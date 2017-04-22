@@ -1,0 +1,197 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+full_text=
+align=right
+color=#666666
+separator=false
+separator_block_width=7
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=/usr/lib/i3blocks/$BLOCK_NAME
+separator_block_width=15
+markup=pango
+
+[ssid]
+label=
+command=echo "$(iw dev wlan0 link | grep SSID | cut -d " " -f 2-)"
+color=#23ce6b
+interval=5
+
+[wireless]
+instance=wlan0
+command=/usr/lib/i3blocks/iface
+color=#aaaaaa
+interval=10
+
+[strength]
+command=echo "$(iw dev wlan0 link | grep signal | cut -d " " -f 2-)"
+interval=10
+color=#aaaaaa
+
+[separator]
+
+# Network interface monitoring
+#
+# If the instance is not specified, use the interface used for default route.
+# The address can be forced to IPv4 or IPv6 with -4 or -6 switches.
+#[iface]
+#instance=wlan0
+#color=#00FF00
+#interval=10
+#separator=false
+
+#[wifi]
+#instance=wlp3s0
+#interval=10
+#separator=false
+
+#[bandwidth]
+#instance=wlan0
+#interval=5
+
+[brightness]
+command=echo "$(xbacklight -get)%"
+label=
+interval=60
+signal=11
+
+# Volume
+#
+# The first parameter sets the step (and units to display)
+# The second parameter overrides the mixer selection
+# See the script for details
+[volume]
+label=
+#command=/usr/lib/i3blocks/volume
+command=amixer get Master | grep -E -o '[0-9][0-9][0-9]?%'
+instance=master
+interval=20
+signal=10
+color=#e0285f
+
+[separator]
+
+# Temperature
+# Support multiple chips, though lm-sensors.
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+#[temperature]
+#label=TEMP
+#interval=10
+
+[temp]
+label=
+command=echo "$(sensors coretemp-isa-0000 | awk '/Core 0/ {print $3}' | sed  s/+//)"
+interval=10
+color=#e59b24
+
+# Memory usage
+#
+# The type defaults to "mem" if the instance is not specified.
+[memory]
+label=
+color=#dff8eb
+interval=30
+
+#[memory]
+#label=SWAP
+#instance=swap
+#interval=30
+
+# Disk usage
+#
+# The directory defaults to $HOME if the instance is not specified.
+# The script may be called with a optional argument to set the alert
+# (defaults to 10 for 10%).
+#[disk]
+#label=
+#instance=/
+#interval=
+
+[load]
+label=
+command=/usr/lib/i3blocks/load_average
+interval=10
+color=#6c71c4
+
+# CPU usage
+#
+# The script may be called with -w and -c switches to specify thresholds,
+# see the script for details.
+#[cpu_usage]
+#label=CPU
+#interval=10
+#min_width=CPU: 100.00%
+
+# Battery indicator
+#
+# The battery instance defaults to 0.
+[battery]
+command=~/.config/i3blocks/battery
+instance=0
+interval=30
+color=#aaaaaa
+
+[separator]
+
+# Date Time
+#
+[time]
+#command=date '+%Y-%m-%d %H:%M:%S'
+command=date '+%H:%M, %a %d %b'
+interval=5
+color=#759aab
+
+# Generic media player support
+#
+# This displays "ARTIST - SONG" if a music is playing.
+# Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
+#[mediaplayer]
+#instance=spotify
+#interval=5
+#signal=10
+
+# OpenVPN support
+#
+# Support multiple VPN, with colors.
+#[openvpn]
+#interval=20
+
+# Key indicators
+#
+# Add the following bindings to i3 config file:
+#
+# bindsym --release Caps_Lock exec pkill -SIGRTMIN+11 i3blocks
+# bindsym --release Num_Lock  exec pkill -SIGRTMIN+11 i3blocks
+#[keyindicator]
+#instance=CAPS
+#interval=once
+#signal=11
+
+#[keyindicator]
+#instance=NUM
+#interval=once
+#signal=11
