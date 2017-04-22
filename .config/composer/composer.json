@@ -1,0 +1,5 @@
+{
+    "require": {
+        "atomic-deploy/client": "^0.1.6"
+    }
+}

@@ -1,0 +1,17 @@
+rofi.lines: 5
+rofi.eh: 1
+rofi.line-margin: 5
+rofi.width: 100
+rofi.padding: 200
+rofi.auto-select: true
+rofi.bw: 0
+! Separator style (none, dash, solid)
+rofi.separator-style: solid
+rofi.line-margin: 10
+rofi.hide-scrollbar: true
+
+rofi.color-enabled: true
+rofi.color-window: argb:ee222222, #fafafa, argb:00000000
+rofi.color-normal: argb:00fdf6e3, #fafafa, argb:00fdf6e3, argb:00000000, #268bd2
+rofi.color-active: argb:00fdf6e3, #fafafa, #eee8d5, argb:00000000, #268bd2
+rofi.color-urgent: argb:aafdf6e3, #dc322f, #eee8d5, #dc322f, #fdf6e3

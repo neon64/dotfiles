@@ -1,0 +1,5 @@
+[user]
+	email = c.chamberlain@iinet.net.au
+	name = Chris Chamberlain
+[credential]
+	helper = /usr/share/git/credential/gnome-keyring/git-credential-gnome-keyring

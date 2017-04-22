@@ -1,0 +1,320 @@
+### Variables
+
+# Theme: Blue
+#set $bg-color 	         #2f343f
+#set $inactive-bg-color  #2f343f
+#set $bar-bg-color        #1c2638
+#set $text-color          #f3f4f5
+#set $inactive-text-color #676E7D
+
+# Theme: Space
+#set $bg-color 	         #070707dd
+#set $inactive-bg-color 	 #050505dd
+#set $bar-bg-color        #1f242f
+#set $text-color          #f4f4f4
+#set $inactive-text-color #666666
+
+# Theme: Light
+set $bg-color 	          #22224466
+set $inactive-bg-color 	  #66666622
+set $bar-bg-color         #1f242f
+set $text-color           #ffffff
+set $inactive-text-color  #cccccc
+
+set $urgent-bg-color     #E53935
+set $green               #00ff00
+
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Your preferred terminal emulator
+set $term alacritty
+set $browser google-chrome-stable
+# movement keys
+set $up l
+set $down k
+set $left j
+set $right semicolon
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/sway/)
+#output * bg ~/Pictures/space.png fill
+
+exec polybar top
+exec --no-startup-id polybar bottom
+exec compton
+exec setxkbmap -option caps:super,ctrl:swap_lwin_lctl
+exec feh --bg-fill ~/Pictures/mountains-2.jpg
+exec --no-startup-id xautolock -time 5 -locker i3lock-fancy &
+
+# Restore GNOME's settings
+exec --no-startup-id /usr/lib64/gnome-settings-daemon/gnome-settings-daemon
+
+#exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
+# Fix a bug in gnome-settings-daemon: http://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment-using-i3/
+#exec --no-startup-id dconf write /org/gnome/settings-daemon/plugins/cursor/active false
+
+#
+# Example output configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running swaymsg -t get_outputs
+
+### Key bindings
+
+#
+# Basics:
+#
+    # start a terminal
+    bindsym $mod+Return exec $term
+    bindsym $mod+c exec $browser
+
+    # kill focused window
+    bindsym $mod+Shift+q kill
+
+    # start your launcher
+    bindsym $mod+d exec ~/.config/rofi/show.sh
+
+    # show expose-like view
+    bindsym $mod+a exec skippy-xd
+
+    # take a screenshot
+    bindsym $mod+shift+s exec "scrot ~/Downloads/Screenshot%Y-%m-%d%H:%M:%S.png"
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod
+
+    # reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    bindsym $mod+Shift+x exec --no-startup-id i3lock-fancy
+    #bindsym $mod+Shift+x exec swaylock
+
+    # exit sway (logs you out of your wayland session)
+    # bindsym $mod+Shift+e exec bash -c "gdialog --yesno 'Are you sure you want to exit sway?' 0 0 && swaymsg exit"
+    bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+#
+# Moving around
+#
+    # Move your focus around with $mod+[h|j|k|l], like vim
+    bindsym $mod+j focus left
+    bindsym $mod+k focus down
+    bindsym $mod+l focus up
+    bindsym $mod+semicolon focus right
+    # or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # _move_ the focused window with the same, but add Shift
+    bindsym $mod+Shift+j move left
+    bindsym $mod+Shift+k move down
+    bindsym $mod+Shift+l move up
+    bindsym $mod+Shift+semicolon move right
+    # ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+
+    # switch to workspace
+    bindsym $mod+1 workspace 1
+    bindsym $mod+2 workspace 2
+    bindsym $mod+3 workspace 3
+    bindsym $mod+4 workspace 4
+    bindsym $mod+5 workspace 5
+    bindsym $mod+6 workspace 6
+    bindsym $mod+7 workspace 7
+    bindsym $mod+8 workspace 8
+    bindsym $mod+9 workspace 9
+    bindsym $mod+0 workspace 10
+    # move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace 1
+    bindsym $mod+Shift+2 move container to workspace 2
+    bindsym $mod+Shift+3 move container to workspace 3
+    bindsym $mod+Shift+4 move container to workspace 4
+    bindsym $mod+Shift+5 move container to workspace 5
+    bindsym $mod+Shift+6 move container to workspace 6
+    bindsym $mod+Shift+7 move container to workspace 7
+    bindsym $mod+Shift+8 move container to workspace 8
+    bindsym $mod+Shift+9 move container to workspace 9
+    bindsym $mod+Shift+0 move container to workspace 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+
+    bindsym $mod+m move workspace to right
+    bindsym $mod+n move workspace to left
+
+    # default workspace
+    workspace 10 output 0
+
+    assign [class="qutebrowser"] 1
+    assign [class="Atom"] 3
+    #assign [class~="firefox"] 1
+    assign [class="Gnome-terminal"] 2
+    assign [class="Alacritty"] 2
+    assign [class="Firefox"] 1
+    assign [class="Nylas N1"] 7
+    assign [class="Google-chrome"] 1
+    assign [class="keepassxc"] 9
+    assign [class="GitKraken"] 4
+
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s layout stacking
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+    bindsym $mod+t layout splith
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # move focus to the parent container
+    bindsym $mod+shift+a focus parent
+
+#
+# Special keys
+#
+
+    # Volume
+    # exec pkill --signal SIGRTMIN+10 i3blocks
+    bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% # increase sound volume
+    bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% # decrease sound volume
+    bindsym XF86AudioMute  exec --no-startup-id pactl set-sink-mute 0 toggle # toggle mute
+
+    # Media player
+    bindsym XF86AudioPlay exec mpc toggle
+    # bindsym XF86AudioPause exec mpc pause
+    bindsym XF86AudioPrev exec mpc prev
+    bindsym XF86AudioNext exec mpc next
+
+    # Brightness
+    bindsym XF86MonBrightnessUp exec xbacklight -inc 10;  exec pkill --signal SIGRTMIN+11 i3blocks
+    bindsym XF86MonBrightnessDown exec xbacklight -dec 10;  exec pkill --signal SIGRTMIN+11 i3blocks
+
+    # Sleep
+    #bindsym $mod+shift+l exec bash /home/chris/lock.sh
+
+#
+# Resize mode:
+#
+
+bindsym $mod+r mode "resize"
+
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j         resize shrink width 10px
+        bindsym k         resize grow height 10px
+        bindsym l         resize shrink height 10px
+        bindsym semicolon resize grow width 10px
+
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink width 10px
+        bindsym Down        resize grow height 10px
+        bindsym Up          resize shrink height 10px
+        bindsym Right       resize grow width 10px
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+
+# window colors
+#                       border              background         text                  indicator  child border
+client.focused          $bg-color           $bg-color          $text-color           $green     $bg-color
+client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color  $green     $inactive-bg-color
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color  $green     $inactive-bg-color
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color           $green     $urgent-bg-color
+
+
+### Ricing
+
+new_window normal 0
+#hide_edge_borders both
+gaps outer 4
+gaps inner 4
+smart_gaps on
+#smart_borders on
+
+#font pango:Cantarell 10
+font pango:System San Francisco Display 10
+
+# doesn't work on i3
+#for_window [class=".*"] title_format "<span size='x-small'>%title</span>"
+#for_window [class=".*"] title_format "<span size="smaller">      %title</span>"
+
+#
+# Status Bar:
+#
+#bar {
+#    position bottom
+#    strip_workspace_numbers yes
+#    colors {
+#        background $bar-bg-color
+#        separator #757575
+#        focused_workspace   $bar-bg-color     $bar-bg-color       $text-color
+#		inactive_workspace  $bar-bg-color     $bar-bg-color       $inactive-text-color
+#        urgent_workspace    $urgent-bg-color  $urgent-bg-color    $text-color
+#    }
+#
+#    #status_command i3status
+#    status_command i3blocks
+#    font pango:System San Francisco Display 10
+#}
+
+
+
+# Read sway-bar(5) for more information about this section.
+
+# You may want this:
+#
+# include ~/.config/sway/conf.d/*
+#
+# Protip:
+#
+# include ~/.config/sway/`hostname`/*
+
+for_window [class="Gnome-calculator"] border none
+for_window [title="Question"] floating enable
+for_window [class="Google-chrome"] border none
+for_window [class="Firefox"] border none
+for_window [class="Gnome-control-center"] border none
