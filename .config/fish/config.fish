@@ -7,12 +7,16 @@ set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/l
 alias dotf "git --git-dir=$HOME/Code/Dotfiles --work-tree=$HOME"
 alias swm "bash ~/.config/dm/start_sway"
 alias pac "pacaur"
-alias mus "ncmpcpp"
 alias docker "sudo docker"
 alias docker-compose "sudo docker-compose"
 
 function fish_greeting
 
+end
+
+function mus
+	systemctl --user start mopidy
+	ncmpcpp
 end
 
 function work
@@ -28,3 +32,6 @@ if status --is-login
 	#startx
     end
 end
+
+# OPAM configuration
+source /home/chris/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true

@@ -85,10 +85,10 @@ signal=11
 # See the script for details
 [volume]
 label=
-#command=/usr/lib/i3blocks/volume
-command=amixer get Master | grep -E -o '[0-9][0-9][0-9]?%'
-instance=master
-interval=20
+command=/usr/lib/i3blocks/volume
+#command=amixer get Master | grep -E -o '[0-9][0-9][0-9]?%'
+#instance=master
+interval=5
 signal=10
 color=#e0285f
 

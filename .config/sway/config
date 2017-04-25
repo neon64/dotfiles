@@ -137,7 +137,7 @@ input "1452:781:Robert_Chamberlain’s_M" {
     #assign [class~="firefox"] "1: "
     assign [id="gnome-terminal-server"] "2: "
     assign [class="Navigator"] "1: "
-    assign [class="google-chrome"] "1: "
+    assign [class="Google-chrome"] "1: "
     assign [class="keepassxc"] "9: "
 
 
@@ -171,15 +171,17 @@ input "1452:781:Robert_Chamberlain’s_M" {
 #
 
     # Volume
-    bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%; exec pkill --signal SIGRTMIN+10 i3blocks # increase sound volume
-    bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%; exec pkill --signal SIGRTMIN+10 i3blocks # decrease sound volume
-    bindsym XF86AudioMute  exec --no-startup-id pactl set-sink-mute 0 toggle; exec pkill --signal SIGRTMIN+10 i3blocks # toggle mute
+    
+    # Volume
+    bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+; exec pkill --signal SIGRTMIN+10 i3blocks
+    bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-;  exec pkill --signal SIGRTMIN+10 i3blocks
+    bindsym XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle; exec pkill --signal SIGRTMIN+10 i3blocks
 
     # Media player
-    bindsym XF86AudioPlay exec playerctl play
-    bindsym XF86AudioPause exec playerctl pause
-    bindsym XF86AudioPrev exec playerctl previous
-    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPlay exec mpc toggle
+    # bindsym XF86AudioPause exec mpc pause
+    bindsym XF86AudioPrev exec mpc prev
+    bindsym XF86AudioNext exec mpc next
 
     # Brightness
     bindsym XF86MonBrightnessUp exec xbacklight -inc 10;  exec pkill --signal SIGRTMIN+11 i3blocks
