@@ -7,8 +7,13 @@ I was fed up with having to download yet another fancy bash script, just to do s
 
 ## Prerequisites
 
+**Shell**
  - [Fish shell](https://fishshell.com/)
  - [Fisherman](https://github.com/fisherman/fisherman)
+
+** Editor **
+ - [Neovim](https://github.com/neovim/neovim)
+ - [vim-plug](https://github.com/junegunn/vim-plug)
 
 ## Installation
 
@@ -28,7 +33,7 @@ It's also advised to run the following so that the entire home directory doesn't
 
     $ dotf config --local status.showUntrackedFiles no
 
-## Getting Started
+## Keeping track of local changes
 
 To stage changes to a file, just run:
 
