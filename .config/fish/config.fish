@@ -1,5 +1,7 @@
 set -x PATH $HOME/.cargo/bin $PATH
-set -x PATH /usr/bin/core_perl $PATH
+if test -d /usr/bin/core_perl
+    set -x PATH /usr/bin/core_perl $PATH
+end
 set -x PATH $HOME/.config/composer/vendor/bin $PATH
 
 set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
