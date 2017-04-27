@@ -1,5 +1,12 @@
 [user]
 	email = c.chamberlain@iinet.net.au
 	name = Chris Chamberlain
-[credential]
-	helper = /usr/share/git/credential/gnome-keyring/git-credential-gnome-keyring
+[include]
+	# includes special platform specific configuration items (eg: credential helper)
+	path = ~/.gitconfig-platform-specific
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true

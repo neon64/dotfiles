@@ -1,7 +1,12 @@
 set -x PATH $HOME/.cargo/bin $PATH
-set -x PATH /usr/bin/core_perl $PATH
+
+if test -d /usr/bin/core_perl
+    set -x PATH /usr/bin/core_perl $PATH
+end
+
 set -x PATH $HOME/.config/composer/vendor/bin $PATH
 
+# used for the Rust Language Server
 set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
 
 alias dotf "git --git-dir=$HOME/Code/Dotfiles --work-tree=$HOME"
@@ -11,9 +16,9 @@ alias docker "sudo docker"
 alias docker-compose "sudo docker-compose"
 
 function fish_greeting
-
 end
 
+# starts the music player daemon and client
 function mus
 	systemctl --user start mopidy
 	ncmpcpp
