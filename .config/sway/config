@@ -25,7 +25,7 @@ set $right semicolon
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
-output * bg ~/Pictures/abstract-2.png fill
+output * bg ~/Pictures/mountains-2.jpg fill
 #
 # Example output configuration:
 #
@@ -253,7 +253,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 
 ### Ricing
 
-new_window normal 1
+new_window normal 0
 hide_edge_borders both
 gaps inner 10
 gaps outer 5

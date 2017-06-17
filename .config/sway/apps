@@ -5,4 +5,4 @@ for_window [class="Polybar"] border none
 for_window [class="chromium"] border none
 #for_window [class="Navigator"] border pixel 1
 for_window [id="gnome-control-center"] floating enable
-for_window [id="gnome-terminal-server"] border normal 1
+#for_window [id="gnome-terminal-server"] border normal 1
