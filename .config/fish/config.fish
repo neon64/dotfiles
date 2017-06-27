@@ -5,6 +5,7 @@ if test -d /usr/bin/core_perl
 end
 
 set -x PATH $HOME/.config/composer/vendor/bin $PATH
+set -x BROWSER google-chrome-stable
 
 # used for the Rust Language Server
 set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
@@ -12,6 +13,7 @@ set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/l
 alias dotf "git --git-dir=$HOME/Code/Dotfiles --work-tree=$HOME"
 alias swm "bash ~/.config/dm/start_sway"
 alias pac "pacaur"
+alias up "newsbeuter -r; and pac -Syu"
 alias docker "sudo docker"
 alias docker-compose "sudo docker-compose"
 

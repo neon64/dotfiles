@@ -76,7 +76,7 @@ input "1452:781:Robert_Chamberlain’s_M" {
     bindsym $mod+Shift+x exec swaylock
 
     # exit sway (logs you out of your wayland session)
-    bindsym $mod+Shift+e exec bash -c "gdialog --yesno 'Are you sure you want to exit sway?' 0 0 && swaymsg exit"
+    bindsym $mod+Shift+e exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"
 #
 # Moving around
 #
@@ -138,6 +138,7 @@ input "1452:781:Robert_Chamberlain’s_M" {
     assign [id="gnome-terminal-server"] "2: "
     assign [class="Navigator"] "1: "
     assign [class="Google-chrome"] "1: "
+    assign [class="evolution"] "8: "
     assign [class="keepassxc"] "9: "
 
 
@@ -188,8 +189,7 @@ input "1452:781:Robert_Chamberlain’s_M" {
     bindsym XF86MonBrightnessDown exec xbacklight -dec 10;  exec pkill --signal SIGRTMIN+11 i3blocks
 
     # Sleep
-
-    bindsym $mod+shift+l exec bash /home/chris/.config/sway/22lock.sh
+    bindsym $mod+shift+l exec bash /home/chris/.config/sway/lock.sh
 
 #
 # Resize mode:
@@ -253,11 +253,11 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 
 ### Ricing
 
-new_window normal 0
+new_window normal 1
 hide_edge_borders both
-gaps inner 10
-gaps outer 5
-smart_gaps on
+#gaps inner 10
+#gaps outer 5
+#smart_gaps on
 #smart_borders on
 
 #font pango:Cantarell 10
