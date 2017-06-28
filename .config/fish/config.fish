@@ -10,6 +10,7 @@ set -x BROWSER google-chrome-stable
 # used for the Rust Language Server
 set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
 
+alias t "tmux a; or tmux"
 # alias tmux "tmux -f ~/.config/tmux/tmux.conf"
 alias dotf "git --git-dir=$HOME/Code/Dotfiles --work-tree=$HOME"
 alias swm "bash ~/.config/dm/start_sway"
@@ -42,4 +43,4 @@ if status --is-login
 end
 
 # OPAM configuration
-source /home/chris/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+# source /home/chris/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
