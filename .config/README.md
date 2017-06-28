@@ -11,7 +11,7 @@ I was fed up with having to download yet another fancy bash script, just to do s
  - [Fish shell](https://fishshell.com/)
  - [Fisherman](https://github.com/fisherman/fisherman)
 
-** Editor **
+**Editor**
  - [Neovim](https://github.com/neovim/neovim)
  - [vim-plug](https://github.com/junegunn/vim-plug)
 
