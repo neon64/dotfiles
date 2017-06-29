@@ -45,7 +45,8 @@ alias up "newsbeuter -r; and pac -Syu"
 # because I keep forgetting sudo
 alias docker "sudo docker"
 alias docker-compose "sudo docker-compose"
-
+# use neovim
+alias vim "nvim"
 
 ### ========================================
 ###				   AUTOSTART
