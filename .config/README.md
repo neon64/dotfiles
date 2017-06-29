@@ -60,6 +60,12 @@ It's also advised to run the following so that the entire home directory doesn't
 
     $ dotf config --local status.showUntrackedFiles no
 
+### Extra things
+
+To add platform-specific stuff. Replace `{linux|macos}` with your chosen platform.
+
+    $ ln -s ~/.gitconfig-{linux|macos} ~/.gitconfig-platform-specific
+
 ## Keeping track of local changes
 
 To stage changes to a file, just run:
