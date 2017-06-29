@@ -4,6 +4,13 @@ if test -d /usr/bin/core_perl
     set -x PATH /usr/bin/core_perl $PATH
 end
 
+if test -d /usr/lib/emsdk
+	set -x PATH /usr/lib/emsdk $PATH
+	set -x PATH /usr/lib/emsdk/clang/e1.37.14_64bit $PATH
+	set -x PATH /usr/lib/emsdk/node/4.1.1_64bit/bin $PATH
+	set -x PATH /usr/lib/emsdk/emscripten/1.37.14 $PATH
+end
+
 set -x PATH $HOME/.config/composer/vendor/bin $PATH
 set -x BROWSER google-chrome-stable
 
@@ -43,4 +50,7 @@ if status --is-login
 end
 
 # OPAM configuration
-# source /home/chris/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+# Under the status quo $MANPATH was unset, so `man` would use default paths.
+# OCaml upset this by setting $MANPATH.. Thus I manually commented out the line.
+# This will probably be broken by package updates
+source /home/chris/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
