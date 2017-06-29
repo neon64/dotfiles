@@ -5,15 +5,42 @@ This repository contains the most important dotfiles that I want replicated betw
 Kudos to the extremely simple way of keeping track of dotfiles detailed here: https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/.
 I was fed up with having to download yet another fancy bash script, just to do something that Git can do out of the box.
 
-## Prerequisites
+## Stuff I use
+
+I have one Linux machine and two OS X machines. While these dotfiles contain a lot of stuff pertinent to Linux only (all the WM stuff), I try to ensure that they work universally.
+
+Here's a list in no particular order of the apps I use.
+
+**Window Manager**
+ - i3-gaps, for when I want to look cool and transparent
+        - polybar
+        - rofi
+ - sway, as my daily driver
+        - polybar doesn't seem to support Wayland atm, so I'm using `swaybar` and `i3blocks`
+        - dmenu
+        - I really miss copy/paste between Wayland and XWayland clients! 
+ - Gnome, installed and there just in case, but I never use it
+
+**Terminal**
+ - [Alacritty](https://github.com/jwilm/alacritty/), a fast terminal emulator written in Rust, is unfortunately not yet my daily driver because it lacks scrollback
+ - Gnome Terminal
 
 **Shell**
  - [Fish shell](https://fishshell.com/)
  - [Fisherman](https://github.com/fisherman/fisherman)
 
 **Editor**
- - [Neovim](https://github.com/neovim/neovim)
- - [vim-plug](https://github.com/junegunn/vim-plug)
+ - Visual Studio Code
+ - [Neovim](https://github.com/neovim/neovim), when I need to use the command line
+     - [vim-plug](https://github.com/junegunn/vim-plug)
+
+**Browser**
+ - Google Chrome
+ - Qutebrowser - I like the vim keybindings but my config isn't fully complete yet
+
+**Music**
+ - YouTube
+ - Mopidy as a backend and then ncmpcpp for a terminal UI
 
 ## Installation
 
