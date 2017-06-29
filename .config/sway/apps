@@ -3,6 +3,7 @@ for_window [id="gnome-calculator"] border none
 for_window [title="Question"] floating enable
 for_window [title="Preferences"] floating enable
 for_window [title="Editing Profile"] floating enable
+for_window [title="Login Keyring"] floating enable
 for_window [class="Polybar"] border none
 for_window [class="Google-chrome"] border none
 #for_window [class="Navigator"] border pixel 1
