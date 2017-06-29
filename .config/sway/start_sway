@@ -1,0 +1,1 @@
+XKB_DEFAULT_OPTIONS="caps:super,ctrl:swap_lwin_lctl" sway -d 2> ~/.sway.log
