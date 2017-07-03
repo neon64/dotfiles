@@ -8,7 +8,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 
 " Let's make it pretty
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
+" Plug 'frankier/neovim-colors-solarized-truecolor-only'
+Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
@@ -17,6 +18,7 @@ let g:airline_powerline_fonts = 1
 " Colours
 syntax enable
 set background=dark
+set number
 set termguicolors
-colorscheme solarized
+colorscheme base16-tomorrow-night
 hi! EndOfBuffer guifg='#002b36'

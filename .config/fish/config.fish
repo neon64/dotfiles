@@ -2,20 +2,17 @@
 ###					PATH
 ### ========================================
 
-set -x PATH $HOME/.cargo/bin $PATH
-
-if test -d /usr/bin/core_perl
-    set -x PATH /usr/bin/core_perl $PATH
-end
+# this is *prepended* because we want it to override
+# the system rust compiler with our more up to date versions
+set PATH $HOME/.cargo/bin $PATH   
 
 if test -d /usr/lib/emsdk
-	set -x PATH /usr/lib/emsdk $PATH
-	set -x PATH /usr/lib/emsdk/clang/e1.37.14_64bit $PATH
-	set -x PATH /usr/lib/emsdk/node/4.1.1_64bit/bin $PATH
-	set -x PATH /usr/lib/emsdk/emscripten/1.37.14 $PATH
+	set PATH $PATH /usr/lib/emsdk /usr/lib/emsdk/clang/e1.37.14_64bit \
+		/usr/lib/emsdk/node/4.1.1_64bit/bin /usr/lib/emsdk/emscripten/1.37.14
 end
 
-set -x PATH $HOME/.config/composer/vendor/bin $PATH
+set PATH $PATH $HOME/.config/composer/vendor/bin 
+
 
 # used for the Rust Language Server
 set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
@@ -26,6 +23,7 @@ set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/l
 # This will probably be broken by package updates
 source /home/chris/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 
+set -x EDITOR /usr/bin/nvim
 
 ### ========================================
 ###				   ALIASES
