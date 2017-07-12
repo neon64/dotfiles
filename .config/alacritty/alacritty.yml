@@ -183,9 +183,11 @@ visual_bell:
 key_bindings:
   - { key: V,        mods: Control,    action: Paste               }
   - { key: C,        mods: Control,    action: Copy                }
-  - { key: Q,        mods: Control, action: Quit                         }
-  - { key: W,        mods: Control, action: Quit                         }
-  - { key: Insert,   mods: Shift,   action: PasteSelection               }
+  - { key: Q,        mods: Control,    action: Quit                }
+  - { key: W,        mods: Control,    action: Quit                }
+  - { key: Insert,   mods: Shift,      action: PasteSelection      }
+  - { key: J,        mods: Control,    action: ScrollUp            }
+  - { key: K,        mods: Control,    action: ScrollDown          }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[1~",  mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }
