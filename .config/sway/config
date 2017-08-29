@@ -73,8 +73,7 @@ input "1452:781:Robert_Chamberlain’s_M" {
 
     # reload the configuration file
     bindsym $mod+Shift+c reload
-
-    bindsym $mod+Shift+x exec swaylock
+    bindsym $mod+Shift+s swaygrab
 
     # exit sway (logs you out of your wayland session)
     bindsym $mod+Shift+e exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"
@@ -139,6 +138,7 @@ input "1452:781:Robert_Chamberlain’s_M" {
     assign [id="gnome-terminal-server"] "2: "
     assign [class="Navigator"] "1: "
     assign [class="Google-chrome"] "1: "
+    assign [class="GitKraken"] 4
     assign [class="evolution"] "8: "
     assign [class="keepassxc"] "9: "
 
@@ -295,9 +295,9 @@ client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-co
 # window borders and gaps
 new_window normal 1
 hide_edge_borders both
-gaps inner 5
-gaps outer 2
-smart_gaps on
+# gaps inner 1
+# gaps outer 2
+# smart_gaps on
 # smart_borders on
 
 #font pango:Cantarell 10
