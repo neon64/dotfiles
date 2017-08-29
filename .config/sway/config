@@ -13,7 +13,7 @@
 set $mod Mod4
 # Your preferred terminal emulator
 set $term gnome-terminal
-set $browser google-chrome-stable
+set $browser firefox-nightly
 # Your preferred application launcher
 # set $menu dmenu_run
 set $menu ~/.config/rofi/show.sh
@@ -137,6 +137,7 @@ input "1452:781:Robert_Chamberlain’s_M" {
     #assign [class~="firefox"] "1: "
     assign [id="gnome-terminal-server"] "2: "
     assign [class="Navigator"] "1: "
+    assign [class="Firefox"] "1: "
     assign [class="Google-chrome"] "1: "
     assign [class="GitKraken"] 4
     assign [class="evolution"] "8: "
