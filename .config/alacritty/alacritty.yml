@@ -20,6 +20,10 @@ dimensions:
   columns: 80
   lines: 24
 
+scrollback:
+  enabled: true
+  max_lines: 10000
+
 # Adds this many blank pixels of padding around the window
 # Units are physical pixels; this is not DPI aware.
 # (change requires restart)
@@ -145,8 +149,8 @@ colors:
 # To completely disable the visual bell, set its duration to 0.
 #
 visual_bell:
-  animation: EaseOutExpo
-  duration: 0
+  animation: Linear #EaseOutExpo
+  duration: 5000
 
 # Key bindings
 #
@@ -181,13 +185,15 @@ visual_bell:
 # (e.g. "\x1b[5~") is? Open another terminal (like xterm) without tmux,
 # then run `showkey -a` to get the sequence associated to a key combination.
 key_bindings:
-  - { key: V,        mods: Control,    action: Paste               }
-  - { key: C,        mods: Control,    action: Copy                }
-  - { key: Q,        mods: Control,    action: Quit                }
-  - { key: W,        mods: Control,    action: Quit                }
-  - { key: Insert,   mods: Shift,      action: PasteSelection      }
-  - { key: J,        mods: Control,    action: ScrollUp            }
-  - { key: K,        mods: Control,    action: ScrollDown          }
+  - { key: V,        mods: Control,       action: Paste               }
+  - { key: C,        mods: Control,       action: Copy                }
+  - { key: Q,        mods: Control,       action: Quit                }
+  - { key: W,        mods: Control,       action: Quit                }
+  - { key: Insert,   mods: Shift,         action: PasteSelection      }
+  - { key: Up,       mods: Control|Shift, action: ScrollUp            }
+  - { key: Down,     mods: Control|Shift, action: ScrollDown          }
+  - { key: PageUp,   mods: Shift,         action: PageUp              }
+  - { key: PageDown, mods: Shift,         action: PageDown            }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[1~",  mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }

@@ -6,9 +6,9 @@
 # the system rust compiler with our more up to date versions
 set PATH $HOME/.cargo/bin $PATH   
 
-if test -d /usr/lib/emsdk
-	set PATH $PATH /usr/lib/emsdk /usr/lib/emsdk/clang/e1.37.14_64bit \
-		/usr/lib/emsdk/node/4.1.1_64bit/bin /usr/lib/emsdk/emscripten/1.37.14
+if test -d $HOME/Code/emsdk
+	set PATH $PATH $HOME/Code/emsdk $HOME/Code/emsdk/clang/e1.37.18_64bit \
+        $HOME/Code/emsdk/node/4.1.1_64bit/bin $HOME/Code/emsdk/emscripten/1.37.18
 end
 
 set PATH $PATH $HOME/.config/composer/vendor/bin 
