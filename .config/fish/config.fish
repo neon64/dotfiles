@@ -21,7 +21,9 @@ set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/l
 # Under the status quo $MANPATH was unset, so `man` would use default paths.
 # OCaml upset this by setting $MANPATH.. Thus I manually commented out the line.
 # This will probably be broken by package updates
-source /home/chris/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+if test -d $HOME/.opam
+    source $HOME/.opam/opam-init/init.fish #> /dev/null 2> /dev/null; or true
+end
 
 set -x EDITOR /usr/bin/nvim
 
@@ -31,7 +33,6 @@ set -x EDITOR /usr/bin/nvim
 
 # connects to an existing tmux session before creating a new one
 alias t "tmux a; or tmux"
-alias s "ddgr -n 10"
 # starts Alacritty fullscreen without a wm
 alias al "env NO_WM=1 startx"
 alias dotf "git --git-dir=$HOME/Code/Dotfiles --work-tree=$HOME"
@@ -39,16 +40,6 @@ alias dotf "git --git-dir=$HOME/Code/Dotfiles --work-tree=$HOME"
 alias swm "bash ~/.config/sway/start_sway"
 # its shorter
 alias pac "pacaur"
-
-function up
-    SESSION_NAME='update_arch'
-    # read Arch news before updating:
-    tmux start-server
-    tmux new-session -d -n 'System Update' -s 'update_arch' 'newsboat -r; pac -Syu; fish'
-    tmux split-window -h 'rustup update; fish'
-    tmux split-window -v 'sudo npm update -g; fish'
-    tmux -2 attach-session
-end
 
 # because I keep forgetting sudo
 alias docker "sudo docker"
