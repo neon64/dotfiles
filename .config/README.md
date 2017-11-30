@@ -35,7 +35,7 @@ Here's a list in no particular order of the apps I use.
      - [vim-plug](https://github.com/junegunn/vim-plug)
 
 **Browser**
- - Google Chrome
+ - Firefox - As a Rust user, I really appreciate all the work that has gone into the 'Quantum' release.
  - Qutebrowser - I like the vim keybindings but my config isn't fully complete yet
 
 **Music**
