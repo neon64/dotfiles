@@ -7,10 +7,14 @@ function up
         case "--pieces"
             update_pieces
         case ""
-            tmux start-server
-            tmux new-session -d -n 'System Update' -s 'update_arch' 'fish -c "up --system"; fish'
-            tmux split-window -h 'fish -c "up --pieces"; fish'
-            tmux -2 attach-session
+            if tmux has-session -t 'update_arch' 2>/dev/null
+                tmux -2 attach-session -t 'update_arch'
+            else 
+                tmux start-server
+                tmux new-session -d -s 'update_arch' -n 'System Update' 'fish -c "up --system"; fish'
+                tmux split-window -h 'fish -c "up --pieces"; fish'
+                tmux -2 attach-session
+            end
     end
 end
 
@@ -29,19 +33,28 @@ function update_system
     end
 end
 
+# updates all the other various miscellaneous 'pieces'
+# which make up the system.
 function update_pieces
-    echo (set_color yellow) "Updating Rust..." (set_color normal)
-    rustup update
+    if command -v rustup >/dev/null 2>&1
+        echo (set_color yellow) "Updating Rust..." (set_color normal)
+        rustup update
+    else
+        echo (set_color red) "rustup not found..." (set_color normal)
+    end
 
-    echo (set_color yellow) "Updating global npm packages..." (set_color normal)
-    switch (uname)
-        case Linux
-            sudo npm update -g
-        case Darwin
-            # through homebrew, so npm shouldn't need root perms
-            npm update -g
-        case *
-            echo "Unknown OS"
+
+    if command -v npm >/dev/null 2>&1
+        echo (set_color yellow) "Updating global npm packages..." (set_color normal)
+        switch (uname)
+            case Darwin
+                # through homebrew, so npm shouldn't need root perms
+                npm update -g
+            case *
+                sudo npm update -g
+        end
+    else
+        echo (set_color red) "npm not found..." (set_color normal)
     end
 
     # though this is technically an 'install' script, it won't hurt if we run it again to 
