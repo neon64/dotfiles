@@ -13,6 +13,7 @@ function install_dotfiles
     curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
 
     echo (set_color yellow) "Installing fisherman plugins..." (set_color normal)
+    source ~/.config/fish/functions/fisher.fish
     fisher up
 
     echo (set_color yellow) "Installing platform-specific git settings..." (set_color normal)
