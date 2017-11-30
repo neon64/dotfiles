@@ -25,7 +25,12 @@ if test -d $HOME/.opam
     source $HOME/.opam/opam-init/init.fish #> /dev/null 2> /dev/null; or true
 end
 
-set -x EDITOR /usr/bin/nvim
+switch (uname)
+    case Darwin
+        set -x EDITOR /usr/local/bin/nvim
+    case '*'
+        set -x EDITOR /usr/bin/nvim
+end
 
 ### ========================================
 ###				   ALIASES
