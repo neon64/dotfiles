@@ -40,7 +40,11 @@ end
 alias t "tmux a; or tmux"
 # starts Alacritty fullscreen without a wm
 alias al "env NO_WM=1 startx"
+
+# dotfile handling
 alias dotf "git --git-dir=$HOME/Code/Dotfiles --work-tree=$HOME"
+trap check_dotf EXIT
+
 # starts sway with the required
 alias swm "bash ~/.config/sway/start_sway"
 # its shorter
