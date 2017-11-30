@@ -31,6 +31,7 @@ set -x EDITOR /usr/bin/nvim
 
 # connects to an existing tmux session before creating a new one
 alias t "tmux a; or tmux"
+alias s "ddgr -n 10"
 # starts Alacritty fullscreen without a wm
 alias al "env NO_WM=1 startx"
 alias dotf "git --git-dir=$HOME/Code/Dotfiles --work-tree=$HOME"
@@ -38,8 +39,17 @@ alias dotf "git --git-dir=$HOME/Code/Dotfiles --work-tree=$HOME"
 alias swm "bash ~/.config/sway/start_sway"
 # its shorter
 alias pac "pacaur"
-# read the Arch RSS feed before updating
-alias up "newsbeuter -r; and pac -Syu; rustup update"
+
+function up
+    SESSION_NAME='update_arch'
+    # read Arch news before updating:
+    tmux start-server
+    tmux new-session -d -n 'System Update' -s 'update_arch' 'newsboat -r; pac -Syu; fish'
+    tmux split-window -h 'rustup update; fish'
+    tmux split-window -v 'sudo npm update -g; fish'
+    tmux -2 attach-session
+end
+
 # because I keep forgetting sudo
 alias docker "sudo docker"
 alias docker-compose "sudo docker-compose"
