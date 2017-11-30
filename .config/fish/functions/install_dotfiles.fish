@@ -18,9 +18,13 @@ function install_dotfiles
     echo (set_color yellow) "Installing platform-specific git settings..." (set_color normal)
     switch (uname)
     	case Linux
-            ln -s ~/.gitconfig-linux ~/.gitconfig-platform-specific; and echo Success!
+            ln -s ~/.gitconfig-linux ~/.gitconfig-platform-specific;
+            and ln -s ~/.xinitrc-linux ~/.xinitrc;
+            and echo Success!
         case Darwin
-            ln -s ~/.gitconfig-macos ~/.gitconfig-platform-specific; and echo Success!
+            ln -s ~/.gitconfig-macos ~/.gitconfig-platform-specific;
+            and ln -s ~/.xinitrc-linux ~/.xinitrc;
+            and echo Success!
         case *
             echo "Unknown OS"
     end

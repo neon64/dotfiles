@@ -1,7 +1,0 @@
-#!/bin/bash
-
-if [ -z "$NO_WM" ]; then
-	exec i3
-else
-	exec alacritty --dimensions 142 47 -e tmux
-fi
