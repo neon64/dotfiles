@@ -73,7 +73,7 @@ input "1452:781:Robert_Chamberlain’s_M" {
 
     # reload the configuration file
     bindsym $mod+Shift+c reload
-    bindsym $mod+Shift+s swaygrab
+    bindsym $mod+Shift+s exec swaygrab ~/Pictures/latest-screenshot.png
 
     # exit sway (logs you out of your wayland session)
     bindsym $mod+Shift+e exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"

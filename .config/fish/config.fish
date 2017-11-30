@@ -39,7 +39,7 @@ alias swm "bash ~/.config/sway/start_sway"
 # its shorter
 alias pac "pacaur"
 # read the Arch RSS feed before updating
-alias up "newsbeuter -r; and pac -Syu"
+alias up "newsbeuter -r; and pac -Syu; rustup update"
 # because I keep forgetting sudo
 alias docker "sudo docker"
 alias docker-compose "sudo docker-compose"
