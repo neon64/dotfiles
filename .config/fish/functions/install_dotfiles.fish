@@ -23,7 +23,7 @@ function install_dotfiles
             and echo Success!
         case Darwin
             ln -s ~/.gitconfig-macos ~/.gitconfig-platform-specific;
-            and ln -s ~/.xinitrc-linux ~/.xinitrc;
+            and ln -s ~/.xinitrc-macos ~/.xinitrc;
             and echo Success!
         case *
             echo "Unknown OS"
