@@ -56,15 +56,9 @@ Then attempt to checkout the configuration files:
 
 You will most likely have to decide what to do with the existing dotfiles on your system.
 
-It's also advised to run the following so that the entire home directory doesn't show up as 'untracked':
+Finally, run the install script:
 
-    $ dotf config --local status.showUntrackedFiles no
-
-### Extra things
-
-To add platform-specific stuff. Replace `{linux|macos}` with your chosen platform.
-
-    $ ln -s ~/.gitconfig-{linux|macos} ~/.gitconfig-platform-specific
+    $ install_dotfiles
 
 ## Keeping track of local changes
 
@@ -83,3 +77,17 @@ To commit changes:
     $ dotf commit -m "Describing the change
 
 In conclusion: it's exactly like normal Git, just with `git` replaced with the alias `dotf` (defined in `.config/fish/config.fish`)
+
+## Updating your system
+
+To update the system, run:
+
+    $ up
+
+On ArchLinux, this will use `pacaur`, on macOS, it will use `brew`.
+It will also update various components (namely language-specific package managers). At the moment this includes:
+
+- Rust (via Rustup)
+- `npm` globally-installed packages
+- Fisherman & its plugins
+- `vim-plug` & its plugins
