@@ -6,10 +6,20 @@
 # the system rust compiler with our more up to date versions
 set PATH $HOME/.cargo/bin $PATH
 
-if test -d $HOME/Code/emsdk
-	set PATH $PATH $HOME/Code/emsdk $HOME/Code/emsdk/clang/e1.37.18_64bit \
-        $HOME/Code/emsdk/node/4.1.1_64bit/bin $HOME/Code/emsdk/emscripten/1.37.18
+# if test -d $HOME/Code/emsdk
+# 	set -x PATH $PATH $HOME/Code/emsdk $HOME/Code/emsdk/clang/e1.37.18_64bit \
+#         $HOME/Code/emsdk/node/4.1.1_64bit/bin $HOME/Code/emsdk/emscripten/1.37.18
+# end
+
+if test -d  /usr/lib/emscripten
+    set -xg EMSCRIPTEN "/usr/lib/emscripten"
+    set -xg EMSCRIPTEN_FASTCOMP "/usr/lib/emscripten-fastcomp"
+
+    # add to path
+    set -xg PATH $PATH $EMSCRIPTEN
 end
+
+
 
 set PATH $PATH $HOME/.config/composer/vendor/bin 
 
@@ -40,10 +50,6 @@ alias t "tmux a; or tmux"
 # starts Alacritty fullscreen without a wm
 alias al "env NO_WM=1 startx"
 
-# dotfile handling
-alias dotf "git --git-dir=$HOME/Code/Dotfiles --work-tree=$HOME"
-# trap check_dotf EXIT
-
 # starts sway with the required
 alias swm "bash ~/.config/sway/start_sway"
 # its shorter
@@ -54,6 +60,8 @@ alias docker "sudo docker"
 alias docker-compose "sudo docker-compose"
 # use neovim
 alias vim "nvim"
+
+complete --command dotf --wraps git
 
 ### ========================================
 ###				   COLOURS
