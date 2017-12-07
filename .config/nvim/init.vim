@@ -22,3 +22,8 @@ set number
 set termguicolors
 colorscheme base16-tomorrow-night
 hi! EndOfBuffer guifg='#002b36'
+
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>
