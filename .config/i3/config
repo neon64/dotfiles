@@ -36,6 +36,7 @@ set $green               #000000
 # Your preferred terminal emulator
 set $term dbus-launch gnome-terminal
 set $browser firefox
+set $launcher rofi -show combi
 
 ### =====================
 ###         Exec
@@ -93,7 +94,7 @@ set $right semicolon
     bindsym $mod+Shift+q kill
 
     # start your launcher
-    bindsym $mod+d exec ~/.config/rofi/show.sh
+    bindsym $mod+d exec $launcher
 
     # show expose-like view
     bindsym $mod+a exec skippy-xd
