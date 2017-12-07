@@ -5,6 +5,7 @@
 # this is *prepended* because we want it to override
 # the system rust compiler with our more up to date versions
 set PATH $HOME/.cargo/bin $PATH
+set PATH $HOME/.config/bin $PATH
 
 # if test -d $HOME/Code/emsdk
 # 	set -x PATH $PATH $HOME/Code/emsdk $HOME/Code/emsdk/clang/e1.37.18_64bit \
@@ -60,8 +61,6 @@ alias docker "sudo docker"
 alias docker-compose "sudo docker-compose"
 # use neovim
 alias vim "nvim"
-
-complete --command dotf --wraps git
 
 ### ========================================
 ###				   COLOURS
