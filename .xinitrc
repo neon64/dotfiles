@@ -1,0 +1,1 @@
+/home/chris/.xinitrc-linux
