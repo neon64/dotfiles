@@ -98,6 +98,6 @@ set -U fisher_active_prompt clearance
 # start sway upon login to tty1
 if status --is-login
     if test -z "$DISPLAY" -a "$XDG_VTNR" -eq "1"
-        swm
+        startx
     end
 end
