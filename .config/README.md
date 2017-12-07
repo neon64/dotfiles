@@ -13,13 +13,13 @@ Here's a list in no particular order of the apps I use.
 
 **Window Manager**
  - i3-gaps, for when I want to look cool and transparent
-        - polybar
-        - rofi
+        - [polybar](https://github.com/jaagr/polybar)
+        - [rofi](https://github.com/DaveDavenport/rofi)
  - sway, as my daily driver
-        - polybar doesn't seem to support Wayland atm, so I'm using `swaybar` and `i3blocks`
-        - dmenu
-        - I really miss copy/paste between Wayland and XWayland clients! 
- - Gnome, installed and there just in case, but I never use it
+        - `polybar` doesn't seem to support Wayland at the moment, so I'm using `swaybar` and `i3blocks`
+        - `rofi` (sometimes it misses keyboard events)
+        - However, on my machine it feels laggier than X+i3. Hopefully the [wlroots](https://github.com/swaywm/wlroots) project will fix it.
+ - Gnome is installed, but there just in case and I never really use it
 
 **Terminal**
  - [Alacritty](https://github.com/jwilm/alacritty/), a fast terminal emulator written in Rust, is unfortunately not yet my daily driver because it lacks scrollback
