@@ -26,7 +26,7 @@ set $text-color           #ffffff
 set $inactive-text-color  #cccccc
 
 set $urgent-bg-color     #E53935
-set $green               #00ff00
+set $green               #000000
 
 
 ### =====================
@@ -34,9 +34,8 @@ set $green               #00ff00
 ### =====================
 
 # Your preferred terminal emulator
-set $term alacritty
-# I should really get around to boycotting Google one day....
-set $browser google-chrome-stable
+set $term dbus-launch gnome-terminal
+set $browser firefox
 
 ### =====================
 ###         Exec
@@ -178,10 +177,10 @@ set $right semicolon
 
     assign [class="qutebrowser"] 1
     assign [class="Atom"] 3
-    #assign [class~="firefox"] 1
     assign [class="Gnome-terminal"] 2
     assign [class="Alacritty"] 2
     assign [class="Firefox"] 1
+    assign [class="Code"] 3
     assign [class="Nylas N1"] 7
     assign [class="Google-chrome"] 1
     assign [class="keepassxc"] 9
@@ -288,9 +287,9 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 
 new_window normal 0
 #hide_edge_borders both
-gaps outer 4
-gaps inner 4
-smart_gaps on
+#gaps outer 4
+#gaps inner 4
+#smart_gaps on
 #smart_borders on
 
 font pango:System San Francisco Display 10
@@ -316,8 +315,11 @@ font pango:System San Francisco Display 10
 #    font pango:System San Francisco Display 10
 # }
 
-for_window [class="Gnome-calculator"] border none
+for_window [id="gnome-calculator"] floating enable
+for_window [id="gnome-calculator"] border none
 for_window [title="Question"] floating enable
-for_window [class="Google-chrome"] border none
+for_window [class="chromium"] border none
 for_window [class="Firefox"] border none
-for_window [class="Gnome-control-center"] border none
+for_window [class="Code"] border none
+for_window [class="Gnome-control-center"] floating enable
+for_window [class="Gnome-terminal"] border none
