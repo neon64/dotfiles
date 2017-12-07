@@ -11,6 +11,7 @@ function fish_greeting
         case "19" "20" "21" "22" "23"
             set tod "evening"
     end
+    echo ""
     echo -ns (set_color cyan) "Good $tod, " (whoami) "!" (set_color normal)
     echo ""
     check_dotf
