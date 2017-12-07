@@ -190,10 +190,10 @@ key_bindings:
   - { key: Q,        mods: Control,       action: Quit                }
   - { key: W,        mods: Control,       action: Quit                }
   - { key: Insert,   mods: Shift,         action: PasteSelection      }
-  - { key: Up,       mods: Control|Shift, action: ScrollUp            }
-  - { key: Down,     mods: Control|Shift, action: ScrollDown          }
-  - { key: PageUp,   mods: Shift,         action: PageUp              }
-  - { key: PageDown, mods: Shift,         action: PageDown            }
+    #  - { key: Up,       mods: Control|Shift, action: ScrollUp            }
+    #  - { key: Down,     mods: Control|Shift, action: ScrollDown          }
+    #  - { key: PageUp,   mods: Shift,         action: PageUp              }
+    #  - { key: PageDown, mods: Shift,         action: PageDown            }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[1~",  mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }
