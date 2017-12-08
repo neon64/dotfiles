@@ -178,7 +178,8 @@ set $right semicolon
 
     assign [class="qutebrowser"] 1
     assign [class="Atom"] 3
-    assign [class="Gnome-terminal"] 2
+    # let us open a terminal on any window
+    # assign [class="Gnome-terminal"] 2
     assign [class="Alacritty"] 2
     assign [class="Firefox"] 1
     assign [class="Code"] 3
