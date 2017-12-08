@@ -65,7 +65,7 @@ exec feh --bg-fill ~/Pictures/mountains-2.jpg
 exec --no-startup-id xautolock -time 5 -locker i3lock-fancy &
 
 # Restore GNOME's settings
-exec --no-startup-id /usr/lib64/gnome-settings-daemon/gnome-settings-daemon
+exec --no-startup-id /usr/lib64/gnome-settings-daemon/gsd-xsettings 
 
 #exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
 # Fix a bug in gnome-settings-daemon: http://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment-using-i3/
