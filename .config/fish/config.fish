@@ -89,7 +89,6 @@ set -U fish_color_search_match \x2d\x2dbackground\x3dpurple
 set -U fish_color_selection \x2d\x2dbackground\x3dpurple
 set -U fish_color_user brgreen
 set -U fish_color_valid_path \x2d\x2dunderline
-set -U fisher_active_prompt clearance
 
 ### ========================================
 ###				   AUTOSTART
