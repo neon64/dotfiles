@@ -12,17 +12,19 @@ function install_dotfiles
     echo (set_color yellow) "Installing fisherman..." (set_color normal)
     curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
 
+
     echo (set_color yellow) "Installing fisherman plugins..." (set_color normal)
-    fisher up
+    # run in subshell so that it loads properly
+    fish -c "fisher up"
 
     echo (set_color yellow) "Installing platform-specific git settings..." (set_color normal)
     switch (uname)
     	case Linux
-            ln -s ~/.gitconfig-linux ~/.gitconfig-platform-specific;
-            ln -s ~/.xinitrc-linux ~/.xinitrc;
+            ln -sfn ~/.gitconfig-linux ~/.gitconfig-platform-specific;
+            ln -sfn ~/.xinitrc-linux ~/.xinitrc;
         case Darwin
-            ln -s ~/.gitconfig-macos ~/.gitconfig-platform-specific;
-            ln -s ~/.xinitrc-macos ~/.xinitrc;
+            ln -sfn ~/.gitconfig-macos ~/.gitconfig-platform-specific;
+            ln -sfn ~/.xinitrc-macos ~/.xinitrc;
         case *
             echo "Unknown OS"
     end
