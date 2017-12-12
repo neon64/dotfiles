@@ -3718,6 +3718,8 @@
 		<key>TB Is Shown</key>
 		<integer>1</integer>
 	</dict>
+	<key>NSWindow Frame NSFontPanel</key>
+	<string>711 161 445 103 0 0 1280 777 </string>
 	<key>NSWindow Frame Preferences</key>
 	<string>269 298 606 456 0 0 1280 777 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
@@ -3725,9 +3727,9 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>269 280 796 473 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>464 114 710 593 0 0 1280 777 </string>
+	<string>0 53 710 724 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>152 70 710 707 0 0 1280 777 </string>
+	<string>152 53 710 724 0 0 1280 777 </string>
 	<key>NeverWarnAboutShortLivedSessions_263CF449-6FA5-428D-B5BE-2C654EA0196C</key>
 	<true/>
 	<key>New Bookmarks</key>
@@ -4298,11 +4300,11 @@
 			<key>Name</key>
 			<string>The Matrix</string>
 			<key>Non Ascii Font</key>
-			<string>Monaco 12</string>
+			<string>Monaco 14</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 12</string>
+			<string>Monaco 14</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -4468,6 +4470,8 @@
 			<key>Use Canonical Parser</key>
 			<true/>
 			<key>Use Italic Font</key>
+			<true/>
+			<key>Use Non-ASCII Font</key>
 			<true/>
 			<key>Vertical Spacing</key>
 			<real>1.5</real>
@@ -4805,7 +4809,7 @@
 			<key>Hide After Opening</key>
 			<false/>
 			<key>Horizontal Spacing</key>
-			<real>0.89999997615814209</real>
+			<real>0.90000000000000002</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
 			<key>Initial Text</key>
@@ -5135,7 +5139,7 @@
 			<key>Non-ASCII Ligatures</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>SourceCodeProForPowerline-Regular 13</string>
+			<string>Menlo-Regular 12</string>
 			<key>Only The Default BG Color Uses Transparency</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -5315,7 +5319,7 @@
 			<key>Use Non-ASCII Font</key>
 			<false/>
 			<key>Vertical Spacing</key>
-			<real>1.0609057323042168</real>
+			<real>1.4134036144578315</real>
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
