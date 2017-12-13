@@ -20,7 +20,7 @@ function check_dotf
     # than `dotf diff-index --quiet HEAD`.
     # sometimes it would return an error code but
     # there were no changed files 
-    if dotf status | grep "nothing to commit"
+    if dotf status | grep --quiet "nothing to commit"
         return 0
     else
         echo ""
