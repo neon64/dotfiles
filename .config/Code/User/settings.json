@@ -1,0 +1,10 @@
+{
+    "editor.fontSize": 14,
+    "editor.fontFamily": "FiraCode-Light, monospace",
+    "editor.fontLigatures": true,
+    "files.associations": {
+        ".*": "shellscript"
+    },
+    "workbench.startupEditor": "welcomePage",
+    "workbench.colorTheme": "Base16 Dark Tomorrow"
+}

@@ -25,6 +25,7 @@ function install_dotfiles
         case Darwin
             ln -sfn ~/.gitconfig-macos ~/.gitconfig-platform-specific;
             ln -sfn ~/.xinitrc-macos ~/.xinitrc;
+            ln -sfn ~/.config/Code/User/settings.json ~/Library/Application\ Support/Code/User/settings.json;
         case *
             echo "Unknown OS"
     end
