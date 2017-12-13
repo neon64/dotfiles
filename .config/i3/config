@@ -325,3 +325,4 @@ for_window [class="Firefox"] border none
 for_window [class="Code"] border none
 for_window [class="Gnome-control-center"] floating enable
 for_window [class="Gnome-terminal"] border none
+for_window [class="Alacritty"] border none
