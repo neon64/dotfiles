@@ -12,7 +12,7 @@ function read_confirm
 end
 
 function read_confirm_prompt
-  echo 'Would you like to push your local commits? [Y/n] '
+  echo 'Your dotfiles are \nWould you like to push your local commits? [Y/n] '
 end
 
 function check_dotf 
@@ -21,7 +21,8 @@ function check_dotf
     # sometimes it would return an error code but
     # there were no changed files 
     if dotf status | grep --quiet "nothing to commit"
-        if dotf status | grep --quiet "Your branch is ahead of 'origin/master'"
+        echo ""
+        if dotf status | grep "Your branch is ahead of 'origin/master'"
             if read_confirm
                 dotf push
             end
