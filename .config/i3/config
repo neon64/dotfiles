@@ -34,7 +34,7 @@ set $green               #000000
 ### =====================
 
 # Your preferred terminal emulator
-set $term dbus-launch gnome-terminal
+set $term ~/Code/Rust/alacritty/target/release/alacritty # dbus-launch gnome-terminal
 set $browser firefox
 set $launcher rofi -show combi
 
@@ -180,7 +180,7 @@ set $right semicolon
     assign [class="Atom"] 3
     # let us open a terminal on any window
     # assign [class="Gnome-terminal"] 2
-    assign [class="Alacritty"] 2
+    # assign [class="Alacritty"] 2
     assign [class="Firefox"] 1
     assign [class="Code"] 3
     assign [class="Nylas N1"] 7
