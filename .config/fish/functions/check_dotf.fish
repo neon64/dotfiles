@@ -16,7 +16,11 @@
 # end
 
 function check_dotf 
-    if dotf diff-index --quiet HEAD
+    # strangely, this appears more robust
+    # than `dotf diff-index --quiet HEAD`.
+    # sometimes it would return an error code but
+    # there were no changed files 
+    if dotf status | grep "nothing to commit"
         return 0
     else
         echo ""
