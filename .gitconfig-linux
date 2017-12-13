@@ -1,2 +1,2 @@
 [credential]
-	helper = /usr/share/git/credential/gnome-keyring/git-credential-gnome-keyring
+	helper = /usr/bin/git-credential-gnome-keyring
