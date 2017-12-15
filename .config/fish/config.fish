@@ -62,6 +62,10 @@ alias docker-compose "sudo docker-compose"
 # use neovim
 alias vim "nvim"
 
+function c
+    cargo $argv --color=always 2>&1 | less -R
+end
+
 ### ========================================
 ###				   COLOURS
 ### ========================================

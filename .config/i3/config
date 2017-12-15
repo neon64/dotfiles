@@ -34,7 +34,8 @@ set $green               #000000
 ### =====================
 
 # Your preferred terminal emulator
-set $term ~/Code/Rust/alacritty/target/release/alacritty # dbus-launch gnome-terminal
+# set $term ~/Code/Rust/alacritty/target/release/alacritty
+set $term dbus-launch gnome-terminal
 set $browser firefox
 set $launcher rofi -show combi
 
@@ -65,7 +66,7 @@ exec feh --bg-fill ~/Pictures/mountains-2.jpg
 exec --no-startup-id xautolock -time 5 -locker i3lock-fancy &
 
 # Restore GNOME's settings
-exec --no-startup-id /usr/lib64/gnome-settings-daemon/gsd-xsettings 
+exec --no-startup-id /usr/lib64/gnome-settings-daemon/gsd-xsettings
 
 #exec --no-startup-id /usr/libexec/gnome-settings-daemon-localeexec
 # Fix a bug in gnome-settings-daemon: http://feeding.cloud.geek.nz/posts/creating-a-modern-tiling-desktop-environment-using-i3/
@@ -100,7 +101,7 @@ set $right semicolon
     bindsym $mod+a exec skippy-xd
 
     # take a screenshot
-    bindsym $mod+shift+s exec "scrot ~/Downloads/Screenshot%Y-%m-%d%H:%M:%S.png"
+    # bindsym $mod+shift+s exec "scrot -s"
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -112,6 +113,7 @@ set $right semicolon
     # reload the configuration file
     bindsym $mod+Shift+c reload
 
+    # lock the screen
     bindsym $mod+Shift+x exec --no-startup-id i3lock-fancy
 
     # exit sway (logs you out of your wayland session)
