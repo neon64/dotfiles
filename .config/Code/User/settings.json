@@ -1,11 +1,12 @@
 {
     "editor.fontSize": 14,
-    "editor.fontFamily": "FiraCode-Light, monospace",
+    "editor.fontFamily": "Fira Code, monospace",
     "editor.fontLigatures": true,
     "files.associations": {
         ".*": "shellscript"
     },
     "workbench.startupEditor": "welcomePage",
     "workbench.colorTheme": "Base16 Dark Tomorrow",
-    "window.menuBarVisibility": "toggle"
+    "window.menuBarVisibility": "toggle",
+    "files.trimTrailingWhitespace": true
 }
