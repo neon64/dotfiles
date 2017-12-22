@@ -7,11 +7,7 @@
 set PATH $HOME/.cargo/bin $PATH
 set PATH $HOME/.config/bin $PATH
 
-# if test -d $HOME/Code/emsdk
-# 	set -x PATH $PATH $HOME/Code/emsdk $HOME/Code/emsdk/clang/e1.37.18_64bit \
-#         $HOME/Code/emsdk/node/4.1.1_64bit/bin $HOME/Code/emsdk/emscripten/1.37.18
-# end
-
+# esmcripten on Arch Linux
 if test -d  /usr/lib/emscripten
     set -xg EMSCRIPTEN "/usr/lib/emscripten"
     set -xg EMSCRIPTEN_FASTCOMP "/usr/lib/emscripten-fastcomp"
@@ -20,9 +16,7 @@ if test -d  /usr/lib/emscripten
     set -xg PATH $PATH $EMSCRIPTEN
 end
 
-
-
-set PATH $PATH $HOME/.config/composer/vendor/bin 
+set PATH $PATH $HOME/.config/composer/vendor/bin
 
 # used for the Rust Language Server
 set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
