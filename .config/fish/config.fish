@@ -22,7 +22,7 @@ end
 
 
 
-set PATH $PATH $HOME/.config/composer/vendor/bin 
+set PATH $PATH $HOME/.config/composer/vendor/bin
 
 # used for the Rust Language Server
 set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
