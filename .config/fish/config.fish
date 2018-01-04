@@ -55,6 +55,14 @@ alias docker "sudo docker"
 alias docker-compose "sudo docker-compose"
 # use neovim
 alias vim "nvim"
+function g
+    set query $argv
+    xdg-open "https://www.google.com/search?q=$query"&
+    disown
+    # try one or the other
+    i3-msg workspace 1 2>/dev/null 1>/dev/null
+    swaymsg workspace "1: " > /dev/null
+end
 
 function c
     cargo $argv --color=always 2>&1 | less -R
