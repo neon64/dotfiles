@@ -7,6 +7,7 @@
 set PATH $HOME/.cargo/bin $PATH
 set PATH $HOME/.config/bin $PATH
 
+# esmcripten on Arch Linux
 if test -d  /usr/lib/emscripten
     set -xg EMSCRIPTEN "/usr/lib/emscripten"
     set -xg EMSCRIPTEN_FASTCOMP "/usr/lib/emscripten-fastcomp"
