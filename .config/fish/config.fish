@@ -7,11 +7,6 @@
 set PATH $HOME/.cargo/bin $PATH
 set PATH $HOME/.config/bin $PATH
 
-# if test -d $HOME/Code/emsdk
-# 	set -x PATH $PATH $HOME/Code/emsdk $HOME/Code/emsdk/clang/e1.37.18_64bit \
-#         $HOME/Code/emsdk/node/4.1.1_64bit/bin $HOME/Code/emsdk/emscripten/1.37.18
-# end
-
 if test -d  /usr/lib/emscripten
     set -xg EMSCRIPTEN "/usr/lib/emscripten"
     set -xg EMSCRIPTEN_FASTCOMP "/usr/lib/emscripten-fastcomp"
@@ -19,8 +14,6 @@ if test -d  /usr/lib/emscripten
     # add to path
     set -xg PATH $PATH $EMSCRIPTEN
 end
-
-
 
 set PATH $PATH $HOME/.config/composer/vendor/bin
 
@@ -61,18 +54,6 @@ alias docker "sudo docker"
 alias docker-compose "sudo docker-compose"
 # use neovim
 alias vim "nvim"
-function g
-    set query $argv
-    xdg-open "https://www.google.com/search?q=$query"&
-    disown
-    # try one or the other
-    i3-msg workspace 1 2>/dev/null 1>/dev/null
-    swaymsg workspace "1: " > /dev/null
-end
-
-function c
-    cargo $argv --color=always 2>&1 | less -R
-end
 
 ### ========================================
 ###				   COLOURS
