@@ -60,7 +60,7 @@ exec compton
 # exec setxkbmap -option caps:super,ctrl:swap_lwin_lctl
 
 # Wallpaper
-exec feh --bg-fill ~/Pictures/mountains-2.jpg
+exec feh --bg-fill ~/Pictures/minimal-mountains.jpg
 
 # Locking
 exec --no-startup-id xautolock -time 5 -locker i3lock-fancy &
