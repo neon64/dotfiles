@@ -6,7 +6,7 @@
         ".*": "shellscript"
     },
     "workbench.startupEditor": "welcomePage",
-    "workbench.colorTheme": "Base16 Dark Tomorrow",
+    // "workbench.colorTheme": "Base16 Dark Tomorrow",
     "window.menuBarVisibility": "toggle",
     "files.trimTrailingWhitespace": true,
     "window.zoomLevel": 0,
