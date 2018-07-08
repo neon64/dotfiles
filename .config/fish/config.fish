@@ -8,7 +8,7 @@ set PATH $HOME/.cargo/bin $PATH
 set PATH $HOME/.config/bin $PATH
 
 # esmcripten on Arch Linux
-if test -d  /usr/lib/emscripten
+if test -d /usr/lib/emscripten
     set -xg EMSCRIPTEN "/usr/lib/emscripten"
     set -xg EMSCRIPTEN_FASTCOMP "/usr/lib/emscripten-fastcomp"
 
@@ -90,4 +90,16 @@ if status --is-login
     if test -z "$DISPLAY" -a "$XDG_VTNR" -eq "1"
         startx
     end
+end
+
+switch (uname)
+    case Darwin
+        # assuming we're running with nix pkg manager
+        # fenv is installed using `fisher` - it loads the nix environment so we can use nix applications
+        # NOTE: to fix 'invalid $PATH entry' warning on shell startup, you'll need to manually edit the file
+        #       sourced below
+        #       see https://github.com/NixOS/nix/issues/1512 for developments on this issue
+        if test -f '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+            fenv ". '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'"
+        end
 end

@@ -1,4 +1,4 @@
-# we don't want any greeting
+# simple time of day greeting
 function fish_greeting
     set hour (date +%H)
     switch $hour

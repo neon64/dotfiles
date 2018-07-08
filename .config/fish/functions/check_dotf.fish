@@ -15,11 +15,11 @@ function read_confirm_prompt
   echo 'Would you like to push your local commits? [Y/n] '
 end
 
-function check_dotf 
+function check_dotf
     # strangely, this appears more robust
     # than `dotf diff-index --quiet HEAD`.
     # sometimes it would return an error code but
-    # there were no changed files 
+    # there were no changed files
     if dotf status | grep --quiet "nothing to commit"
         echo ""
         if dotf status | grep --color=never "Your branch is ahead of 'origin/master'"
