@@ -10,12 +10,12 @@ rofi.separator-style: solid
 rofi.line-margin: 10
 rofi.hide-scrollbar: true
 rofi.modi: combi
-rofi.combi-modi: window,run
+rofi.combi-modi: window,drun,run
 rofi.font: "System San Francisco Display" 12
 rofi.terminal: "/usr/bin/gnome-terminal"
 rofi.display-drun:
 rofi.display-run:
-rofi.display-combi: run 
+rofi.display-combi: run
 rofi.display-window:
 rofi.show: combi
 
