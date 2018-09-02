@@ -50,9 +50,6 @@ alias swm "bash ~/.config/sway/start_sway"
 # its shorter
 alias pac "pacaur"
 
-# because I keep forgetting sudo
-alias docker "sudo docker"
-alias docker-compose "sudo docker-compose"
 # use neovim
 alias vim "nvim"
 

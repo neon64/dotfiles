@@ -9,6 +9,7 @@
     },
     "workbench.startupEditor": "welcomePage",
     "workbench.colorTheme": "Default Light+",
+    "window.menuBarVisibility": "toggle",
     "files.trimTrailingWhitespace": true,
     "window.zoomLevel": 0,
     "php.suggest.basic": false,
