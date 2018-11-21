@@ -1,14 +1,40 @@
 {
     "editor.fontSize": 14,
-    "editor.fontFamily": "Fira Code, monospace",
+    "editor.fontFamily": "Fira Code,Menlo, monospace",
     "editor.fontLigatures": true,
+    "editor.minimap.enabled": true,
+    "editor.detectIndentation": true,
     "files.associations": {
         ".*": "shellscript"
     },
     "workbench.startupEditor": "welcomePage",
-    // "workbench.colorTheme": "Base16 Dark Tomorrow",
+    "workbench.colorTheme": "Default Light+",
     "window.menuBarVisibility": "toggle",
     "files.trimTrailingWhitespace": true,
     "window.zoomLevel": 0,
-    "php.suggest.basic": false
+    "php.suggest.basic": false,
+    "editor.wordWrap": "on",
+    "breadcrumbs.enabled": true,
+    // Sync with Skim support:
+    // https://github.com/James-Yu/LaTeX-Workshop/issues/318
+    "latex-workshop.view.pdf.external.command": {
+        "command": "/Users/chris/.config/bin/displayfile",
+        "args": [
+            "-r",
+            "%PDF%"
+        ]
+    },
+    "latex-workshop.view.pdf.external.synctex": {
+        "command": "/Applications/Skim.app/Contents/SharedSupport/displayline",
+        "args": [
+            "-r",
+            "%LINE%",
+            "%PDF%",
+            "%TEX%"
+        ]
+    },
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    "latex-workshop.view.pdf.viewer": "external",
+    "cSpell.language": "en-GB",
+    "cSpell.numSuggestions": 8
 }
