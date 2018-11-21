@@ -34,8 +34,8 @@ set $green               #000000
 ### =====================
 
 # Your preferred terminal emulator
-# set $term ~/Code/Rust/alacritty/target/release/alacritty
-set $term dbus-launch gnome-terminal
+set $term alacritty
+# set $term dbus-launch gnome-terminal
 set $browser firefox
 set $launcher rofi -show combi
 

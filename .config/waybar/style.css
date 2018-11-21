@@ -1,0 +1,121 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: rgba(43, 48, 59, 0.3);
+    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    color: white;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background: transparent;
+    color: white;
+    border-bottom: 3px solid transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+#workspaces button.focused {
+    background: rgba(100, 114, 125, 0.5);
+    border-bottom: 3px solid white;
+}
+
+#workspaces button:hover {
+    background: rgba(71, 90, 105, 0.5);
+    border-bottom: 3px solid #ccc;
+}
+
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode {
+    padding: 0 10px;
+    margin: 0 3px;
+}
+
+#window {
+    margin: 0 20px;
+}
+
+#clock {
+    background-color: rgba(100, 114, 125, 0.8);
+    border-bottom: 3px solid rgb(83, 97, 107);
+}
+
+#battery {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-bottom: 3px solid rgba(204, 204, 204, 0.8);
+    color: black;
+}
+
+#battery.charging {
+    color: white;
+    background-color: rgba(38, 166, 91, 0.8);
+    border-bottom-color: rgba(35, 155, 85, 0.8);
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#battery.warning:not(.charging) {
+    background: #f53c3c;
+    color: white;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu {
+    background: rgba(46, 204, 113, 0.8);
+    border-bottom: 3px solid rgba(38, 172, 93, 0.8);
+    color: #000000;
+}
+
+#memory {
+    background: rgba(155, 88, 182, 0.8);
+    border-bottom: 3px solid rgba(126, 72, 147, 0.8);
+}
+
+#network {
+    background: rgba(41, 128, 185, 0.8);
+    border-bottom: 3px solid rgba(34, 110, 160, 0.8);
+}
+
+#network.disconnected {
+    background: rgba(245, 60, 60, 0.8);
+    border-bottom: 3px solid rgba(219, 54, 54, 0.8);
+}
+
+#pulseaudio {
+    background: rgba(241, 196, 15, 0.99);
+    border-bottom: 3px solid rgba(221, 180, 14, 0.99);
+    color: black;
+}
+
+#pulseaudio.muted {
+    background: rgba(144, 177, 177, 0.8);
+    border-bottom: 3px solid rgba(105, 129, 129, 0.8);
+    color: #2a5c45;
+}
+
+#custom-spotify {
+    background: #66cc99;
+    color: #2a5c45;
+}
+
+#tray {
+    background-color: #2980b9;
+}

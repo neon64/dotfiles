@@ -45,10 +45,8 @@ alias t "tmux a; or tmux"
 # starts Alacritty fullscreen without a wm
 alias al "env NO_WM=1 startx"
 
-# starts sway with the required
-alias swm "bash ~/.config/sway/start_sway"
-# its shorter
-alias pac "pacaur"
+# in case I forget
+alias pac "yay"
 
 # use neovim
 alias vim "nvim"
