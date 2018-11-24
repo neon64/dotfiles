@@ -86,6 +86,6 @@ set -U fish_color_valid_path \x2d\x2dunderline
 # start sway upon login to tty1
 if status --is-login
     if test -z "$DISPLAY" -a "$XDG_VTNR" -eq "1"
-        startx
+        # startx
     end
 end
