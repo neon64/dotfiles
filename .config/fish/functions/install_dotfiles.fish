@@ -15,7 +15,7 @@ function install_dotfiles
 
     echo (set_color yellow) "Installing fisherman plugins..." (set_color normal)
     # run in subshell so that it loads properly
-    fish -c "fisher; and fisher up"
+    fish -c "fisher"
 
     echo (set_color yellow) "Installing platform-specific git settings..." (set_color normal)
     switch (uname)
