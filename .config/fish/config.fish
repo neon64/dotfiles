@@ -44,6 +44,7 @@ end
 alias t "tmux a; or tmux"
 # starts Alacritty fullscreen without a wm
 alias al "env NO_WM=1 startx"
+alias yt "mpsyt"
 
 # in case I forget
 alias pac "yay"
