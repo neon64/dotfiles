@@ -40,8 +40,9 @@ Here's a list in no particular order of the apps I use.
 
 **Music**
  - YouTube (including mps-youtube in terminal)
- - Mopidy as a backend and then ncmpcpp for a terminal UI
+ - <strike>Mopidy as a backend and then ncmpcpp for a terminal UI</strike>
     - having issues with this setup at the moment (YouTube and Google Play Music backends aren't very mature)
+    - Switched to `mpd` - can now use `ncmpcpp` visualizer, or `cava`
 
 ## Installation
 
