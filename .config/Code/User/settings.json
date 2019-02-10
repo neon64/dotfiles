@@ -9,7 +9,6 @@
     },
     "workbench.startupEditor": "welcomePage",
     "workbench.colorTheme": "Default Light+",
-    "window.menuBarVisibility": "toggle",
     "files.trimTrailingWhitespace": true,
     "window.zoomLevel": 0,
     "php.suggest.basic": false,
@@ -36,5 +35,9 @@
     "latex-workshop.synctex.afterBuild.enabled": true,
     "latex-workshop.view.pdf.viewer": "external",
     "cSpell.language": "en-GB",
-    "cSpell.numSuggestions": 8
+    "cSpell.numSuggestions": 8,
+    "window.menuBarVisibility": "toggle",
+    "window.titleBarStyle": "native",
+    "[jade]": {},
+    "open-in-browser.default": "firefox"
 }

@@ -82,8 +82,9 @@ input "1452:781:Robert_Chamberlain’s_M" {
     # screenshot using a timestamped filename
     bindsym $mod+Shift+s exec bash -c "slurp | grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')"
 
-    # exit sway (logs you out of your wayland session)
-    bindsym $mod+Shift+e exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"
+    # exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    # used to be: exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"
 #
 # Moving around
 #
@@ -188,9 +189,9 @@ input "1452:781:Robert_Chamberlain’s_M" {
     # Volume
 
     # Volume
-    bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+; exec pkill --signal SIGRTMIN+10 i3blocks
-    bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-;  exec pkill --signal SIGRTMIN+10 i3blocks
-    bindsym XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle; exec pkill --signal SIGRTMIN+10 i3blocks
+    bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+
+    bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%- #  exec pkill --signal SIGRTMIN+10 i3blocks
+    bindsym XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle #; exec pkill --signal SIGRTMIN+10 i3blocks
 
     # Media player
     bindsym XF86AudioPlay exec mpc toggle
@@ -199,15 +200,17 @@ input "1452:781:Robert_Chamberlain’s_M" {
     bindsym XF86AudioNext exec mpc next
 
     # Brightness
-    bindsym XF86MonBrightnessUp exec xbacklight -inc 10;  exec pkill --signal SIGRTMIN+11 i3blocks
-    bindsym XF86MonBrightnessDown exec xbacklight -dec 10;  exec pkill --signal SIGRTMIN+11 i3blocks
+    bindsym XF86MonBrightnessUp exec xbacklight -inc 10 #;  exec pkill --signal SIGRTMIN+11 i3blocks
+    bindsym XF86MonBrightnessDown exec xbacklight -dec 10 #;  exec pkill --signal SIGRTMIN+11 i3blocks
 
     # Sleep
     # bindsym $mod+shift+l exec bash /home/chris/.config/sway/lock.sh
 
     exec waybar
 
-    exec swayidle timeout 300 'swaylock -c 000000' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -c 000000'
+    exec swayidle timeout 120 'swaylock -c 000000' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -c 000000'
+
+#
 
 #
 # Resize mode:
