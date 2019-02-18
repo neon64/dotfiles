@@ -1,5 +1,5 @@
-for_window [id="gnome-calculator"] floating enable
-for_window [id="gnome-calculator"] border none
+for_window [class="gnome-calculator"] floating enable
+for_window [class="gnome-calculator"] border none
 for_window [title="Question"] floating enable
 for_window [title="Preferences"] floating enable
 for_window [title="Editing Profile"] floating enable
@@ -9,6 +9,6 @@ for_window [class="Google-chrome"] border none
 for_window [class="Firefox"] border none
 for_window [class="Code"] border none
 for_window [class="FirefoxNightly"] border none
-for_window [id="gnome-control-center"] floating enable
-for_window [id="gnome-control-center"] border none
-for_window [id="gnome-terminal-server"] border pixel 1
+for_window [class="gnome-control-center"] floating enable
+for_window [class="gnome-control-center"] border none
+for_window [class="gnome-terminal-server"] border pixel 1

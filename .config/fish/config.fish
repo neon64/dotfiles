@@ -44,11 +44,10 @@ end
 alias t "tmux a; or tmux"
 # starts Alacritty fullscreen without a wm
 alias al "env NO_WM=1 startx"
+alias yt "mpsyt"
 
-# starts sway with the required
-alias swm "bash ~/.config/sway/start_sway"
-# its shorter
-alias pac "pacaur"
+# in case I forget
+alias pac "yay"
 
 # use neovim
 alias vim "nvim"
@@ -88,6 +87,6 @@ set -U fish_color_valid_path \x2d\x2dunderline
 # start sway upon login to tty1
 if status --is-login
     if test -z "$DISPLAY" -a "$XDG_VTNR" -eq "1"
-        startx
+        # startx
     end
 end

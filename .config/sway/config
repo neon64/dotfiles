@@ -12,7 +12,8 @@
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Your preferred terminal emulator
-set $term gnome-terminal
+# set $term gnome-terminal
+set $term ~/Code/Rust/alacritty_new_window_cwd/target/release/alacritty_new_window_cwd
 # Your preferred web browser
 set $browser firefox
 # Your preferred application launcher
@@ -34,7 +35,8 @@ output * bg ~/Pictures/mountains-2.jpg fill
 #
 # You can get the names of your outputs by running swaymsg -t get_outputs
 
-input "1452:566:bcm" {
+#input "1452:566:bcm" {
+input "1452:566:bcm5974" {
     tap enabled
     natural_scroll enabled
     #dwt disabled
@@ -42,6 +44,10 @@ input "1452:566:bcm" {
     #accel_profile adaptive
     #pointer_accel -100, 100
     click_method clickfinger
+}
+
+input "1452:566:Apple_Inc._Apple_Internal_Keyboard_/_Trackpad" {
+    xkb_options caps:super,ctrl:swap_lwin_lctl
 }
 
 input "1452:781:Robert_Chamberlain’s_M" {
@@ -61,7 +67,7 @@ input "1452:781:Robert_Chamberlain’s_M" {
     # kill focused window
     bindsym $mod+Shift+q kill
 
-    # start your launcher  
+    # start your launcher
     bindsym $mod+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
@@ -73,10 +79,12 @@ input "1452:781:Robert_Chamberlain’s_M" {
 
     # reload the configuration file
     bindsym $mod+Shift+c reload
-    bindsym $mod+Shift+s exec swaygrab ~/Pictures/latest-screenshot.png
+    # screenshot using a timestamped filename
+    bindsym $mod+Shift+s exec bash -c "slurp | grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')"
 
-    # exit sway (logs you out of your wayland session)
-    bindsym $mod+Shift+e exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"
+    # exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    # used to be: exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"
 #
 # Moving around
 #
@@ -135,7 +143,8 @@ input "1452:781:Robert_Chamberlain’s_M" {
     assign [class="Atom"] "3: "
     assign [class="Code"] "3: "
     #assign [class~="firefox"] "1: "
-    assign [id="gnome-terminal-server"] "2: "
+    #assign [title="fish"] "2: "
+    #assign [class="gnome-terminal-server"] "2: "
     assign [class="Navigator"] "1: "
     assign [class="Firefox"] "1: "
     assign [class="Google-chrome"] "1: "
@@ -178,11 +187,11 @@ input "1452:781:Robert_Chamberlain’s_M" {
 #
 
     # Volume
-    
+
     # Volume
-    bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+; exec pkill --signal SIGRTMIN+10 i3blocks
-    bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-;  exec pkill --signal SIGRTMIN+10 i3blocks
-    bindsym XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle; exec pkill --signal SIGRTMIN+10 i3blocks
+    bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+
+    bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%- #  exec pkill --signal SIGRTMIN+10 i3blocks
+    bindsym XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle #; exec pkill --signal SIGRTMIN+10 i3blocks
 
     # Media player
     bindsym XF86AudioPlay exec mpc toggle
@@ -191,11 +200,17 @@ input "1452:781:Robert_Chamberlain’s_M" {
     bindsym XF86AudioNext exec mpc next
 
     # Brightness
-    bindsym XF86MonBrightnessUp exec xbacklight -inc 10;  exec pkill --signal SIGRTMIN+11 i3blocks
-    bindsym XF86MonBrightnessDown exec xbacklight -dec 10;  exec pkill --signal SIGRTMIN+11 i3blocks
+    bindsym XF86MonBrightnessUp exec xbacklight -inc 10 #;  exec pkill --signal SIGRTMIN+11 i3blocks
+    bindsym XF86MonBrightnessDown exec xbacklight -dec 10 #;  exec pkill --signal SIGRTMIN+11 i3blocks
 
     # Sleep
-    bindsym $mod+shift+l exec bash /home/chris/.config/sway/lock.sh
+    # bindsym $mod+shift+l exec bash /home/chris/.config/sway/lock.sh
+
+    exec waybar
+
+    exec swayidle timeout 120 'swaylock -c 000000' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -c 000000'
+
+#
 
 #
 # Resize mode:
@@ -274,7 +289,7 @@ set $base0F #a3685a
 
 # fits Base16-Tomorrow-Night theme
 #darker than $base00
-set $bd-color              #17191a 
+set $bd-color              #17191a
 #slightly lighter than $base00
 set $focused-bd-color      #222325
 set $bg-color              #17191a
@@ -311,21 +326,21 @@ font pango:System San Francisco Display 10
 #
 # Status Bar:
 #
-bar {
-    position bottom
-    strip_workspace_numbers yes
-    colors {
-        background $bar-bg-color
-        separator #757575
-        focused_workspace   $bar-bg-color     $bar-bg-color       $focused-text-color
-		inactive_workspace  $bar-bg-color     $bar-bg-color       $inactive-text-color
-        urgent_workspace    $urgent-bg-color  $urgent-bg-color    $focused-text-color
-    }
+# bar {
+#     position bottom
+#     strip_workspace_numbers yes
+#     colors {
+#         background $bar-bg-color
+#         separator #757575
+#         focused_workspace   $bar-bg-color     $bar-bg-color       $focused-text-color
+# 		inactive_workspace  $bar-bg-color     $bar-bg-color       $inactive-text-color
+#         urgent_workspace    $urgent-bg-color  $urgent-bg-color    $focused-text-color
+#     }
 
-    #status_command i3status
-    status_command i3blocks
-    font pango:System San Francisco Display 10
-}
+#     #status_command i3status
+#     status_command i3blocks
+#     font pango:System San Francisco Display 10
+# }
 
 
 
