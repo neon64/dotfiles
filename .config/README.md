@@ -16,7 +16,7 @@ Here's a list in no particular order of the apps I use.
         - [polybar](https://github.com/jaagr/polybar)
         - [rofi](https://github.com/DaveDavenport/rofi)
  - sway, as my daily driver
-        - `polybar` doesn't seem to support Wayland at the moment, so I'm using `swaybar` and `i3blocks`
+        - `waybar`, `swayidle`, `grim` (screenshotting)
         - `rofi` (sometimes it misses keyboard events)
         - However, on my machine it feels laggier than X+i3. Hopefully the [wlroots](https://github.com/swaywm/wlroots) project will fix it.
  - Gnome is installed, but there just in case and I never really use it
