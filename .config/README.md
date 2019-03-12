@@ -64,6 +64,8 @@ Finally, run the install function to install needed plugins (eg: for `nvim` and 
 
     $ install_dotfiles
 
+Also update the git repo location used by the script `~/.config/dotf` to point to wherever you stored the bare dotfiles repository (default is `~/Code/Dotfiles`)
+
 ## Keeping track of local changes
 
 To stage changes to a file, just run:
@@ -78,7 +80,7 @@ Don't ever try `dotf add -A` - It tries to stage everything in your home directo
 
 To commit changes:
 
-    $ dotf commit -m "Describing the change
+    $ dotf commit -m "Describing the change"
 
 In conclusion: it's exactly like normal Git, just with `git` replaced with the alias `dotf` (defined in `.config/fish/config.fish`)
 
