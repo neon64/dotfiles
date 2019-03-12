@@ -58,7 +58,9 @@ Then attempt to checkout the configuration files:
 
 You will most likely have to decide what to do with the existing dotfiles on your system.
 
-Finally, run the install script:
+If `fish` isn't already installed, you'll need to install it now using an appropriate package manager and also eventually set it as the default shell.
+
+Finally, run the install function to install needed plugins (eg: for `nvim` and `fish`):
 
     $ install_dotfiles
 
@@ -86,7 +88,7 @@ To update the system, run:
 
     $ up
 
-On ArchLinux, this will use `pacaur`, on macOS, it will use `brew`.
+On ArchLinux, this will use `yay`, on macOS, it will use `brew`.
 It will also update various components (namely language-specific package managers). At the moment this includes:
 
 - Rust (via Rustup)
