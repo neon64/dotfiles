@@ -73,7 +73,7 @@ extra_system_pkgs=(
     polkit # required for shutdown without sudo, avoiding errors in systemctl etc...
     netctl # internet access
     pulseaudio # pulseaudio support
-    git-credential-gnome-keyring # store git credentials in a keyring
+    libsecret # credential management
 )
 
 # installs the fish shell and everything else required to work with these dotfiles

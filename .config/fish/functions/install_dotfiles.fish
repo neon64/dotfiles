@@ -17,7 +17,7 @@ function install_dotfiles
     # run in subshell so that it loads properly
     fish -c "fisher"
 
-    echo (set_color yellow) "Installing platform-specific git settings..." (set_color normal)
+    echo (set_color yellow) "Installing platform-specific settings..." (set_color normal)
     switch (uname)
     	case Linux
             ln -sfn ~/.gitconfig-linux ~/.gitconfig-platform-specific;
