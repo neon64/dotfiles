@@ -3,7 +3,9 @@
 
 This repository contains the most important dotfiles that I want replicated between different systems...
 Kudos to the extremely simple way of keeping track of dotfiles detailed here: https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/.
-I was fed up with having to download yet another fancy bash script, just to do something that Git can do out of the box.
+I was fed up with having to download yet another fancy script, just to do something that Git can do out of the box.
+
+*Coming-soon:* I am working on a simple script that installs these dotfiles + all dependencies to a new computer. I've chosen to stick with simple `bash` so that I don't need to install or learn a new provisioning tool like Ansible etc...
 
 ## Stuff I use
 
@@ -12,17 +14,18 @@ I have one Linux machine and two OS X machines. While these dotfiles contain a l
 Here's a list in no particular order of the apps I use.
 
 **Window Manager**
- - i3-gaps, for when I want to look cool and transparent
+ - sway, as my daily driver when I'm on Linux
+        - `waybar` as the bar, with icons from `otf-font-awesome`.
+        - `rofi` - as of sway 1.0 it works really nicely (except perhaps window switching) 
+ - i3-gaps, my legacy setup (not guaranteed to work anymore, but still part of dotfiles) 
         - [polybar](https://github.com/jaagr/polybar)
         - [rofi](https://github.com/DaveDavenport/rofi)
- - sway, as my daily driver
-        - `polybar` doesn't seem to support Wayland at the moment, so I'm using `swaybar` and `i3blocks`
-        - `rofi` (sometimes it misses keyboard events)
-        - However, on my machine it feels laggier than X+i3. Hopefully the [wlroots](https://github.com/swaywm/wlroots) project will fix it.
- - Gnome is installed, but there just in case and I never really use it
+ - On my old machine I had Gnome installed, just in case. There's nothing in my dotfiles really specific to Gnome though. 
 
 **Terminal**
- - [Alacritty](https://github.com/jwilm/alacritty/), a fast terminal emulator written in Rust, is unfortunately not yet my daily driver because it lacks scrollback
+ - [Alacritty](https://github.com/jwilm/alacritty/), a fast terminal emulator written in Rust.
+   - Now has scrollback, and has become my daily driver
+   - Unfortunately it's performance inside a virtual machine seems somewhat lacklustre
  - Gnome Terminal
 
 **Shell**
@@ -33,10 +36,12 @@ Here's a list in no particular order of the apps I use.
  - Visual Studio Code
  - [Neovim](https://github.com/neovim/neovim), when I need to use the command line
      - [vim-plug](https://github.com/junegunn/vim-plug)
+     - I'm now trying to learn vim as a primary text editor. Hopefully it works out.
 
 **Browser**
- - Firefox - As a Rust user, I really appreciate all the work that has gone into the 'Quantum' release.
- - Qutebrowser - I like the vim keybindings but my config isn't fully complete yet
+ - Firefox - As a Rust user, I really appreciate all the work that has gone into the 'Firefox Quantum' release, and I also
+   am wary of Google achieving a monopoly over the web with Chrome/Blink
+ - Qutebrowser - I liked the vim keybindings but my config isn't fully complete yet
 
 **Music**
  - YouTube (including mps-youtube in terminal)
@@ -65,6 +70,11 @@ Finally, run the install function to install needed plugins (eg: for `nvim` and 
     $ install_dotfiles
 
 Also update the git repo location used by the script `~/.config/dotf` to point to wherever you stored the bare dotfiles repository (default is `~/Code/Dotfiles`)
+
+### In the pipeline - installation script
+
+I'm currently working on an all in one installation script (for Arch Linux) `~/.config/bin/provision_arch` which should install all required packages for these
+dotfiles to function correctly. More to come...
 
 ## Keeping track of local changes
 
