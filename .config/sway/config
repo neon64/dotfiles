@@ -85,7 +85,9 @@ input "1452:781:Robert_Chamberlain’s_M" {
     bindsym $mod+Shift+s exec bash -c "slurp | grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')"
 
     # exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec swaynag -t warning \
+        -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.'\
+        -b 'Yes, exit sway' 'swaymsg exit'
     # used to be: exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"
 #
 # Moving around
@@ -303,7 +305,7 @@ hide_edge_borders both
 # smart_gaps on
 # smart_borders on
 
-font pango:Cantarell 10
+font pango:Cantarell 11
 
 # doesn't work on i3
 #for_window [class=".*"] title_format "<span size='x-small'>%title</span>"

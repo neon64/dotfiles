@@ -8,7 +8,6 @@ GREEN="\e[32m"
 BOLD="\e[1m"
 RESET_FMT="\e[0m"
 
-#set -e
 trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
 trap handle_exit EXIT
 
@@ -66,6 +65,7 @@ else
     makepkg -si 
 fi
 
+cd ~
 header "Using \`yay\` to install everything else\n"
 
 # packages which weren't installed as part of base, but are nevertheless important for system functions
@@ -73,6 +73,7 @@ extra_system_pkgs=(
     polkit # required for shutdown without sudo, avoiding errors in systemctl etc...
     netctl # internet access
     pulseaudio # pulseaudio support
+    git-credential-gnome-keyring # store git credentials in a keyring
 )
 
 # installs the fish shell and everything else required to work with these dotfiles
@@ -103,15 +104,21 @@ extra_shell_pkgs=(
     pamixer # control pulseaudio from cli
     googler # google from the command line
     xdg-utils # xdg-open and other utils
+    mpd # music player daemon
+    mpc # command line client to mpd
+    ncmpcpp # music player terminal client
 )
 
 # apps which I use
 recommended_apps=(
 	alacritty # nice terminal emulator written in rust 
+    otf-fira-code # nice coding font with ligatures
+    otf-fira-mono # nice coding font without ligatures
 	firefox # browser of choice
     code # VS Code editor
 	gnome-system-monitor #  visual htop
     gnome-font-viewer # viewing which fonts are available
+    pavucontrol # visual pulse audio info
 )
 
 # packages to write rust code
@@ -127,6 +134,7 @@ node_pkgs=(
 # packages to write/run python code
 python_pkgs=(
     python
+    python-pip
 )
 
 function install_group {
@@ -144,5 +152,31 @@ install_group rust_pkgs ${rust_pkgs[@]} && rustup install stable && rustup insta
 install_group node_pkgs ${node_pkgs[@]}
 install_group python_pkgs ${python_pkgs[@]} 
 
-header "Installed all requested packages"
-#yay -S --needed "${packages[@]}"
+function install_custom_mpsyt {
+    yay -S --needed python-mpd2
+    pip3 install --user -U git+https://github.com/vn-ki/mps-youtube.git@mpd
+}
+
+confirm "Installing custom version of mps-youtube which interacts nicely with mpd (requires python)" && install_custom_mpsyt
+
+header "Installed all requested packages!"
+
+function theme_gnome_term {  
+    git clone https://github.com/aaron-williamson/base16-gnome-terminal.git ~/.config/base16-gnome-terminal || warn "Already cloned repository"
+    ~/.config/base16-gnome-terminal/color-scripts/base16-tomorrow-night.sh   
+    warn "You will need to set this theme as default in Gnome Terminal's preferences"
+}
+
+confirm "Adding \`base16-tomorrow-night\` theme to Gnome Terminal " && theme_gnome_term 
+
+function link_code_configs {
+    if [[ -d ~/.config/Code\ -\ OSS/ ]]; then
+        echo "Already exists, trashing old config"
+        trash ~/.config/Code\ -\ OSS
+    fi
+    ln -s ~/.config/Code ~/.config/Code\ -\ OSS
+}
+
+confirm "Symlinking 'Code - OSS' config to normal VS Code config" && link_code_configs
+
+exit 0

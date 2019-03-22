@@ -4,16 +4,20 @@
 
 # this is *prepended* because we want it to override
 # the system rust compiler with our more up to date versions
-set PATH $HOME/.cargo/bin $PATH
-set PATH $HOME/.config/bin $PATH
+set -x PATH $HOME/.cargo/bin $PATH
+set -x PATH $HOME/.config/bin $PATH
 
 # esmcripten on Arch Linux
 if test -d  /usr/lib/emscripten
-    set -xg EMSCRIPTEN "/usr/lib/emscripten"
-    set -xg EMSCRIPTEN_FASTCOMP "/usr/lib/emscripten-fastcomp"
+    set -x EMSCRIPTEN "/usr/lib/emscripten"
+    set -x EMSCRIPTEN_FASTCOMP "/usr/lib/emscripten-fastcomp"
 
     # add to path
-    set -xg PATH $PATH $EMSCRIPTEN
+    set -x PATH $PATH $EMSCRIPTEN
+end
+
+if test -d $HOME/.local/bin
+    set -x PATH $PATH $HOME/.local/bin
 end
 
 set PATH $PATH $HOME/.config/composer/vendor/bin
@@ -88,6 +92,6 @@ set -U fish_color_valid_path \x2d\x2dunderline
 # start sway upon login to tty1
 if status --is-login
     if test -z "$DISPLAY" -a "$XDG_VTNR" -eq "1"
-        # startx
+        sway
     end
 end
