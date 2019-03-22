@@ -1,8 +1,9 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    /* we use `serif` as a fallback so its clear if our proper font isn't installed */
+    font-family: "Cantarell", serif;
+    font-size: 14px;
     min-height: 0;
 }
 
@@ -13,7 +14,7 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 0 5px;
+    padding: 0 12px;
     background: transparent;
     color: white;
     border-bottom: 3px solid transparent;

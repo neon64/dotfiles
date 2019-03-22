@@ -1,8 +1,8 @@
 rofi.lines: 5
 rofi.eh: 1
 rofi.line-margin: 5
-rofi.width: 100
-rofi.padding: 200
+rofi.width: 60
+rofi.padding: 30 
 rofi.auto-select: true
 rofi.bw: 0
 ! Separator style (none, dash, solid)
@@ -10,8 +10,8 @@ rofi.separator-style: solid
 rofi.line-margin: 10
 rofi.hide-scrollbar: true
 rofi.modi: combi
-rofi.combi-modi: window,drun,run
-rofi.font: "System San Francisco Display" 12
+rofi.combi-modi: drun,run
+rofi.font: cantarell 12
 rofi.terminal: "/usr/bin/gnome-terminal"
 rofi.display-drun:
 rofi.display-run:

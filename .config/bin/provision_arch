@@ -1,0 +1,148 @@
+#!/bin/bash
+
+PKG_BUILD_DIR="$HOME/Code/Packages"
+BLUE="\e[34m"
+RED="\e[31m"
+YELLOW="\e[33m"
+GREEN="\e[32m"
+BOLD="\e[1m"
+RESET_FMT="\e[0m"
+
+#set -e
+trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
+trap handle_exit EXIT
+
+function handle_exit {
+    if [ "$?" -eq 0 ]; then
+        echo -e "Clean exit"
+    elif [ "$?" -eq 196238 ]; then
+        echo -e "User aborted script"
+    else
+        echo -e "${BOLD}====>${RESET_FMT} \`${last_command}\` ${RED}${BOLD}failed with exit code $?, aborting install...${RESET_FMT}"
+    fi
+}
+
+function header {
+	echo -e "\n${BOLD}====> ${BLUE}$1${RESET_FMT}"
+}
+
+function warn {
+	echo -e "\n${BOLD}====> ${YELLOW}Warning: $1${RESET_FMT}\n"
+}
+
+function confirm {
+    echo -e "\n${BOLD}====> ${GREEN}$1${RESET_FMT}"
+    while true; do
+        read -n1 -p "Do you wish to perform this action? (y/n/e[xit]) " yn
+        echo -e "\n"
+        case $yn in
+            [Yy]* ) return 0;;
+            [Nn]* ) return 1;;
+            [Ee]* ) exit 196238;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+}
+
+function enable_locales {
+    # set locale properly
+    sudo sed -i '/en_AU.UTF-8 UTF-8/s/^#//' /etc/locale.gen
+    sudo sed -i '/en_US.UTF-8 UTF-8/s/^#//' /etc/locale.gen
+    header "Generating locales"
+    sudo locale-gen
+}
+
+confirm "Enabling en_AU.UTF-8, en_US.UTF-8 locales" && enable_locales
+
+if pacman -Q | grep 'yay'; then
+    warn "\`Yay\` already installed"
+else
+    header "Installing \`yay\`"
+    # first we want install an AUR helper, so we can install more packages more easily
+    mkdir -p $PKG_BUILD_DIR
+    cd $PKG_BUILD_DIR
+    git clone https://aur.archlinux.org/yay.git || warn "Already cloned"
+    cd yay
+    makepkg -si 
+fi
+
+header "Using \`yay\` to install everything else\n"
+
+# packages which weren't installed as part of base, but are nevertheless important for system functions
+extra_system_pkgs=(
+    polkit # required for shutdown without sudo, avoiding errors in systemctl etc...
+    netctl # internet access
+    pulseaudio # pulseaudio support
+)
+
+# installs the fish shell and everything else required to work with these dotfiles
+base_shell_pkgs=(
+    fish # shell of choice
+    neovim # text editor - either use because its awesome, or as console backup
+    newsboat # required for reading Arch RSS feed before updating packages
+    tmux # terminal multiplexer, provides multiple concurrent panes whilst running system updates using the `up` script
+)
+
+# installs the sway window manager and other utilites used by my particular configuration
+wm_pkgs=(
+	sway # window manager
+    swayidle # lockscreen + power management
+    waybar # awesome looking status bar
+    grim # grab images from the wayland compositor
+	rofi # app launcher
+	slurp # select area to screenshot
+    cantarell-fonts # chosen UI font for sway and waybar
+    otf-font-awesome # chosen icon font for waybar
+    swaylock-blur-git # cool util which blurs background for swaylock
+)
+
+# extra shell utils which aren't integral to these dotfiles, but are nevertheless useful
+extra_shell_pkgs=(
+	lostfiles # search for stray system files which aren't part of a package 
+	trash-cli # `trash` command
+    pamixer # control pulseaudio from cli
+    googler # google from the command line
+    xdg-utils # xdg-open and other utils
+)
+
+# apps which I use
+recommended_apps=(
+	alacritty # nice terminal emulator written in rust 
+	firefox # browser of choice
+    code # VS Code editor
+	gnome-system-monitor #  visual htop
+    gnome-font-viewer # viewing which fonts are available
+)
+
+# packages to write rust code
+rust_pkgs=(
+    rustup # manage rust installations
+)
+
+# packages to write/run node code
+node_pkgs=(
+    nodejs npm
+)
+
+# packages to write/run python code
+python_pkgs=(
+    python
+)
+
+function install_group {
+    name=$1
+    shift
+    confirm "Installing group \`$name\`" && yay -S --needed "$@"
+}
+
+install_group extra_system_pkgs "${extra_system_pkgs[@]}"
+install_group base_shell_pkgs "${base_shell_pkgs[@]}"
+install_group wm_pkgs ${wm_pkgs[@]}
+install_group extra_shell_pkgs ${extra_shell_pkgs[@]}
+install_group recommended_apps ${recommended_apps[@]}
+install_group rust_pkgs ${rust_pkgs[@]} && rustup install stable && rustup install nightly
+install_group node_pkgs ${node_pkgs[@]}
+install_group python_pkgs ${python_pkgs[@]} 
+
+header "Installed all requested packages"
+#yay -S --needed "${packages[@]}"

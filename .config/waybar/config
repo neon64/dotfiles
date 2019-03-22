@@ -1,7 +1,7 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar at the bottom of your screen
-    // "height": 30, // Waybar height
+    "height": 40, // Waybar height
     // "width": 1280, // Waybar width
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "custom/spotify"],
@@ -9,23 +9,23 @@
     "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "clock", "tray"],
     // Modules configuration
     "sway/window": {
-        "max-length": 50
+        "max-length": 80
     },
     "sway/workspaces": {
         "disable-scroll": false,
     //     "all-outputs": true,
         "format": "{icon}",
         "format-icons": {
-            "1: ": "",
-            "2: ": "",
-            "3: ": "",
+            "1": "",
+            "2": "",
+            "3": "",
             "4": "4",
             "5": "5",
             "6": "6",
-            "7: ": "",
-            "8: ": "",
-            "9: ": "",
-            "10: ": "",
+            "7": "",
+            "8": "",
+            "9": "",
+            "10": "",
             "urgent": "",
             "focused": "",
             "default": ""

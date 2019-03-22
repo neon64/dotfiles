@@ -12,8 +12,9 @@
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Your preferred terminal emulator
+set $term alacritty
 # set $term gnome-terminal
-set $term ~/Code/Rust/alacritty_new_window_cwd/target/release/alacritty_new_window_cwd
+# set $term ~/Code/Rust/alacritty_new_window_cwd/target/release/alacritty_new_window_cwd
 # Your preferred web browser
 set $browser firefox
 # Your preferred application launcher
@@ -27,7 +28,8 @@ set $right semicolon
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
-output * bg ~/Pictures/mountains-2.jpg fill
+# output * bg ~/Pictures/mountains-2.jpg fill
+output * bg ~/Pictures/hamburg-night.jpg fill
 #
 # Example output configuration:
 #
@@ -113,44 +115,38 @@ input "1452:781:Robert_Chamberlain’s_M" {
 # Workspaces:
 #
 
-    workspace "10: "
+    workspace 10
     # switch to workspace
-    bindsym $mod+1 workspace "1: "
-    bindsym $mod+2 workspace "2: "
-    bindsym $mod+3 workspace "3: "
+    bindsym $mod+1 workspace 1
+    bindsym $mod+2 workspace 2
+    bindsym $mod+3 workspace 3
     bindsym $mod+4 workspace 4
     bindsym $mod+5 workspace 5
     bindsym $mod+6 workspace 6
-    bindsym $mod+7 workspace "7: "
-    bindsym $mod+8 workspace "8: "
-    bindsym $mod+9 workspace "9: "
-    bindsym $mod+0 workspace "10: "
+    bindsym $mod+7 workspace 7
+    bindsym $mod+8 workspace 8
+    bindsym $mod+9 workspace 9
+    bindsym $mod+0 workspace 10
     # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace "1: "
-    bindsym $mod+Shift+2 move container to workspace "2: "
-    bindsym $mod+Shift+3 move container to workspace "3: "
+    bindsym $mod+Shift+1 move container to workspace 1
+    bindsym $mod+Shift+2 move container to workspace 2
+    bindsym $mod+Shift+3 move container to workspace 3
     bindsym $mod+Shift+4 move container to workspace 4
     bindsym $mod+Shift+5 move container to workspace 5
     bindsym $mod+Shift+6 move container to workspace 6
-    bindsym $mod+Shift+7 move container to workspace "7: "
-    bindsym $mod+Shift+8 move container to workspace "8: "
-    bindsym $mod+Shift+9 move container to workspace "9: "
-    bindsym $mod+Shift+0 move container to workspace "10: "
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
-
-    assign [class="qutebrowser"] "1: "
-    assign [class="Atom"] "3: "
-    assign [class="Code"] "3: "
-    #assign [class~="firefox"] "1: "
-    #assign [title="fish"] "2: "
-    #assign [class="gnome-terminal-server"] "2: "
-    assign [class="Navigator"] "1: "
-    assign [class="Firefox"] "1: "
-    assign [class="Google-chrome"] "1: "
+    bindsym $mod+Shift+7 move container to workspace 7
+    bindsym $mod+Shift+8 move container to workspace 8
+    bindsym $mod+Shift+9 move container to workspace 9
+    bindsym $mod+Shift+0 move container to workspace 10
+    # default workspaces
+    assign [class="qutebrowser"] 1 
+    assign [class="Atom"] 3
+    assign [class="Code"] 3
+    assign [class="Firefox"] 1 
+    assign [class="Google-chrome"] 1
     assign [class="GitKraken"] 4
-    assign [class="evolution"] "8: "
-    assign [class="keepassxc"] "9: "
+    assign [class="evolution"] 8 
+    assign [class="keepassxc"] 9
 
 #
 # Layout stuff:
@@ -208,7 +204,7 @@ input "1452:781:Robert_Chamberlain’s_M" {
 
     exec waybar
 
-    exec swayidle timeout 120 'swaylock -c 000000' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -c 000000'
+    exec swayidle timeout 120 'swaylock-blur' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock-blur'
 
 #
 
@@ -278,15 +274,6 @@ set $base0D #81a2be
 set $base0E #b294bb
 set $base0F #a3685a
 
-# fits the `Arc` theme
-# set $bg-color 	         #2f343f
-# set $inactive-bg-color   #2f343f
-# set $bar-bg-color        #1f242f
-# set $text-color          #f3f4f5
-# set $inactive-text-color #676E7D
-# set $urgent-bg-color     #E53935
-# set $green               #00ff00
-
 # fits Base16-Tomorrow-Night theme
 #darker than $base00
 set $bd-color              #17191a
@@ -316,8 +303,7 @@ hide_edge_borders both
 # smart_gaps on
 # smart_borders on
 
-#font pango:Cantarell 10
-font pango:System San Francisco Display 10
+font pango:Cantarell 10
 
 # doesn't work on i3
 #for_window [class=".*"] title_format "<span size='x-small'>%title</span>"

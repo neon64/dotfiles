@@ -45,6 +45,7 @@ alias t "tmux a; or tmux"
 # starts Alacritty fullscreen without a wm
 alias al "env NO_WM=1 startx"
 alias yt "mpsyt"
+alias g "googler --url-handler ~/.config/bin/browse"
 
 # in case I forget
 alias pac "yay"
