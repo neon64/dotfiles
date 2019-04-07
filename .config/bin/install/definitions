@@ -1,0 +1,52 @@
+#!/bin/bash
+
+PKG_BUILD_DIR="$HOME/Code/Packages"
+BLUE="\e[34m"
+RED="\e[31m"
+YELLOW="\e[33m"
+GREEN="\e[32m"
+BOLD="\e[1m"
+RESET_FMT="\e[0m"
+
+# trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
+# trap handle_exit EXIT
+
+case $1 in
+    '--update')
+        FRESH_INSTALL=false
+        ;;
+    * )
+        FRESH_INSTALL=true
+        ;;
+esac
+
+function handle_exit {
+    if [ "$?" -eq 0 ]; then
+        echo -e "Clean exit"
+    elif [ "$?" -eq 196238 ]; then
+        echo -e "User aborted script"
+    else
+        echo -e "${BOLD}====>${RESET_FMT} \`${last_command}\` ${RED}${BOLD}failed with exit code $?, aborting install...${RESET_FMT}"
+    fi
+}
+
+function header {
+	echo -e "${BOLD}====> ${BLUE}$1${RESET_FMT}"
+}
+
+function warn {
+	echo -e "${BOLD}====> ${YELLOW}Warning: $1${RESET_FMT}"
+}
+
+function confirm {
+    echo -en "${BOLD}====> ${GREEN}$1${RESET_FMT}"
+    while true; do
+        read -n1 -p " (y/n/e) " yn
+        case $yn in
+            [Yy]* ) echo "" && return 0;;
+            [Nn]* ) echo "" && return 1;;
+            [Ee]* ) exit 196238;;
+            * ) echo -e "\nPlease answer yes or no.";;
+        esac
+    done
+}

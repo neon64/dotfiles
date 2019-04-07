@@ -1,47 +1,9 @@
 #!/bin/bash
 
-PKG_BUILD_DIR="$HOME/Code/Packages"
-BLUE="\e[34m"
-RED="\e[31m"
-YELLOW="\e[33m"
-GREEN="\e[32m"
-BOLD="\e[1m"
-RESET_FMT="\e[0m"
-
-trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
-trap handle_exit EXIT
-
-function handle_exit {
-    if [ "$?" -eq 0 ]; then
-        echo -e "Clean exit"
-    elif [ "$?" -eq 196238 ]; then
-        echo -e "User aborted script"
-    else
-        echo -e "${BOLD}====>${RESET_FMT} \`${last_command}\` ${RED}${BOLD}failed with exit code $?, aborting install...${RESET_FMT}"
-    fi
-}
-
-function header {
-	echo -e "\n${BOLD}====> ${BLUE}$1${RESET_FMT}"
-}
-
-function warn {
-	echo -e "\n${BOLD}====> ${YELLOW}Warning: $1${RESET_FMT}\n"
-}
-
-function confirm {
-    echo -e "\n${BOLD}====> ${GREEN}$1${RESET_FMT}"
-    while true; do
-        read -n1 -p "Do you wish to perform this action? (y/n/e[xit]) " yn
-        echo -e "\n"
-        case $yn in
-            [Yy]* ) return 0;;
-            [Nn]* ) return 1;;
-            [Ee]* ) exit 196238;;
-            * ) echo "Please answer yes or no.";;
-        esac
-    done
-}
+# load the platform-independent definitions & functions
+source "`dirname $0`/definitions"
+# load the platform-independent installation steps
+source "`dirname $0`/common"
 
 function enable_locales {
     # set locale properly
@@ -51,22 +13,27 @@ function enable_locales {
     sudo locale-gen
 }
 
-confirm "Enabling en_AU.UTF-8, en_US.UTF-8 locales" && enable_locales
+if $FRESH_INSTALL; then
+    confirm "Enable en_AU.UTF-8, en_US.UTF-8 locales?" && enable_locales
 
-if pacman -Q | grep 'yay'; then
-    warn "\`Yay\` already installed"
-else
-    header "Installing \`yay\`"
-    # first we want install an AUR helper, so we can install more packages more easily
-    mkdir -p $PKG_BUILD_DIR
-    cd $PKG_BUILD_DIR
-    git clone https://aur.archlinux.org/yay.git || warn "Already cloned"
-    cd yay
-    makepkg -si 
+    echo ""
+
+    if pacman -Q | grep -q 'yay'; then
+        warn "\`yay\` already installed, using it to install everything else"
+    else
+        header "Installing \`yay\`"
+        # first we want install an AUR helper, so we can install more packages more easily
+        mkdir -p $PKG_BUILD_DIR
+        cd $PKG_BUILD_DIR
+        git clone https://aur.archlinux.org/yay.git || warn "Already cloned"
+        cd yay
+        makepkg -si
+
+        header "Using \`yay\` to install everything else"
+    fi
+
+    cd ~
 fi
-
-cd ~
-header "Using \`yay\` to install everything else\n"
 
 # packages which weren't installed as part of base, but are nevertheless important for system functions
 extra_system_pkgs=(
@@ -147,45 +114,63 @@ python_pkgs=(
 function install_group {
     name=$1
     shift
-    confirm "Installing group \`$name\`" && yay -S --needed "$@"
+    confirm " - \`$name\`?" && yay -S --needed "$@"
 }
-
-install_group extra_system_pkgs "${extra_system_pkgs[@]}"
-install_group base_shell_pkgs "${base_shell_pkgs[@]}"
-install_group wm_pkgs ${wm_pkgs[@]}
-install_group extra_shell_pkgs ${extra_shell_pkgs[@]}
-install_group recommended_apps ${recommended_apps[@]}
-install_group rust_pkgs ${rust_pkgs[@]} && rustup install stable && rustup install nightly && rustup default nightly && cargo install cargo-add
-install_group node_pkgs ${node_pkgs[@]}
-install_group python_pkgs ${python_pkgs[@]} 
 
 function install_custom_mpsyt {
     yay -S --needed python-mpd2
     pip3 install --user -U git+https://github.com/vn-ki/mps-youtube.git@mpd
 }
 
-confirm "Installing custom version of mps-youtube which interacts nicely with mpd (requires python)" && install_custom_mpsyt
+function install_pkgs {
+    install_group extra_system_pkgs "${extra_system_pkgs[@]}"
+    install_group base_shell_pkgs "${base_shell_pkgs[@]}"
+    install_group wm_pkgs ${wm_pkgs[@]}
+    install_group extra_shell_pkgs ${extra_shell_pkgs[@]}
+    install_group recommended_apps ${recommended_apps[@]}
+    install_group rust_pkgs ${rust_pkgs[@]} && rustup install stable && rustup install nightly && rustup default nightly && cargo install cargo-add
+    install_group node_pkgs ${node_pkgs[@]}
+    install_group python_pkgs ${python_pkgs[@]} 
+    confirm " - custom version of mps-youtube which interacts nicely with mpd (requires python)?" && install_custom_mpsyt
+    header "Installed all requested packages!"
+}
 
-header "Installed all requested packages!"
+function update_pkgs {
+    newsboat -r
+    yay -Syu
+}
+
+if $FRESH_INSTALL; then
+    echo ""
+    confirm "Install Arch packages?" && install_pkgs
+    echo ""
+else
+    echo ""
+    confirm "Update Arch packages?" && update_pkgs
+    echo ""
+fi
 
 function theme_gnome_term {  
     git clone https://github.com/aaron-williamson/base16-gnome-terminal.git ~/.config/base16-gnome-terminal || warn "Already cloned repository"
-    ~/.config/base16-gnome-terminal/color-scripts/base16-tomorrow-night.sh   
+    ~/.config/base16-gnome-terminal/color-scripts/base16-tomorrow-night.sh
     warn "You will need to set this theme as default in Gnome Terminal's preferences"
 }
 
-confirm "Adding \`base16-tomorrow-night\` theme to Gnome Terminal " && theme_gnome_term 
+if $FRESH_INSTALL; then
+    confirm "Add \`base16-tomorrow-night\` theme to Gnome Terminal (warning will add twice)?" && theme_gnome_term 
 
-function link_code_configs {
-    if [[ -d ~/.config/Code\ -\ OSS/ ]]; then
-        echo "Already exists, trashing old config"
-        trash ~/.config/Code\ -\ OSS
-    fi
-    ln -s ~/.config/Code ~/.config/Code\ -\ OSS
-}
+    confirm "Enable network time synchronization?" && sudo timedatectl set-ntp true
+fi
 
-confirm "Symlinking 'Code - OSS' config to normal VS Code config" && link_code_configs
+install_common
 
-confirm "Enabling network time synchronization" && sudo timedatectl set-ntp true
+echo ""
+echo ""
+
+if $FRESH_INSTALL; then
+    header "Congratulations, installation completed!"
+else
+    header "System updated successfully"
+fi
 
 exit 0
