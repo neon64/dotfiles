@@ -39,7 +39,6 @@ switch (uname)
     case '*'
         set -x EDITOR /usr/bin/nvim
 end
-
 ### ========================================
 ###				   ALIASES
 ### ========================================
@@ -47,15 +46,19 @@ end
 # connects to an existing tmux session before creating a new one
 alias t "tmux a; or tmux"
 # starts Alacritty fullscreen without a wm
-alias al "env NO_WM=1 startx"
+alias al "env NO_WM=1 COLUMNS=$COLUMNS LINES=$LINES startx"
 alias yt "mpsyt"
-alias g "googler --url-handler ~/.config/bin/browse"
+alias g "googler --url-handler ~/.config/bin/browse --colors bjdxxy"
+alias ls "exa --classify --git --header" 
 
 # in case I forget
 alias pac "yay"
 
 # use neovim
 alias vim "nvim"
+
+# start emacs daemon for faster startup
+alias e "emacsclient --no-wait --quiet --create-frame --alternate-editor=''"
 
 ### ========================================
 ###				   COLOURS

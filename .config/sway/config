@@ -12,16 +12,16 @@
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
 # Your preferred terminal emulator
-set $term alacritty
-# set $term gnome-terminal
+# set $term alacritty
+set $term gnome-terminal
 # set $term ~/Code/Rust/alacritty_new_window_cwd/target/release/alacritty_new_window_cwd
 # Your preferred web browser
 set $browser firefox
 # Your preferred application launcher
 set $menu rofi -show combi
 # movement keys
-set $up l
-set $down k
+set $up k
+set $down l
 set $left j
 set $right semicolon
 
@@ -30,6 +30,7 @@ set $right semicolon
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
 # output * bg ~/Pictures/mountains-2.jpg fill
 output * bg ~/Pictures/hamburg-night.jpg fill
+
 #
 # Example output configuration:
 #
@@ -62,9 +63,9 @@ input "1452:781:Robert_Chamberlain’s_M" {
 #
 # Basics:
 #
-    # start a terminal
-    bindsym $mod+Return exec $term
-    bindsym $mod+c exec $browser
+# start a terminal
+bindsym $mod+Return exec $term
+bindsym $mod+c exec $browser
 
     # kill focused window
     bindsym $mod+Shift+q kill
@@ -72,31 +73,34 @@ input "1452:781:Robert_Chamberlain’s_M" {
     # start your launcher
     bindsym $mod+d exec $menu
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
+    # Drag floating windows by holding down $mod and left mouse button. Resize
+    # them with right mouse button + $mod. Despite the name, also works for
+    # non-floating windows. Change normal to inverse to use left mouse button
+    # for resizing and right mouse button for dragging.
     floating_modifier $mod normal
 
     # reload the configuration file
     bindsym $mod+Shift+c reload
-    # screenshot using a timestamped filename
-    bindsym $mod+Shift+s exec bash -c "slurp | grim $(xdg-user-dir PICTURES)/$(date +'%Y-%m-%d-%H%M%S_grim.png')"
+    # screenshot using a 'timestamped' filename
+    bindsym $mod+Shift+s exec bash -c "slurp | grim ~/Pictures/$(date +u%Y-%m-%d-%H%M%S_grim.pngu)"
 
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning \
         -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.'\
         -b 'Yes, exit sway' 'swaymsg exit'
-    # used to be: exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"
+    # used to be: exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"ww
 #
 # Moving around
 #
-    # Move your focus around with $mod+[h|j|k|l], like vim
-    bindsym $mod+j focus left
-    bindsym $mod+k focus down
-    bindsym $mod+l focus up
-    bindsym $mod+semicolon focus right
+    # Move your focus around using the home row
+    # bindsym $mod+$left exec ~/.config/bin/navigate_sway_and_emacs left
+    # bindsym $mod+$down exec ~/.config/bin/navigate_sway_and_emacs down
+    # bindsym $mod+$up exec ~/.config/bin/navigate_sway_and_emacs up
+    # bindsym $mod+$right exec ~/.config/bin/navigate_sway_and_emacs right
+    bindsym $mod+$left exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs left
+    bindsym $mod+$down exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs down
+    bindsym $mod+$up exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs up
+    bindsym $mod+$right exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs right
     # or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
@@ -104,10 +108,10 @@ input "1452:781:Robert_Chamberlain’s_M" {
     bindsym $mod+Right focus right
 
     # _move_ the focused window with the same, but add Shift
-    bindsym $mod+Shift+j move left
-    bindsym $mod+Shift+k move down
-    bindsym $mod+Shift+l move up
-    bindsym $mod+Shift+semicolon move right
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
     # ditto, with arrow keys
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
@@ -141,13 +145,13 @@ input "1452:781:Robert_Chamberlain’s_M" {
     bindsym $mod+Shift+9 move container to workspace 9
     bindsym $mod+Shift+0 move container to workspace 10
     # default workspaces
-    assign [class="qutebrowser"] 1 
+    assign [class="qutebrowser"] 1
     assign [class="Atom"] 3
     assign [class="Code"] 3
-    assign [class="Firefox"] 1 
+    assign [class="Firefox"] 1
     assign [class="Google-chrome"] 1
     assign [class="GitKraken"] 4
-    assign [class="evolution"] 8 
+    assign [class="evolution"] 8
     assign [class="keepassxc"] 9
 
 #
@@ -300,6 +304,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-co
 # window borders and gaps
 new_window normal 1
 hide_edge_borders both
+focus_wrapping no
 # gaps inner 1
 # gaps outer 2
 # smart_gaps on

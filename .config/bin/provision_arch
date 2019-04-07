@@ -72,7 +72,7 @@ header "Using \`yay\` to install everything else\n"
 extra_system_pkgs=(
     polkit # required for shutdown without sudo, avoiding errors in systemctl etc...
     netctl # internet access
-    pulseaudio # pulseaudio support
+    pulseaudio pulseaudio-alsa # pulseaudio support
     libsecret # credential management
 )
 
@@ -82,16 +82,19 @@ base_shell_pkgs=(
     neovim # text editor - either use because its awesome, or as console backup
     newsboat # required for reading Arch RSS feed before updating packages
     tmux # terminal multiplexer, provides multiple concurrent panes whilst running system updates using the `up` script
+    exa # file listing in Rust
+    git # version control
+    emacs ttf-nanum adobe-source-code-pro-fonts # emacs + fonts required for it
 )
 
 # installs the sway window manager and other utilites used by my particular configuration
 wm_pkgs=(
-	sway # window manager
+    sway # window manager
     swayidle # lockscreen + power management
     waybar # awesome looking status bar
     grim # grab images from the wayland compositor
-	rofi # app launcher
-	slurp # select area to screenshot
+    rofi # app launcher
+    slurp # select area to screenshot
     cantarell-fonts # chosen UI font for sway and waybar
     otf-font-awesome # chosen icon font for waybar
     swaylock-blur-git # cool util which blurs background for swaylock
@@ -99,24 +102,28 @@ wm_pkgs=(
 
 # extra shell utils which aren't integral to these dotfiles, but are nevertheless useful
 extra_shell_pkgs=(
-	lostfiles # search for stray system files which aren't part of a package 
-	trash-cli # `trash` command
+    lostfiles # search for stray system files which aren't part of a package
+    trash-cli # `trash` command
     pamixer # control pulseaudio from cli
     googler # google from the command line
     xdg-utils # xdg-open and other utils
     mpd # music player daemon
     mpc # command line client to mpd
+    mpv # play music and videos in the command line
     ncmpcpp # music player terminal client
+    archey3 # display system info
+    cava # audio visualiser
 )
 
 # apps which I use
 recommended_apps=(
-	alacritty # nice terminal emulator written in rust 
+    alacritty # nice terminal emulator written in rust
     otf-fira-code # nice coding font with ligatures
     otf-fira-mono # nice coding font without ligatures
-	firefox # browser of choice
+    firefox # browser of choice
+    ttf-liberation # sans-serif font for firefox
     code # VS Code editor
-	gnome-system-monitor #  visual htop
+    gnome-system-monitor #  visual htop
     gnome-font-viewer # viewing which fonts are available
     pavucontrol # visual pulse audio info
 )
@@ -148,7 +155,7 @@ install_group base_shell_pkgs "${base_shell_pkgs[@]}"
 install_group wm_pkgs ${wm_pkgs[@]}
 install_group extra_shell_pkgs ${extra_shell_pkgs[@]}
 install_group recommended_apps ${recommended_apps[@]}
-install_group rust_pkgs ${rust_pkgs[@]} && rustup install stable && rustup install nightly
+install_group rust_pkgs ${rust_pkgs[@]} && rustup install stable && rustup install nightly && rustup default nightly && cargo install cargo-add
 install_group node_pkgs ${node_pkgs[@]}
 install_group python_pkgs ${python_pkgs[@]} 
 
@@ -178,5 +185,7 @@ function link_code_configs {
 }
 
 confirm "Symlinking 'Code - OSS' config to normal VS Code config" && link_code_configs
+
+confirm "Enabling network time synchronization" && sudo timedatectl set-ntp true
 
 exit 0
