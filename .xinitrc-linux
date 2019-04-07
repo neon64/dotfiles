@@ -1,7 +1,8 @@
 #!/bin/bash
 
 if [ -z "$NO_WM" ]; then
-	exec i3
+	exec startkde
 else
-	exec alacritty --dimensions 142 47 -e fish -c "t"
+    # dimensions for old laptop were 142 47
+	exec alacritty --dimensions $COLUMNS $LINES -e fish -c "t"
 fi
