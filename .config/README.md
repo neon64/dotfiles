@@ -1,15 +1,23 @@
 # Dotfiles
 
 
-This repository contains the most important dotfiles that I want replicated between different systems...
-Kudos to the extremely simple way of keeping track of dotfiles detailed here: https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/.
-I was fed up with having to download yet another fancy script, just to do something that Git can do out of the box.
+This repository contains the most important dotfiles that I want replicated
+between different systems... Kudos to the extremely simple way of keeping track
+of dotfiles detailed here:
+https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/.
+I was fed up with having to download yet another fancy script, just to do
+something that Git can do out of the box.
 
-*Coming-soon:* I am working on a simple script that installs these dotfiles + all dependencies to a new computer. I've chosen to stick with simple `bash` so that I don't need to install or learn a new provisioning tool like Ansible etc...
+*Coming-soon:* I am working on a simple script that installs these dotfiles +
+all dependencies to a new computer. I've chosen to stick with simple `bash` so
+that I don't need to install or learn a new provisioning tool like Ansible
+etc...
 
 ## Stuff I use
 
-I have one Linux machine and two OS X machines. While these dotfiles contain a lot of stuff pertinent to Linux only (all the WM stuff), I try to ensure that they work universally.
+I have one Linux machine and two OS X machines. While these dotfiles contain a
+lot of stuff pertinent to Linux only (all the WM stuff), I try to ensure that
+they work universally.
 
 Here's a list in no particular order of the apps I use.
 
@@ -20,7 +28,8 @@ Here's a list in no particular order of the apps I use.
  - i3-gaps, my legacy setup (not guaranteed to work anymore, but still part of dotfiles) 
         - [polybar](https://github.com/jaagr/polybar)
         - [rofi](https://github.com/DaveDavenport/rofi)
- - On my old machine I had Gnome installed, just in case. There's nothing in my dotfiles really specific to Gnome though. 
+ - On my old machine I had Gnome installed, just in case. There's nothing in my
+   dotfiles really specific to Gnome though.
 
 **Terminal**
  - [Alacritty](https://github.com/jwilm/alacritty/), a fast terminal emulator written in Rust.
@@ -39,8 +48,9 @@ Here's a list in no particular order of the apps I use.
      - I'm now trying to learn vim as a primary text editor. Hopefully it works out.
 
 **Browser**
- - Firefox - As a Rust user, I really appreciate all the work that has gone into the 'Firefox Quantum' release, and I also
-   am wary of Google achieving a monopoly over the web with Chrome/Blink
+ - Firefox - As a Rust user, I really appreciate all the work that has gone into
+   the 'Firefox Quantum' release, and I also am wary of Google achieving a
+   monopoly over the web with Chrome/Blink
  - Qutebrowser - I liked the vim keybindings but my config isn't fully complete yet
 
 **Music**
@@ -63,18 +73,23 @@ Then attempt to checkout the configuration files:
 
 You will most likely have to decide what to do with the existing dotfiles on your system.
 
-If `fish` isn't already installed, you'll need to install it now using an appropriate package manager and also eventually set it as the default shell.
+If `fish` isn't already installed, you'll need to install it now using an
+appropriate package manager and also eventually set it as the default shell.
 
-Finally, run the install function to install needed plugins (eg: for `nvim` and `fish`):
+Finally, run the install function to install needed plugins (eg: for `nvim` and
+`fish`):
 
     $ install_dotfiles
 
-Also update the git repo location used by the script `~/.config/dotf` to point to wherever you stored the bare dotfiles repository (default is `~/Code/Dotfiles`)
+Also update the git repo location used by the script `~/.config/dotf` to point
+to wherever you stored the bare dotfiles repository (default is
+`~/Code/Dotfiles`)
 
 ### In the pipeline - installation script
 
-I'm currently working on an all in one installation script (for Arch Linux) `~/.config/bin/provision_arch` which should install all required packages for these
-dotfiles to function correctly. More to come...
+I'm currently working on an all in one installation script (for Arch Linux)
+`~/.config/bin/provision_arch` which should install all required packages for
+these dotfiles to function correctly. More to come...
 
 ## Keeping track of local changes
 
@@ -92,7 +107,8 @@ To commit changes:
 
     $ dotf commit -m "Describing the change"
 
-In conclusion: it's exactly like normal Git, just with `git` replaced with the alias `dotf` (defined in `.config/fish/config.fish`)
+In conclusion: it's exactly like normal Git, just with `git` replaced with the
+alias `dotf` (defined in `.config/fish/config.fish`)
 
 ## Updating your system
 
@@ -100,8 +116,9 @@ To update the system, run:
 
     $ up
 
-On ArchLinux, this will use `yay`, on macOS, it will use `brew`.
-It will also update various components (namely language-specific package managers). At the moment this includes:
+On ArchLinux, this will use `yay`, on macOS, it will use `brew`. It will also
+update various components (namely language-specific package managers). At the
+moment this includes:
 
 - Rust (via Rustup)
 - `npm` globally-installed packages
