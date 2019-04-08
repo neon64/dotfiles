@@ -82,7 +82,7 @@ bindsym $mod+c exec $browser
     # reload the configuration file
     bindsym $mod+Shift+c reload
     # screenshot using a 'timestamped' filename
-    bindsym $mod+Shift+s exec bash -c "slurp | grim ~/Pictures/$(date +u%Y-%m-%d-%H%M%S_grim.pngu)"
+    bindsym $mod+Shift+s exec bash -c "slurp | grim ~/Pictures/Screenshots/$(date +u%Y-%m-%d-%H%M%S_grim.png)"
 
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning \
