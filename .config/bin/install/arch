@@ -7,8 +7,8 @@ source "`dirname $0`/common"
 
 function enable_locales {
     # set locale properly
-    sudo sed -i '/en_AU.UTF-8 UTF-8/s/^#//' /etc/locale.gen
-    sudo sed -i '/en_US.UTF-8 UTF-8/s/^#//' /etc/locale.gen
+    sudo sed -i 's/^#en_AU.UTF-8 UTF-8/en_AU.UTF-8 UTF-8/g' /etc/locale.gen
+    sudo sed -i 's/^#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
     header "Generating locales"
     sudo locale-gen
 }
@@ -86,6 +86,7 @@ music_pkgs=(
     mpv # play music and videos in the command line
     ncmpcpp # music player terminal client
     cava # audio visualiser
+    youtube-dl # `ytdl` command
 )
 
 # extra miscellaneous utils which aren't integral to these dotfiles, but are nevertheless useful
@@ -168,14 +169,17 @@ else
     echo ""
 fi
 
-function theme_gnome_term {  
+function theme_gnome_term {
     git clone https://github.com/aaron-williamson/base16-gnome-terminal.git ~/.config/base16-gnome-terminal || warn "Already cloned repository"
     ~/.config/base16-gnome-terminal/color-scripts/base16-tomorrow-night.sh
     warn "You will need to set this theme as default in Gnome Terminal's preferences"
+    header "Hiding terminal title bar"
+    # sets the title bar to hidden
+    gsettings set org.gnome.Terminal.Legacy.Settings headerbar "@mb false"
 }
 
 if $FRESH_INSTALL; then
-    confirm "Add \`base16-tomorrow-night\` theme to Gnome Terminal (warning will add twice)?" && theme_gnome_term 
+    confirm "Add \`base16-tomorrow-night\` theme to Gnome Terminal (warning will add twice)?" && theme_gnome_term
 
     confirm "Enable network time synchronization?" && sudo timedatectl set-ntp true
 fi

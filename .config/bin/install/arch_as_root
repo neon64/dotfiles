@@ -1,0 +1,12 @@
+#!/bin/bash
+
+echo "===> Creating administrator user account"
+echo ""
+
+read -p "Enter a username: " username
+
+useradd -m -G wheel $username
+passwd $username
+
+# anyone in `%wheel` can use `sudo`
+sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers
