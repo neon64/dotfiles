@@ -29,7 +29,7 @@ set $right semicolon
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
 # output * bg ~/Pictures/mountains-2.jpg fill
-output * bg ~/Pictures/hamburg-night.jpg fill
+output * bg ~/Pictures/wallpaper-current.jpg fill
 
 #
 # Example output configuration:

@@ -45,7 +45,7 @@ function confirm {
         case $yn in
             [Yy]* ) echo "" && return 0;;
             [Nn]* ) echo "" && return 1;;
-            [Ee]* ) exit 196238;;
+            [Ee]* ) echo "" && warn "user aborted script, exiting..." && exit 1;;
             * ) echo -e "\nPlease answer yes or no.";;
         esac
     done

@@ -1,7 +1,7 @@
 rofi.lines: 5
 rofi.eh: 1
 rofi.line-margin: 5
-rofi.width: 60
+rofi.width: 40
 rofi.padding: 30 
 rofi.auto-select: true
 rofi.bw: 0
