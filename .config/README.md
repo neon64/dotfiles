@@ -79,7 +79,7 @@ appropriate package manager and also eventually set it as the default shell.
 Finally, run the install function to install needed plugins (eg: for `nvim` and
 `fish`):
 
-    $ install_dotfiles
+    $ ~/.config/bin/install/arch
 
 Also update the git repo location used by the script `~/.config/dotf` to point
 to wherever you stored the bare dotfiles repository (default is
@@ -88,7 +88,7 @@ to wherever you stored the bare dotfiles repository (default is
 ### In the pipeline - installation script
 
 I'm currently working on an all in one installation script (for Arch Linux)
-`~/.config/bin/provision_arch` which should install all required packages for
+`~/.config/bin/install/arch` which should install all required packages for
 these dotfiles to function correctly. More to come...
 
 ## Keeping track of local changes

@@ -1,0 +1,77 @@
+#!/bin/bash
+
+BLUE="\e[34m"
+RED="\e[31m"
+YELLOW="\e[33m"
+GREEN="\e[32m"
+BOLD="\e[1m"
+RESET_FMT="\e[0m"
+
+function header {
+	echo -e "${BOLD}====> ${BLUE}$1${RESET_FMT}"
+}
+
+function warn {
+	echo -e "${BOLD}====> ${YELLOW}Warning: $1${RESET_FMT}"
+}
+
+function confirm {
+    echo -en "${BOLD}====> ${GREEN}$1${RESET_FMT}"
+    while true; do
+        read -n1 -p " (y/n/e) " yn
+        case $yn in
+            [Yy]* ) echo "" && return 0;;
+            [Nn]* ) echo "" && return 1;;
+            [Ee]* ) echo "" && warn "user aborted script, exiting..." && exit 1;;
+            * ) echo -e "\nPlease answer yes or no.";;
+        esac
+    done
+}
+
+function create_account {
+    read -p "Enter a username: " username
+
+    useradd -m -G wheel $username
+    passwd $username
+    header "Account created and password set..."
+
+    # anyone in `%wheel` can use `sudo`
+    header "Enabling \`sudo\` for anybody in %wheel"
+    sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers
+}
+
+function existing_account {
+    read -p "Enter the username of your existing user account: " username
+}
+
+if [ `whoami` = "root" ]; then
+     header "You are currently logged in as 'root'"
+     confirm "Would you like to create a new user account?" && create_account || existing_account
+else
+    username=`whoami`
+fi
+
+# `-e` allows the default value to actually work
+read -e -i "~/Code/Dotfiles" -p "Where should the dotfile repository be installed? " install_location
+
+install_location="${install_location/#\~/$HOME}"
+
+header "Installing dotfiles for user '$username' in \`$install_location\`"
+
+if [ `whoami` = "chris" ]; then
+    # if we're in the root account, we need to switch to the desired user account
+    # to complete the installation safely
+    sudo -u $username bash -x << EOF
+shopt -s expand_aliases
+echo "Now running as \`whoami\`"
+cd ~
+echo "Now at \`pwd\`"
+alias dotf='/usr/bin/git --git-dir="$install_location" --work-tree=\$HOME'
+echo "$install_location" >> .gitignore
+git clone --bare https://github.com/neon64/dotfiles "$install_location"
+cd "$install_location"
+pwd
+EOF
+else
+    echo "do nothing"
+fi
