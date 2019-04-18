@@ -13,33 +13,9 @@ function enable_locales {
     sudo locale-gen
 }
 
-
 function add_colors_to_pacman {
     sudo sed -i 's/^#Color/Color/g' /etc/pacman.conf
 }
-
-if $FRESH_INSTALL; then
-    confirm "Enable en_AU.UTF-8, en_US.UTF-8 locales?" && enable_locales
-    confirm "Enable colored output in \`pacman\` and \`yay\`?" && add_colors_to_pacman
-
-    echo ""
-
-    if pacman -Q | grep -q 'yay'; then
-        warn "\`yay\` already installed, using it to install everything else"
-    else
-        header "Installing \`yay\`"
-        # first we want install an AUR helper, so we can install more packages more easily
-        mkdir -p $PKG_BUILD_DIR
-        cd $PKG_BUILD_DIR
-        git clone https://aur.archlinux.org/yay.git || warn "Already cloned"
-        cd yay
-        makepkg -si
-
-        header "Using \`yay\` to install everything else"
-    fi
-
-    cd ~
-fi
 
 # packages which weren't installed as part of base, but are nevertheless important for system functions
 extra_system_pkgs=(
@@ -57,6 +33,9 @@ base_shell_pkgs=(
     tmux # terminal multiplexer, provides multiple concurrent panes whilst running system updates using the `up` script
     exa # file listing in Rust
     git # version control
+    fzf # fuzzy file finder
+    fd # nice alternative to `find`, written in Rust, and used in our fzf config
+    highlight # syntax highlighting when previewing documents
 )
 
 # installs the sway window manager and other utilites used by my particular configuration
@@ -160,6 +139,30 @@ function update_pkgs {
 }
 
 if $FRESH_INSTALL; then
+    section "1" "2" "system-level configuration"
+    confirm "Enable en_AU.UTF-8, en_US.UTF-8 locales?" && enable_locales
+    confirm "Enable colored output in \`pacman\` and \`yay\`?" && add_colors_to_pacman
+    confirm "Enable network time synchronization?" && sudo timedatectl set-ntp true
+    echo ""
+
+    if pacman -Q | grep -q 'yay'; then
+        warn "\`yay\` already installed, using it to install everything else"
+    else
+        header "Installing \`yay\`"
+        # first we want install an AUR helper, so we can install more packages more easily
+        mkdir -p $PKG_BUILD_DIR
+        cd $PKG_BUILD_DIR
+        git clone https://aur.archlinux.org/yay.git || warn "Already cloned"
+        cd yay
+        makepkg -si
+
+        header "Using \`yay\` to install everything else"
+    fi
+
+    cd ~
+fi
+
+if $FRESH_INSTALL; then
     echo ""
     confirm "Install Arch packages?" && install_pkgs
     echo ""
@@ -178,15 +181,14 @@ function theme_gnome_term {
     gsettings set org.gnome.Terminal.Legacy.Settings headerbar "@mb false"
 }
 
+section "2" "2" "user-level configuration:"
+
 if $FRESH_INSTALL; then
     confirm "Add \`base16-tomorrow-night\` theme to Gnome Terminal (warning will add twice)?" && theme_gnome_term
-
-    confirm "Enable network time synchronization?" && sudo timedatectl set-ntp true
 fi
 
 install_common
 
-echo ""
 echo ""
 
 if $FRESH_INSTALL; then

@@ -61,6 +61,10 @@ function update_npm_packages {
     esac
 }
 
+function set_fish_as_default_shell {
+    chsh -s $(which fish)
+}
+
 function install_common {
     confirm "Install vim plugins using \`vim-plug\`?" && install_vim_plugins
     confirm "Install fish plugins using \`fisherman\`?" && install_fish_plugins
@@ -68,6 +72,7 @@ function install_common {
         confirm "Symlink platform-specific dotfiles?" && symlink_platform_specific
         confirm "Symlink 'Code - OSS' config to normal VS Code config?" && link_code_configs
         confirm "Set \`dotf\` to ignore untracked files?" && set_dotf_ignore_untracked
+        confirm "Set \`fish\` as default shell?" && set_fish_as_default_shell
     else
         if command -v rustup >/dev/null 2>&1; then
             confirm "Update Rust toolchains?" && rustup update 

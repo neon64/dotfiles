@@ -1,7 +1,9 @@
 #!/bin/bash
 
+termwidth=80
 PKG_BUILD_DIR="$HOME/Code/Packages"
 BLUE="\e[34m"
+MAGENTA="\e[35m"
 RED="\e[31m"
 YELLOW="\e[33m"
 GREEN="\e[32m"
@@ -34,8 +36,16 @@ function header {
 	echo -e "${BOLD}====> ${BLUE}$1${RESET_FMT}"
 }
 
+function section {
+    echo ""
+    text="PART $1/$2: ${3^^}"
+    padding="$(printf '%0.1s' -{1..500})"
+    printf "%*.*s ${BOLD}${MAGENTA}%s${RESET_FMT} %*.*s\n" 0 "$(((termwidth-2-${#text})/2))" "$padding" "$text" 0 "$(((termwidth-1-${#text})/2))" "$padding"
+    echo ""
+}
+
 function warn {
-	echo -e "${BOLD}====> ${YELLOW}Warning: $1${RESET_FMT}"
+	echo -e "${BOLD}   -> ${YELLOW}Warning: $1${RESET_FMT}"
 }
 
 function confirm {
@@ -45,7 +55,7 @@ function confirm {
         case $yn in
             [Yy]* ) echo "" && return 0;;
             [Nn]* ) echo "" && return 1;;
-            [Ee]* ) echo "" && warn "user aborted script, exiting..." && exit 1;;
+            [Ee]* ) echo "" && echo "" && warn "user aborted script, exiting..." && exit 1;;
             * ) echo -e "\nPlease answer yes or no.";;
         esac
     done

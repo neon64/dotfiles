@@ -37,7 +37,7 @@ switch (uname)
     case Darwin
         set -x EDITOR /usr/local/bin/nvim
     case '*'
-        set -x EDITOR /usr/bin/nvim
+        set -x EDITOR emacsclient --quiet --alternate-editor=''
 end
 ### ========================================
 ###				   ALIASES
@@ -58,7 +58,14 @@ alias pac "yay"
 alias vim "nvim"
 
 # start emacs daemon for faster startup
-alias e "emacsclient --no-wait --quiet --create-frame --alternate-editor=''"
+alias e "emacsclient --no-wait --quiet --alternate-editor=''"
+
+# set -x FZF_DEFAULT_COMMAND "rg --files --hidden -g '!**/.git/' --ignore-parent"
+set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"
+set -x FZF_CTRL_T_COMMAND "fd --hidden --exclude '**/.git/'"
+set -x FZF_ALT_C_COMMAND "fd --type d --hidden --exclude '**/.git/'"
+# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
+set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head -n 100'"
 
 ### ========================================
 ###				   COLOURS
