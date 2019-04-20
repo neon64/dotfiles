@@ -60,46 +60,47 @@ function center() {
     printf "%*.*s ${GREEN}%s${RESET_FMT} %*.*s\n" 0 "$(((termwidth-2-${#1})/2))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding"
 }
 
-clear
-echo ""
-center "Welcome to my dotfiles installation wizard!"
-echo ""
-echo -e "If anything goes wrong, you usually should be safe to rerun\nthis command and it will try everything again.\nBut also note this isn't designed to cover every single edge case,\nso please don't run this unless you have read through the script\nand understand what you're doing. Good luck!"
+function entry_point() {
+    clear
+    echo ""
+    center "Welcome to my dotfiles installation wizard!"
+    echo ""
+    echo -e "If anything goes wrong, you usually should be safe to rerun\nthis command and it will try everything again.\nBut also note this isn't designed to cover every single edge case,\nso please don't run this unless you have read through the script\nand understand what you're doing. Good luck!"
 
-section "STEP ONE: CHECK USER"
-echo -e "These dotfiles work best when installed as a normal, non-root user.\nSo we'll do a quick check to make sure the current user isn't root,\nand if we are root we can create a new user and run the rest of the\nscript as that user."
-echo ""
+    section "STEP ONE: CHECK USER"
+    echo -e "These dotfiles work best when installed as a normal, non-root user.\nSo we'll do a quick check to make sure the current user isn't root,\nand if we are root we can create a new user and run the rest of the\nscript as that user."
+    echo ""
 
-if [ `whoami` = "root" ]; then
-    header "You are currently logged in as 'root'"
-    confirm "Would you like to create a new user account?" && create_account || existing_account
-else
-    header "You are currently logged in as '`whoami`'. Dotfiles will be installed for this user."
-    username=`whoami`
-fi
+    if [ `whoami` = "root" ]; then
+        header "You are currently logged in as 'root'"
+        confirm "Would you like to create a new user account?" && create_account || existing_account
+    else
+        header "You are currently logged in as '`whoami`'. Dotfiles will be installed for this user."
+        username=`whoami`
+    fi
 
-section "STEP TWO: INSTALL DOTFILES REPO"
+    section "STEP TWO: INSTALL DOTFILES REPO"
 
-echo -e "Here we perform the bare minimum work to get the dotfiles repo onto this machine.\nIf you have already installed all the applications/tools which these dotfiles\nfunction with, or prefer to have a more manual install, then after running\nstep two you can exit the script and install apps & perform misc setup yourself."
-echo ""
+    echo -e "Here we perform the bare minimum work to get the dotfiles repo onto this machine.\nIf you have already installed all the applications/tools which these dotfiles\nfunction with, or prefer to have a more manual install, then after running\nstep two you can exit the script and install apps & perform misc setup yourself."
+    echo ""
 
-# `-e` allows the default value to actually work
-read -e -i "~/Code/Dotfiles" -p "$(echo -e ${GREEN}Where should the dotfiles repository be installed? ${RESET_FMT})" install_location
+    # `-e` allows the default value to actually work
+    read -e -i "~/Code/Dotfiles" -p "$(echo -e ${GREEN}Where should the dotfiles repository be installed? ${RESET_FMT})" install_location
 
-echo ""
+    echo ""
 
-other_homedir=$( getent passwd "$username" | cut -d: -f6 )
-if [ "$other_homedir" = "" ]; then
-    warn "The home directory for this user shouldn't be empty. Perhaps the user doesn't exist?"
-    exit 1
-fi
+    other_homedir=$( getent passwd "$username" | cut -d: -f6 )
+    if [ "$other_homedir" = "" ]; then
+        warn "The home directory for this user shouldn't be empty. Perhaps the user doesn't exist?"
+        exit 1
+    fi
 
-header "Installing dotfiles for user '$username' in \`${install_location/#\~/$other_homedir}\`"
+    header "Installing dotfiles for user '$username' in \`${install_location/#\~/$other_homedir}\`"
 
-step_three=$(section "STEP THREE: RUN ACTUAL INSTALL SCRIPT")
-step_four=$(section "STEP FOUR - PROFIT")
+    step_three=$(section "STEP THREE: RUN ACTUAL INSTALL SCRIPT")
+    step_four=$(section "STEP FOUR - PROFIT")
 
-read -d '' commands <<EOF
+    read -d '' commands <<EOF
 BLUE="\\\e[34m"
 RED="\\\e[31m"
 YELLOW="\\\e[33m"
@@ -159,15 +160,18 @@ else
 fi
 EOF
 
-if [ `whoami` = "root" ]; then
-    # if we're in the root account, we need to switch to the desired user account
-    # to complete the installation safely
-    sudo -u $username bash -c "$commands"
-else
-    bash -c "$commands"
-fi
+    if [ `whoami` = "root" ]; then
+        # if we're in the root account, we need to switch to the desired user account
+        # to complete the installation safely
+        sudo -u $username bash -c "$commands"
+    else
+        bash -c "$commands"
+    fi
 
-status=$?
-if [ $status -ne 0 ]; then
-    exit $status
-fi
+    status=$?
+    if [ $status -ne 0 ]; then
+        exit $status
+    fi
+end
+
+entry_point
