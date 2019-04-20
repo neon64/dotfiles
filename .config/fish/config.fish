@@ -39,6 +39,9 @@ switch (uname)
     case '*'
         set -x EDITOR emacsclient --quiet --alternate-editor=''
 end
+
+set -x SPACEMACSDIR "~/.config/spacemacs"
+
 ### ========================================
 ###				   ALIASES
 ### ========================================
@@ -57,15 +60,14 @@ alias pac "yay"
 # use neovim
 alias vim "nvim"
 
-# start emacs daemon for faster startup
-alias e "emacsclient --no-wait --quiet --alternate-editor=''"
-
 # set -x FZF_DEFAULT_COMMAND "rg --files --hidden -g '!**/.git/' --ignore-parent"
 set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"
 set -x FZF_CTRL_T_COMMAND "fd --hidden --exclude '**/.git/'"
 set -x FZF_ALT_C_COMMAND "fd --type d --hidden --exclude '**/.git/'"
 # Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
 set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head -n 100'"
+
+set fish_cursor_insert line
 
 ### ========================================
 ###				   COLOURS

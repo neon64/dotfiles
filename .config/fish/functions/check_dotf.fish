@@ -32,7 +32,7 @@ function check_dotf
         echo ""
         echo (set_color red)"You have unsaved changes to your dotfiles:"(set_color normal)
         echo ""
-        dotf -C $HOME ls-files -m
+        dotf -C $HOME status -s
         echo ""
         echo "You should probably commit them sometime soon."
         # if read_confirm

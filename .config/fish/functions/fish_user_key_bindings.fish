@@ -9,4 +9,6 @@ function fish_user_key_bindings
     else
         echo -e (set_color red)"\nWarning: `fzf` not installed, fuzzy searching shortcuts disabled."(set_color normal)
     end
+
+    fish_vi_key_bindings
 end
