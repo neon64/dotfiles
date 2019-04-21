@@ -28,7 +28,7 @@ function warn {
 function confirm {
     echo -en "${BOLD}====> ${GREEN}$1${RESET_FMT}"
     while true; do
-        read -n1 -p " (y/n/e) " yn
+        read -n1 -p " (y/n/e) " yn </dev/tty
         case $yn in
             [Yy]* ) echo "" && return 0;;
             [Nn]* ) echo "" && return 1;;
@@ -39,7 +39,7 @@ function confirm {
 }
 
 function create_account {
-    read -p "Enter a username: " username
+    read -p "Enter a username: " username </dev/tty
 
     useradd -m -G wheel $username
     passwd $username
@@ -52,7 +52,7 @@ function create_account {
 }
 
 function existing_account {
-    read -p "Then enter the username of your existing user account: " username
+    read -p "Then enter the username of your existing user account: " username </dev/tty
 }
 
 function center() {
@@ -85,7 +85,7 @@ function entry_point() {
     echo ""
 
     # `-e` allows the default value to actually work
-    read -e -i "~/Code/Dotfiles" -p "$(echo -e ${GREEN}Where should the dotfiles repository be installed? ${RESET_FMT})" install_location
+    read -e -i "~/Code/Dotfiles" -p "$(echo -e ${GREEN}Where should the dotfiles repository be installed? ${RESET_FMT})" install_location </dev/tty
 
     echo ""
 
@@ -172,6 +172,6 @@ EOF
     if [ $status -ne 0 ]; then
         exit $status
     fi
-end
+}
 
 entry_point
