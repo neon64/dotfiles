@@ -42,7 +42,7 @@ function create_account {
     read -p "Enter a username: " username </dev/tty
 
     useradd -m -G wheel $username
-    passwd $username
+    passwd $username </dev/tty
     header "Account created and password set..."
 
     # anyone in `%wheel` can use `sudo`
