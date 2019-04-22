@@ -20,8 +20,8 @@ set $browser firefox
 # Your preferred application launcher
 set $menu rofi -show combi
 # movement keys
-set $up k
-set $down l
+set $up l
+set $down k
 set $left j
 set $right semicolon
 
@@ -149,6 +149,7 @@ bindsym $mod+c exec $browser
     assign [class="qutebrowser"] 1
     assign [class="Atom"] 3
     assign [class="Code"] 3
+    assign [class="Emacs"] 3
     assign [class="Firefox"] 1
     assign [class="Google-chrome"] 1
     assign [class="GitKraken"] 4
@@ -306,8 +307,8 @@ client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-co
 new_window normal 1
 hide_edge_borders both
 focus_wrapping no
-# gaps inner 1
-# gaps outer 2
+# gaps inner 10
+# gaps outer 5
 # smart_gaps on
 # smart_borders on
 

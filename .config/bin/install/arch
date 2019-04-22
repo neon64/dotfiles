@@ -56,6 +56,8 @@ wm_pkgs=(
 # installs packages required for emacs
 emacs_pkgs=(
     emacs ttf-nanum adobe-source-code-pro-fonts # emacs + fonts required for it
+    mlocate
+    otf-fira-code-symbol # my own package for the fira code symbol font - a hack to make ligatures work in emacs
 )
 
 # installs packages to play music on the command-line
@@ -118,12 +120,18 @@ function install_custom_mpsyt {
     pip3 install --user -U git+https://github.com/vn-ki/mps-youtube.git@mpd
 }
 
+function install_doom_emacs {
+    git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+    ~/.emacs.d/bin/doom quickstart
+}
+
 function install_pkgs {
     install_group extra_system_pkgs "${extra_system_pkgs[@]}"
     install_group base_shell_pkgs "${base_shell_pkgs[@]}"
     install_group wm_pkgs ${wm_pkgs[@]}
     install_group extra_shell_pkgs ${extra_shell_pkgs[@]}
     install_group emacs_pkgs ${emacs_pkgs[@]}
+    confirm " - Doom (emacs configuration framework)?" && install_doom_emacs
     install_group music_pkgs ${music_pkgs[@]}
     install_group recommended_apps ${recommended_apps[@]}
     install_group rust_pkgs ${rust_pkgs[@]} && rustup install stable && rustup install nightly && rustup default nightly && cargo install cargo-add

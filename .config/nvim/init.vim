@@ -2,10 +2,12 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sensible' " sensible defaults
+Plug 'tpope/vim-commentary' " use `gc` to comment
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
+Plug 'justinmk/vim-sneak' " `s` and `S` do two letter sneaking
 
 " Let's make it pretty
 Plug 'chriskempson/base16-vim'
@@ -58,10 +60,19 @@ augroup END
 nnoremap <Left> :echo "No left for you!"<CR>
 vnoremap <Left> :<C-u>echo "No left for you!"<CR>
 inoremap <Left> <C-o>:echo "No left for you!"<CR>
-nnoremap <Left> :echo "No left for you!"<CR>
-vnoremap <Left> :<C-u>echo "No left for you!"<CR>
-inoremap <Left> <C-o>:echo "No left for you!"<CR>
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+
+nnoremap <Right> :echo "No right for you!"<CR>
+vnoremap <Right> :<C-u>echo "No right for you!"<CR>
+inoremap <Right> <C-o>:echo "No right for you!"<CR>
+
+nnoremap <Up> :echo "No up for you!"<CR>
+vnoremap <Up> :<C-u>echo "No up for you!"<CR>
+inoremap <Up> <C-o>:echo "No up for you!"<CR>
+
+nnoremap <Down> :echo "No down for you!"<CR>
+vnoremap <Down> :<C-u>echo "No down for you!"<CR>
+inoremap <Down> <C-o>:echo "No down for you!"<CR>
+
+" because I'm getting so used to spacemacs
+nnoremap <Space>fs :w<CR>
+nnoremap <Space>qz :q<CR>

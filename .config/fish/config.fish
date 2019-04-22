@@ -1,5 +1,5 @@
 ### ========================================
-###					PATH
+###				PATH & ENV VARS
 ### ========================================
 
 # this is *prepended* because we want it to override
@@ -41,6 +41,11 @@ switch (uname)
 end
 
 set -x SPACEMACSDIR "~/.config/spacemacs"
+set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"
+set -x FZF_CTRL_T_COMMAND "fd --hidden --exclude '**/.git/'"
+set -x FZF_ALT_C_COMMAND "fd --type d --hidden --exclude '**/.git/'"
+# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
+set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head -n 100'"
 
 ### ========================================
 ###				   ALIASES
@@ -60,14 +65,11 @@ alias pac "yay"
 # use neovim
 alias vim "nvim"
 
-# set -x FZF_DEFAULT_COMMAND "rg --files --hidden -g '!**/.git/' --ignore-parent"
-set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"
-set -x FZF_CTRL_T_COMMAND "fd --hidden --exclude '**/.git/'"
-set -x FZF_ALT_C_COMMAND "fd --type d --hidden --exclude '**/.git/'"
-# Using highlight (http://www.andre-simon.de/doku/highlight/en/highlight.html)
-set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head -n 100'"
+### ========================================
+###				 CUSTOMISATIONS
+### ========================================
 
-set fish_cursor_insert line
+set -g fish_cursor_insert line
 
 ### ========================================
 ###				   COLOURS

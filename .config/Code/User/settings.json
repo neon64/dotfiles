@@ -1,6 +1,6 @@
 {
-    "editor.fontSize": 14,
     "editor.fontFamily": "Fira Code,Menlo, monospace",
+    "editor.fontSize": 12,
     "editor.fontLigatures": true,
     "editor.minimap.enabled": true,
     "editor.detectIndentation": true,
@@ -10,7 +10,7 @@
     "workbench.startupEditor": "welcomePage",
     "workbench.colorTheme": "Default Light+",
     "files.trimTrailingWhitespace": true,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "php.suggest.basic": false,
     "editor.wordWrap": "on",
     "breadcrumbs.enabled": true,
@@ -39,5 +39,8 @@
     "window.menuBarVisibility": "toggle",
     "window.titleBarStyle": "native",
     "[jade]": {},
-    "open-in-browser.default": "firefox"
+    "open-in-browser.default": "firefox",
+    "editor.lineHeight": 24,
+    "vim.enableNeovim": true,
+    "vim.neovimPath": "/usr/bin/nvim"
 }
