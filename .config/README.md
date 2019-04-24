@@ -24,8 +24,8 @@ Here's a list in no particular order of the apps I use.
 **Window Manager**
  - sway, as my daily driver when I'm on Linux
         - `waybar` as the bar, with icons from `otf-font-awesome`.
-        - `rofi` - as of sway 1.0 it works really nicely (except perhaps window switching) 
- - i3-gaps, my legacy setup (not guaranteed to work anymore, but still part of dotfiles) 
+        - `rofi` - as of sway 1.0 it works really nicely (except perhaps window switching)
+ - i3-gaps, my legacy setup (not guaranteed to work anymore, but still part of dotfiles)
         - [polybar](https://github.com/jaagr/polybar)
         - [rofi](https://github.com/DaveDavenport/rofi)
  - On my old machine I had Gnome installed, just in case. There's nothing in my
@@ -123,7 +123,7 @@ To update the system, run:
 
     $ up
 
-On ArchLinux, this will use `yay`, on macOS, it will use `brew`. It will also
+On ArchLinux, this will use `pikaur`, on macOS, it will use `brew`. It will also
 update various components (namely language-specific package managers). At the
 moment this includes:
 

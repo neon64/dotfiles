@@ -50,7 +50,7 @@ wm_pkgs=(
     cantarell-fonts # chosen UI font for sway and waybar
     otf-font-awesome # chosen icon font for waybar
     swaylock-blur-git # cool util which blurs background for swaylock
-    acpilight # provides an `xbacklight` replacement for wayland, used in sway config
+    brillo # provides an `xbacklight` replacement for wayland, used in sway config
     alsa-utils # provides an `amixer` command used for volume control
 )
 
@@ -93,6 +93,7 @@ recommended_apps=(
     gnome-font-viewer # viewing which fonts are available
     pavucontrol # visual pulse audio info
     nautilus # file manager
+    keepassxc # password manager
 )
 
 # packages to write rust code
@@ -111,62 +112,73 @@ python_pkgs=(
     python-pip
 )
 
+laptop_pkgs=(
+    powertop # like htop but for power
+    gnome-power-manager # power management
+)
+
 function install_group {
     name=$1
     shift
-    confirm " - \`$name\`?" && yay -S --needed "$@"
+    confirm " - \`$name\`?" && pikaur -S --needed "$@"
 }
 
 function install_custom_mpsyt {
-    yay -S --needed python-mpd2
+    pikaur -S --needed python-mpd2
     pip3 install --user -U git+https://github.com/vn-ki/mps-youtube.git@mpd
 }
 
-function install_doom_emacs {
-    git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-    ~/.emacs.d/bin/doom quickstart
+function configure_rustup {
+    rustup install stable
+    rustup install nightly && rustup default nightly
+    if ls "$HOME/.cargo/bin" | grep -q "cargo-add"; then
+        echo "'cargo-add' already installed"
+    else
+        cargo install cargo-add
+    fi
 }
 
 function install_pkgs {
     install_group extra_system_pkgs "${extra_system_pkgs[@]}"
     install_group base_shell_pkgs "${base_shell_pkgs[@]}"
-    install_group rust_pkgs ${rust_pkgs[@]} && rustup install stable && rustup install nightly && rustup default nightly && cargo install cargo-add
+    install_group rust_pkgs ${rust_pkgs[@]} && configure_rustup
     install_group wm_pkgs ${wm_pkgs[@]}
     install_group extra_shell_pkgs ${extra_shell_pkgs[@]}
     install_group emacs_pkgs ${emacs_pkgs[@]}
-    confirm " - Doom (emacs configuration framework)?" && install_doom_emacs
     install_group music_pkgs ${music_pkgs[@]}
     install_group recommended_apps ${recommended_apps[@]}
     install_group node_pkgs ${node_pkgs[@]}
-    install_group python_pkgs ${python_pkgs[@]} 
+    install_group python_pkgs ${python_pkgs[@]}
+    install_group laptop_pkgs ${laptop_pkgs[@]}
     confirm " - custom version of mps-youtube which interacts nicely with mpd (requires python)?" && install_custom_mpsyt
     header "Installed all requested packages!"
 }
 
 function update_pkgs {
     newsboat -r
-    yay -Syu
+    pikaur -Syu
 }
 
 if $FRESH_INSTALL; then
     section "1" "2" "system-level configuration"
     confirm "Enable en_AU.UTF-8, en_US.UTF-8 locales?" && enable_locales
-    confirm "Enable colored output in \`pacman\` and \`yay\`?" && add_colors_to_pacman
+    confirm "Enable colored output in \`pacman\` and \`pikaur\`?" && add_colors_to_pacman
     confirm "Enable network time synchronization?" && sudo timedatectl set-ntp true
     echo ""
 
-    if pacman -Q | grep -q 'yay'; then
-        warn "\`yay\` already installed, using it to install everything else"
+    if pacman -Q | grep -q 'pikaur'; then
+        warn "\`pikaur\` already installed, using it to install everything else"
     else
-        header "Installing \`yay\`"
+        header "Installing \`pikaur\`"
         # first we want install an AUR helper, so we can install more packages more easily
         mkdir -p $PKG_BUILD_DIR
         cd $PKG_BUILD_DIR
-        git clone https://aur.archlinux.org/yay.git || warn "Already cloned"
-        cd yay
-        makepkg -si
 
-        header "Using \`yay\` to install everything else"
+        git clone https://aur.archlinux.org/pikaur.git
+        cd pikaur
+        makepkg -fsri
+
+        header "Using \`pikaur\` to install everything else"
     fi
 
     cd ~
@@ -196,6 +208,7 @@ section "2" "2" "user-level configuration:"
 if $FRESH_INSTALL; then
     confirm "Add \`base16-tomorrow-night\` theme to Gnome Terminal (warning will add twice)?" && theme_gnome_term
 fi
+
 
 install_common
 

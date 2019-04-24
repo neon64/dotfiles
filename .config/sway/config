@@ -29,7 +29,7 @@ set $right semicolon
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
 # output * bg ~/Pictures/mountains-2.jpg fill
-# output * bg ~/Pictures/wallpaper-current.jpg fill
+output * bg ~/Pictures/wallpaper-current.jpg fill
 
 #
 # Example output configuration:
@@ -216,9 +216,10 @@ bindsym $mod+c exec $browser
     bindsym XF86AudioPrev exec mpc prev
     bindsym XF86AudioNext exec mpc next
 
-    # Brightness
-    bindsym XF86MonBrightnessUp exec xbacklight -inc 10 #;  exec pkill --signal SIGRTMIN+11 i3blocks
-    bindsym XF86MonBrightnessDown exec xbacklight -dec 10 #;  exec pkill --signal SIGRTMIN+11 i3blocks
+    # Brightness (a fade over 100ms)
+    bindsym XF86MonBrightnessUp exec brillo -A 10 -u 100000
+    bindsym XF86MonBrightnessDown exec brillo -U 10 -u 100000
+    # pkexec brillo -A 10 -u 1000000
 
     # Sleep
     # bindsym $mod+shift+l exec bash /home/chris/.config/sway/lock.sh

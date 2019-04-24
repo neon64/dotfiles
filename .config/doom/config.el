@@ -44,7 +44,7 @@
 ;; (set-window-buffer nil (current-buffer))
 
 
-;; Doom has its own support for this, yay!!
+;; Doom has its own support for this, pikaur!!
 ;;
 ;; ;; Support for Ligatures with a custom Fira Code Symbol font
 ;; (defun fira-code-mode--make-alist (list)

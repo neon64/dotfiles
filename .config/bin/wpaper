@@ -1,0 +1,7 @@
+#!/bin/bash
+
+echo "Select a new wallpaper:"
+mkdir -p ~/Pictures
+wallpaper=$(ls ~/Pictures | grep -v "wallpaper-current" | fzf --reverse --height 10%)
+ln -sf $wallpaper ~/Pictures/wallpaper-current.jpg && echo "Done, reloading"
+swaymsg reload && swaymsg workspace "view-wallpaper"

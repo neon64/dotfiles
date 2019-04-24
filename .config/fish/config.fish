@@ -57,10 +57,10 @@ alias t "tmux a; or tmux"
 alias al "env NO_WM=1 COLUMNS=$COLUMNS LINES=$LINES startx"
 alias yt "mpsyt"
 alias g "googler --url-handler ~/.config/bin/browse --colors bjdxxy"
-alias ls "exa --classify --git --header" 
+alias ls "exa --classify --git --header"
 
 # in case I forget
-alias pac "yay"
+alias pac "pikaur"
 
 # use neovim
 alias vim "nvim"
