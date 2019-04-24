@@ -37,7 +37,7 @@ switch (uname)
     case Darwin
         set -x EDITOR /usr/local/bin/nvim
     case '*'
-        set -x EDITOR emacsclient --quiet --alternate-editor=''
+        set -x EDITOR /usr/bin/nvim # emacs is too risky with client/server mode etc
 end
 
 set -x SPACEMACSDIR "~/.config/spacemacs"

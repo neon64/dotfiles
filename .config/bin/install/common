@@ -46,7 +46,7 @@ function symlink_platform_specific {
 }
 
 function set_dotf_ignore_untracked {
-    dotf config --local status.showUntrackedFiles no && header "Done"
+    .config/bin/dotf config --local status.showUntrackedFiles no && header "Done"
 }
 
 function update_npm_packages {

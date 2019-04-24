@@ -41,6 +41,7 @@ base_shell_pkgs=(
 # installs the sway window manager and other utilites used by my particular configuration
 wm_pkgs=(
     sway # window manager
+    xorg-server-xwayland # things are very buggy, basically no apps work without this
     swayidle # lockscreen + power management
     waybar # awesome looking status bar
     grim # grab images from the wayland compositor
@@ -77,6 +78,7 @@ extra_shell_pkgs=(
     googler # google from the command line
     xdg-utils # xdg-open and other utils
     archey3 # display system info
+    htop # system monitoring
 )
 
 # apps which I use
@@ -128,13 +130,13 @@ function install_doom_emacs {
 function install_pkgs {
     install_group extra_system_pkgs "${extra_system_pkgs[@]}"
     install_group base_shell_pkgs "${base_shell_pkgs[@]}"
+    install_group rust_pkgs ${rust_pkgs[@]} && rustup install stable && rustup install nightly && rustup default nightly && cargo install cargo-add
     install_group wm_pkgs ${wm_pkgs[@]}
     install_group extra_shell_pkgs ${extra_shell_pkgs[@]}
     install_group emacs_pkgs ${emacs_pkgs[@]}
     confirm " - Doom (emacs configuration framework)?" && install_doom_emacs
     install_group music_pkgs ${music_pkgs[@]}
     install_group recommended_apps ${recommended_apps[@]}
-    install_group rust_pkgs ${rust_pkgs[@]} && rustup install stable && rustup install nightly && rustup default nightly && cargo install cargo-add
     install_group node_pkgs ${node_pkgs[@]}
     install_group python_pkgs ${python_pkgs[@]} 
     confirm " - custom version of mps-youtube which interacts nicely with mpd (requires python)?" && install_custom_mpsyt
