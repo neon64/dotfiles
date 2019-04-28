@@ -55,7 +55,8 @@ You can also update the system with
 
     $ ~/.config/bin/install/arch --update
 
-This script is split into two general parts. Within each part, basically each step will ask for your confirmation.
+This script is split into two general parts. Within each part, basically each
+step will ask for your confirmation.
 
 ### System
 
@@ -63,7 +64,9 @@ This script is split into two general parts. Within each part, basically each st
 - enables en_US and en_AU locales
 - enables colored output in `pacman`
 
-- installs a whole bunch of packages (you can read the [source](https://github.com/neon64/dotfiles/blob/master/.config/bin/install/arch) for an up to date list)
+- installs a whole bunch of packages (you can read the
+  [source](https://github.com/neon64/dotfiles/blob/master/.config/bin/install/arch)
+  for an up to date list)
 
 ### User
 
@@ -78,7 +81,18 @@ This script is split into two general parts. Within each part, basically each st
 
 These don't really have anything to do with my Dotfiles but I'll put them here anyway:
 
-- needed to blacklist nouveau by adding it to /etc/modprobe.d/blacklist -- fixed freezes with lspci, reboot etc...
-- needed to set a label for partition using `e2label` - then really easy to make a config file for `systemd-boot`
-- needed to have the EFI system partition mounted inside /mnt/boot so that vmlinuz-linux would install properly
+- needed to blacklist nouveau by adding it to /etc/modprobe.d/blacklist -- fixed
+  freezes with lspci, reboot etc...
+- needed to set a label for partition using `e2label` - then really easy to make
+  a config file for `systemd-boot`
+- needed to have the EFI system partition mounted inside /mnt/boot so that
+  vmlinuz-linux would install properly
 - needed to install the intel-ucode package
+
+- needed to run
+
+$ reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_DWORD /f
+
+ on an administrator Command Prompt inside Windows (see the [Arch Wiki
+ page](https://wiki.archlinux.org/index.php/System_time)). Otherwise every time
+ I rebooted back into Windows the time was messed up.
