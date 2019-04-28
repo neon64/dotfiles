@@ -39,6 +39,40 @@
 
 (setq evil-snipe-scope 'buffer)
 
+(map!
+      :m "C-j"           #'evil-window-left
+      :m "C-;"           #'evil-window-right
+      :m "C-k"           #'evil-window-down
+      :m "C-l"           #'evil-window-up
+      :m "C-J"           #'evil-window-move-left
+      :m "C-:"           #'evil-window-move-right
+      :m "C-K"           #'evil-window-move-down
+      :m "C-L"           #'evil-window-move-up
+
+      (:map evil-window-map
+        ;; Navigation
+        "h"       #'noop
+        "j"       #'evil-window-left
+        "k"       #'evil-window-down
+        "l"       #'evil-window-up
+        ";"       #'evil-window-right
+        ;; Swapping windows
+        "J"       #'+evil/window-move-left
+        "K"       #'+evil/window-move-down
+        "L"       #'+evil/window-move-up
+        ":"       #'+evil/window-move-right
+      )
+)
+
+(map! :leader
+      :desc "M-x"                                "`" #'execute-extended-command
+      (:prefix ("q" . "session")
+        :desc "Close Frame"                      "z" #'save-buffers-kill-terminal
+        :desc "Close Frame without saving"       "Z" #'evil-quit-all-with-error-code
+        :desc "Quit Emacs server"                "q" #'save-buffers-kill-emacs
+        :desc "Quit Emacs server without saving" "Q" #'kill-emacs)
+      )
+
 ;; give us some space around the Emacs window
 ;; (setq-default left-margin-width 1 right-margin-width 1)
 ;; (set-window-buffer nil (current-buffer))

@@ -71,13 +71,16 @@ input "2:7:SynPS/2_Synaptics_Touchpad" {
     natural_scroll enabled
 }
 
-### Key bindings
+# more specific configuration at runtime
+exec_always ~/.config/sway/configure.sh
+exec evscript -f ~/.config/bin/evscript_map -d /dev/input/event2 /dev/input/event3
 
 #
 # Basics:
 #
-# start a terminal
-bindsym $mod+Return exec $term
+
+# the $term variable is expanded at runtime 
+bindsym $mod+Return exec $$term
 bindsym $mod+c exec $browser
 
     # kill focused window
@@ -326,7 +329,7 @@ focus_wrapping no
 # smart_gaps on
 # smart_borders on
 
-font pango:Cantarell 11
+font Cantarell 11
 
 # doesn't work on i3
 #for_window [class=".*"] title_format "<span size='x-small'>%title</span>"
