@@ -24,8 +24,8 @@ Here's a list in no particular order of the apps I use.
 **Window Manager**
  - sway, as my daily driver when I'm on Linux
         - `waybar` as the bar, with icons from `otf-font-awesome`.
-        - `rofi` - as of sway 1.0 it works really nicely (except perhaps window switching) 
- - i3-gaps, my legacy setup (not guaranteed to work anymore, but still part of dotfiles) 
+        - `rofi` - as of sway 1.0 it works really nicely (except perhaps window switching)
+ - i3-gaps, my legacy setup (not guaranteed to work anymore, but still part of dotfiles)
         - [polybar](https://github.com/jaagr/polybar)
         - [rofi](https://github.com/DaveDavenport/rofi)
  - On my old machine I had Gnome installed, just in case. There's nothing in my
@@ -34,7 +34,7 @@ Here's a list in no particular order of the apps I use.
 **Terminal**
  - [Alacritty](https://github.com/jwilm/alacritty/), a fast terminal emulator written in Rust.
    - Now has scrollback, and has become my daily driver
-   - Unfortunately it's performance inside a virtual machine seems somewhat lacklustre
+   - Unfortunately it's performance inside a virtual machine seems somewhat lacklustre so I've been using Gnome Terminal a bit
  - Gnome Terminal
 
 **Shell**
@@ -46,12 +46,16 @@ Here's a list in no particular order of the apps I use.
  - [Neovim](https://github.com/neovim/neovim), when I need to use the command line
      - [vim-plug](https://github.com/junegunn/vim-plug)
      - I'm now trying to learn vim as a primary text editor. Hopefully it works out.
+- Emacs with [Doom Emacs](https://github.com/hlissner/doom-emacs) config
+     - seems slightly more fancy than Vim, and I love SPC keybindings + Evil Mode
 
 **Browser**
  - Firefox - As a Rust user, I really appreciate all the work that has gone into
    the 'Firefox Quantum' release, and I also am wary of Google achieving a
    monopoly over the web with Chrome/Blink
- - Qutebrowser - I liked the vim keybindings but my config isn't fully complete yet
+ - <strike>Qutebrowser</strike>
+    - haven't used for ages
+    - I liked the vim keybindings but my config isn't fully complete yet
 
 **Music**
  - YouTube (including mps-youtube in terminal)
@@ -59,7 +63,11 @@ Here's a list in no particular order of the apps I use.
     - having issues with this setup at the moment (YouTube and Google Play Music backends aren't very mature)
     - Switched to `mpd` - can now use `ncmpcpp` visualizer, or `cava`
 
-## Installation
+## Automatic Installation
+
+If you're on Arch Linux, then I've been working on an installation wizard, `arch_0`, which takes a basic Arch Linux installation and downloads these dotfiles and installs everything needed to make them work. See the [readme](https://github.com/neon64/dotfiles/tree/master/.config/bin/install) for more information and caveats.
+
+## Manual Installation
 
 To install these dotfiles onto a new machine:
 
@@ -76,20 +84,19 @@ You will most likely have to decide what to do with the existing dotfiles on you
 If `fish` isn't already installed, you'll need to install it now using an
 appropriate package manager and also eventually set it as the default shell.
 
-Finally, run the install function to install needed plugins (eg: for `nvim` and
-`fish`):
+If you're on Arch Linux, you can run the following install script to install a whole heap of packages which power my dotfiles (things like `sway`, `firefox` and loads of little things like `ttf-font-waesome` etc...), as well as plugins for `nvim`, `fish` and `emacs`:
 
     $ ~/.config/bin/install/arch
+
+If you're not on Arch Linux, I'm afraid I don't have an all-in-one solution yet. However, try taking a look inside of `~/.config/bin/install/common` for some bits you will be able to run.
 
 Also update the git repo location used by the script `~/.config/dotf` to point
 to wherever you stored the bare dotfiles repository (default is
 `~/Code/Dotfiles`)
 
-### In the pipeline - installation script
+Also run the following to ensure untracked files (i.e.: the rest of your home directory) don't show up when running `dotf` commands.
 
-I'm currently working on an all in one installation script (for Arch Linux)
-`~/.config/bin/install/arch` which should install all required packages for
-these dotfiles to function correctly. More to come...
+    $ dotf config --local status.showUntrackedFiles no
 
 ## Keeping track of local changes
 
@@ -116,7 +123,7 @@ To update the system, run:
 
     $ up
 
-On ArchLinux, this will use `yay`, on macOS, it will use `brew`. It will also
+On ArchLinux, this will use `pikaur`, on macOS, it will use `brew`. It will also
 update various components (namely language-specific package managers). At the
 moment this includes:
 

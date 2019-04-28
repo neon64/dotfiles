@@ -37,7 +37,7 @@ switch (uname)
     case Darwin
         set -x EDITOR /usr/local/bin/nvim
     case '*'
-        set -x EDITOR emacsclient --quiet --alternate-editor=''
+        set -x EDITOR /usr/bin/nvim # emacs is too risky with client/server mode etc
 end
 
 set -x SPACEMACSDIR "~/.config/spacemacs"
@@ -57,10 +57,10 @@ alias t "tmux a; or tmux"
 alias al "env NO_WM=1 COLUMNS=$COLUMNS LINES=$LINES startx"
 alias yt "mpsyt"
 alias g "googler --url-handler ~/.config/bin/browse --colors bjdxxy"
-alias ls "exa --classify --git --header" 
+alias ls "exa --classify --git --header"
 
 # in case I forget
-alias pac "yay"
+alias pac "pikaur"
 
 # use neovim
 alias vim "nvim"

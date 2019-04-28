@@ -41,8 +41,8 @@ function confirm {
 function create_account {
     read -p "Enter a username: " username </dev/tty
 
-    useradd -m -G wheel $username
-    passwd $username
+    useradd -m -G wheel,video $username
+    passwd $username </dev/tty
     header "Account created and password set..."
 
     # anyone in `%wheel` can use `sudo`
@@ -85,7 +85,7 @@ function entry_point() {
     echo ""
 
     # `-e` allows the default value to actually work
-    read -e -i "~/Code/Dotfiles" -p "$(echo -e ${GREEN}Where should the dotfiles repository be installed? ${RESET_FMT})" install_location </dev/tty
+    read -e -i "~/Code/Dotfiles" -p "$(echo -e ${GREEN}Where should the dotfiles repository be installed? ${RESET_FMT})" rel_install_location </dev/tty
 
     echo ""
 
@@ -94,8 +94,19 @@ function entry_point() {
         warn "The home directory for this user shouldn't be empty. Perhaps the user doesn't exist?"
         exit 1
     fi
+    install_location="${rel_install_location/#\~/$other_homedir}"
 
-    header "Installing dotfiles for user '$username' in \`${install_location/#\~/$other_homedir}\`"
+    header "Performing pre-installation checks"
+
+    ping -q -w 1 -c 1 "github.com" > /dev/null
+    if [ $? -ne 0 ]; then
+        warn "no internet connection - installation will fail"
+    fi
+
+    header "Ensuring \`base-devel\` and \`git\` are installed"
+    sudo pacman -S --needed --noconfirm base-devel git
+
+    header "Installing dotfiles for user '$username' in \`$install_location\`"
 
     step_three=$(section "STEP THREE: RUN ACTUAL INSTALL SCRIPT")
     step_four=$(section "STEP FOUR - PROFIT")
@@ -108,8 +119,8 @@ GREEN="\\\e[32m"
 BOLD="\\\e[1m"
 RESET_FMT="\\\e[0m"
 shopt -s expand_aliases
-install_location=$install_location
-install_location="\${install_location/#\~/$HOME}"
+rel_install_location="$rel_install_location"
+install_location="$install_location"
 echo -e "\${BOLD}   -> \${RESET_FMT}Now running as '\`whoami\`'\${RESET_FMT}"
 cd ~
 echo -e "\${BOLD}   -> \${RESET_FMT}Now at '\`pwd\`'\${RESET_FMT}"
@@ -122,7 +133,7 @@ else
    echo "\$install_location" >> ~/.gitignore
 fi
 echo -e "\${BOLD}====> \${BLUE}Cloning dotfiles repository...\${RESET_FMT}"
-git clone --bare https://github.com/neon64/dotfiles "\$install_location"
+git clone --bare "https://github.com/neon64/dotfiles" "\$install_location"
 status=\$?
 if [ \$status -ne 0 ]; then
     echo -e "\${BOLD}   -> \${YELLOW}Warning: clone of repository failed with exit code \$status\${RESET_FMT}"
@@ -132,8 +143,13 @@ dotf checkout || checkout_failed=true
 if dotf diff-index --quiet HEAD; then
     echo -e "\${BOLD}====> \${GREEN}Dotfiles repository checked out successfully\${RESET_FMT}"
 else
-    echo -e "\${BOLD}   -> \${RED}Error checking out the dotfiles, the working directory wasn't clean\${RESET_FMT}"
+    echo -e "\${BOLD}   -> \${RED}Error checking out the dotfiles\${RESET_FMT}"
 fi
+
+tilde_install_location="${rel_install_location/#\~/}"
+echo -e "\${BOLD}====> \${BLUE}Updating dotfiles location inside '~/.config/bin/dotf' to '~\$tilde_install_location'\${RESET_FMT}"
+sed -i "s#/Code/Dotfiles#\$tilde_install_location#" ~/.config/bin/dotf
+
 # run the next installation step
 echo -e "$step_three\\\n"
 echo "Here we call another script, '~/.config/bin/install/arch', which is part of the dotfiles proper."
@@ -149,7 +165,7 @@ if [[ -x ~/.config/bin/install/arch ]]; then
        exit \$status
     fi
     echo -e "$step_four\\\n"
-    echo -e "Yay, the dotfiles were installed. Try logging back in again for changes to take effect."
+    echo -e "pikaur, the dotfiles were installed. Try logging back in again for changes to take effect."
     exit 0
 else
     echo -e "\${BOLD}====> \${RED}Fatal error, install script ~/.config/bin/install/arch not executable.\${RESET_FMT}"

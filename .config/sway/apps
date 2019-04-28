@@ -13,3 +13,4 @@ for_window [class="gnome-control-center"] floating enable
 for_window [class="gnome-control-center"] border none
 # for_window [app_id="gnome-terminal-server"] border none
 for_window [class="Emacs"] border none
+for_window [app_id="org.gnome.Nautilus"] border none

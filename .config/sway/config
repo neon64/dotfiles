@@ -9,11 +9,11 @@
 
 ### Variables
 #
-# Logo key. Use Mod1 for Alt.
+# Logo key. Use Mod1 for Alt. Mod4 for Super
 set $mod Mod4
 # Your preferred terminal emulator
-# set $term alacritty
-set $term gnome-terminal
+set $term alacritty
+# set $term gnome-terminal
 # set $term ~/Code/Rust/alacritty_new_window_cwd/target/release/alacritty_new_window_cwd
 # Your preferred web browser
 set $browser firefox
@@ -38,7 +38,7 @@ output * bg ~/Pictures/wallpaper-current.jpg fill
 #
 # You can get the names of your outputs by running swaymsg -t get_outputs
 
-#input "1452:566:bcm" {
+# 2010 MacBook Pro hardware
 input "1452:566:bcm5974" {
     tap enabled
     natural_scroll enabled
@@ -53,7 +53,20 @@ input "1452:566:Apple_Inc._Apple_Internal_Keyboard_/_Trackpad" {
     xkb_options caps:super,ctrl:swap_lwin_lctl
 }
 
+# Wireless mouse
 input "1452:781:Robert_Chamberlain’s_M" {
+    tap enabled
+    natural_scroll enabled
+}
+
+# Thinkpad X1 Extreme Hardware
+input "1:1:AT_Translated_Set_2_keyboard" {
+    # according to the xkb docs, we map control to alt, and then alt to win, thus
+    # we have a poor man's emulation of an Apple keyboard.
+    xkb_options caps:super,altwin:ctrl_alt_win
+}
+
+input "2:7:SynPS/2_Synaptics_Touchpad" {
     tap enabled
     natural_scroll enabled
 }
@@ -203,9 +216,10 @@ bindsym $mod+c exec $browser
     bindsym XF86AudioPrev exec mpc prev
     bindsym XF86AudioNext exec mpc next
 
-    # Brightness
-    bindsym XF86MonBrightnessUp exec xbacklight -inc 10 #;  exec pkill --signal SIGRTMIN+11 i3blocks
-    bindsym XF86MonBrightnessDown exec xbacklight -dec 10 #;  exec pkill --signal SIGRTMIN+11 i3blocks
+    # Brightness (a fade over 100ms)
+    bindsym XF86MonBrightnessUp exec brillo -A 10 -u 100000
+    bindsym XF86MonBrightnessDown exec brillo -U 10 -u 100000
+    # pkexec brillo -A 10 -u 1000000
 
     # Sleep
     # bindsym $mod+shift+l exec bash /home/chris/.config/sway/lock.sh
