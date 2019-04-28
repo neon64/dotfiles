@@ -77,8 +77,10 @@ extra_shell_pkgs=(
     trash-cli # `trash` command
     googler # google from the command line
     xdg-utils # xdg-open and other utils
-    archey3 # display system info
+    neofetch # display system info
     htop # system monitoring
+    gnome-keyring # provider for libsecret - allows us to store git credentials for the command line
+    gcsf-bin # google drive file system written in rust
 )
 
 # apps which I use
@@ -91,9 +93,13 @@ recommended_apps=(
     code # VS Code editor
     gnome-system-monitor #  visual htop
     gnome-font-viewer # viewing which fonts are available
+    gnome-control-center # settings app
+    marktext-bin # text editor
     pavucontrol # visual pulse audio info
     nautilus # file manager
     keepassxc # password manager
+    evince # pdf reader
+    eog # gnome image viewer
 )
 
 # packages to write rust code
@@ -112,9 +118,18 @@ python_pkgs=(
     python-pip
 )
 
+# packages for running on a laptop
 laptop_pkgs=(
     powertop # like htop but for power
     gnome-power-manager # power management
+)
+
+# legacy X window system support
+xorg_pkgs=(
+    xorg-server
+    xorg-xinit
+    xorg-xprop
+    xorg-xev
 )
 
 function install_group {
@@ -150,6 +165,7 @@ function install_pkgs {
     install_group node_pkgs ${node_pkgs[@]}
     install_group python_pkgs ${python_pkgs[@]}
     install_group laptop_pkgs ${laptop_pkgs[@]}
+    install_group xorg_pkgs ${xorg_pkgs[@]}
     confirm " - custom version of mps-youtube which interacts nicely with mpd (requires python)?" && install_custom_mpsyt
     header "Installed all requested packages!"
 }

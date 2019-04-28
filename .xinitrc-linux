@@ -1,7 +1,9 @@
 #!/bin/bash
 
 if [ -z "$NO_WM" ]; then
-	exec startkde
+    export GDK_BACKEND=X11
+    exec gnome-session
+	# exec startkde
 else
     # dimensions for old laptop were 142 47
 	exec alacritty --dimensions $COLUMNS $LINES -e fish -c "t"
