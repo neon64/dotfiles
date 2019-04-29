@@ -39,6 +39,14 @@ set path+=**
 " Display allmatching files when we tab complete
 set wildmenu
 
+" Scroll with mouse
+set mouse=a
+
+" Copy/paste to system clipboard
+" (instead, we prefer to use "+y and "+p to copy and paste respectively -
+" keeps the buffers separate)
+" set clipboard=unnamedplus
+
 " HYBRID NUMBERING
 " 
 " https://jeffkreeftmeijer.com/vim-number

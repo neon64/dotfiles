@@ -96,3 +96,12 @@ $ reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformati
  on an administrator Command Prompt inside Windows (see the [Arch Wiki
  page](https://wiki.archlinux.org/index.php/System_time)). Otherwise every time
  I rebooted back into Windows the time was messed up.
+
+ ### In a virtual machine
+
+Needed to follow the instructions on the [Arch Wiki](https://wiki.archlinux.org/index.php/VirtualBox#Set_optimal_framebuffer_resolution) in order to get a full HD screen working nicely. (still don't know what's going on?)
+
+- tried using [raw disk access](https://www.virtualbox.org/manual/ch09.html#rawdisk) to use a dual-booted Arch installation from Windows. Works well except there's no read access to the EFI system partition (presumably because Windows is using it).
+    - this caused me much grief once because I updated the Linux kernel while in the VirtualBox host, which tried to write to `/boot`, which silently failed. Then my kernel version was out of sync with everyting else in the system (e.g.: kernel modules) and everything broke down (couldn't boot because mounting `/boot` failed, unknown filesystem type `vfat`, no Intel graphics drivers??). Booting from the `archiso` and reinstalling `linux` fixed everything though.
+
+

@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo bootctl set-oneshot arch
+reboot

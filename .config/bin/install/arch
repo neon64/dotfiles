@@ -81,6 +81,7 @@ extra_shell_pkgs=(
     htop # system monitoring
     gnome-keyring # provider for libsecret - allows us to store git credentials for the command line
     gcsf-bin # google drive file system written in rust
+    hwinfo # useful for debugging info like framebuffer resolutions
 )
 
 # apps which I use
@@ -132,6 +133,19 @@ xorg_pkgs=(
     xorg-xev
 )
 
+# VirtualBox
+virtualbox_guest_pkgs=(
+    virtualbox-guest-utils
+)
+
+# Bluetooth support
+bluetooth_pkgs=(
+    bluez # core bluetooth stack
+    bluez-utils # provides bluetoothctl
+    blueman # GTK+ bluetooth manager
+    pulseaudio-bluetooth # use bluetooth audio devices
+)
+
 function install_group {
     name=$1
     shift
@@ -166,6 +180,8 @@ function install_pkgs {
     install_group python_pkgs ${python_pkgs[@]}
     install_group laptop_pkgs ${laptop_pkgs[@]}
     install_group xorg_pkgs ${xorg_pkgs[@]}
+    install_group virtualbox_guest_pkgs ${virtualbox_guest_pkgs[@]}
+    install_group bluetooth_pkgs ${bluetooth_pkgs[@]}
     confirm " - custom version of mps-youtube which interacts nicely with mpd (requires python)?" && install_custom_mpsyt
     header "Installed all requested packages!"
 }
