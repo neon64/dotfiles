@@ -37,7 +37,7 @@ This is a collection of remarks and things which didn't quite work the last time
 - vim, missing - had to use `vi` and `nano` for way too long
 - `ttf-nanum` failed to install - weird - it worked after clearing cache and reinstalling
 - gconftool didn't work to setup a Gnome Terminal theme
-- all the icons install with Doom?
+- all the icons install with Doom? ** Advice ** (make sure it goes to "~/.local/share/fonts" )
 - needed to map some key to `Mod4` so that sway keyboard shortcuts actually worked (I got stuck and had to force-restart)
 - needed to install `xorg-server-xwayland` otherwise all xwayland apps were freezing/didn't start in `sway` - **Fixed**
 - Firefox is still missing some basic font since websites look a little weird

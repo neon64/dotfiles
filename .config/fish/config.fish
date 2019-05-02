@@ -78,6 +78,17 @@ set -g fish_cursor_insert line
 # I'm not sure where these are from, but I'll put them here instead of
 # in the machine-specific u-vars file, so that they sync nicely.
 
+# Base16 Shell
+if status --is-interactive
+    if not test -d ~/.config/base16-shell
+        echo (set_color yellow)"Warning: base16-shell isn't installed, can't set theme" (set_color normal)
+    else
+        set BASE16_SHELL "$HOME/.config/base16-shell"
+        source "$BASE16_SHELL/profile_helper.fish"
+        base16-tomorrow-night
+    end
+end
+
 set -U fish_color_autosuggestion 555\x1eyellow
 set -U fish_color_command green
 set -U fish_color_comment red

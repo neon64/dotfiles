@@ -52,6 +52,7 @@ wm_pkgs=(
     swaylock-blur-git # cool util which blurs background for swaylock
     brillo # provides an `xbacklight` replacement for wayland, used in sway config
     alsa-utils # provides an `amixer` command used for volume control
+    evscript-git # map caps lock to escape on tap + more
 )
 
 # installs packages required for emacs
@@ -157,6 +158,10 @@ function install_custom_mpsyt {
     pip3 install --user -U git+https://github.com/vn-ki/mps-youtube.git@mpd
 }
 
+function setuid_evscript {
+    sudo chmod u+s /usr/bin/evscript
+}
+
 function configure_rustup {
     rustup install stable
     rustup install nightly && rustup default nightly
@@ -183,6 +188,7 @@ function install_pkgs {
     install_group virtualbox_guest_pkgs ${virtualbox_guest_pkgs[@]}
     install_group bluetooth_pkgs ${bluetooth_pkgs[@]}
     confirm " - custom version of mps-youtube which interacts nicely with mpd (requires python)?" && install_custom_mpsyt
+    confirm " - setuid root the `evscript` binary?" && setuid_evscript
     header "Installed all requested packages!"
 }
 
@@ -226,21 +232,7 @@ else
     echo ""
 fi
 
-function theme_gnome_term {
-    git clone https://github.com/aaron-williamson/base16-gnome-terminal.git ~/.config/base16-gnome-terminal || warn "Already cloned repository"
-    ~/.config/base16-gnome-terminal/color-scripts/base16-tomorrow-night.sh
-    warn "You will need to set this theme as default in Gnome Terminal's preferences"
-    header "Hiding terminal title bar"
-    # sets the title bar to hidden
-    gsettings set org.gnome.Terminal.Legacy.Settings headerbar "@mb false"
-}
-
 section "2" "2" "user-level configuration:"
-
-if $FRESH_INSTALL; then
-    confirm "Add \`base16-tomorrow-night\` theme to Gnome Terminal (warning will add twice)?" && theme_gnome_term
-fi
-
 
 install_common
 

@@ -4,7 +4,7 @@
     "height": 40, // Waybar height
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "custom/spotify"],
+    "modules-left": ["sway/workspaces", "sway/mode", "mpd"],
     "modules-center": ["sway/window"],
     "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "clock", "tray"],
     // Modules configuration
@@ -89,11 +89,36 @@
         //"on-scroll-down": "amixer -q sset Master 5%-",
         "on-click": "pavucontrol"
     },
+    "mpd": {
+        "format": "  {stateIcon}{consumeIcon}{repeatIcon}{singleIcon}    {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})    ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "   {consumeIcon}{repeatIcon}{singleIcon}Stopped    ",
+        "interval": 2,
+        "consume-icons": {
+            "on": " " // Icon shows only when "consume" is on
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ", // Icon grayed out when "random" is off
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
     "custom/spotify": {
         "format": " {}",
         "max-length": 40,
         "interval": 30, // Remove this if your script is endless and write in loop
         "exec": "$HOME/.config/waybar/mediaplayer.sh 2> /dev/null", // Script in resources folder
-        "exec-if": "pgrep spotify"
+        "exec-if": "pgrep mpd"
     }
 }

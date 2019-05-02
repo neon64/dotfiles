@@ -22,7 +22,7 @@ window#waybar {
 }
 
 #workspaces button.focused {
-    background: rgba(100, 114, 125, 0.5);
+    background: rgba(100, 114, 125, 0.4);
     border-bottom: 3px solid white;
 }
 
@@ -36,7 +36,7 @@ window#waybar {
     border-bottom: 3px solid white;
 }
 
-#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #tray, #mode {
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #mpd, #tray, #mode {
     padding: 0 10px;
     margin: 0 3px;
 }
@@ -101,8 +101,8 @@ window#waybar {
 }
 
 #pulseaudio {
-    background: rgba(241, 196, 15, 0.99);
-    border-bottom: 3px solid rgba(221, 180, 14, 0.99);
+    background: rgba(241, 196, 15, 0.8);
+    border-bottom: 3px solid rgba(221, 180, 14, 0.8);
     color: black;
 }
 
@@ -110,6 +110,17 @@ window#waybar {
     background: rgba(144, 177, 177, 0.8);
     border-bottom: 3px solid rgba(105, 129, 129, 0.8);
     color: #2a5c45;
+}
+
+#mpd {
+    margin-left: 30px;
+    background: rgba(100, 114, 125, 0.4);
+    color: #eee;
+}
+
+#mpd.hover {
+    background: rgba(71, 90, 105, 0.5);
+    border-bottom: 3px solid #ccc;
 }
 
 #custom-spotify {

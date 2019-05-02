@@ -74,7 +74,7 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 
 # more specific configuration at runtime
 exec_always ~/.config/sway/configure.sh
-exec evscript -f ~/.config/bin/evscript_map -d /dev/input/event2 /dev/input/event3
+exec bash -c "evscript -f ~/.config/bin/evscript_map -d /dev/input/event2 /dev/input/event3 > /tmp/evscript_log"
 
 #
 # Basics:

@@ -29,8 +29,12 @@ function install_fish_plugins {
 }
 
 function install_doom_emacs {
-    git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-    ~/.emacs.d/bin/doom quickstart
+    if test -x ~/.emacs.d/bin/doom; then
+        ~/.emacs.d/bin/doom refresh
+    else
+        git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+        ~/.emacs.d/bin/doom quickstart
+    fi
 }
 
 function symlink_platform_specific {
@@ -66,6 +70,10 @@ function update_npm_packages {
     esac
 }
 
+function install_base16_shell {
+    git clone --branch patch-1 https://github.com/kaepora/base16-shell.git $HOME/.config/base16-shell
+}
+
 function set_fish_as_default_shell {
     chsh -s $(which fish)
 }
@@ -75,6 +83,7 @@ function install_common {
     confirm "Install fish plugins using \`fisherman\`?" && install_fish_plugins
     if $FRESH_INSTALL; then
         confirm "Install Doom (emacs configuration framework)?" && install_doom_emacs
+        confirm "Install \`base16-shell\`?" && install_base16_shell
         confirm "Symlink platform-specific dotfiles?" && symlink_platform_specific
         confirm "Symlink 'Code - OSS' config to normal VS Code config?" && link_code_configs
         confirm "Set \`dotf\` to ignore untracked files?" && set_dotf_ignore_untracked
