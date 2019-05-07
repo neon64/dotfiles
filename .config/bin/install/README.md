@@ -97,6 +97,10 @@ $ reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformati
  page](https://wiki.archlinux.org/index.php/System_time)). Otherwise every time
  I rebooted back into Windows the time was messed up.
 
+- switched to using hybrid-sleep on lid close - just in case there seems to be a
+ bug with resuming on my laptop - doesn't always work
+- install `tlp` and `intel-undervolt` yay
+
  ### In a virtual machine
 
 Needed to follow the instructions on the [Arch Wiki](https://wiki.archlinux.org/index.php/VirtualBox#Set_optimal_framebuffer_resolution) in order to get a full HD screen working nicely. (still don't know what's going on?)

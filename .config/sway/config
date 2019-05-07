@@ -74,14 +74,14 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 
 # more specific configuration at runtime
 exec_always ~/.config/sway/configure.sh
-exec bash -c "evscript -f ~/.config/bin/evscript_map -d /dev/input/event2 /dev/input/event3 > /tmp/evscript_log"
 
 #
 # Basics:
 #
 
-# the $term variable is expanded at runtime 
+# the $term variable is expanded at runtime
 bindsym $mod+Return exec $$term
+bindsym $mod+x exec alacritty --title "Floating Terminal" -e fish -c 'env fish_custom_greeting= fish'
 bindsym $mod+c exec $browser
 
     # kill focused window
@@ -200,8 +200,8 @@ bindsym $mod+c exec $browser
     bindsym $mod+a focus parent
 
     # manipulate gaps settings
-    bindsym $mod+Shift+equal gaps inner workspace plus 5
-    bindsym $mod+Shift+minus gaps inner workspace minus 5
+    bindsym $mod+Shift+equal gaps inner plus 5
+    bindsym $mod+Shift+minus gaps inner minus 5
 
 #
 # Special keys
@@ -221,8 +221,8 @@ bindsym $mod+c exec $browser
     bindsym XF86AudioNext exec mpc next
 
     # Brightness (a fade over 100ms)
-    bindsym XF86MonBrightnessUp exec brillo -A 10 -u 100000
-    bindsym XF86MonBrightnessDown exec brillo -U 10 -u 100000
+    bindsym XF86MonBrightnessUp exec brillo -A 5 -u 100000
+    bindsym XF86MonBrightnessDown exec brillo -U 5 -u 100000
     # pkexec brillo -A 10 -u 1000000
 
     # Sleep
@@ -331,33 +331,6 @@ focus_wrapping no
 # smart_borders on
 
 font Cantarell 11
-
-# doesn't work on i3
-#for_window [class=".*"] title_format "<span size='x-small'>%title</span>"
-#for_window [class=".*"] title_format "<span size="smaller">      %title</span>"
-
-#
-# Status Bar:
-#
-# bar {
-#     position bottom
-#     strip_workspace_numbers yes
-#     colors {
-#         background $bar-bg-color
-#         separator #757575
-#         focused_workspace   $bar-bg-color     $bar-bg-color       $focused-text-color
-# 		inactive_workspace  $bar-bg-color     $bar-bg-color       $inactive-text-color
-#         urgent_workspace    $urgent-bg-color  $urgent-bg-color    $focused-text-color
-#     }
-
-#     #status_command i3status
-#     status_command i3blocks
-#     font pango:System San Francisco Display 10
-# }
-
-
-
-# Read sway-bar(5) for more information about this section.
 
 # You may want this:
 #

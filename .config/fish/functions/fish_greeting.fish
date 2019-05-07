@@ -1,5 +1,9 @@
 # we don't want any greeting
 function fish_greeting
+    if set -q fish_custom_greeting
+        echo -ns $fish_custom_greeting
+        return
+    end
     set hour (date +%H)
     switch $hour
         case "00" "01" "02" "03" "04" "05" "06"

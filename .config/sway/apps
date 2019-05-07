@@ -19,3 +19,5 @@ for_window [class="gnome-calculator"] border none
 for_window [app_id="org.gnome.Nautilus"] border none
 for_window [app_id="eog"] border none
 for_window [app_id="evince"] border none
+
+for_window [title="Floating Terminal"] floating enable; border none; resize set 800 400

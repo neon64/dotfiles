@@ -17,6 +17,10 @@ function add_colors_to_pacman {
     sudo sed -i 's/^#Color/Color/g' /etc/pacman.conf
 }
 
+function disable_aur_pkg_compression {
+    sudo sed -i "s,PKGEXT='.pkg.tar.xz',PKGEXT='.pkg.tar',g" /etc/makepkg.conf
+}
+
 # packages which weren't installed as part of base, but are nevertheless important for system functions
 extra_system_pkgs=(
     polkit # required for shutdown without sudo, avoiding errors in systemctl etc...
@@ -122,7 +126,8 @@ python_pkgs=(
 
 # packages for running on a laptop
 laptop_pkgs=(
-    powertop # like htop but for power
+    intel-undervolt # undervolt your CPU to save battery
+    tlp # battery-saving info
     gnome-power-manager # power management
 )
 
@@ -145,6 +150,12 @@ bluetooth_pkgs=(
     bluez-utils # provides bluetoothctl
     blueman # GTK+ bluetooth manager
     pulseaudio-bluetooth # use bluetooth audio devices
+)
+
+printing_pkgs=(
+    cups cups-pdf # printing support
+    avahi # printers on a network?
+    system-config-printer
 )
 
 function install_group {
@@ -172,6 +183,11 @@ function configure_rustup {
     fi
 }
 
+function configure_tlp {
+    systemctl enable tlp.service --now
+    systemctl enable tlp-sleep.server
+}
+
 function install_pkgs {
     install_group extra_system_pkgs "${extra_system_pkgs[@]}"
     install_group base_shell_pkgs "${base_shell_pkgs[@]}"
@@ -183,7 +199,7 @@ function install_pkgs {
     install_group recommended_apps ${recommended_apps[@]}
     install_group node_pkgs ${node_pkgs[@]}
     install_group python_pkgs ${python_pkgs[@]}
-    install_group laptop_pkgs ${laptop_pkgs[@]}
+    install_group laptop_pkgs ${laptop_pkgs[@]} && configure_tlp
     install_group xorg_pkgs ${xorg_pkgs[@]}
     install_group virtualbox_guest_pkgs ${virtualbox_guest_pkgs[@]}
     install_group bluetooth_pkgs ${bluetooth_pkgs[@]}
@@ -201,6 +217,7 @@ if $FRESH_INSTALL; then
     section "1" "2" "system-level configuration"
     confirm "Enable en_AU.UTF-8, en_US.UTF-8 locales?" && enable_locales
     confirm "Enable colored output in \`pacman\` and \`pikaur\`?" && add_colors_to_pacman
+    confirm "Disable AUR package compression (speeds up install times)?" && disable_aur_pkg_compression
     confirm "Enable network time synchronization?" && sudo timedatectl set-ntp true
     echo ""
 

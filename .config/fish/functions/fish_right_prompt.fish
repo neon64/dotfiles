@@ -7,7 +7,7 @@ function fish_right_prompt
                 set_color --bold --background yellow black
                 echo ' N '
             case insert
-                set_color --bold --background green black 
+                set_color --bold --background green black
                 echo ' I '
             case replace_one
                 set_color --bold --background green white

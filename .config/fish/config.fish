@@ -69,6 +69,7 @@ alias vim "nvim"
 ###				 CUSTOMISATIONS
 ### ========================================
 
+set -g fish_cursor_default block
 set -g fish_cursor_insert line
 
 ### ========================================

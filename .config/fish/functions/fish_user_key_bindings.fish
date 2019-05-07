@@ -16,11 +16,12 @@ function fish_user_key_bindings
     end
 
     set -g fish_escape_delay_ms 50
-    fish_vi_key_bindings 
+    fish_hybrid_key_bindings
+    # fish_vi_key_bindings
 
     # useful crossovers from emacs
-    bind \cA -M insert beginning-of-line
-    bind \cE -M insert end-of-line
+    # bind \cA -M insert beginning-of-line
+    # bind \cE -M insert end-of-line
     # mash Ctrl+H to go home
-    bind \cH -M insert cd "echo -e \n\n" "commandline -f repaint" 
+    bind \cH -M insert cd "echo -e \n\n" "commandline -f repaint"
 end
