@@ -27,7 +27,9 @@ window#waybar {
 }
 
 #workspaces button:hover {
-    background: rgba(71, 90, 105, 0.5);
+    box-shadow: inherit;
+    text-shadow: inherit;
+    background: rgba(100, 114, 125, 0.2);
     border-bottom: 3px solid #ccc;
 }
 
@@ -36,7 +38,7 @@ window#waybar {
     border-bottom: 3px solid white;
 }
 
-#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #mpd, #tray, #mode {
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #mpd, #tray, #mode, #idle_inhibitor, #backlight {
     padding: 0 10px;
     margin: 0 3px;
 }
@@ -46,8 +48,11 @@ window#waybar {
 }
 
 #clock {
-    background-color: rgba(100, 114, 125, 0.8);
-    border-bottom: 3px solid rgb(83, 97, 107);
+    background: rgba(100, 114, 125, 0.4);
+    color: #fff;
+    border-bottom: 3px solid rgba(236, 236, 236, 0.1);
+    /* background-color: rgba(100, 114, 125, 0.8);
+    border-bottom: 3px solid rgb(83, 97, 107); */
 }
 
 #battery {
@@ -102,7 +107,13 @@ window#waybar {
 
 #pulseaudio {
     background: rgba(241, 196, 15, 0.8);
-    border-bottom: 3px solid rgba(221, 180, 14, 0.8);
+    border-bottom: 3px solid rgba(190, 155, 13, 0.8);
+    color: black;
+}
+
+#backlight {
+    background: rgba(241, 143, 15, 0.8);
+    border-bottom: 3px solid rgba(177, 106, 13, 0.8);
     color: black;
 }
 
@@ -116,16 +127,23 @@ window#waybar {
     margin-left: 30px;
     background: rgba(100, 114, 125, 0.4);
     color: #eee;
+    border-bottom: 3px solid rgba(236, 236, 236, 0.1);
 }
 
-#mpd.hover {
+#mpd:hover {
     background: rgba(71, 90, 105, 0.5);
-    border-bottom: 3px solid #ccc;
+    border-bottom: 3px solid white;
 }
 
 #custom-spotify {
     background: #66cc99;
     color: #2a5c45;
+}
+
+#idle_inhibitor {
+    background: rgba(100, 114, 125, 0.4);
+    color: #eee;
+    border-bottom: 3px solid rgba(236, 236, 236, 0.1);
 }
 
 #tray {

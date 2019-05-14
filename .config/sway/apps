@@ -4,20 +4,25 @@ for_window [title="Preferences"] floating enable
 for_window [title="Editing Profile"] floating enable
 for_window [title="Login Keyring"] floating enable
 
-for_window [class="Google-chrome"] border none
-for_window [class="Firefox"] border none
-for_window [class="Code"] border none
-for_window [class="FirefoxNightly"] border none
-for_window [class="Emacs"] border none
+# for_window [class="Google-chrome"] border none
+# for_window [class="Firefox"] border none
+# for_window [class="Code"] border none
+# for_window [class="FirefoxNightly"] border none
+# for_window [class="Emacs"] border none
 
-for_window [class="gnome-control-center"] floating enable
-for_window [class="gnome-calculator"] floating enable
+for_window [app_id="gnome-control-center"] floating enable
+for_window [app_id="gnome-calculator"] floating enable
+for_window [app_id="gnome-tweaks"] floating enable
+for_window [app_id="gnome-system-monitor"] floating enable; resize set 1024 600
+for_window [app_id="org.gnome.Nautilus"] floating enable
 
 # all these gnome apps use CSD, so we don't use a border with them
-for_window [class="gnome-control-center"] border none
-for_window [class="gnome-calculator"] border none
+for_window [app_id="gnome-calculator"] border none
+for_window [app_id="gnome-tweaks"] border none
 for_window [app_id="org.gnome.Nautilus"] border none
 for_window [app_id="eog"] border none
 for_window [app_id="evince"] border none
+for_window [class="marktext"] border none
 
 for_window [title="Floating Terminal"] floating enable; border none; resize set 800 400
+# for_window [app_id="Alacritty"] border pixel 2

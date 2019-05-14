@@ -51,6 +51,7 @@ wm_pkgs=(
     grim # grab images from the wayland compositor
     rofi # app launcher
     slurp # select area to screenshot
+    swayshot # screenshot wrapper
     cantarell-fonts # chosen UI font for sway and waybar
     otf-font-awesome # chosen icon font for waybar
     swaylock-blur-git # cool util which blurs background for swaylock
@@ -99,7 +100,7 @@ recommended_apps=(
     code # VS Code editor
     gnome-system-monitor #  visual htop
     gnome-font-viewer # viewing which fonts are available
-    gnome-control-center # settings app
+    gnome-calculator # basic calculator
     marktext-bin # text editor
     pavucontrol # visual pulse audio info
     nautilus # file manager
@@ -156,6 +157,12 @@ printing_pkgs=(
     cups cups-pdf # printing support
     avahi # printers on a network?
     system-config-printer
+)
+
+gtk_theme=(
+    gnome-tweak-tool # change themes
+    flat-remix # icon theme
+    flat-remix-gtk # gtk theme
 )
 
 function install_group {

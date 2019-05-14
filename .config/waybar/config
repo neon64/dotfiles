@@ -6,7 +6,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "mpd"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "clock", "tray"],
+    "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "clock", "idle_inhibitor", "tray"],
     // Modules configuration
     "sway/window": {
         "max-length": 80
@@ -66,8 +66,8 @@
     },
     "network": {
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
-        "format-wifi": "{ifname} ({signalStrength}%) ",
-        "format-ethernet": "{ifname}: {ipaddr}/{cidr} ",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "Eth: {ipaddr}/{cidr} ",
         "format-disconnected": "Disconnected ⚠",
         "on-click": "2"
     },
@@ -114,11 +114,22 @@
         "tooltip-format": "MPD (connected)",
         "tooltip-format-disconnected": "MPD (disconnected)"
     },
+    "backlight": {
+        "format": "{percent}% {icon}",
+        "format-icons": ["", ""]
+    },
     "custom/spotify": {
         "format": " {}",
         "max-length": 40,
         "interval": 30, // Remove this if your script is endless and write in loop
         "exec": "$HOME/.config/waybar/mediaplayer.sh 2> /dev/null", // Script in resources folder
         "exec-if": "pgrep mpd"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
     }
 }
