@@ -14,15 +14,27 @@ for_window [app_id="gnome-control-center"] floating enable
 for_window [app_id="gnome-calculator"] floating enable
 for_window [app_id="gnome-tweaks"] floating enable
 for_window [app_id="gnome-system-monitor"] floating enable; resize set 1024 600
-for_window [app_id="org.gnome.Nautilus"] floating enable
+
+for_window [class="keepassxc"] border normal $borderwidth
 
 # all these gnome apps use CSD, so we don't use a border with them
-for_window [app_id="gnome-calculator"] border none
-for_window [app_id="gnome-tweaks"] border none
-for_window [app_id="org.gnome.Nautilus"] border none
-for_window [app_id="eog"] border none
-for_window [app_id="evince"] border none
-for_window [class="marktext"] border none
+# for_window [app_id="gnome-calculator"] border pixel 1
+# for_window [app_id="gnome-tweaks"] border pixel 1
+# for_window [app_id="org.gnome.Nautilus"] border pixel 1
+# for_window [app_id="eog"] border pixel 1
+# for_window [app_id="evince"] border pixel 1
+# for_window [class="marktext"] border pixel 1
 
 for_window [title="Floating Terminal"] floating enable; border none; resize set 800 400
-# for_window [app_id="Alacritty"] border pixel 2
+
+# default workspaces
+assign [class="qutebrowser"] 1
+assign [class="Atom"] 3
+assign [class="Code"] 3
+assign [class="code-oss"] 3
+assign [class="Emacs"] 3
+assign [class="Firefox"] 1
+assign [class="Google-chrome"] 1
+assign [class="GitKraken"] 4
+assign [class="evolution"] 8
+assign [class="keepassxc"] 9

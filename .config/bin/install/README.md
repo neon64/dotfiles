@@ -101,6 +101,8 @@ $ reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformati
  bug with resuming on my laptop - doesn't always work
 - install `tlp` and `intel-undervolt` yay
 
+- Use `netctl-ifplugd@interface.service` to get automatic ethernet working
+
  ### In a virtual machine
 
 Needed to follow the instructions on the [Arch Wiki](https://wiki.archlinux.org/index.php/VirtualBox#Set_optimal_framebuffer_resolution) in order to get a full HD screen working nicely. (still don't know what's going on?)

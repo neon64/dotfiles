@@ -23,8 +23,15 @@ set termguicolors
 set expandtab
 set tabstop=4
 set shiftwidth=4
+
 " colorscheme
-colorscheme base16-tomorrow-night
+" this script auto-updates the colourscheme to match
+" that of base16-shell
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
+endif
+
 hi! EndOfBuffer guifg='#002b36'
 
 " FINDING FILES

@@ -66,18 +66,9 @@ alias pac "pikaur"
 alias vim "nvim"
 
 ### ========================================
-###				 CUSTOMISATIONS
-### ========================================
-
-set -g fish_cursor_default block
-set -g fish_cursor_insert line
-
-### ========================================
 ###				   COLOURS
 ### ========================================
 
-# I'm not sure where these are from, but I'll put them here instead of
-# in the machine-specific u-vars file, so that they sync nicely.
 
 # Base16 Shell
 if status --is-interactive
@@ -86,37 +77,48 @@ if status --is-interactive
     else
         set BASE16_SHELL "$HOME/.config/base16-shell"
         source "$BASE16_SHELL/profile_helper.fish"
-        base16-tomorrow-night
+        # we enable the theme if no theme is currently enabled
+        if not test -f ~/.base16_theme
+            base16-onedark
+        end
     end
-end
 
-set -U fish_color_autosuggestion 555\x1eyellow
-set -U fish_color_command green
-set -U fish_color_comment red
-set -U fish_color_cwd blue
-set -U fish_color_cwd_root red
-set -U fish_color_end brmagenta
-set -U fish_color_error red\x1e\x2d\x2dbold
-set -U fish_color_escape cyan
-set -U fish_color_history_current cyan
-set -U fish_color_host normal
-set -U fish_color_match cyan
-set -U fish_color_normal white
-set -U fish_color_operator cyan
-set -U fish_color_param 00afff\x1ecyan
-set -U fish_color_quote brown
-set -U fish_color_redirection normal
-set -U fish_color_search_match \x2d\x2dbackground\x3dpurple
-set -U fish_color_selection \x2d\x2dbackground\x3dpurple
-set -U fish_color_user brgreen
-set -U fish_color_valid_path \x2d\x2dunderline
+    set -g fish_cursor_default block
+    set -g fish_cursor_insert line
+
+    # i'm not sure where these are from, but i'll put them here instead of
+    # in the machine-specific u-vars file, so that they sync nicely.
+    set -U fish_color_autosuggestion 555\x1eyellow
+    set -U fish_color_command green
+    set -U fish_color_comment red
+    set -U fish_color_cwd blue
+    set -U fish_color_cwd_root red
+    set -U fish_color_end brmagenta
+    set -U fish_color_error red\x1e\x2d\x2dbold
+    set -U fish_color_escape cyan
+    set -U fish_color_history_current cyan
+    set -U fish_color_host normal
+    set -U fish_color_match cyan
+    set -U fish_color_normal white
+    set -U fish_color_operator cyan
+    set -U fish_color_param 00afff\x1ecyan
+    set -U fish_color_quote brown
+    set -U fish_color_redirection normal
+    set -U fish_color_search_match \x2d\x2dbackground\x3dpurple
+    set -U fish_color_selection \x2d\x2dbackground\x3dpurple
+    set -U fish_color_user brgreen
+    set -U fish_color_valid_path \x2d\x2dunderline
+end
 
 ### ========================================
 ###				   AUTOSTART
 ### ========================================
 
 # start sway upon login to tty1
-if status --is-login
+# we check `status --is-interactive` because
+# commands like dbus-run-session (for starting Gnome
+# Terminal) start a non-interactive login shell
+if status --is-login && status --is-interactive
     if test -z "$DISPLAY" -a "$XDG_VTNR" -eq "1"
         sway
     end

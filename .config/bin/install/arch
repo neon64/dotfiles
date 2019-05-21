@@ -58,6 +58,7 @@ wm_pkgs=(
     brillo # provides an `xbacklight` replacement for wayland, used in sway config
     alsa-utils # provides an `amixer` command used for volume control
     evscript-git # map caps lock to escape on tap + more
+    wl-clipboard # clipboard tools
 )
 
 # installs packages required for emacs
@@ -85,6 +86,7 @@ extra_shell_pkgs=(
     xdg-utils # xdg-open and other utils
     neofetch # display system info
     htop # system monitoring
+    gotop # fancier system monitoring
     gnome-keyring # provider for libsecret - allows us to store git credentials for the command line
     gcsf-bin # google drive file system written in rust
     hwinfo # useful for debugging info like framebuffer resolutions

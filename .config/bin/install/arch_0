@@ -41,6 +41,7 @@ function confirm {
 function create_account {
     read -p "Enter a username: " username </dev/tty
 
+    # wheel is needed for `sudo` access,
     useradd -m -G wheel,video $username
     passwd $username </dev/tty
     header "Account created and password set..."
