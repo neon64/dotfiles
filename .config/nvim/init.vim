@@ -9,12 +9,13 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'justinmk/vim-sneak' " `s` and `S` do two letter sneaking
 
+
 " Let's make it pretty
 Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 
 syntax enable
 set background=dark
@@ -25,17 +26,15 @@ set tabstop=4
 set shiftwidth=4
 
 " colorscheme
-" this script auto-updates the colourscheme to match
-" that of base16-shell
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+" add colorscheme to match master_theme
+
+let master_theme = system('cat $HOME/.config/colors/current-theme')
+execute 'colorscheme' master_theme
 
 hi! EndOfBuffer guifg='#002b36'
 
 " FINDING FILES
-" 
+"
 " According to the video here:
 " https://www.youtube.com/watch?v=XA2WjJbmmoM&t=408s
 
@@ -55,12 +54,12 @@ set mouse=a
 " set clipboard=unnamedplus
 
 " HYBRID NUMBERING
-" 
+"
 " https://jeffkreeftmeijer.com/vim-number
 set number relativenumber
 
 " SYNTAX FOLDING
-" 
+"
 "
 set foldmethod=syntax
 set foldlevel=4

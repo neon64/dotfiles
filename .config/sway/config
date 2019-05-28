@@ -24,12 +24,12 @@ set $up l
 set $down k
 set $left j
 set $right semicolon
-set $borderwidth 3
+set $borderwidth 1
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
-# output * bg ~/Pictures/mountains-2.jpg fill
+
 output * bg ~/Pictures/wallpaper-current.jpg fill
 
 #
@@ -287,23 +287,27 @@ bindsym $mod+c exec $browser
     include colorscheme
 
     # fits Base16-Tomorrow-Night theme
-    set $bd-color              $base01
-    set $focused-bd-color      $base04
+    set $bd-color              $base02
+    set $focused-bd-color      $base00
     set $urgent-bd-color       $base08
     set $indicator             $base0A
 
     set $bg-color              $base01
-    set $focused-bg-color      $base04
+    set $focused-bg-color      $base00
+
+    set $inner-bd-color         $base01
+    set $focused-inner-bd-color $base03
+
     set $inactive-text-color   $base03
     set $text-color            $base05
     set $focused-text-color    $base07
     set $urgent-bg-color       $base08
 
     # window colors
-    #                       border              background          text                  indicator  child border
-    client.focused          $focused-bd-color   $focused-bg-color   $focused-text-color   $indicator    $focused-bd-color
-    client.unfocused        $bd-color           $bg-color           $text-color           $indicator     $bd-color
-    client.focused_inactive $bd-color           $bg-color           $text-color           $indicator     $bd-color
+    #                       border              background          text                  indicator      child border
+    client.focused          $focused-bd-color   $focused-bg-color   $focused-text-color   $indicator     $focused-inner-bd-color
+    client.unfocused        $bd-color           $bg-color           $text-color           $indicator     $inner-bd-color
+    client.focused_inactive $bd-color           $bg-color           $text-color           $indicator     $inner-bd-color
     client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $indicator     $urgent-bd-color
 
     # window borders and gaps

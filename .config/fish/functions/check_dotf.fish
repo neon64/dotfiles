@@ -35,8 +35,5 @@ function check_dotf
         dotf -C $HOME status -s
         echo ""
         echo "You should probably commit them sometime soon."
-        # if read_confirm
-        #     return 0
-        # else
     end
 end

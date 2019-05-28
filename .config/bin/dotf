@@ -1,4 +1,4 @@
-#!/usr/bin/env fish
+#!/bin/bash
 
 # dotfile handling
-git --git-dir=$HOME/Code/Dotfiles --work-tree=$HOME $argv
+git --git-dir=$HOME/Code/Dotfiles --work-tree=$HOME $@

@@ -2,6 +2,6 @@
 
 echo "Select a new wallpaper:"
 mkdir -p ~/Pictures
-wallpaper=$(ls ~/Pictures | grep -v "wallpaper-current" | fzf --reverse --height 10%)
-ln -sf $wallpaper ~/Pictures/wallpaper-current.jpg && echo "Done, reloading"
-swaymsg reload && swaymsg workspace "view-wallpaper"
+wallpaper=$(ls ~/Pictures | grep -v "wallpaper-current" | fzf --reverse --height=10 --min-height=5)
+wallpaper="$HOME/Pictures/$wallpaper"
+ln -sf $wallpaper ~/Pictures/wallpaper-current.jpg && echo "'wallpaper-current.jpg' points to '$wallpaper'"

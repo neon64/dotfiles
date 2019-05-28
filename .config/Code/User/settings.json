@@ -1,6 +1,6 @@
 {
     "editor.fontFamily": "Fira Code,Menlo, monospace",
-    "editor.fontSize": 12,
+    "editor.fontSize": 13,
     "editor.fontLigatures": true,
     "editor.minimap.enabled": true,
     "editor.detectIndentation": true,
@@ -8,7 +8,7 @@
         ".*": "shellscript"
     },
     "workbench.startupEditor": "welcomePage",
-    "workbench.colorTheme": "Default Light+",
+    "workbench.colorTheme": "One Dark Pro Vivid",
     "files.trimTrailingWhitespace": true,
     "window.zoomLevel": 1,
     "php.suggest.basic": false,

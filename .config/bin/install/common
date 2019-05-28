@@ -70,18 +70,12 @@ function update_npm_packages {
     esac
 }
 
-function install_base16_themes {
-    # this patch updated `profile_helper.fish` to be compatible with Fish 3.0
-    git clone --branch patch-1 https://github.com/kaepora/base16-shell.git $HOME/.config/base16-shell
-    git clone https://github.com/rkubosz/base16-sway/ $HOME/.config/base16-sway
+function install_color_schemes {
+    ~/.config/bin/theme
 }
 
-function update_base16_themes {
-    cd $HOME/.config/base16-shell
-    git pull
-    cd $HOME/.config/base16-themes
-    git pull
-    cd
+function update_color_schemes {
+    ~/.config/bin/theme --regen
 }
 
 function set_fish_as_default_shell {
@@ -93,14 +87,14 @@ function install_common {
     confirm "Install fish plugins using \`fisherman\`?" && install_fish_plugins
     if $FRESH_INSTALL; then
         confirm "Install Doom (emacs configuration framework)?" && install_doom_emacs
-        confirm "Install \`base16\` themes?" && install_base16_themes
+        confirm "Install color schemes?" && set_color_schemes
         confirm "Symlink platform-specific dotfiles?" && symlink_platform_specific
         confirm "Symlink 'Code - OSS' config to normal VS Code config?" && link_code_configs
         confirm "Set \`dotf\` to ignore untracked files?" && set_dotf_ignore_untracked
         confirm "Set \`fish\` as default shell?" && set_fish_as_default_shell
     else
         confirm "Update Doom (emacs configuration framework)?" && cd ~/.emacs.d/ && git pull && ~/.emacs.d/bin/doom update
-        confirm "Update \`base16\` themes?" && update_base16_themes
+        confirm "Update color schemes?" && update_color_schemes
         if command -v rustup >/dev/null 2>&1; then
             confirm "Update Rust toolchains?" && rustup update
         else

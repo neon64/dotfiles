@@ -7,15 +7,6 @@
 set -x PATH $HOME/.cargo/bin $PATH
 set -x PATH $HOME/.config/bin $PATH
 
-# esmcripten on Arch Linux
-if test -d  /usr/lib/emscripten
-    set -x EMSCRIPTEN "/usr/lib/emscripten"
-    set -x EMSCRIPTEN_FASTCOMP "/usr/lib/emscripten-fastcomp"
-
-    # add to path
-    set -x PATH $PATH $EMSCRIPTEN
-end
-
 if test -d $HOME/.local/bin
     set -x PATH $PATH $HOME/.local/bin
 end
@@ -23,22 +14,17 @@ end
 set PATH $PATH $HOME/.config/composer/vendor/bin
 
 # used for the Rust Language Server
-set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
+# set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
 
 # OPAM configuration
 # Under the status quo $MANPATH was unset, so `man` would use default paths.
 # OCaml upset this by setting $MANPATH.. Thus I manually commented out the line.
 # This will probably be broken by package updates
-if test -d $HOME/.opam
-    source $HOME/.opam/opam-init/init.fish #> /dev/null 2> /dev/null; or true
-end
+# if test -d $HOME/.opam
+#     source $HOME/.opam/opam-init/init.fish #> /dev/null 2> /dev/null; or true
+# end
 
-switch (uname)
-    case Darwin
-        set -x EDITOR /usr/local/bin/nvim
-    case '*'
-        set -x EDITOR /usr/bin/nvim # emacs is too risky with client/server mode etc
-end
+set -x EDITOR (which nvim)
 
 set -x SPACEMACSDIR "~/.config/spacemacs"
 set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"
@@ -69,45 +55,44 @@ alias vim "nvim"
 ###				   COLOURS
 ### ========================================
 
-
 # Base16 Shell
 if status --is-interactive
-    if not test -d ~/.config/base16-shell
-        echo (set_color yellow)"Warning: base16-shell isn't installed, can't set theme" (set_color normal)
-    else
-        set BASE16_SHELL "$HOME/.config/base16-shell"
-        source "$BASE16_SHELL/profile_helper.fish"
-        # we enable the theme if no theme is currently enabled
-        if not test -f ~/.base16_theme
-            base16-onedark
-        end
-    end
-
     set -g fish_cursor_default block
     set -g fish_cursor_insert line
 
+    # manually set
+    if [ $TERM = 'linux' ]
+        bash ~/.config/colors/theme.sh
+        clear
+    end
+
+    # unset all universal variables
+
+    for v in (set --show | string replace -rf '^\$([^:[]+).*: set in universal.*' '$1')
+        set -e $v
+    end
     # i'm not sure where these are from, but i'll put them here instead of
     # in the machine-specific u-vars file, so that they sync nicely.
-    set -U fish_color_autosuggestion 555\x1eyellow
-    set -U fish_color_command green
-    set -U fish_color_comment red
-    set -U fish_color_cwd blue
-    set -U fish_color_cwd_root red
-    set -U fish_color_end brmagenta
-    set -U fish_color_error red\x1e\x2d\x2dbold
-    set -U fish_color_escape cyan
-    set -U fish_color_history_current cyan
-    set -U fish_color_host normal
-    set -U fish_color_match cyan
-    set -U fish_color_normal white
-    set -U fish_color_operator cyan
-    set -U fish_color_param 00afff\x1ecyan
-    set -U fish_color_quote brown
-    set -U fish_color_redirection normal
-    set -U fish_color_search_match \x2d\x2dbackground\x3dpurple
-    set -U fish_color_selection \x2d\x2dbackground\x3dpurple
-    set -U fish_color_user brgreen
-    set -U fish_color_valid_path \x2d\x2dunderline
+    set -g fish_color_autosuggestion 555\x1eyellow
+    set -g fish_color_command green
+    set -g fish_color_comment red
+    set -g fish_color_cwd blue
+    set -g fish_color_cwd_root red
+    set -g fish_color_end brmagenta
+    set -g fish_color_error red\x1e\x2d\x2dbold
+    set -g fish_color_escape cyan
+    set -g fish_color_history_current cyan
+    set -g fish_color_host normal
+    set -g fish_color_match cyan
+    set -g fish_color_normal cyan
+    set -g fish_color_operator cyan
+    set -g fish_color_param blue
+    set -g fish_color_quote brown
+    set -g fish_color_redirection normal
+    set -g fish_color_search_match \x2d\x2dbackground\x3dpurple
+    set -g fish_color_selection \x2d\x2dbackground\x3dpurple
+    set -g fish_color_user brgreen
+    set -g fish_color_valid_path \x2d\x2dunderline
 end
 
 ### ========================================

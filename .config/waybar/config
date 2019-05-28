@@ -4,8 +4,8 @@
     "height": 40, // Waybar height
     // "width": 1280, // Waybar width
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "sway/mode", "mpd"],
-    "modules-center": ["sway/window"],
+    "modules-left": ["sway/mode", "mpd"],
+    "modules-center": ["sway/workspaces"],
     "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "clock", "idle_inhibitor", "tray"],
     // Modules configuration
     "sway/window": {

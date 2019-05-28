@@ -25,7 +25,7 @@ for_window [class="keepassxc"] border normal $borderwidth
 # for_window [app_id="evince"] border pixel 1
 # for_window [class="marktext"] border pixel 1
 
-for_window [title="Floating Terminal"] floating enable; border none; resize set 800 400
+for_window [title="Floating Terminal"] floating enable; border pixel 3; resize set 800 400
 
 # default workspaces
 assign [class="qutebrowser"] 1
