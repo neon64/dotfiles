@@ -7,3 +7,6 @@
 [submodule "/home/chris/.config/colors/base16-alacritty"]
 	path = /home/chris/.config/colors/base16-alacritty
 	url = https://github.com/aaron-williamson/base16-alacritty
+[submodule ".config/colors/base16-alacritty"]
+	path = .config/colors/base16-alacritty
+	url = https://github.com/aaron-williamson/base16-alacritty
