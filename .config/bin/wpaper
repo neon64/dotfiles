@@ -5,3 +5,5 @@ mkdir -p ~/Pictures
 wallpaper=$(ls ~/Pictures | grep -v "wallpaper-current" | fzf --reverse --height=10 --min-height=5)
 wallpaper="$HOME/Pictures/$wallpaper"
 ln -sf $wallpaper ~/Pictures/wallpaper-current.jpg && echo "'wallpaper-current.jpg' points to '$wallpaper'"
+
+swaymsg reload
