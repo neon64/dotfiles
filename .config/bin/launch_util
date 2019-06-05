@@ -1,0 +1,3 @@
+#!/bin/bash
+
+compgen -c | sort -u | fzf --color=16 --reverse | xargs swaymsg -t command exec

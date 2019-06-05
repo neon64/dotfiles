@@ -1,0 +1,153 @@
+/**
+ * modern firefox r/firefoxcss
+ * https://www.reddit.com/r/FirefoxCSS/comments/bm77hx/modern_firefox/
+ */
+
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+#personal-bookmarks #PlacesToolbarItems {
+    -moz-box-pack: center;
+}
+
+#PersonalToolbar {
+    height: 37px;
+}
+
+#navigator-toolbox:hover > #PersonalToolbar {
+    visibility: visible !important;
+}
+
+#urlbar:not([focused="true"]) {
+    /* box-shadow:0 0 5px 1px rgba(17, 17, 17, .06) !important; */
+    border:#FFFFFF solid 1px !important;
+}
+
+#nav-bar, .tabbrowser-tab[selected="true"] {
+    /* box-shadow:0px 0px 8px -6px #000000 !important; */
+}
+
+#navigator-toolbox {
+    /* box-shadow:0px 0px 8px -6px #000000 !important; */
+}
+
+#navigator-toolbox::after {
+    /* border-bottom:0px !important; */
+}
+
+#PanelUI-button,
+#PanelUI-menu-button {
+    border:none !important;
+    padding-left:0px !important;
+    margin-inline-end:1.4px !important;
+}
+
+.urlbar-go-button {
+    display:none !important;
+}
+
+#TabsToolbar {
+    max-height:41px !important;
+}
+
+#nav-bar {
+    padding:0 2px !important;
+}
+
+#urlbar {
+    min-height:30px !important;
+    border-radius: 2em !important;
+}
+
+#back-button:not([disabled="true"]):not([open="true"]):not(:active) > .toolbarbutton-icon {
+    background-color: white !important;
+}
+
+#back-button:not(:hover),
+#back-button:not(:hover) > .toolbarbutton-icon {
+    background: transparent !important;
+    border: none !important;
+    /* box-shadow:0px 0px 8px -6px #000000 !important; */
+}
+
+#back-button:hover,
+#back-button:hover > .toolbarbutton-icon {
+    border: none !important;
+    border-radius: 2px !important;
+}
+
+.tab-background {
+    margin-inline-start:-1px !important;
+    margin-inline-end:-1px !important;
+    border:0 !important;
+    border-image-width:0 !important;
+}
+
+.titlebar-buttonbox-container {
+    max-height: 30px !important;
+}
+
+.tabbrowser-tab[fadein] {
+    /* max-width: 242px !important; */
+}
+
+.tab-line {
+    visibility: hidden !important;
+}
+
+.titlebar-spacer[type="pre-tabs"] {
+    display:none !important;
+}
+
+/**
+ *
+ * my own customisations, as well as stuff from
+ * https://www.reddit.com/r/FirefoxCSS/comments/bm77hx/modern_firefox/
+ *
+ */
+
+:root:not([customizing]) #navigator-toolbox #nav-bar {
+    min-height: 0!important;
+    max-height: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+:root:not([customizing]) #navigator-toolbox:focus-within #nav-bar {
+    max-height: 36px;
+    height: 36px;
+    /* max-height: 32px; */
+    /* height: 32px; */
+}
+
+:root:not([customizing]) .tabbrowser-tab:not([pinned="true"]) .tab-stack {
+	flex-basis: 1;
+}
+
+:root:not([customizing]) .tabs-newtab-button {
+    display: none;
+}
+/* Hide tab borders */
+/* .tabbrowser-tabs{
+    border:none !important;
+    opacity: 0 !important;
+} */
+/* Hide separators between background tabs */
+/* .tabbrowser-tab::before {
+    opacity: 0 !important;
+} */
+
+/* Hide border from rightmost background tab */
+.tabbrowser-tab::after {
+    opacity: 0 !important;
+}
+
+/* Remove placeholder right border */
+.titlebar-placeholder {
+    border: none !important;
+}
+
+:root:not([customizing]) .tab-line,
+/* :root:not([customizing]) .tab-text, */
+:root:not([customizing]) .tab-close-button {
+	display: none !important;
+}

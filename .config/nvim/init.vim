@@ -31,6 +31,7 @@ set shiftwidth=4
 let master_theme = system('cat $HOME/.config/colors/current-theme')
 execute 'colorscheme' master_theme
 
+hi! Normal guibg=NONE ctermbg=NONE
 hi! EndOfBuffer guifg='#002b36'
 
 " FINDING FILES

@@ -84,7 +84,7 @@ exec_always ~/.config/sway/configure.sh
 
     # the $term variable is expanded at runtime
     bindsym $mod+Return exec $$term
-    bindsym $mod+x exec alacritty --title "Floating Terminal" --config-file ~/.config/alacritty/alacritty_launcher.yml -e fish -c 'env fish_custom_greeting= fish'
+    bindsym $mod+x exec alacritty --title "Floating Terminal" --config-file ~/.config/alacritty/alacritty_big.yml -e fish -c 'env fish_custom_greeting= fish'
     bindsym $mod+c exec $browser
 
     # kill focused window
@@ -92,7 +92,7 @@ exec_always ~/.config/sway/configure.sh
 
     # start your launcher
     # bindsym $mod+d exec $menu
-    bindsym $mod+d exec alacritty --title "Command Launcher" --config-file ~/.config/alacritty/alacritty_launcher.yml -e ~/.config/bin/launch_util
+    bindsym $mod+d exec alacritty --title "Command Launcher" --config-file ~/.config/alacritty/alacritty_big.yml -e ~/.config/bin/launch_util
     # ; bash"
 
     # Drag floating windows by holding down $mod and left mouse button. Resize
