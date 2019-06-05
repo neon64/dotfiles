@@ -2,6 +2,9 @@
 
 These came about as I was switching to another Linux machine and realised there was so much manual setting up that needs to be done to install all the apps and change settings etc... Not all of that can be covered by static textual configuration files (except maybe if I ran NixOS), so I decided to write some install scripts to do it.
 
+- `arch_0` - configure Arch and dotfiles (nearly) from scratch
+- `arch` - install the dotfiles (and required packages) on an existing system
+
 ## `arch_0`
 
 `arch_0` is like 'step 0' for installing the dotfiles on Arch Linux.
@@ -91,11 +94,13 @@ These don't really have anything to do with my Dotfiles but I'll put them here a
 
 - needed to run
 
-$ reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_DWORD /f
+    ```
+    $ reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_DWORD /f
+    ```
 
- on an administrator Command Prompt inside Windows (see the [Arch Wiki
- page](https://wiki.archlinux.org/index.php/System_time)). Otherwise every time
- I rebooted back into Windows the time was messed up.
+     on an administrator Command Prompt inside Windows (see the [Arch Wiki
+     page](https://wiki.archlinux.org/index.php/System_time)). Otherwise every time
+     I rebooted back into Windows the time was messed up.
 
 - switched to using hybrid-sleep on lid close - just in case there seems to be a
  bug with resuming on my laptop - doesn't always work
