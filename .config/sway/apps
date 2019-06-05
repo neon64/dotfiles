@@ -5,15 +5,17 @@ for_window [title="Editing Profile"] floating enable
 for_window [title="Login Keyring"] floating enable
 
 # for_window [class="Google-chrome"] border none
-# for_window [class="Firefox"] border none
+for_window [class="Firefox"] border none
 # for_window [class="Code"] border none
 # for_window [class="FirefoxNightly"] border none
 # for_window [class="Emacs"] border none
 
 for_window [app_id="gnome-control-center"] floating enable
 for_window [app_id="gnome-calculator"] floating enable
+for_window [app_id="gnome-clocks"] floating enable
 for_window [app_id="gnome-tweaks"] floating enable
 for_window [app_id="gnome-system-monitor"] floating enable; resize set 1024 600
+for_window [app_id="blueman-manager"] floating enable
 
 for_window [class="keepassxc"] border normal $borderwidth
 
@@ -25,7 +27,9 @@ for_window [class="keepassxc"] border normal $borderwidth
 # for_window [app_id="evince"] border pixel 1
 # for_window [class="marktext"] border pixel 1
 
-for_window [title="Floating Terminal"] floating enable; border pixel 3; resize set 800 400
+for_window [title="Floating Terminal"] floating enable; border pixel 1; resize set 640 320
+for_window [title="Command Launcher"] floating enable; border pixel 1; resize set 640 320
+
 
 # default workspaces
 assign [class="qutebrowser"] 1
@@ -38,3 +42,4 @@ assign [class="Google-chrome"] 1
 assign [class="GitKraken"] 4
 assign [class="evolution"] 8
 assign [class="keepassxc"] 9
+assign [app_id="blueman-manager"] 10

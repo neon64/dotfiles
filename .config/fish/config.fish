@@ -27,6 +27,7 @@ set PATH $PATH $HOME/.config/composer/vendor/bin
 set -x EDITOR (which nvim)
 
 set -x SPACEMACSDIR "~/.config/spacemacs"
+set -e FZF_DEFAULT_OPTS
 set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"
 set -x FZF_CTRL_T_COMMAND "fd --hidden --exclude '**/.git/'"
 set -x FZF_ALT_C_COMMAND "fd --type d --hidden --exclude '**/.git/'"
@@ -66,11 +67,14 @@ if status --is-interactive
         clear
     end
 
-    # unset all universal variables
+    set theme (cat ~/.config/colors/current-theme)
+    source ~/.config/colors/base16-fzf/fish/$theme.fish
 
-    for v in (set --show | string replace -rf '^\$([^:[]+).*: set in universal.*' '$1')
-        set -e $v
-    end
+    # unset all universal variables
+    # for v in (set --show | string replace -rf '^\$([^:[]+).*: set in universal.*' '$1')
+    #     set -e $v
+    # end
+
     # i'm not sure where these are from, but i'll put them here instead of
     # in the machine-specific u-vars file, so that they sync nicely.
     set -g fish_color_autosuggestion 555\x1eyellow

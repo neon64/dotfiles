@@ -59,6 +59,7 @@ wm_pkgs=(
     alsa-utils # provides an `amixer` command used for volume control
     evscript-git # map caps lock to escape on tap + more
     wl-clipboard # clipboard tools
+    libinput-gestures # swipe actions for trackpads
 )
 
 # installs packages required for emacs
@@ -88,6 +89,7 @@ extra_shell_pkgs=(
     htop # system monitoring
     gotop # fancier system monitoring
     ttf-ubraille # font for gotop
+    noto-fonts # provides special unicode char for pure fish prompt
     nnn # fastest terminal file manager
     gnome-keyring # provider for libsecret - allows us to store git credentials for the command line
     gcsf-bin # google drive file system written in rust
@@ -102,15 +104,22 @@ recommended_apps=(
     firefox # browser of choice
     ttf-liberation # sans-serif font for firefox
     code # VS Code editor
+    marktext-bin # text editor
+    pavucontrol # visual pulse audio info
+    keepassxc # password manager
+    zathura zathura-pdf-mupdf # pdf viewer
+)
+
+# while it is possible to do withut these Gnome apps, I find they make my life so much
+# easier when I just need a GUI for once
+gnome_apps=(
     gnome-system-monitor #  visual htop
     gnome-font-viewer # viewing which fonts are available
     gnome-calculator # basic calculator
-    marktext-bin # text editor
-    pavucontrol # visual pulse audio info
-    nautilus # file manager
-    keepassxc # password manager
-    evince # pdf reader
+    evince # gnome pdf reader
     eog # gnome image viewer
+    nautilus # file manager
+    gnome-clocks # alarm clocks etc...
 )
 
 # packages to write rust code
@@ -208,6 +217,8 @@ function install_pkgs {
     install_group emacs_pkgs ${emacs_pkgs[@]}
     install_group music_pkgs ${music_pkgs[@]}
     install_group recommended_apps ${recommended_apps[@]}
+    install_group gnome_apps ${gnome_apps[@]}
+    install_group gtk_theme ${gtk_theme[@]}
     install_group node_pkgs ${node_pkgs[@]}
     install_group python_pkgs ${python_pkgs[@]}
     install_group laptop_pkgs ${laptop_pkgs[@]} && configure_tlp
@@ -215,7 +226,7 @@ function install_pkgs {
     install_group virtualbox_guest_pkgs ${virtualbox_guest_pkgs[@]}
     install_group bluetooth_pkgs ${bluetooth_pkgs[@]}
     confirm " - custom version of mps-youtube which interacts nicely with mpd (requires python)?" && install_custom_mpsyt
-    confirm " - setuid root the `evscript` binary?" && setuid_evscript
+    confirm " - setuid root the \`evscript\` binary?" && setuid_evscript
     header "Installed all requested packages!"
 }
 

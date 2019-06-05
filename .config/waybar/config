@@ -1,19 +1,18 @@
 {
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar at the bottom of your screen
-    "height": 40, // Waybar height
-    // "width": 1280, // Waybar width
+    "height": 36, // Waybar height
     // Choose the order of the modules
     "modules-left": ["sway/mode", "mpd"],
     "modules-center": ["sway/workspaces"],
-    "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "clock", "idle_inhibitor", "tray"],
+    "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "clock", "idle_inhibitor"],
     // Modules configuration
     "sway/window": {
         "max-length": 80
     },
     "sway/workspaces": {
         "disable-scroll": false,
-    //     "all-outputs": true,
+        "all-outputs": true,
         "format": "{icon}",
         "format-icons": {
             "1": "",
@@ -93,6 +92,7 @@
         "format": "  {stateIcon}{consumeIcon}{repeatIcon}{singleIcon}    {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})    ",
         "format-disconnected": "Disconnected ",
         "format-stopped": "   {consumeIcon}{repeatIcon}{singleIcon}Stopped    ",
+        "max-length": 40,
         "interval": 2,
         "consume-icons": {
             "on": " " // Icon shows only when "consume" is on

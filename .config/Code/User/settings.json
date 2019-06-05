@@ -8,7 +8,6 @@
         ".*": "shellscript"
     },
     "workbench.startupEditor": "welcomePage",
-    "workbench.colorTheme": "One Dark Pro Vivid",
     "files.trimTrailingWhitespace": true,
     "window.zoomLevel": 1,
     "php.suggest.basic": false,
@@ -42,5 +41,7 @@
     "open-in-browser.default": "firefox",
     "editor.lineHeight": 24,
     "vim.enableNeovim": true,
-    "vim.neovimPath": "/usr/bin/nvim"
+    "vim.neovimPath": "/usr/bin/nvim",
+    "vim.easymotion": true,
+    "vim.sneak": true,
 }

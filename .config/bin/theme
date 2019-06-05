@@ -26,10 +26,12 @@ echo -e " - Updating shell init script"
 ln -sf ~/.config/colors/base16-shell/scripts/$theme.sh ~/.config/colors/theme.sh
 echo -e " - Updating swaywm colors"
 ln -sf ~/.config/colors/base16-sway/themes/$theme.config ~/.config/sway/colorscheme
+echo -e " - Updating waybar colors"
+ln -sf ~/.config/colors/base16-waybar/colors/$theme.css ~/.config/waybar/colors.css
 echo -e " - Updating alacritty config"
 ~/.config/alacritty/build_config.py $theme
 
-echo -e " - Updating theme file (used by vim)"
+echo -e " - Updating theme file (used by vim, fzf)"
 echo "$theme" > ~/.config/colors/current-theme
 
 echo -e "${BLUE}Reloading sway...${RESET_FMT}"

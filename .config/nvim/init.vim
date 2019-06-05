@@ -8,7 +8,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'justinmk/vim-sneak' " `s` and `S` do two letter sneaking
-
+Plug 'sheerun/vim-polyglot' " many different language packs
 
 " Let's make it pretty
 Plug 'chriskempson/base16-vim'
