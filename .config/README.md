@@ -2,72 +2,30 @@
 
 
 This repository contains the most important dotfiles that I want replicated
-between different systems... Kudos to the extremely simple way of keeping track
+between different systems.
+
+
+## How is everything tracked?
+
+I just use plain old git and a couple of shell scripts. Kudos to the extremely simple way of keeping track
 of dotfiles detailed here:
 https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/.
-I was fed up with having to download yet another fancy script, just to do
-something that Git can do out of the box.
 
-*Coming-soon:* I am working on a simple script that installs these dotfiles +
-all dependencies to a new computer. I've chosen to stick with simple `bash` so
-that I don't need to install or learn a new provisioning tool like Ansible
-etc...
+Over time I've found that more and more tools need manual 'installation', so I've written a few extra scripts to install required dependencies / configure the system automatically.
 
-## Stuff I use
+## Installation
 
-I have one Linux machine and two OS X machines. While these dotfiles contain a
-lot of stuff pertinent to Linux only (all the WM stuff), I try to ensure that
-they work universally.
+### Automatic
 
-Here's a list in no particular order of the apps I use.
+If you're on Arch Linux, then I've been working on an installation wizard, `arch_0`, which takes a basic Arch Linux installation and downloads these dotfiles and installs everything needed to make them work.
 
-**Window Manager**
- - sway, as my daily driver when I'm on Linux
-        - `waybar` as the bar, with icons from `otf-font-awesome`.
-        - `rofi` - as of sway 1.0 it works really nicely (except perhaps window switching)
- - i3-gaps, my legacy setup (not guaranteed to work anymore, but still part of dotfiles)
-        - [polybar](https://github.com/jaagr/polybar)
-        - [rofi](https://github.com/DaveDavenport/rofi)
- - On my old machine I had Gnome installed, just in case. There's nothing in my
-   dotfiles really specific to Gnome though.
+In short, you just need to run:
 
-**Terminal**
- - [Alacritty](https://github.com/jwilm/alacritty/), a fast terminal emulator written in Rust.
-   - Now has scrollback, and has become my daily driver
-   - Unfortunately it's performance inside a virtual machine seems somewhat lacklustre so I've been using Gnome Terminal a bit
- - Gnome Terminal
+    $ curl "https://raw.githubusercontent.com/neon64/dotfiles/master/.config/bin/install/arch_0" | bash
 
-**Shell**
- - [Fish shell](https://fishshell.com/)
- - [Fisherman](https://github.com/fisherman/fisherman)
+See the [installation guide](https://github.com/neon64/dotfiles/tree/master/.config/bin/install) for more information and caveats.
 
-**Editor**
- - Visual Studio Code
- - [Neovim](https://github.com/neovim/neovim), when I need to use the command line
-     - [vim-plug](https://github.com/junegunn/vim-plug)
-     - I'm now trying to learn vim as a primary text editor. Hopefully it works out.
-- Emacs with [Doom Emacs](https://github.com/hlissner/doom-emacs) config
-     - seems slightly more fancy than Vim, and I love SPC keybindings + Evil Mode
-
-**Browser**
- - Firefox - As a Rust user, I really appreciate all the work that has gone into
-   the 'Firefox Quantum' release, and I also am wary of Google achieving a
-   monopoly over the web with Chrome/Blink
- - <strike>Qutebrowser</strike>
-    - haven't used for ages
-    - I liked the vim keybindings but my config isn't fully complete yet
-
-**Music**
- - YouTube (including mps-youtube in terminal)
- - <strike>Mopidy as a backend and then ncmpcpp for a terminal UI</strike>
-    - having issues with this setup at the moment (YouTube and Google Play Music backends aren't very mature)
-    - Switched to `mpd` - can now use `ncmpcpp` visualizer, or `cava`
-
-## Automatic Installation
-
-If you're on Arch Linux, then I've been working on an installation wizard, `arch_0`, which takes a basic Arch Linux installation and downloads these dotfiles and installs everything needed to make them work. See the [readme](https://github.com/neon64/dotfiles/tree/master/.config/bin/install) for more information and caveats.
-
-## Manual Installation
+### Manual
 
 To install these dotfiles onto a new machine:
 
@@ -98,6 +56,57 @@ Also run the following to ensure untracked files (i.e.: the rest of your home di
 
     $ dotf config --local status.showUntrackedFiles no
 
+## Chosen tools
+
+I have one Linux machine and two OS X machines. While these dotfiles contain a
+lot of stuff pertinent to Linux only (all the WM stuff), I try to ensure that
+they work universally.
+
+Here's a list in no particular order of the apps I use.
+
+**Window Manager**
+ - sway, as my daily driver when I'm on Linux
+        - `waybar` as the bar, with icons from `otf-font-awesome`.
+        - `rofi` - as of sway 1.0 it works really nicely (except perhaps window switching)
+        - `fzf` drives a lot of my config
+ - On my old machine I had Gnome installed, just in case. There's nothing in my
+   dotfiles really specific to Gnome though.
+        - I have a selection of apps, `gnome_apps`, which can be optionally installed.
+          I find them useful when I just need a no-frills utility e.g.: system monitor.
+
+**Terminal**
+ - [Alacritty](https://github.com/jwilm/alacritty/), a fast terminal emulator written in Rust.
+   - Now has scrollback, and has become my daily driver
+   - Unfortunately it's performance inside a virtual machine seems somewhat lacklustre so I've been using Gnome Terminal a bit
+ - Gnome Terminal
+
+**Shell**
+ - [Fish shell](https://fishshell.com/)
+ - [Fisherman](https://github.com/fisherman/fisherman)
+
+**Editor**
+ - Visual Studio Code
+ - [Neovim](https://github.com/neovim/neovim), when I need to use the command line
+     - [vim-plug](https://github.com/junegunn/vim-plug)
+     - I'm now trying to learn vim as a primary text editor. Hopefully it works out.
+- Emacs with [Doom Emacs](https://github.com/hlissner/doom-emacs) config
+     - seems slightly more fancy than Vim, and I love SPC keybindings + Evil Mode
+
+**Browser**
+ - Firefox - As a Rust user, I really appreciate all the work that has gone into
+   the 'Firefox Quantum' release, and I also am wary of Google achieving a
+   monopoly over the web with Chrome/Blink
+    - with a custom `userChrome.css` it looks quite spectacular
+ - <strike>Qutebrowser</strike>
+    - haven't used for ages
+    - I liked the vim keybindings but my config isn't fully complete yet
+
+**Music**
+ - YouTube (including mps-youtube in terminal)
+ - <strike>Mopidy as a backend and then ncmpcpp for a terminal UI</strike>
+    - having issues with this setup at the moment (YouTube and Google Play Music backends aren't very mature)
+    - Switched to `mpd` - can now use `ncmpcpp` visualizer, or `cava`
+
 ## Keeping track of local changes
 
 To stage changes to a file, just run:
@@ -123,7 +132,7 @@ To update the system, run:
 
     $ up
 
-On ArchLinux, this will use `pikaur`, on macOS, it will use `brew`. It will also
+On Arch Linux, this will use `pikaur`, on macOS, it will use `brew`. It will also
 update various components (namely language-specific package managers). At the
 moment this includes:
 
