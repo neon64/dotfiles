@@ -44,4 +44,8 @@
     "vim.neovimPath": "/usr/bin/nvim",
     "vim.easymotion": true,
     "vim.sneak": true,
+    "vim.handleKeys": {
+        "<C-w>": false,
+        "<C-q>": false
+    }
 }
