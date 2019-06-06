@@ -66,13 +66,18 @@
 #back-button:not(:hover) > .toolbarbutton-icon {
     background: transparent !important;
     border: none !important;
-    /* box-shadow:0px 0px 8px -6px #000000 !important; */
 }
 
 #back-button:hover,
 #back-button:hover > .toolbarbutton-icon {
     border: none !important;
-    border-radius: 2px !important;
+    box-shadow:0px 0px 8px -6px #000000 !important;
+    /* border-radius: 2px !important; */
+}
+
+#forward-button .toolbarbutton-icon {
+    border-radius: 50% !important;
+    /* border-radius: 2px !important; */
 }
 
 .tab-background {
@@ -113,8 +118,8 @@
 }
 
 :root:not([customizing]) #navigator-toolbox:focus-within #nav-bar {
-    max-height: 36px;
-    height: 36px;
+    max-height: 46px;
+    height: 46px;
     /* max-height: 32px; */
     /* height: 32px; */
 }
@@ -146,7 +151,7 @@
     border: none !important;
 }
 
-:root:not([customizing]) .tab-line,
+/* :root:not([customizing]) .tab-line, */
 /* :root:not([customizing]) .tab-text, */
 :root:not([customizing]) .tab-close-button {
 	display: none !important;

@@ -5,7 +5,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/mode", "mpd"],
     "modules-center": ["sway/workspaces"],
-    "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "clock", "idle_inhibitor"],
+    "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "clock", "idle_inhibitor", "tray"],
     // Modules configuration
     "sway/window": {
         "max-length": 80
@@ -66,7 +66,7 @@
     "network": {
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "Eth: {ipaddr}/{cidr} ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
         "format-disconnected": "Disconnected ⚠",
         "on-click": "2"
     },

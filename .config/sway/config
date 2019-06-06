@@ -308,10 +308,10 @@ exec_always ~/.config/sway/configure.sh
 
     # window colors
     #                       border              background          text                  indicator      child border
-    client.focused          $focused-bd-color   $focused-bg-color   $focused-text-color   $indicator     $focused-inner-bd-color
-    client.unfocused        $bd-color           $bg-color           $text-color           $indicator     $inner-bd-color
-    client.focused_inactive $bd-color           $bg-color           $text-color           $indicator     $inner-bd-color
-    client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $indicator     $urgent-bd-color
+    client.focused          $focused-bd-color   $focused-bg-color   $focused-text-color   $focused-inner-bd-color     $focused-inner-bd-color
+    client.unfocused        $bd-color           $bg-color           $text-color           $inner-bd-color     $inner-bd-color
+    client.focused_inactive $bd-color           $bg-color           $text-color           $inner-bd-color     $inner-bd-color
+    client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $urgent-bd-color     $urgent-bd-color
 
     # window borders and gaps
     default_border pixel $borderwidth
