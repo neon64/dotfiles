@@ -70,11 +70,11 @@ function update_npm_packages {
     esac
 }
 
-function install_color_schemes {
+function set_color_schemes {
     ~/.config/bin/theme
 }
 
-function update_color_schemes {
+function regen_color_schemes {
     ~/.config/bin/theme --regen
 }
 
@@ -87,14 +87,14 @@ function install_common {
     confirm "Install fish plugins using \`fisherman\`?" && install_fish_plugins
     if $FRESH_INSTALL; then
         confirm "Install Doom (emacs configuration framework)?" && install_doom_emacs
-        confirm "Install color schemes?" && set_color_schemes
+        confirm "Choose a color scheme?" && set_color_schemes
         confirm "Symlink platform-specific dotfiles?" && symlink_platform_specific
         confirm "Symlink 'Code - OSS' config to normal VS Code config?" && link_code_configs
         confirm "Set \`dotf\` to ignore untracked files?" && set_dotf_ignore_untracked
         confirm "Set \`fish\` as default shell?" && set_fish_as_default_shell
     else
         confirm "Update Doom (emacs configuration framework)?" && cd ~/.emacs.d/ && git pull && ~/.emacs.d/bin/doom update
-        confirm "Update color schemes?" && update_color_schemes
+        confirm "Update color schemes?" && regen_color_schemes
         if command -v rustup >/dev/null 2>&1; then
             confirm "Update Rust toolchains?" && rustup update
         else
