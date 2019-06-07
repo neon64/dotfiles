@@ -64,10 +64,10 @@ if status --is-interactive
     set -g fish_cursor_insert line
 
     # manually set
-    if [ $TERM = 'linux' ]
+    if [ "$TERM" = 'linux' ]
         bash ~/.config/colors/theme.sh
         clear
-    else if [ ! -z $GNOME_TERMINAL_SCREEN ] 
+    else if [ ! -z "$GNOME_TERMINAL_SCREEN" ] 
         bash ~/.config/colors/theme.sh
     end
 
