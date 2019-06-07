@@ -156,3 +156,7 @@
 :root:not([customizing]) .tab-close-button {
 	display: none !important;
 }
+
+.search-one-offs {
+    display: none !important;
+}

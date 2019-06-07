@@ -8,11 +8,14 @@ GREEN="\e[32m"
 BOLD="\e[1m"
 RESET_FMT="\e[0m"
 
-if [ "$1" != '--regen' ]; then
+if [ "$1" = '--regen' ]; then
+    theme=$(cat ~/.config/colors/current-theme)
+elif [ "$1" = '--current' ]; then
+    cat ~/.config/colors/current-theme
+    exit
+else
     echo -e "${BLUE}Select a new theme:${RESET_FMT}"
     theme=$(ls ~/.config/colors/base16-shell/scripts | sed 's/.sh//g' | fzf --height=20 --min-height=5 --reverse)
-else
-    theme=$(cat ~/.config/colors/current-theme)
 fi
 
 if [ "$theme" = '' ]; then

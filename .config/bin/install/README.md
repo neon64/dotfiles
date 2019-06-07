@@ -111,8 +111,15 @@ These don't really have anything to do with my Dotfiles but I'll put them here a
  ### In a virtual machine
 
 Needed to follow the instructions on the [Arch Wiki](https://wiki.archlinux.org/index.php/VirtualBox#Set_optimal_framebuffer_resolution) in order to get a full HD screen working nicely. (still don't know what's going on?)
+ - so setting GRUB_GFX_MODE inside `/etc/default/grub` works if I'm booting through VirtualBox with BIOS and Grub, however I can't use that with systemd-boot and UEFI boot.
+ - the solution was to run
+
+    ```
+    VBoxManage setextradata "name_of_vm" VBoxInternal2/EfiGraphicsResolution 1920x1080
+    ```
+
+    in order to get Full HD screen inside a VM.
 
 - tried using [raw disk access](https://www.virtualbox.org/manual/ch09.html#rawdisk) to use a dual-booted Arch installation from Windows. Works well except there's no read access to the EFI system partition (presumably because Windows is using it).
     - this caused me much grief once because I updated the Linux kernel while in the VirtualBox host, which tried to write to `/boot`, which silently failed. Then my kernel version was out of sync with everyting else in the system (e.g.: kernel modules) and everything broke down (couldn't boot because mounting `/boot` failed, unknown filesystem type `vfat`, no Intel graphics drivers??). Booting from the `archiso` and reinstalling `linux` fixed everything though.
-
 
