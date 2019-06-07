@@ -172,8 +172,8 @@ printing_pkgs=(
 
 gtk_theme=(
     gnome-tweak-tool # change themes
-    flat-remix # icon theme
-    flat-remix-gtk # gtk theme
+    arc-gtk-theme # gtk theme
+    arc-icon-theme # icon theme
 )
 
 function install_group {

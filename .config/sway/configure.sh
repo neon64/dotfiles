@@ -5,7 +5,7 @@ if [ $? -eq 0 ]; then
     echo "Running in VM, applying tweaks"
     swaymsg input "*" xkb_options caps:super
     # alacritty is really laggy inside a VM
-    # swaymsg set '$term' dbus-launch gnome-terminal
+    swaymsg set '$term' dbus-launch gnome-terminal
 else
     echo "Not running in vm"
     libinput-gestures-setup restart

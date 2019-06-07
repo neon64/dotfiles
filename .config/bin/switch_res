@@ -1,0 +1,3 @@
+#!/bin/bash
+
+swaymsg -t get_outputs --pretty | grep "    " | awk "{print \$1}" | fzf --reverse --color=16 | xargs swaymsg output "*" res

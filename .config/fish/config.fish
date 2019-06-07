@@ -45,6 +45,8 @@ alias al "env NO_WM=1 COLUMNS=$COLUMNS LINES=$LINES startx"
 alias yt "mpsyt"
 alias g "googler --url-handler ~/.config/bin/browse --colors bjdxxy"
 alias ls "exa --classify --git --header"
+alias sr "switch_res"
+alias rbw "reboot_to_windows"
 
 # in case I forget
 alias pac "pikaur"
@@ -65,6 +67,8 @@ if status --is-interactive
     if [ $TERM = 'linux' ]
         bash ~/.config/colors/theme.sh
         clear
+    else if [ ! -z $GNOME_TERMINAL_SCREEN ] 
+        bash ~/.config/colors/theme.sh
     end
 
     set theme (cat ~/.config/colors/current-theme)
