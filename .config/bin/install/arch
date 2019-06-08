@@ -91,9 +91,7 @@ extra_shell_pkgs=(
     gotop # fancier system monitoring
     ttf-ubraille # font for gotop
     noto-fonts # provides special unicode char for pure fish prompt
-    nnn # fastest terminal file manager
     gnome-keyring # provider for libsecret - allows us to store git credentials for the command line
-    gcsf-bin # google drive file system written in rust
     hwinfo # useful for debugging info like framebuffer resolutions
 )
 

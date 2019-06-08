@@ -42,7 +42,9 @@ function create_account {
     read -p "Enter a username: " username </dev/tty
 
     # wheel is needed for `sudo` access,
-    useradd -m -G wheel,video $username
+    # input is needed for libinput-gestures
+    # video is needed for ???
+    useradd -m -G wheel,video,input $username
     passwd $username </dev/tty
     header "Account created and password set..."
 
@@ -140,7 +142,7 @@ if [ \$status -ne 0 ]; then
     echo -e "\${BOLD}   -> \${YELLOW}Warning: clone of repository failed with exit code \$status\${RESET_FMT}"
 fi
 echo -e "\${BOLD}====> \${BLUE}Attempting to checkout dotfiles repository \${RESET_FMT}"
-dotf checkout || checkout_failed=true
+dotf checkout && dotf submodule update --init --recursive 
 if dotf diff-index --quiet HEAD; then
     echo -e "\${BOLD}====> \${GREEN}Dotfiles repository checked out successfully\${RESET_FMT}"
 else
