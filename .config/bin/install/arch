@@ -51,6 +51,7 @@ wm_pkgs=(
     grim # grab images from the wayland compositor
     rofi # app launcher
     slurp # select area to screenshot
+    mako # notification daemon
     swayshot # screenshot wrapper
     cantarell-fonts # chosen UI font for sway and waybar
     otf-font-awesome # chosen icon font for waybar
@@ -99,6 +100,8 @@ extra_shell_pkgs=(
 # apps which I use
 recommended_apps=(
     alacritty # nice terminal emulator written in rust
+    ttf-hack # new default terminal font
+    otf-fantasque-sans-mono # sweet font with a handwriting feel
     otf-fira-code # nice coding font with ligatures
     otf-fira-mono # nice coding font without ligatures
     firefox # browser of choice

@@ -50,6 +50,7 @@ alias rbw "reboot_to_windows"
 
 # in case I forget
 alias pac "pikaur"
+alias pac_orphans "pacman -Qqtd | grep -Fv -f (pacman -Qqtdm | psub)" 
 
 # use neovim
 alias vim "nvim"

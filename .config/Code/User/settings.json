@@ -1,6 +1,5 @@
 {
-    "editor.fontFamily": "Fira Code,Menlo, monospace",
-    "editor.fontSize": 13,
+    "editor.fontFamily": "Fantasque Sans Mono",
     "editor.fontLigatures": true,
     "editor.minimap.enabled": true,
     "editor.detectIndentation": true,

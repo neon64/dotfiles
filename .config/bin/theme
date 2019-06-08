@@ -37,8 +37,12 @@ echo -e " - Updating alacritty config"
 echo -e " - Updating theme file (used by vim, fzf)"
 echo "$theme" > ~/.config/colors/current-theme
 
-echo -e "${BLUE}Reloading sway...${RESET_FMT}"
-swaymsg reload
+if [ "$2" = '--no-reload' ]; then
+    echo -e "${BLUE}Skipping reload...${RESET_FMT}"
+else
+    echo -e "${BLUE}Reloading sway...${RESET_FMT}"
+    swaymsg reload
+fi
 
 # alacritty will auto-reload the config
 
