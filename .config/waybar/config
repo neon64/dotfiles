@@ -3,7 +3,7 @@
     "position": "top", // Waybar at the bottom of your screen
     "height": 36, // Waybar height
     // Choose the order of the modules
-    "modules-left": ["sway/mode", "mpd"],
+    "modules-left": ["sway/mode"],
     "modules-center": ["sway/workspaces"],
     "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "clock", "idle_inhibitor", "tray"],
     // Modules configuration
@@ -93,7 +93,7 @@
         "format-disconnected": "Disconnected ",
         "format-stopped": "   {consumeIcon}{repeatIcon}{singleIcon}Stopped    ",
         "max-length": 40,
-        "interval": 2,
+        "interval": 5,
         "consume-icons": {
             "on": " " // Icon shows only when "consume" is on
         },

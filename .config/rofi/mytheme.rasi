@@ -1,7 +1,7 @@
 configuration {
 	modi: "combi";
-/*	width: 50;*/
-    lines: 5;
+    width: 30;
+    lines: 7;
 /*	columns: 1;*/
 	font: "cantarell 12";
 	bw: 0;

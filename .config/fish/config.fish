@@ -35,6 +35,22 @@ set -x FZF_ALT_C_COMMAND "fd --type d --hidden --exclude '**/.git/'"
 set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head -n 100'"
 
 ### ========================================
+###				   AUTOSTART
+### ========================================
+
+# start sway upon login to tty1
+# we check `status --is-interactive` because
+# commands like dbus-run-session (for starting Gnome
+# Terminal) start a non-interactive login shell
+if status --is-login && status --is-interactive
+    if test -z "$DISPLAY" -a "$XDG_VTNR" -eq "1"
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        export MOZ_ENABLE_WAYLAND=1
+        exec systemd-cat -t sway sway
+    end
+end
+
+### ========================================
 ###				   ALIASES
 ### ========================================
 
@@ -45,6 +61,7 @@ alias al "env NO_WM=1 COLUMNS=$COLUMNS LINES=$LINES startx"
 alias yt "mpsyt"
 alias g "googler --url-handler ~/.config/bin/browse --colors bjdxxy"
 alias ls "exa --classify --git --header"
+alias v "bat"
 alias sr "switch_res"
 alias rbw "reboot_to_windows"
 
@@ -68,7 +85,7 @@ if status --is-interactive
     if [ "$TERM" = 'linux' ]
         bash ~/.config/colors/theme.sh
         clear
-    else if [ ! -z "$GNOME_TERMINAL_SCREEN" ] 
+    else if [ ! -z "$GNOME_TERMINAL_SCREEN" ]  
         bash ~/.config/colors/theme.sh
     end
 
@@ -104,16 +121,3 @@ if status --is-interactive
     set -g fish_color_valid_path \x2d\x2dunderline
 end
 
-### ========================================
-###				   AUTOSTART
-### ========================================
-
-# start sway upon login to tty1
-# we check `status --is-interactive` because
-# commands like dbus-run-session (for starting Gnome
-# Terminal) start a non-interactive login shell
-if status --is-login && status --is-interactive
-    if test -z "$DISPLAY" -a "$XDG_VTNR" -eq "1"
-        sway
-    end
-end

@@ -1,5 +1,5 @@
 {
-    "editor.fontFamily": "Fantasque Sans Mono",
+    "editor.fontFamily": "Hack",
     "editor.fontLigatures": true,
     "editor.minimap.enabled": true,
     "editor.detectIndentation": true,
@@ -46,5 +46,7 @@
     "vim.handleKeys": {
         "<C-w>": false,
         "<C-q>": false
-    }
+    },
+    "editor.fontSize": 13,
+    "vim.useSystemClipboard": true
 }

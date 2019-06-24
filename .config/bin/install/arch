@@ -5,30 +5,6 @@ source "`dirname $0`/definitions"
 # load the platform-independent installation steps
 source "`dirname $0`/common"
 
-function enable_locales {
-    # set locale properly
-    sudo sed -i 's/^#en_AU.UTF-8 UTF-8/en_AU.UTF-8 UTF-8/g' /etc/locale.gen
-    sudo sed -i 's/^#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
-    header "Generating locales"
-    sudo locale-gen
-}
-
-function add_colors_to_pacman {
-    sudo sed -i 's/^#Color/Color/g' /etc/pacman.conf
-}
-
-function disable_aur_pkg_compression {
-    sudo sed -i "s,PKGEXT='.pkg.tar.xz',PKGEXT='.pkg.tar',g" /etc/makepkg.conf
-}
-
-# packages which weren't installed as part of base, but are nevertheless important for system functions
-extra_system_pkgs=(
-    polkit # required for shutdown without sudo, avoiding errors in systemctl etc...
-    netctl # internet access
-    pulseaudio pulseaudio-alsa # pulseaudio support
-    libsecret # credential management
-)
-
 # installs the fish shell and everything else required to work with these dotfiles
 base_shell_pkgs=(
     fish # shell of choice
@@ -36,6 +12,7 @@ base_shell_pkgs=(
     newsboat # required for reading Arch RSS feed before updating packages
     tmux # terminal multiplexer, provides multiple concurrent panes whilst running system updates using the `up` script
     exa # file listing in Rust
+    bat # cat clone with extras (also just happens to be written in Rust)
     git # version control
     fzf # fuzzy file finder
     fd # nice alternative to `find`, written in Rust, and used in our fzf config
@@ -93,6 +70,7 @@ extra_shell_pkgs=(
     noto-fonts # provides special unicode char for pure fish prompt
     gnome-keyring # provider for libsecret - allows us to store git credentials for the command line
     hwinfo # useful for debugging info like framebuffer resolutions
+    reptyr # attach background process to a terminal
 )
 
 # apps which I use
@@ -108,6 +86,7 @@ recommended_apps=(
     marktext-bin # text editor
     pavucontrol # visual pulse audio info
     keepassxc # password manager
+    qt5-wayland # makes keepassxc work in Gnome
     zathura zathura-pdf-mupdf # pdf viewer
 )
 
@@ -121,6 +100,7 @@ gnome_apps=(
     eog # gnome image viewer
     nautilus # file manager
     gnome-clocks # alarm clocks etc...
+    gnome-power-manager # power graphs etc..
 )
 
 # packages to write rust code
@@ -137,13 +117,6 @@ node_pkgs=(
 python_pkgs=(
     python
     python-pip
-)
-
-# packages for running on a laptop
-laptop_pkgs=(
-    intel-undervolt # undervolt your CPU to save battery
-    tlp # battery-saving info
-    gnome-power-manager # power management
 )
 
 # legacy X window system support
@@ -204,13 +177,7 @@ function configure_rustup {
     fi
 }
 
-function configure_tlp {
-    systemctl enable tlp.service --now
-    systemctl enable tlp-sleep.server
-}
-
 function install_pkgs {
-    install_group extra_system_pkgs "${extra_system_pkgs[@]}"
     install_group base_shell_pkgs "${base_shell_pkgs[@]}"
     install_group rust_pkgs ${rust_pkgs[@]} && configure_rustup
     install_group wm_pkgs ${wm_pkgs[@]}
@@ -222,7 +189,6 @@ function install_pkgs {
     install_group gtk_theme ${gtk_theme[@]}
     install_group node_pkgs ${node_pkgs[@]}
     install_group python_pkgs ${python_pkgs[@]}
-    install_group laptop_pkgs ${laptop_pkgs[@]} && configure_tlp
     install_group xorg_pkgs ${xorg_pkgs[@]}
     install_group virtualbox_guest_pkgs ${virtualbox_guest_pkgs[@]}
     install_group bluetooth_pkgs ${bluetooth_pkgs[@]}
@@ -238,11 +204,6 @@ function update_pkgs {
 
 if $FRESH_INSTALL; then
     section "1" "2" "system-level configuration"
-    confirm "Enable en_AU.UTF-8, en_US.UTF-8 locales?" && enable_locales
-    confirm "Enable colored output in \`pacman\` and \`pikaur\`?" && add_colors_to_pacman
-    confirm "Disable AUR package compression (speeds up install times)?" && disable_aur_pkg_compression
-    confirm "Enable network time synchronization?" && sudo timedatectl set-ntp true
-    echo ""
 
     if pacman -Q | grep -q 'pikaur'; then
         warn "\`pikaur\` already installed, using it to install everything else"

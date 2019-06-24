@@ -1,13 +1,19 @@
 #!/bin/bash
 
+BLUE="\e[34m"
+RESET_FMT="\e[0m"
+
 grep -q ^flags.*\ hypervisor /proc/cpuinfo
 if [ $? -eq 0 ]; then
-    echo "Running in VM, applying tweaks"
+    echo -e "=> ${BLUE}Running in VM, applying tweaks${RESET_FMT}"
+    echo " - Remapping keyboard"
     swaymsg input "*" xkb_options caps:super
+    echo " - Switching to gnome-terminal"
     # alacritty is really laggy inside a VM
     swaymsg set '$term' dbus-launch gnome-terminal
 else
-    echo "Not running in vm"
+    echo -e " => ${BLUE}Not running in vm${RESET_FMT}"
+    echo " - Adding gestures"
     libinput-gestures-setup restart
 fi
 
