@@ -22,12 +22,6 @@ function check_dotf
     # there were no changed files 
     if dotf status | grep --quiet "nothing to commit"
         echo ""
-        if dotf status | grep --color=never "Your branch is ahead of 'origin/master'"
-            if read_confirm
-                dotf push
-            end
-        end
-        return 0
     else
         echo ""
         echo (set_color red)"You have unsaved changes to your dotfiles:"(set_color normal)
