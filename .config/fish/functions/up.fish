@@ -2,62 +2,41 @@
 # all the tools I find important
 function up
     switch (echo $argv)
-        case "--system"
-            update_system
-        case "--pieces"
-            update_pieces
+        case "--inner"
+            up_inner
         case ""
             if tmux has-session -t 'update_arch' 2>/dev/null
                 tmux -2 attach-session -t 'update_arch'
             else 
                 tmux start-server
-                tmux new-session -d -s 'update_arch' -n 'System Update' 'fish -c "up --system"; fish'
-                tmux split-window -h 'fish -c "up --pieces"; fish'
+                tmux new-session -d -s 'update_arch' -n 'System Update' 'fish -c "up --inner"'
                 tmux -2 attach-session
             end
     end
 end
 
-function update_system
+
+function up_inner
     switch (uname)
-        case Linux
-            echo (set_color yellow) "Updating using pacaur..." (set_color normal)
-            # read Arch news before updating with pacaur:
-            newsboat -r
-            pac -Syu
-        case Darwin
-            echo (set_color yellow) "Updating using Homebrew..." (set_color normal)
-            brew update; and brew upgrade;
-        case '*'
-            echo "Unknown OS"
-    end
-end
-
-# updates all the other various miscellaneous 'pieces'
-# which make up the system.
-function update_pieces
-    if command -v rustup >/dev/null 2>&1
-        echo (set_color yellow) "Updating Rust..." (set_color normal)
-        rustup update
-    else
-        echo (set_color red) "rustup not found..." (set_color normal)
+        case "Darwin"
+            # note: this is a major regression
+            echo "No update script yet..."
+        case "Linux"
+            switch (uname -r)
+                case "*ARCH*"
+                    # run our install script but with the `--update` parameter, which saves
+                    # time by not reinstalling things that (we hope) are already installed
+                    # note, there's no technical reason why this stuff shouldn't work on 
+                    bash ~/.config/bin/install/arch --update
+                case *
+                    echo "Unsupported Linux distro"
+                    echo "Note: there's no technical reason why this update script doesn't work across all Linuxes, I just can't be bothered supporting more than Arch. So feel free to run it yourself." 
+            end
     end
 
-
-    if command -v npm >/dev/null 2>&1
-        echo (set_color yellow) "Updating global npm packages..." (set_color normal)
-        switch (uname)
-            case Darwin
-                # through homebrew, so npm shouldn't need root perms
-                npm update -g
-            case *
-                sudo npm update -g
-        end
-    else
-        echo (set_color red) "npm not found..." (set_color normal)
-    end
-
-    # though this is technically an 'install' script, it won't hurt if we run it again to 
-    # update various things eg: fish/vim plugins.
-    install_dotfiles
+    echo ""
+    echo ""
+    echo "Press any key to exit..."
+    read -n1 -P "" foo
+    echo "Done..."
 end

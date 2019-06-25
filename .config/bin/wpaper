@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Select a new wallpaper:"
+mkdir -p ~/Pictures/Wallpapers
+wallpaper=$(cd ~/Pictures/Wallpapers && find . -type f | sed 's/^\.\///g'| grep -v "wallpaper-current" | fzf --reverse --height=10 --min-height=5)
+
+if [ "$wallpaper" = '' ]; then
+    echo "No wallpaper selected, aborting..."
+    exit 1
+fi
+
+wallpaper="$HOME/Pictures/Wallpapers/$wallpaper"
+ln -sf $wallpaper ~/Pictures/Wallpapers/wallpaper-current.jpg && echo "'wallpaper-current.jpg' points to '$wallpaper'"
+
+swaymsg reload

@@ -1,48 +1,29 @@
 # Dotfiles
 
+This repository contains the dotfiles which I want replicated
+between different systems.
 
-This repository contains the most important dotfiles that I want replicated between different systems...
-Kudos to the extremely simple way of keeping track of dotfiles detailed here: https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/.
-I was fed up with having to download yet another fancy bash script, just to do something that Git can do out of the box.
+## How is everything tracked?
 
-## Stuff I use
+I just use plain old git and a couple of shell scripts. Kudos to the extremely simple way of keeping track
+of dotfiles detailed here:
+https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/.
 
-I have one Linux machine and two OS X machines. While these dotfiles contain a lot of stuff pertinent to Linux only (all the WM stuff), I try to ensure that they work universally.
-
-Here's a list in no particular order of the apps I use.
-
-**Window Manager**
- - i3-gaps, for when I want to look cool and transparent
-        - [polybar](https://github.com/jaagr/polybar)
-        - [rofi](https://github.com/DaveDavenport/rofi)
- - sway, as my daily driver
-        - `polybar` doesn't seem to support Wayland at the moment, so I'm using `swaybar` and `i3blocks`
-        - `rofi` (sometimes it misses keyboard events)
-        - However, on my machine it feels laggier than X+i3. Hopefully the [wlroots](https://github.com/swaywm/wlroots) project will fix it.
- - Gnome is installed, but there just in case and I never really use it
-
-**Terminal**
- - [Alacritty](https://github.com/jwilm/alacritty/), a fast terminal emulator written in Rust, is unfortunately not yet my daily driver because it lacks scrollback
- - Gnome Terminal
-
-**Shell**
- - [Fish shell](https://fishshell.com/)
- - [Fisherman](https://github.com/fisherman/fisherman)
-
-**Editor**
- - Visual Studio Code
- - [Neovim](https://github.com/neovim/neovim), when I need to use the command line
-     - [vim-plug](https://github.com/junegunn/vim-plug)
-
-**Browser**
- - Firefox - As a Rust user, I really appreciate all the work that has gone into the 'Quantum' release.
- - Qutebrowser - I like the vim keybindings but my config isn't fully complete yet
-
-**Music**
- - YouTube
- - Mopidy as a backend and then ncmpcpp for a terminal UI
+Over time I've found that more and more tools need manual 'installation', so I've written a few extra scripts to install required dependencies / configure the system automatically.
 
 ## Installation
+
+### Automatic
+
+If you're on Arch Linux, then I've been working on an installation wizard, `arch_0`, which takes a basic Arch Linux installation and downloads these dotfiles and installs everything needed to make them work.
+
+In short, you just need to run:
+
+    $ curl "https://raw.githubusercontent.com/neon64/dotfiles/master/.config/bin/install/arch_0" | bash
+
+See the [installation guide](https://github.com/neon64/dotfiles/tree/master/.config/bin/install) for more information and caveats.
+
+### Manual
 
 To install these dotfiles onto a new machine:
 
@@ -56,9 +37,22 @@ Then attempt to checkout the configuration files:
 
 You will most likely have to decide what to do with the existing dotfiles on your system.
 
-Finally, run the install script:
+If `fish` isn't already installed, you'll need to install it now using an
+appropriate package manager and also eventually set it as the default shell.
 
-    $ install_dotfiles
+If you're on Arch Linux, you can run the following install script to install a whole heap of packages which power my dotfiles (things like `sway`, `firefox` and loads of little things like `ttf-font-waesome` etc...), as well as plugins for `nvim`, `fish` and `emacs`:
+
+    $ ~/.config/bin/install/arch
+
+If you're not on Arch Linux, I'm afraid I don't have an all-in-one solution yet. However, try taking a look inside of `~/.config/bin/install/common` for some bits you will be able to run.
+
+Also update the git repo location used by the script `~/.config/dotf` to point
+to wherever you stored the bare dotfiles repository (default is
+`~/Code/Dotfiles`)
+
+Also run the following to ensure untracked files (i.e.: the rest of your home directory) don't show up when running `dotf` commands.
+
+    $ dotf config --local status.showUntrackedFiles no
 
 ## Keeping track of local changes
 
@@ -74,9 +68,10 @@ Don't ever try `dotf add -A` - It tries to stage everything in your home directo
 
 To commit changes:
 
-    $ dotf commit -m "Describing the change
+    $ dotf commit -m "Describing the change"
 
-In conclusion: it's exactly like normal Git, just with `git` replaced with the alias `dotf` (defined in `.config/fish/config.fish`)
+In conclusion: it's exactly like normal Git, just with `git` replaced with the
+alias `dotf` (defined in `.config/fish/config.fish`)
 
 ## Updating your system
 
@@ -84,8 +79,9 @@ To update the system, run:
 
     $ up
 
-On ArchLinux, this will use `pacaur`, on macOS, it will use `brew`.
-It will also update various components (namely language-specific package managers). At the moment this includes:
+On Arch Linux, this will use `pikaur`, on macOS, it will use `brew`. It will also
+update various components (namely language-specific package managers). At the
+moment this includes:
 
 - Rust (via Rustup)
 - `npm` globally-installed packages

@@ -1,0 +1,110 @@
+#!/bin/bash
+
+OS="`uname`"
+
+function link_code_configs {
+    if [[ -d ~/.config/Code\ -\ OSS/ ]]; then
+        echo "Already exists, trashing old config"
+        trash ~/.config/Code\ -\ OSS
+    fi
+    ln -s ~/.config/Code ~/.config/Code\ -\ OSS
+}
+
+function install_vim_plugins {
+    # install `vim-plug`
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+    nvim +PlugInstall +qall && header "Done"
+}
+
+function install_fish_plugins {
+    header "Installing fisherman"
+    curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
+
+    header "Using fisherman to install plugins"
+    fish -c "fisher"
+
+    header "Done"
+}
+
+function install_doom_emacs {
+    if test -x ~/.emacs.d/bin/doom; then
+        ~/.emacs.d/bin/doom refresh
+    else
+        git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+        ~/.emacs.d/bin/doom quickstart
+    fi
+}
+
+function symlink_platform_specific {
+    case $OS in
+         'Linux')
+              ln -sfn ~/.gitconfig-linux ~/.gitconfig-platform-specific;
+              ln -sfn ~/.xinitrc-linux ~/.xinitrc;
+              ;;
+         'Darwin')
+              ln -sfn ~/.gitconfig-macos ~/.gitconfig-platform-specific;
+              ln -sfn ~/.xinitrc-macos ~/.xinitrc;
+              ln -sfn ~/.config/Code/User/settings.json ~/Library/Application\ Support/Code/User/settings.json;
+              ;;
+         *)
+              warn "Unknown OS '$OS'"
+    esac
+    header "Done"
+}
+
+function set_dotf_ignore_untracked {
+    .config/bin/dotf config --local status.showUntrackedFiles no && header "Done"
+}
+
+function update_npm_packages {
+    case $OS in
+         'Darwin')
+              # through homebrew, so npm shouldn't need root permissions
+              npm update -g
+              ;;
+         *)
+              sudo npm update -g
+              ;;
+    esac
+}
+
+function set_color_schemes {
+    ~/.config/bin/theme
+}
+
+function regen_color_schemes {
+    ~/.config/bin/theme --regen
+}
+
+function set_fish_as_default_shell {
+    chsh -s $(which fish)
+}
+
+function install_common {
+    confirm "Install vim plugins using \`vim-plug\`?" && install_vim_plugins
+    confirm "Install fish plugins using \`fisherman\`?" && install_fish_plugins
+    if $FRESH_INSTALL; then
+        confirm "Install Doom (emacs configuration framework)?" && install_doom_emacs
+        confirm "Choose a color scheme?" && set_color_schemes
+        confirm "Symlink platform-specific dotfiles?" && symlink_platform_specific
+        confirm "Symlink 'Code - OSS' config to normal VS Code config?" && link_code_configs
+        confirm "Set \`dotf\` to ignore untracked files?" && set_dotf_ignore_untracked
+        confirm "Set \`fish\` as default shell?" && set_fish_as_default_shell
+    else
+        confirm "Update Doom (emacs configuration framework)?" && cd ~/.emacs.d/ && git pull && ~/.emacs.d/bin/doom update
+        confirm "Update color schemes?" && regen_color_schemes
+        if command -v rustup >/dev/null 2>&1; then
+            confirm "Update Rust toolchains?" && rustup update
+        else
+            warn "\`rustup\` not found, skipping Rust update"
+        fi
+
+        if command -v npm >/dev/null 2>&1; then
+           confirm "Update global npm packages?" && update_npm_packages
+        else
+            warn "\`npm\` not found, skipping update"
+        fi
+    fi
+}

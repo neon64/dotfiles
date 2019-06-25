@@ -1,0 +1,196 @@
+#!/bin/bash
+
+termwidth=80
+BLUE="\e[34m"
+RED="\e[31m"
+YELLOW="\e[33m"
+GREEN="\e[32m"
+BOLD="\e[1m"
+RESET_FMT="\e[0m"
+
+function header {
+	echo -e "${BOLD}====> ${BLUE}$1${RESET_FMT}"
+}
+
+function section {
+    echo ""
+    echo ""
+    echo ""
+    padding="$(printf '%0.1s' -{1..500})"
+    printf "%*.*s ${BOLD}%s${RESET_FMT} %*.*s\n" 0 "$(((termwidth-2-${#1})/2))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding"
+    echo ""
+}
+
+function warn {
+	echo -e "${BOLD}   -> ${YELLOW}Warning: $1${RESET_FMT}"
+}
+
+function confirm {
+    echo -en "${BOLD}====> ${GREEN}$1${RESET_FMT}"
+    while true; do
+        read -n1 -p " (y/n/e) " yn </dev/tty
+        case $yn in
+            [Yy]* ) echo "" && return 0;;
+            [Nn]* ) echo "" && return 1;;
+            [Ee]* ) echo "" && warn "user aborted script, exiting..." && exit 1;;
+            * ) echo -e "\nPlease answer yes or no.";;
+        esac
+    done
+}
+
+function create_account {
+    read -p "Enter a username: " username </dev/tty
+
+    # wheel is needed for `sudo` access,
+    # input is needed for libinput-gestures
+    # video is needed for ???
+    useradd -m -G wheel,video,input $username
+    passwd $username </dev/tty
+    header "Account created and password set..."
+
+    # anyone in `%wheel` can use `sudo`
+    header "Enabling \`sudo\` for anybody in %wheel"
+    sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers
+    echo ""
+}
+
+function existing_account {
+    read -p "Then enter the username of your existing user account: " username </dev/tty
+}
+
+function center() {
+    padding="$(printf '%0.1s' ={1..500})"
+    printf "%*.*s ${GREEN}%s${RESET_FMT} %*.*s\n" 0 "$(((termwidth-2-${#1})/2))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding"
+}
+
+function entry_point() {
+    clear
+    echo ""
+    center "Welcome to my dotfiles installation wizard!"
+    echo ""
+    echo -e "If anything goes wrong, you usually should be safe to rerun\nthis command and it will try everything again.\nBut also note this isn't designed to cover every single edge case,\nso please don't run this unless you have read through the script\nand understand what you're doing. Good luck!"
+
+    section "STEP ONE: CHECK USER"
+    echo -e "These dotfiles work best when installed as a normal, non-root user.\nSo we'll do a quick check to make sure the current user isn't root,\nand if we are root we can create a new user and run the rest of the\nscript as that user."
+    echo ""
+
+    if [ `whoami` = "root" ]; then
+        header "You are currently logged in as 'root'"
+        confirm "Would you like to create a new user account?" && create_account || existing_account
+    else
+        header "You are currently logged in as '`whoami`'. Dotfiles will be installed for this user."
+        username=`whoami`
+    fi
+
+    section "STEP TWO: INSTALL DOTFILES REPO"
+
+    echo -e "Here we perform the bare minimum work to get the dotfiles repo onto this machine.\nIf you have already installed all the applications/tools which these dotfiles\nfunction with, or prefer to have a more manual install, then after running\nstep two you can exit the script and install apps & perform misc setup yourself."
+    echo ""
+
+    # `-e` allows the default value to actually work
+    read -e -i "~/Code/Dotfiles" -p "$(echo -e ${GREEN}Where should the dotfiles repository be installed? ${RESET_FMT})" rel_install_location </dev/tty
+
+    echo ""
+
+    other_homedir=$( getent passwd "$username" | cut -d: -f6 )
+    if [ "$other_homedir" = "" ]; then
+        warn "The home directory for this user shouldn't be empty. Perhaps the user doesn't exist?"
+        exit 1
+    fi
+    install_location="${rel_install_location/#\~/$other_homedir}"
+
+    header "Performing pre-installation checks"
+
+    ping -q -w 1 -c 1 "github.com" > /dev/null
+    if [ $? -ne 0 ]; then
+        warn "no internet connection - installation will fail"
+    fi
+
+    header "Ensuring \`base-devel\` and \`git\` are installed"
+    sudo pacman -S --needed --noconfirm base-devel git
+
+    header "Installing dotfiles for user '$username' in \`$install_location\`"
+
+    step_three=$(section "STEP THREE: RUN ACTUAL INSTALL SCRIPT")
+    step_four=$(section "STEP FOUR - PROFIT")
+
+    read -d '' commands <<EOF
+BLUE="\\\e[34m"
+RED="\\\e[31m"
+YELLOW="\\\e[33m"
+GREEN="\\\e[32m"
+BOLD="\\\e[1m"
+RESET_FMT="\\\e[0m"
+shopt -s expand_aliases
+rel_install_location="$rel_install_location"
+install_location="$install_location"
+echo -e "\${BOLD}   -> \${RESET_FMT}Now running as '\`whoami\`'\${RESET_FMT}"
+cd ~
+echo -e "\${BOLD}   -> \${RESET_FMT}Now at '\`pwd\`'\${RESET_FMT}"
+echo -e "\${BOLD}====> \${BLUE}Creating 'dotf' alias\${RESET_FMT}"
+alias dotf='/usr/bin/git --git-dir="\$install_location" --work-tree=\$HOME' && echo "Done"
+echo -e "$\{BOLD}====> \${BLUE}Adding \$install_location to '.gitignore'\${RESET_FMT}"
+if cat ~/.gitignore | grep -qi "\$install_location"; then
+   echo "Already in .gitignore"
+else
+   echo "\$install_location" >> ~/.gitignore
+fi
+echo -e "\${BOLD}====> \${BLUE}Cloning dotfiles repository...\${RESET_FMT}"
+git clone --bare "https://github.com/neon64/dotfiles" "\$install_location"
+status=\$?
+if [ \$status -ne 0 ]; then
+    echo -e "\${BOLD}   -> \${YELLOW}Warning: clone of repository failed with exit code \$status\${RESET_FMT}"
+fi
+echo -e "\${BOLD}====> \${BLUE}Attempting to checkout dotfiles repository \${RESET_FMT}"
+dotf checkout && dotf submodule update --init --recursive 
+if dotf diff-index --quiet HEAD; then
+    echo -e "\${BOLD}====> \${GREEN}Dotfiles repository checked out successfully\${RESET_FMT}"
+else
+    echo -e "\${BOLD}   -> \${RED}Error checking out the dotfiles\${RESET_FMT}"
+fi
+
+tilde_install_location="${rel_install_location/#\~/}"
+echo -e "\${BOLD}====> \${BLUE}Updating dotfiles location inside '~/.config/bin/dotf' to '~\$tilde_install_location'\${RESET_FMT}"
+sed -i "s#/Code/Dotfiles#\$tilde_install_location#" ~/.config/bin/dotf
+
+# run the next installation step
+echo -e "$step_three\\\n"
+echo "Here we call another script, '~/.config/bin/install/arch', which is part of the dotfiles proper."
+echo "Using a separate script simplifies the source code of the dotfiles, as we can begin to use more features"
+echo "such as splitting the source code into multiple files and sourcing them when needed."
+echo "If all goes well though you won't notice that its a separate script, and everything"
+echo "will just work seamlessly."
+echo ""
+if [[ -x ~/.config/bin/install/arch ]]; then
+    ~/.config/bin/install/arch </dev/tty
+    status=\$?
+    if [ \$status -ne 0 ]; then
+       exit \$status
+    fi
+    echo -e "$step_four\\\n"
+    echo -e "pikaur, the dotfiles were installed. Try logging back in again for changes to take effect."
+    exit 0
+else
+    echo -e "\${BOLD}====> \${RED}Fatal error, install script ~/.config/bin/install/arch not executable.\${RESET_FMT}"
+    echo -e "\${BOLD}   -> \${RESET_FMT}Check that the dotfiles were successfully downloaded and the repository checked out successfully."
+    echo -e ""
+    echo "Aborting script..."
+    exit 1
+fi
+EOF
+
+    if [ `whoami` = "root" ]; then
+        # if we're in the root account, we need to switch to the desired user account
+        # to complete the installation safely
+        sudo -u $username bash -c "$commands"
+    else
+        bash -c "$commands"
+    fi
+
+    status=$?
+    if [ $status -ne 0 ]; then
+        exit $status
+    fi
+}
+
+entry_point

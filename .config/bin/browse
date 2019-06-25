@@ -1,0 +1,19 @@
+#!/usr/bin/env fish
+
+switch $argv
+case "http://*"
+    set url $argv
+case "https://*"
+    set url $argv
+case "*"
+    echo "Searching google for '$argv'"
+    set url "https://www.google.com/search?q=$argv" 
+end
+xdg-open $url 2>/dev/null &
+disown
+# try one or the other
+if type -q i3-msg
+    i3-msg workspace 1 >/dev/null 2>&1
+else if type -q swaymsg
+    swaymsg workspace 1 > /dev/null
+end

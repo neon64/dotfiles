@@ -1,0 +1,18 @@
+[submodule ".config/colors/base16-shell"]
+	path = .config/colors/base16-shell
+	url = https://github.com/chriskempson/base16-shell
+[submodule ".config/colors/base16-sway"]
+	path = .config/colors/base16-sway
+	url = https://github.com/rkubosz/base16-sway
+[submodule ".config/colors/base16-alacritty"]
+	path = .config/colors/base16-alacritty
+	url = https://github.com/aaron-williamson/base16-alacritty
+[submodule ".config/colors/base16-styles"]
+	path = .config/colors/base16-styles
+	url = https://github.com/samme/base16-styles
+[submodule ".config/colors/base16-waybar"]
+	path = .config/colors/base16-waybar
+	url = https://github.com/mnussbaum/base16-waybar
+[submodule ".config/colors/base16-fzf"]
+	path = .config/colors/base16-fzf
+	url = https://github.com/nicodebo/base16-fzf

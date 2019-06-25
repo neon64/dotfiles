@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# compgen -c | sort -u | fzf --color=16 --reverse | xargs swaymsg -t command exec
+
+find /usr/share/applications -name *.desktop | xargs basename -s .desktop -a | fzf --color=16 --reverse | xargs -r swaymsg -t command exec gtk-launch

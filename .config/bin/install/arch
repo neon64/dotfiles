@@ -1,0 +1,249 @@
+#!/bin/bash
+
+# load the platform-independent definitions & functions
+source "`dirname $0`/definitions"
+# load the platform-independent installation steps
+source "`dirname $0`/common"
+
+# installs the fish shell and everything else required to work with these dotfiles
+base_shell_pkgs=(
+    fish # shell of choice
+    neovim # text editor - either use because its awesome, or as console backup
+    newsboat # required for reading Arch RSS feed before updating packages
+    tmux # terminal multiplexer, provides multiple concurrent panes whilst running system updates using the `up` script
+    exa # file listing in Rust
+    bat # cat clone with extras (also just happens to be written in Rust)
+    git # version control
+    fzf # fuzzy file finder
+    fd # nice alternative to `find`, written in Rust, and used in our fzf config
+    highlight # syntax highlighting when previewing documents
+)
+
+# installs the sway window manager and other utilites used by my particular configuration
+wm_pkgs=(
+    sway # window manager
+    xorg-server-xwayland # things are very buggy, basically no apps work without this
+    swayidle # lockscreen + power management
+    waybar # awesome looking status bar
+    grim # grab images from the wayland compositor
+    rofi # app launcher
+    slurp # select area to screenshot
+    mako # notification daemon
+    swayshot # screenshot wrapper
+    cantarell-fonts # chosen UI font for sway and waybar
+    otf-font-awesome # chosen icon font for waybar
+    swaylock-blur-git # cool util which blurs background for swaylock
+    brillo # provides an `xbacklight` replacement for wayland, used in sway config
+    alsa-utils # provides an `amixer` command used for volume control
+    evscript-git # map caps lock to escape on tap + more
+    wl-clipboard # clipboard tools
+    libinput-gestures # swipe actions for trackpads
+)
+
+# installs packages required for emacs
+emacs_pkgs=(
+    emacs ttf-nanum adobe-source-code-pro-fonts # emacs + fonts required for it
+    mlocate
+    otf-fira-code-symbol # my own package for the fira code symbol font - a hack to make ligatures work in emacs
+)
+
+# installs packages to play music on the command-line
+music_pkgs=(
+    mpd # music player daemon
+    mpc # command line client to mpd
+    mpv # play music and videos in the command line
+    ncmpcpp # music player terminal client
+    cava # audio visualiser
+    youtube-dl # `ytdl` command
+)
+
+# extra miscellaneous utils which aren't integral to these dotfiles, but are nevertheless useful
+extra_shell_pkgs=(
+    lostfiles # search for stray system files which aren't part of a package
+    trash-cli # `trash` command
+    googler # google from the command line
+    xdg-utils # xdg-open and other utils
+    neofetch # display system info
+    htop # system monitoring
+    gotop # fancier system monitoring
+    ttf-ubraille # font for gotop
+    noto-fonts # provides special unicode char for pure fish prompt
+    gnome-keyring # provider for libsecret - allows us to store git credentials for the command line
+    hwinfo # useful for debugging info like framebuffer resolutions
+    reptyr # attach background process to a terminal
+)
+
+# apps which I use
+recommended_apps=(
+    alacritty # nice terminal emulator written in rust
+    ttf-hack # new default terminal font
+    otf-fantasque-sans-mono # sweet font with a handwriting feel
+    otf-fira-code # nice coding font with ligatures
+    otf-fira-mono # nice coding font without ligatures
+    firefox # browser of choice
+    ttf-liberation # sans-serif font for firefox
+    code # VS Code editor
+    marktext-bin # text editor
+    pavucontrol # visual pulse audio info
+    keepassxc # password manager
+    qt5-wayland # makes keepassxc work in Gnome
+    zathura zathura-pdf-mupdf # pdf viewer
+)
+
+# while it is possible to do withut these Gnome apps, I find they make my life so much
+# easier when I just need a GUI for once
+gnome_apps=(
+    gnome-system-monitor #  visual htop
+    gnome-font-viewer # viewing which fonts are available
+    gnome-calculator # basic calculator
+    evince # gnome pdf reader
+    eog # gnome image viewer
+    nautilus # file manager
+    gnome-clocks # alarm clocks etc...
+    gnome-power-manager # power graphs etc..
+    baobab # disk usage analyzer
+)
+
+# packages to write rust code
+rust_pkgs=(
+    rustup # manage rust installations
+)
+
+# packages to write/run node code
+node_pkgs=(
+    nodejs npm
+)
+
+# packages to write/run python code
+python_pkgs=(
+    python
+    python-pip
+)
+
+# legacy X window system support
+xorg_pkgs=(
+    xorg-server
+    xorg-xinit
+    xorg-xprop
+    xorg-xev
+)
+
+# VirtualBox
+virtualbox_guest_pkgs=(
+    virtualbox-guest-utils
+)
+
+# Bluetooth support
+bluetooth_pkgs=(
+    bluez # core bluetooth stack
+    bluez-utils # provides bluetoothctl
+    blueman # GTK+ bluetooth manager
+    pulseaudio-bluetooth # use bluetooth audio devices
+)
+
+printing_pkgs=(
+    cups cups-pdf # printing support
+    avahi # printers on a network?
+    system-config-printer
+)
+
+gtk_theme=(
+    gnome-tweak-tool # change themes
+    arc-gtk-theme # gtk theme
+    arc-icon-theme # icon theme
+)
+
+function install_group {
+    name=$1
+    shift
+    confirm " - \`$name\`?" && pikaur -S --needed "$@"
+}
+
+function install_custom_mpsyt {
+    pikaur -S --needed python-mpd2
+    pip3 install --user -U git+https://github.com/vn-ki/mps-youtube.git@mpd
+}
+
+function setuid_evscript {
+    sudo chmod u+s /usr/bin/evscript
+}
+
+function configure_rustup {
+    rustup install stable
+    rustup install nightly && rustup default nightly
+    if ls "$HOME/.cargo/bin" | grep -q "cargo-add"; then
+        echo "'cargo-add' already installed"
+    else
+        cargo install cargo-add
+    fi
+}
+
+function install_pkgs {
+    install_group base_shell_pkgs "${base_shell_pkgs[@]}"
+    install_group rust_pkgs ${rust_pkgs[@]} && configure_rustup
+    install_group wm_pkgs ${wm_pkgs[@]}
+    install_group extra_shell_pkgs ${extra_shell_pkgs[@]}
+    install_group emacs_pkgs ${emacs_pkgs[@]}
+    install_group music_pkgs ${music_pkgs[@]}
+    install_group recommended_apps ${recommended_apps[@]}
+    install_group gnome_apps ${gnome_apps[@]}
+    install_group gtk_theme ${gtk_theme[@]}
+    install_group node_pkgs ${node_pkgs[@]}
+    install_group python_pkgs ${python_pkgs[@]}
+    install_group xorg_pkgs ${xorg_pkgs[@]}
+    install_group virtualbox_guest_pkgs ${virtualbox_guest_pkgs[@]}
+    install_group bluetooth_pkgs ${bluetooth_pkgs[@]}
+    confirm " - custom version of mps-youtube which interacts nicely with mpd (requires python)?" && install_custom_mpsyt
+    confirm " - setuid root the \`evscript\` binary?" && setuid_evscript
+    header "Installed all requested packages!"
+}
+
+function update_pkgs {
+    newsboat -r
+    pikaur -Syu
+}
+
+if $FRESH_INSTALL; then
+    section "1" "2" "system-level configuration"
+
+    if pacman -Q | grep -q 'pikaur'; then
+        warn "\`pikaur\` already installed, using it to install everything else"
+    else
+        header "Installing \`pikaur\`"
+        # first we want install an AUR helper, so we can install more packages more easily
+        mkdir -p $PKG_BUILD_DIR
+        cd $PKG_BUILD_DIR
+
+        git clone https://aur.archlinux.org/pikaur.git
+        cd pikaur
+        makepkg -fsri
+
+        header "Using \`pikaur\` to install everything else"
+    fi
+
+    cd ~
+fi
+
+if $FRESH_INSTALL; then
+    echo ""
+    confirm "Install Arch packages?" && install_pkgs
+    echo ""
+else
+    echo ""
+    confirm "Update Arch packages?" && update_pkgs
+    echo ""
+fi
+
+section "2" "2" "user-level configuration:"
+
+install_common
+
+echo ""
+
+if $FRESH_INSTALL; then
+    header "Congratulations, installation completed!"
+else
+    header "System updated successfully"
+fi
+
+exit 0

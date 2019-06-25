@@ -1,0 +1,53 @@
+#!/bin/bash
+
+BLUE="\e[34m"
+MAGENTA="\e[35m"
+RED="\e[31m"
+YELLOW="\e[33m"
+GREEN="\e[32m"
+BOLD="\e[1m"
+RESET_FMT="\e[0m"
+
+if [ "$1" = '--regen' ]; then
+    theme=$(cat ~/.config/colors/current-theme)
+elif [ "$1" = '--current' ]; then
+    cat ~/.config/colors/current-theme
+    exit
+else
+    echo -e "${BLUE}Select a new theme:${RESET_FMT}"
+    theme=$(ls ~/.config/colors/base16-shell/scripts | sed 's/.sh//g' | fzf --height=20 --min-height=5 --reverse)
+fi
+
+if [ "$theme" = '' ]; then
+    echo -e "${RED}No theme chosen, exiting...${RESET_FMT}"
+    exit 1
+else
+    echo -e "${GREEN}Applying theme $theme${RESET_FMT}"
+fi
+
+echo -e " - Updating shell init script"
+ln -sf ~/.config/colors/base16-shell/scripts/$theme.sh ~/.config/colors/theme.sh
+echo -e " - Updating swaywm colors"
+ln -sf ~/.config/colors/base16-sway/themes/$theme.config ~/.config/sway/colorscheme
+echo -e " - Updating waybar colors"
+ln -sf ~/.config/colors/base16-waybar/colors/$theme.css ~/.config/waybar/colors.css
+echo -e " - Updating alacritty config"
+~/.config/alacritty/build_config.py $theme
+
+echo -e " - Updating theme file (used by vim, fzf)"
+echo "$theme" > ~/.config/colors/current-theme
+
+if [ "$2" = '--no-reload' ]; then
+    echo -e "${BLUE}Skipping reload...${RESET_FMT}"
+else
+    echo -e "${BLUE}Reloading sway...${RESET_FMT}"
+    swaymsg reload
+fi
+
+# alacritty will auto-reload the config
+
+if [ "$TERM" = 'linux' ]; then
+    bash ~/.config/colors/theme.sh
+    # clear the screen on the Linux VTE to avoid awkward half change of color scheme
+    clear
+fi

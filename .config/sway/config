@@ -1,32 +1,36 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-#
-# Sway is a work in progress. Some of these defaults are currently unimplemented.
-
-
 ### Variables
 #
-# Logo key. Use Mod1 for Alt.
+# use super as the modifier key -
+# warning - on most keyboards nothing maps to super by default so you will
+# be unable to exit or launch anything!
 set $mod Mod4
-# Your preferred terminal emulator
-set $term gnome-terminal
-# Your preferred web browser
-set $browser firefox
-# Your preferred application launcher
+
+# preferred terminal emulator
+set $term alacritty
+# set $term gnome-terminal
+# set $term ~/Code/Rust/alacritty_new_window_cwd/target/release/alacritty_new_window_cwd
+
+# preferred web browser
+set $browser firefox-nightly
+
+# preferred application launcher
 set $menu rofi -show combi
+
 # movement keys
 set $up l
 set $down k
 set $left j
 set $right semicolon
 
+# ricing
+set $borderwidth 1
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
-output * bg ~/Pictures/mountains-2.jpg fill
+
+output * bg ~/Pictures/Wallpapers/wallpaper-current.jpg fill
+
 #
 # Example output configuration:
 #
@@ -34,7 +38,13 @@ output * bg ~/Pictures/mountains-2.jpg fill
 #
 # You can get the names of your outputs by running swaymsg -t get_outputs
 
-input "1452:566:bcm" {
+# Generic Keyboard
+input * {
+    xkb_options caps:super
+}
+
+# 2010 MacBook Pro hardware
+input "1452:566:bcm5974" {
     tap enabled
     natural_scroll enabled
     #dwt disabled
@@ -44,47 +54,96 @@ input "1452:566:bcm" {
     click_method clickfinger
 }
 
+input "1452:566:Apple_Inc._Apple_Internal_Keyboard_/_Trackpad" {
+    xkb_options caps:super,ctrl:swap_lwin_lctl
+}
+
+# Wireless mouse
 input "1452:781:Robert_Chamberlain’s_M" {
     tap enabled
     natural_scroll enabled
 }
 
-### Key bindings
+# Thinkpad X1 Extreme Hardware
+input "1:1:AT_Translated_Set_2_keyboard" {
+    # according to the xkb docs, we map control to alt, and then alt to win, thus
+    # we have a poor man's emulation of an Apple keyboard.
+    xkb_options caps:super,altwin:ctrl_alt_win
+}
+
+input "2:7:SynPS/2_Synaptics_TouchPad" {
+    tap enabled
+    middle_emulation disabled
+    # dwt disabled
+    natural_scroll enabled
+    click_method clickfinger
+}
+
+# more specific configuration at runtime
+exec_always ~/.config/sway/configure.sh
+exec mako
 
 #
 # Basics:
 #
-    # start a terminal
-    bindsym $mod+Return exec $term
+
+    # the $term variable is expanded at runtime
+    bindsym $mod+Return exec $$term
+    bindsym $mod+x exec alacritty --title "Floating Terminal" --config-file ~/.config/alacritty/alacritty_big.yml -e fish -c 'env fish_custom_greeting= fish'
     bindsym $mod+c exec $browser
 
     # kill focused window
     bindsym $mod+Shift+q kill
 
-    # start your launcher  
+    # start your launcher
     bindsym $mod+d exec $menu
+    # bindsym $mod+d exec alacritty --title "Command Launcher" --config-file ~/.config/alacritty/alacritty_big.yml -e ~/.config/bin/launch_util
 
-    # Drag floating windows by holding down $mod and left mouse button.
-    # Resize them with right mouse button + $mod.
-    # Despite the name, also works for non-floating windows.
-    # Change normal to inverse to use left mouse button for resizing and right
-    # mouse button for dragging.
+    # Drag floating windows by holding down $mod and left mouse button. Resize
+    # them with right mouse button + $mod. Despite the name, also works for
+    # non-floating windows. Change normal to inverse to use left mouse button
+    # for resizing and right mouse button for dragging.
     floating_modifier $mod normal
 
     # reload the configuration file
     bindsym $mod+Shift+c reload
-    bindsym $mod+Shift+s exec swaygrab ~/Pictures/latest-screenshot.png
 
-    # exit sway (logs you out of your wayland session)
-    bindsym $mod+Shift+e exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"
+    # screenshot using a 'timestamped' filename
+    # bindsym $mod+Shift+s exec bash -c "slurp -d | grim -g - ~/Pictures/Screenshots/$(date +u%Y-%m-%d-%H%M%S_grim.png)"
+
+    # swayshot
+    #
+    # Print screen helper for sway: add keyboard shortcuts for screenshots:
+    # * Print Scr for whole screen
+    # * Alt + Print Scr for a focused window
+    # * Shift + Print Scr for a selected region
+    #
+    # Save screenshots to $SCREENSHOTS folder.
+    # The default value is XDG_PICTURES_DIR, see
+    # https://wiki.archlinux.org/index.php/XDG_user_directories
+
+    bindsym Print exec swayshot
+    bindsym Mod1+Print exec swayshot window
+    bindsym Shift+Print exec swayshot region
+
+    # exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec swaynag -t warning \
+        -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.'\
+        -b 'Yes, exit sway' 'swaymsg exit'
+    # used to be: exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"ww
 #
 # Moving around
 #
-    # Move your focus around with $mod+[h|j|k|l], like vim
-    bindsym $mod+j focus left
-    bindsym $mod+k focus down
-    bindsym $mod+l focus up
-    bindsym $mod+semicolon focus right
+    # Move your focus around using the home row
+    #bindsym $mod+$left exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs left
+    #bindsym $mod+$down exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs down
+    #bindsym $mod+$up exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs up
+    #bindsym $mod+$right exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs right
+    bindsym $mod+$left focus left
+    bindsym $mod+$right focus right
+    bindsym $mod+$up focus up
+    bindsym $mod+$down focus down
+
     # or use $mod+[up|down|left|right]
     bindsym $mod+Left focus left
     bindsym $mod+Down focus down
@@ -92,10 +151,10 @@ input "1452:781:Robert_Chamberlain’s_M" {
     bindsym $mod+Right focus right
 
     # _move_ the focused window with the same, but add Shift
-    bindsym $mod+Shift+j move left
-    bindsym $mod+Shift+k move down
-    bindsym $mod+Shift+l move up
-    bindsym $mod+Shift+semicolon move right
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
     # ditto, with arrow keys
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
@@ -105,43 +164,29 @@ input "1452:781:Robert_Chamberlain’s_M" {
 # Workspaces:
 #
 
-    workspace "10: "
+    workspace 10
     # switch to workspace
-    bindsym $mod+1 workspace "1: "
-    bindsym $mod+2 workspace "2: "
-    bindsym $mod+3 workspace "3: "
+    bindsym $mod+1 workspace 1
+    bindsym $mod+2 workspace 2
+    bindsym $mod+3 workspace 3
     bindsym $mod+4 workspace 4
     bindsym $mod+5 workspace 5
     bindsym $mod+6 workspace 6
-    bindsym $mod+7 workspace "7: "
-    bindsym $mod+8 workspace "8: "
-    bindsym $mod+9 workspace "9: "
-    bindsym $mod+0 workspace "10: "
+    bindsym $mod+7 workspace 7
+    bindsym $mod+8 workspace 8
+    bindsym $mod+9 workspace 9
+    bindsym $mod+0 workspace 10
     # move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace "1: "
-    bindsym $mod+Shift+2 move container to workspace "2: "
-    bindsym $mod+Shift+3 move container to workspace "3: "
+    bindsym $mod+Shift+1 move container to workspace 1
+    bindsym $mod+Shift+2 move container to workspace 2
+    bindsym $mod+Shift+3 move container to workspace 3
     bindsym $mod+Shift+4 move container to workspace 4
     bindsym $mod+Shift+5 move container to workspace 5
     bindsym $mod+Shift+6 move container to workspace 6
-    bindsym $mod+Shift+7 move container to workspace "7: "
-    bindsym $mod+Shift+8 move container to workspace "8: "
-    bindsym $mod+Shift+9 move container to workspace "9: "
-    bindsym $mod+Shift+0 move container to workspace "10: "
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
-
-    assign [class="qutebrowser"] "1: "
-    assign [class="Atom"] "3: "
-    assign [class="Code"] "3: "
-    #assign [class~="firefox"] "1: "
-    assign [id="gnome-terminal-server"] "2: "
-    assign [class="Navigator"] "1: "
-    assign [class="Firefox"] "1: "
-    assign [class="Google-chrome"] "1: "
-    assign [class="GitKraken"] 4
-    assign [class="evolution"] "8: "
-    assign [class="keepassxc"] "9: "
+    bindsym $mod+Shift+7 move container to workspace 7
+    bindsym $mod+Shift+8 move container to workspace 8
+    bindsym $mod+Shift+9 move container to workspace 9
+    bindsym $mod+Shift+0 move container to workspace 10
 
 #
 # Layout stuff:
@@ -170,40 +215,43 @@ input "1452:781:Robert_Chamberlain’s_M" {
     bindsym $mod+a focus parent
 
     # manipulate gaps settings
-    bindsym $mod+Shift+equal gaps inner workspace plus 5
-    bindsym $mod+Shift+minus gaps inner workspace minus 5
+    bindsym $mod+G gaps inner all plus 10; gaps outer all plus 10; hide_edge_borders none
+    bindsym $mod+Shift+G gaps inner all set 0; gaps outer all set 0; hide_edge_borders both
 
 #
 # Special keys
 #
 
     # Volume
-    
-    # Volume
-    bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+; exec pkill --signal SIGRTMIN+10 i3blocks
-    bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-;  exec pkill --signal SIGRTMIN+10 i3blocks
-    bindsym XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle; exec pkill --signal SIGRTMIN+10 i3blocks
+    bindsym --locked XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+
+    bindsym --locked XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-
+    bindsym --locked XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle
 
     # Media player
-    bindsym XF86AudioPlay exec mpc toggle
+    bindsym --locked XF86AudioPlay exec mpc toggle
     # bindsym XF86AudioPause exec mpc pause
-    bindsym XF86AudioPrev exec mpc prev
-    bindsym XF86AudioNext exec mpc next
+    bindsym --locked XF86AudioPrev exec mpc prev
+    bindsym --locked XF86AudioNext exec mpc next
 
-    # Brightness
-    bindsym XF86MonBrightnessUp exec xbacklight -inc 10;  exec pkill --signal SIGRTMIN+11 i3blocks
-    bindsym XF86MonBrightnessDown exec xbacklight -dec 10;  exec pkill --signal SIGRTMIN+11 i3blocks
+    # Brightness (a fade over 100ms)
+    bindsym --locked XF86MonBrightnessUp exec brillo -A 5 -u 100000
+    bindsym --locked XF86MonBrightnessDown exec brillo -U 5 -u 100000
 
     # Sleep
-    bindsym $mod+shift+l exec bash /home/chris/.config/sway/lock.sh
+    bindsym $mod+Shift+u exec loginctl lock-session
+    exec swayidle -w timeout 180 'swaylock-blur' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock-blur' lock 'swaylock-blur'
+
+    bar {
+        swaybar_command waybar
+    }
 
 #
 # Resize mode:
 #
 
-bindsym $mod+r mode "resize"
+    bindsym $mod+r mode "resize"
 
-mode "resize" {
+    mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
         # Pressing left will shrink the window’s width.
@@ -224,7 +272,7 @@ mode "resize" {
         # back to normal: Enter or Escape
         bindsym Return mode "default"
         bindsym Escape mode "default"
-}
+    }
 
 #
 # Scratchpad:
@@ -241,95 +289,39 @@ mode "resize" {
 
 ### Ricing
 
-## Base16 Tomorrow Night
-# Author: Chris Kempson (http://chriskempson.com)
-#
-# You can use these variables anywhere in the i3 configuration file.
+    include colorscheme
 
-set $base00 #1d1f21
-set $base01 #282a2e
-set $base02 #373b41
-set $base03 #969896
-set $base04 #b4b7b4
-set $base05 #c5c8c6
-set $base06 #e0e0e0
-set $base07 #ffffff
-set $base08 #cc6666
-set $base09 #de935f
-set $base0A #f0c674
-set $base0B #b5bd68
-set $base0C #8abeb7
-set $base0D #81a2be
-set $base0E #b294bb
-set $base0F #a3685a
+    # fits Base16-Tomorrow-Night theme
+    set $bd-color              $base01
+    set $focused-bd-color      $base00
+    set $urgent-bd-color       $base08
+    set $indicator             $base0B
 
-# fits the `Arc` theme
-# set $bg-color 	         #2f343f
-# set $inactive-bg-color   #2f343f
-# set $bar-bg-color        #1f242f
-# set $text-color          #f3f4f5
-# set $inactive-text-color #676E7D
-# set $urgent-bg-color     #E53935
-# set $green               #00ff00
+    set $bg-color              $base01
+    set $focused-bg-color      $base00
 
-# fits Base16-Tomorrow-Night theme
-#darker than $base00
-set $bd-color              #17191a 
-#slightly lighter than $base00
-set $focused-bd-color      #222325
-set $bg-color              #17191a
-set $focused-bg-color      #222325
-set $inactive-text-color   $base03
-set $text-color            $base05
-set $focused-text-color    $base07
-set $green                 $base0B
-set $urgent-bg-color       $base08
-set $bar-bg-color          $base01
+    set $inner-bd-color         $base01
+    set $focused-inner-bd-color $base03
 
-# window colors
-#                       border              background          text                  indicator  child border
-client.focused          $focused-bd-color   $focused-bg-color   $focused-text-color   $green     $focused-bd-color
-client.unfocused        $bd-color           $bg-color           $text-color           $green     $bd-color
-client.focused_inactive $bd-color           $bg-color           $text-color           $green     $bd-color
-client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $green     $urgent-bg-color
+    set $inactive-text-color   $base03
+    set $text-color            $base05
+    set $focused-text-color    $base07
+    set $urgent-bg-color       $base08
 
-# window borders and gaps
-new_window normal 1
-hide_edge_borders both
-# gaps inner 1
-# gaps outer 2
-# smart_gaps on
-# smart_borders on
+    # window colors
+    #                       border              background          text                  indicator      child border
+    client.focused          $focused-bd-color   $focused-bg-color   $focused-text-color   $focused-inner-bd-color     $focused-inner-bd-color
+    client.unfocused        $bd-color           $bg-color           $text-color           $inner-bd-color     $inner-bd-color
+    client.focused_inactive $bd-color           $bg-color           $text-color           $inner-bd-color     $inner-bd-color
+    client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $urgent-bd-color     $urgent-bd-color
 
-#font pango:Cantarell 10
-font pango:System San Francisco Display 10
+    # window borders and gaps
+    default_border pixel $borderwidth
+    default_floating_border none
+    hide_edge_borders both
+    focus_wrapping no
 
-# doesn't work on i3
-#for_window [class=".*"] title_format "<span size='x-small'>%title</span>"
-#for_window [class=".*"] title_format "<span size="smaller">      %title</span>"
-
-#
-# Status Bar:
-#
-bar {
-    position bottom
-    strip_workspace_numbers yes
-    colors {
-        background $bar-bg-color
-        separator #757575
-        focused_workspace   $bar-bg-color     $bar-bg-color       $focused-text-color
-		inactive_workspace  $bar-bg-color     $bar-bg-color       $inactive-text-color
-        urgent_workspace    $urgent-bg-color  $urgent-bg-color    $focused-text-color
-    }
-
-    #status_command i3status
-    status_command i3blocks
-    font pango:System San Francisco Display 10
-}
-
-
-
-# Read sway-bar(5) for more information about this section.
+    font Cantarell 11
 
 # You may want this:
 #

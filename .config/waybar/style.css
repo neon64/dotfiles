@@ -1,0 +1,166 @@
+@import "colors.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    /* we use `serif` as a fallback so its clear if our proper font isn't installed */
+    font-family: "Cantarell", serif;
+    font-size: 14px;
+    min-height: 0;
+}
+
+window#waybar {
+    /* background: rgba(43, 48, 59, 0.5); */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
+    color: white;
+}
+
+#workspaces button {
+    padding: 0 8px;
+    background: transparent;
+    color: white;
+    border-bottom: 3px solid transparent;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+#workspaces button.focused {
+    background: rgba(100, 114, 125, 0.4);
+    border-bottom: 3px solid white;
+}
+
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+    background: rgba(100, 114, 125, 0.2);
+    border-bottom: 3px solid #ccc;
+}
+
+#mode {
+    background: #64727D;
+    border-bottom: 3px solid white;
+}
+
+#clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #mpd, #tray, #mode, #idle_inhibitor, #backlight {
+    padding: 0 10px;
+    margin: 0 4px;
+}
+
+#window {
+    margin: 0 20px;
+}
+
+#clock {
+    /* background: rgba(100, 114, 125, 0.4); */
+    color: #fff;
+    border-bottom: 3px solid @base0E;
+    /* background-color: rgba(100, 114, 125, 0.8);
+    border-bottom: 3px solid rgb(83, 97, 107); */
+}
+
+#battery {
+    /* background-color: rgba(255, 255, 255, 0.8);
+    border-bottom: 3px solid rgba(204, 204, 204, 0.8);
+    color: black; */
+    border-bottom: 3px solid @base05;
+}
+
+#battery.charging {
+    /* color: white;
+    background-color: rgba(38, 166, 91, 0.8);
+    border-bottom-color: rgba(35, 155, 85, 0.8); */
+    border-bottom: 3px solid @base0D;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: black;
+    }
+}
+
+#battery.warning:not(.charging) {
+    background: #f53c3c;
+    color: white;
+    animation-name: blink;
+    animation-duration: 10s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#cpu {
+    /* background: rgba(46, 204, 113, 0.8);
+    border-bottom: 3px solid rgba(38, 172, 93, 0.8);
+    color: #000000; */
+    border-bottom: 3px solid @base0B;
+}
+
+#memory {
+    /* background: rgba(155, 88, 182, 0.8);
+    border-bottom: 3px solid rgba(126, 72, 147, 0.8); */
+    border-bottom: 3px solid @base0C;
+}
+
+#network {
+    /* background: rgba(41, 128, 185, 0.8);
+    border-bottom: 3px solid rgba(34, 110, 160, 0.8); */
+    border-bottom: 3px solid @base0A;
+}
+
+#network.disconnected {
+    /* background: rgba(245, 60, 60, 0.8);
+    border-bottom: 3px solid rgba(219, 54, 54, 0.8); */
+    border-bottom: 3px solid @base08;
+}
+
+#pulseaudio {
+    /* background: rgba(241, 196, 15, 0.8);
+    border-bottom: 3px solid rgba(190, 155, 13, 0.8);
+    color: black;*/
+    border-bottom: 3px solid @base08;
+}
+
+#pulseaudio.muted {
+    /* background: rgba(144, 177, 177, 0.8);
+    border-bottom: 3px solid rgba(105, 129, 129, 0.8);
+    color: #2a5c45;*/
+    border-bottom: 3px solid rgba(144, 177, 177, 0.8);
+}
+
+#backlight {
+    /* background: rgba(241, 143, 15, 0.8);
+    border-bottom: 3px solid rgba(177, 106, 13, 0.8);
+    color: black;*/
+    border-bottom: 3px solid @base09;
+}
+
+#mpd {
+    margin-left: 30px;
+    /* background: rgba(100, 114, 125, 0.4); */
+    color: #eee;
+    border-bottom: 3px solid rgba(236, 236, 236, 0.1);
+}
+
+#mpd.disconnected {
+    background: transparent;
+}
+
+#custom-spotify {
+    background: #66cc99;
+    color: #2a5c45;
+}
+
+#idle_inhibitor {
+    color: #eee;
+    border-bottom: 3px solid rgba(236, 236, 236, 0.1);
+}
+
+#idle_inhibitor.activated {
+    background-color: red;
+    background: rgba(100, 114, 125, 0.4);
+}
+
+#tray {
+    /* background-color: #2980b9; */
+}
