@@ -29,7 +29,7 @@ set $borderwidth 1
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
 
-output * bg ~/Pictures/wallpaper-current.jpg fill
+output * bg ~/Pictures/Wallpapers/wallpaper-current.jpg fill
 
 #
 # Example output configuration:
