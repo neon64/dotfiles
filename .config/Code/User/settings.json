@@ -3,7 +3,8 @@
     "editor.fontFamily": "Fira Code, monospace",
     "editor.fontLigatures": true,
     "files.associations": {
-        ".*": "shellscript"
+        ".*": "shellscript",
+        "env-example": "shellscript"
     },
     "workbench.startupEditor": "welcomePage",
     //"workbench.colorTheme": "Base16 Dark Tomorrow",
