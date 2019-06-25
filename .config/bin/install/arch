@@ -101,6 +101,7 @@ gnome_apps=(
     nautilus # file manager
     gnome-clocks # alarm clocks etc...
     gnome-power-manager # power graphs etc..
+    baobab # disk usage analyzer
 )
 
 # packages to write rust code

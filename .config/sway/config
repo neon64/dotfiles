@@ -1,29 +1,28 @@
-# Default config for sway
-#
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-#
-# Sway is a work in progress. Some of these defaults are currently unimplemented.
-
-
 ### Variables
 #
-# Logo key. Use Mod1 for Alt. Mod4 for Super
+# use super as the modifier key -
+# warning - on most keyboards nothing maps to super by default so you will
+# be unable to exit or launch anything!
 set $mod Mod4
-# Your preferred terminal emulator
+
+# preferred terminal emulator
 set $term alacritty
 # set $term gnome-terminal
 # set $term ~/Code/Rust/alacritty_new_window_cwd/target/release/alacritty_new_window_cwd
-# Your preferred web browser
-set $browser firefox
-# Your preferred application launcher
+
+# preferred web browser
+set $browser firefox-nightly
+
+# preferred application launcher
 set $menu rofi -show combi
+
 # movement keys
 set $up l
 set $down k
 set $left j
 set $right semicolon
+
+# ricing
 set $borderwidth 1
 
 ### Output configuration
