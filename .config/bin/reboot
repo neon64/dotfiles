@@ -1,0 +1,20 @@
+#!/bin/bash
+
+options="Reboot normally
+Reboot to Arch Linux
+Reboot to Windows"
+selection=$(echo "$options" | fzf --reverse --height=5 --color=16 )
+case "$selection" in
+    'Reboot normally')
+        /bin/reboot
+        ;;
+    'Reboot to Arch Linux')
+        sudo bootctl set-oneshot arch && /bin/reboot
+        ;;
+    'Reboot to Windows')
+        sudo bootctl set-oneshot auto-windows && /bin/reboot
+        ;;
+    *)
+        echo "invalid option selected"
+        exit 1
+esac

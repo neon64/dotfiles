@@ -2,7 +2,7 @@
 
 options="Start Bluetooth
 Stop Bluetooth"
-selection=$(echo "$options" | fzf --reverse --height=2 --color=16 )
+selection=$(echo "$options" | fzf --reverse --height=4 --color=16 )
 case "$selection" in
     'Start Bluetooth')
         rfkill unblock bluetooth

@@ -1,3 +1,0 @@
-#!/bin/bash
-
-sudo bootctl set-oneshot auto-windows && reboot
