@@ -71,6 +71,7 @@ extra_shell_pkgs=(
     gnome-keyring # provider for libsecret - allows us to store git credentials for the command line
     hwinfo # useful for debugging info like framebuffer resolutions
     reptyr # attach background process to a terminal
+    expac # extra pacman info
 )
 
 # apps which I use

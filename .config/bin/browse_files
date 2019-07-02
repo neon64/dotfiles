@@ -1,0 +1,4 @@
+#!/bin/bash
+
+systemd-cat nautilus ${1:-.} &
+disown

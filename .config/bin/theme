@@ -15,7 +15,7 @@ elif [ "$1" = '--current' ]; then
     exit
 else
     echo -e "${BLUE}Select a new theme:${RESET_FMT}"
-    theme=$(ls ~/.config/colors/base16-shell/scripts | sed 's/.sh//g' | fzf --height=20 --min-height=5 --reverse)
+    theme=$(ls ~/.config/colors/base16-shell/scripts | sed 's/.sh//g' | fzf --height=20 --min-height=5 --reverse --color=16 )
 fi
 
 if [ "$theme" = '' ]; then

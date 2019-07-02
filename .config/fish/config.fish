@@ -59,15 +59,18 @@ alias t "tmux a; or tmux"
 # starts Alacritty fullscreen without a wm
 alias al "env NO_WM=1 COLUMNS=$COLUMNS LINES=$LINES startx"
 alias yt "mpsyt"
-alias g "googler --url-handler ~/.config/bin/browse --colors bjdxxy"
+alias s "googler --url-handler ~/.config/bin/browse_web --colors bjdxxy"
 alias ls "exa --classify --git --header"
-alias v "bat"
+alias v "view"
+alias w "browse_web"
+alias b "browse_files"
+alias blue "bluetooth_scripts"
 alias sr "switch_res"
 alias rbw "reboot_to_windows"
 
 # in case I forget
 alias pac "pikaur"
-alias pac_orphans "pacman -Qqtd | grep -Fv -f (pacman -Qqtdm | psub)" 
+alias pac_orphans "pacman -Qqtd | grep -Fv -f (pacman -Qqtdm | psub)"
 
 # use neovim
 alias vim "nvim"
@@ -85,7 +88,7 @@ if status --is-interactive
     if [ "$TERM" = 'linux' ]
         bash ~/.config/colors/theme.sh
         clear
-    else if [ ! -z "$GNOME_TERMINAL_SCREEN" ]  
+    else if [ ! -z "$GNOME_TERMINAL_SCREEN" ]
         bash ~/.config/colors/theme.sh
     end
 
