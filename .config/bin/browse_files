@@ -1,4 +1,5 @@
 #!/bin/bash
+# (B)rowses a file or folder in a GUI
 
-systemd-cat nautilus ${1:-.} &
+systemd-cat nautilus ${1-.} &
 disown
