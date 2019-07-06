@@ -16,7 +16,7 @@ disown
 
 if type -q swaymsg
     swaymsg workspace 1
-fi
+end
 
 # else if type -q i3-msg
 #     i3-msg workspace 1 >/dev/null 2>&1
