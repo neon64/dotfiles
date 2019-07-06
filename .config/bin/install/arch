@@ -202,9 +202,9 @@ function update_pkgs {
     pikaur -Syu
 }
 
-if $FRESH_INSTALL; then
-    section "1" "2" "system-level configuration"
+section "1" "2" "system-level configuration"
 
+if $FRESH_INSTALL; then
     if pacman -Q | grep -q 'pikaur'; then
         warn "\`pikaur\` already installed, using it to install everything else"
     else

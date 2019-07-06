@@ -83,6 +83,12 @@ function set_fish_as_default_shell {
 }
 
 function install_common {
+    if ! $FRESH_INSTALL; then
+        header "Checking dotfiles for changes"
+        echo ""
+        fish -c check_dotf
+        echo ""
+    fi
     confirm "Install vim plugins using \`vim-plug\`?" && install_vim_plugins
     confirm "Install fish plugins using \`fisherman\`?" && install_fish_plugins
     if $FRESH_INSTALL; then
