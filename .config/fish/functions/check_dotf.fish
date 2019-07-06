@@ -50,7 +50,7 @@ function check_dotf
     # than `dotf diff-index --quiet HEAD`.
     # sometimes it would return an error code but
     # there were no changed files
-    if dotf status | grep --quiet -v "nothing to commit"
+    if dotf status --porcelain --ignore-submodules | grep --quiet -v "nothing to commit"
         echo ""
         echo "You have unsaved changes to your dotfiles:"
         echo ""
