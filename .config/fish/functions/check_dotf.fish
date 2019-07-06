@@ -59,7 +59,6 @@ function check_dotf
         if read_confirm commit_prompt
             dotf commit -a
         end
-        echo ""
     end
 
     if [ "$argv[1]" = "--fetch" ]
@@ -70,6 +69,7 @@ function check_dotf
     set unpushed_commits (get_unpushed_commits)
 
     if test $unpulled_commits -gt 0  # upstream is behind local repo
+        echo ""
         echo -n (set_color cyan)"There are new updates to the dotfiles."(set_color normal)
         if read_confirm pull_prompt
             dotf pull
@@ -77,6 +77,7 @@ function check_dotf
     end
 
     if test $unpushed_commits -gt 0
+        echo ""
         echo -n (set_color cyan)"You have unpushed local commits."(set_color normal)
         if read_confirm push_prompt
             dotf push
