@@ -66,6 +66,7 @@ alias ds "check_dotf"
 alias w "browse_web"
 alias blue "manage_bluetooth"
 alias sr "switch_res"
+alias reboot "reboot_chooser"
 
 # in case I forget
 alias pac "pikaur"
