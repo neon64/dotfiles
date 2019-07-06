@@ -58,10 +58,12 @@ function check_dotf
         echo ""
         if read_confirm commit_prompt
             dotf commit -a
+        else
+            echo ""
         end
     end
 
-    if [ "$argv[1]" = "--fetch" ]
+    if [ "$argv[1]" != "--fast" ]
         dotf fetch
     end
 
@@ -82,6 +84,10 @@ function check_dotf
         if read_confirm push_prompt
             dotf push
         end
+    end
+
+    if [ "$argv[1]" != "--fast" ]
+        echo (set_color green)"Dotfiles are all up to date!"(set_color normal)
     end
 
 end

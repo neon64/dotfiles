@@ -18,5 +18,5 @@ function fish_greeting
     echo ""
     echo -ns (set_color cyan) "$tod, " (whoami) "!" (set_color normal)
     echo ""
-    check_dotf
+    check_dotf --fast
 end
