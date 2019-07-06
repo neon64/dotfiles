@@ -34,17 +34,16 @@ function get_unpulled_commits
 end
 
 function commit_prompt
-    echo -e (set_color green)'Would you like to commit them?'(set_color normal)' [Y/n] '
+    echo -n (set_color green)'Would you like to commit them?'(set_color normal)' [Y/n] '
 end
 
 function push_prompt
-    echo -e (set_color green)'Would you like to push them?'(set_color normal)' [Y/n] '
+    echo -n (set_color green)'Would you like to push them?'(set_color normal)' [Y/n] '
 end
 
 function pull_prompt
-    echo -e (set_color green)'Would you like to pull them?'(set_color normal)' [Y/n] '
+    echo -n (set_color green)'Would you like to pull them?'(set_color normal)' [Y/n] '
 end
-
 
 function check_dotf
     # strangely, this appears more robust
@@ -71,14 +70,14 @@ function check_dotf
     set unpushed_commits (get_unpushed_commits)
 
     if test $unpulled_commits -gt 0  # upstream is behind local repo
-        echo (set_color cyan)"There are new updates to the dotfiles."(set_color normal)
+        echo -n (set_color cyan)"There are new updates to the dotfiles."(set_color normal)
         if read_confirm pull_prompt
             dotf pull
         end
     end
 
     if test $unpushed_commits -gt 0
-        echo (set_color cyan)"You have unpushed local commits."(set_color normal)
+        echo -n (set_color cyan)"You have unpushed local commits."(set_color normal)
         if read_confirm push_prompt
             dotf push
         end
