@@ -63,9 +63,8 @@ alias s "googler --url-handler ~/.config/bin/browse_web --colors bjdxxy"
 alias ls "exa --classify --git --header"
 alias v "view"
 alias w "browse_web"
-alias blue "bluetooth_scripts"
+alias blue "manage_bluetooth"
 alias sr "switch_res"
-alias rbw "reboot_to_windows"
 
 # in case I forget
 alias pac "pikaur"
