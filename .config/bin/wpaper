@@ -20,4 +20,14 @@ fi
 wallpaper="$HOME/Pictures/Wallpapers/$wallpaper"
 ln -sf $wallpaper ~/Pictures/Wallpapers/wallpaper-current.jpg && echo "'wallpaper-current.jpg' points to '$wallpaper'"
 
+generate_lockscreen() {
+    echo -e "${GREEN}Generating lockscreen background...${RESET_FMT}"
+    text="Type password to unlock..."
+    dest=~/.local/share/swaylock_bg.jpg
+    convert ~/Pictures/Wallpapers/wallpaper-current.jpg -resize 1920x1080^ -quality 95 -blur 40x20 -font /usr/share/fonts/cantarell/Cantarell-Light.otf -pointsize 36 -fill white -gravity center -annotate +0+400 "$text" $dest
+    echo -e "Done"
+}
+
+generate_lockscreen
+
 swaymsg reload

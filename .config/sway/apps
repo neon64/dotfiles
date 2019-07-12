@@ -20,18 +20,21 @@ for_window [app_id="gnome-system-monitor"] floating enable; resize set 1024 600
 for_window [app_id="gnome-power-statistics"] floating enable; border normal $borderwidth
 for_window [app_id="libreoffice-startcenter"] border normal $borderwidth
 for_window [app_id="blueman-manager"] floating enable; border normal $borderwidth; resize set 640 480
-for_window [class="keepassxc"] border normal $borderwidth
+for_window [app_id="keepassxc"] border normal $borderwidth
+for_window [app_id="evolution"] border normal $borderwidth
 
 # default workspaces
 assign [class="qutebrowser"] 1
+assign [class="Firefox"] 1
+assign [app_id="firefox"] 1
+assign [class="Google-chrome"] 1
 assign [class="Atom"] 3
 assign [class="Code"] 3
 assign [class="code-oss"] 3
 assign [class="Emacs"] 3
-assign [class="Firefox"] 1
-assign [class="Google-chrome"] 1
 assign [class="GitKraken"] 4
-assign [class="evolution"] 8
+assign [app_id="evolution"] 8
 assign [app_id="geary"] 8
 assign [class="keepassxc"] 9
+assign [app_id="keepassxc"] 9
 assign [app_id="blueman-manager"] 10

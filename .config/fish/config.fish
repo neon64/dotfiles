@@ -46,7 +46,14 @@ if status --is-login && status --is-interactive
     if test -z "$DISPLAY" -a "$XDG_VTNR" -eq "1"
         export _JAVA_AWT_WM_NONREPARENTING=1
         export MOZ_ENABLE_WAYLAND=1
+        export QT_QPA_PLATFORM=wayland-egl
         exec systemd-cat -t sway sway
+    else if test -z "$DISPLAY"; and test "$XDG_VTNR" -gt 1; and test "$XDG_VTNR" -lt 6
+        export _JAVA_AWT_WM_NONREPARENTING=1
+        export MOZ_ENABLE_WAYLAND=1
+        export QT_QPA_PLATFORM=wayland-egl
+        export XKB_DEFAULT_OPTIONS=altwin:ctrl_alt_win
+        exec systemd-cat -t cage ~/Code/cage/build/cage -dt kitty
     end
 end
 
@@ -60,8 +67,9 @@ alias t "tmux a; or tmux"
 alias al "env NO_WM=1 COLUMNS=$COLUMNS LINES=$LINES startx"
 alias yt "mpsyt"
 alias s "googler --url-handler ~/.config/bin/browse_web --colors bjdxxy"
-alias ls "exa --classify --git --header"
+alias ls "lsd"
 alias v "view"
+alias g "git"
 alias ds "check_dotf"
 alias w "browse_web"
 alias blue "manage_bluetooth"
@@ -88,7 +96,7 @@ if status --is-interactive
     if [ "$TERM" = 'linux' ]
         bash ~/.config/colors/theme.sh
         clear
-    else if [ ! -z "$GNOME_TERMINAL_SCREEN" ]
+    else if [ ! -z "$GNOME_TERMINAL_SCREEN" ]; or [ "$TERM" = 'xterm-kitty' ]
         bash ~/.config/colors/theme.sh
     end
 

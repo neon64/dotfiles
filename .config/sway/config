@@ -7,6 +7,7 @@ set $mod Mod4
 
 # preferred terminal emulator
 set $term alacritty
+# set $term cage -d -- alacritty
 # set $term gnome-terminal
 # set $term ~/Code/Rust/alacritty_new_window_cwd/target/release/alacritty_new_window_cwd
 
@@ -86,6 +87,7 @@ exec mako
 #
 # Basics:
 #
+    bindsym $mod+Shift+i exec bash -c "echo $(swaymsg -t get_tree | grep -C 50 '\"focused\": true') > $HOME/foo"
 
     # the $term variable is expanded at runtime
     bindsym $mod+Return exec $$term
@@ -239,7 +241,7 @@ exec mako
 
     # Sleep
     bindsym $mod+Shift+u exec loginctl lock-session
-    exec swayidle -w timeout 180 'swaylock-blur' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock-blur' lock 'swaylock-blur'
+    exec swayidle -w timeout 180 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock' lock 'swaylock'
 
     bar {
         swaybar_command waybar
