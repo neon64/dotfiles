@@ -63,8 +63,6 @@ end
 
 # connects to an existing tmux session before creating a new one
 alias t "tmux a; or tmux"
-# starts Alacritty fullscreen without a wm
-alias al "env NO_WM=1 COLUMNS=$COLUMNS LINES=$LINES startx"
 alias yt "mpsyt"
 alias s "googler --url-handler ~/.config/bin/browse_web --colors bjdxxy"
 alias ls "lsd"
@@ -78,7 +76,6 @@ alias reboot "reboot_chooser"
 
 # in case I forget
 alias pac "pikaur"
-alias pac_orphans "pacman -Qqtd | grep -Fv -f (pacman -Qqtdm | psub)"
 
 # use neovim
 alias vim "nvim"
