@@ -143,6 +143,7 @@ bluetooth_pkgs=(
 
 printing_pkgs=(
     cups cups-pdf # printing support
+    cups-browsed
     avahi # printers on a network?
     system-config-printer
 )

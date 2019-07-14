@@ -217,7 +217,7 @@ exec mako
     bindsym $mod+a focus parent
 
     # manipulate gaps settings
-    bindsym $mod+G gaps inner all plus 10; gaps outer all plus 10; hide_edge_borders none
+    bindsym $mod+G gaps inner all plus 10; hide_edge_borders none
     bindsym $mod+Shift+G gaps inner all set 0; gaps outer all set 0; hide_edge_borders both
 
 #
