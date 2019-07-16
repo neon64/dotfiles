@@ -50,7 +50,7 @@ function check_dotf
     if [ "$argv[1]" = "--fast" ]
         set updated_file ~/.cache/dotf_last_updated
         set last_updated (cat $updated_file 2>/dev/null)
-        set now (date --utc +'%s')
+        set now (date -u +'%s')
 
         if [ "$last_updated" != "" ]
             set difference (math $now - $last_updated)
@@ -81,7 +81,7 @@ function check_dotf
     set unpulled_commits (get_unpulled_commits)
     set unpushed_commits (get_unpushed_commits)
 
-    if test $unpulled_commits -gt 0  # upstream is behind local repo
+    if test "$unpulled_commits" -gt 0  # upstream is behind local repo
         set up_to_date 0
         echo ""
         echo -n (set_color cyan)"There are new updates to the dotfiles."(set_color normal)
@@ -90,7 +90,7 @@ function check_dotf
         end
     end
 
-    if test $unpushed_commits -gt 0
+    if test "$unpushed_commits" -gt 0
         set up_to_date 0
         echo ""
         echo -n (set_color cyan)"You have unpushed local commits."(set_color normal)
