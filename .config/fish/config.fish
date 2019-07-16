@@ -59,7 +59,7 @@ end
 alias t "tmux a; or tmux"
 alias yt "mpsyt"
 alias s "googler --url-handler ~/.config/bin/browse_web --colors bjdxxy"
-alias ls "lsd"
+alias ls "exa --classify --git --header"
 alias v "view"
 alias g "git"
 alias ds "check_dotf"
