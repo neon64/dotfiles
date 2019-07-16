@@ -29,7 +29,7 @@ gnome
 plasma
 xorg
 fullscreen terminal
-vconsole
+virtual console
 poweroff
 reboot
 suspend
@@ -112,7 +112,7 @@ alacritty
         "logout")
             exit
             ;;
-        "vconsole" | *)
+        "virtual console" | *)
             clear
             fish
             clear
