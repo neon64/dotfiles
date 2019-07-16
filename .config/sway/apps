@@ -16,6 +16,7 @@ for_window [app_id="gnome-control-center"] floating enable
 for_window [app_id="gnome-calculator"] floating enable
 for_window [app_id="gnome-clocks"] floating enable
 for_window [app_id="gnome-tweaks"] floating enable
+for_window [app_id="eog"] floating enable
 for_window [app_id="gnome-system-monitor"] floating enable; resize set 1024 600
 for_window [app_id="gnome-power-statistics"] floating enable; border normal $borderwidth
 for_window [app_id="libreoffice-startcenter"] border normal $borderwidth

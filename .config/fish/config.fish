@@ -43,17 +43,11 @@ set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head
 # commands like dbus-run-session (for starting Gnome
 # Terminal) start a non-interactive login shell
 if status --is-login && status --is-interactive
-    if test -z "$DISPLAY" -a "$XDG_VTNR" -eq "1"
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        export MOZ_ENABLE_WAYLAND=1
-        export QT_QPA_PLATFORM=wayland-egl
-        exec systemd-cat -t sway sway
-    else if test -z "$DISPLAY"; and test "$XDG_VTNR" -gt 1; and test "$XDG_VTNR" -lt 6
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        export MOZ_ENABLE_WAYLAND=1
-        export QT_QPA_PLATFORM=wayland-egl
-        export XKB_DEFAULT_OPTIONS=altwin:ctrl_alt_win
-        exec systemd-cat -t cage ~/Code/cage/build/cage -dt kitty
+    if test -z "$DISPLAY" -a "$XDG_VTNR" -gt "0" -a "$XDG_VTNR" -lt "6"
+        set LINE_UP "\033[1A"
+        set CLEAR_LINE "\033[K"
+        echo -e "$LINE_UP$CLEAR_LINE$LINE_UP$CLEAR_LINE$LINE_UP$CLEAR_LINE$LINE_UP"
+        exec choose_de
     end
 end
 
@@ -90,10 +84,7 @@ if status --is-interactive
     set -g fish_cursor_insert line
 
     # manually set
-    if [ "$TERM" = 'linux' ]
-        bash ~/.config/colors/theme.sh
-        clear
-    else if [ ! -z "$GNOME_TERMINAL_SCREEN" ]; or [ "$TERM" = 'xterm-kitty' ]
+    if [ "$TERM" = 'linux' ]; or [ ! -z "$GNOME_TERMINAL_SCREEN" ]; or [ "$TERM" = 'xterm-kitty' ]
         bash ~/.config/colors/theme.sh
     end
 
