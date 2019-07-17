@@ -9,9 +9,8 @@ source "`dirname $0`/common"
 base_shell_pkgs=(
     fish # shell of choice
     neovim # text editor - either use because its awesome, or as console backup
-    newsboat # required for reading Arch RSS feed before updating packages
     tmux # terminal multiplexer, provides multiple concurrent panes whilst running system updates using the `up` script
-    exa # file listing in Rust
+    lsd # file listing in Rust
     bat # cat clone with extras (also just happens to be written in Rust)
     git # version control
     fzf # fuzzy file finder
@@ -71,6 +70,7 @@ extra_shell_pkgs=(
     gnome-keyring # provider for libsecret - allows us to store git credentials for the command line
     hwinfo # useful for debugging info like framebuffer resolutions
     reptyr # attach background process to a terminal
+    expac # extra pacman info
 )
 
 # apps which I use
@@ -143,6 +143,7 @@ bluetooth_pkgs=(
 
 printing_pkgs=(
     cups cups-pdf # printing support
+    cups-browsed
     avahi # printers on a network?
     system-config-printer
 )
@@ -199,13 +200,12 @@ function install_pkgs {
 }
 
 function update_pkgs {
-    newsboat -r
     pikaur -Syu
 }
 
-if $FRESH_INSTALL; then
-    section "1" "2" "system-level configuration"
+section "1" "2" "system-level configuration"
 
+if $FRESH_INSTALL; then
     if pacman -Q | grep -q 'pikaur'; then
         warn "\`pikaur\` already installed, using it to install everything else"
     else

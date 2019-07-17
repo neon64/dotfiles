@@ -16,7 +16,7 @@ function fish_greeting
             set tod "Good evening"
     end
     echo ""
-    echo -ns (set_color cyan) "$tod, " (whoami) "!" (set_color normal)
+    echo -s (set_color cyan) "$tod, " (whoami) "!" (set_color normal)
     echo ""
-    check_dotf
+    check_dotf --fast
 end

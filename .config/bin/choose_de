@@ -1,0 +1,128 @@
+#!/bin/bash
+
+# a really simple display manager with hardcoded options
+# powered by fzf
+
+LINE_UP="\033[1A"
+CLEAR_LINE="\033[K"
+BLUE="\e[34m"
+MAGENTA="\e[35m"
+RED="\e[31m"
+YELLOW="\e[33m"
+GREEN="\e[32m"
+BOLD="\e[1m"
+RESET_FMT="\e[0m"
+
+wayland_env_vars() {
+    export _JAVA_AWT_WM_NONREPARENTING=1
+    export MOZ_ENABLE_WAYLAND=1
+    export QT_QPA_PLATFORM=wayland-egl
+    # needed for Gnome Shell and Plasma Shell
+    export XDG_SESSION_TYPE=wayland
+}
+
+main_menu() {
+    echo -e "${BLUE}Launch:${RESET_FMT}"
+
+    options="sway
+gnome
+plasma
+xorg
+fullscreen terminal
+virtual console
+poweroff
+reboot
+suspend
+logout"
+    selection=$(echo "$options" | fzf --reverse --height=10 --color=16 )
+    echo -en "$LINE_UP$CLEAR_LINE"
+    case "$selection" in
+        'sway')
+            echo -e "${GREEN}Starting Sway...${RESET_FMT}"
+            wayland_env_vars
+            systemd-cat -t sway sway
+            echo -en "$LINE_UP$CLEAR_LINE"
+            ;;
+        'gnome')
+            echo -e "${GREEN}Starting Gnome Shell...${RESET_FMT}"
+            wayland_env_vars
+            systemd-cat -t gnome-session dbus-run-session gnome-session
+            echo -en "$LINE_UP$CLEAR_LINE"
+            ;;
+        'plasma')
+            echo -e "${GREEN}Starting KDE Plasma...${RESET_FMT}"
+            wayland_env_vars
+            systemd-cat -t plasma dbus-run-session startplasmacompositor
+            echo -en "$LINE_UP$CLEAR_LINE"
+            ;;
+        'xorg')
+            echo -e "${BLUE}Starting Xorg With:${RESET_FMT}"
+            options="gnome [default]
+gnome (discrete GPU)
+plasma
+plasma (discrete GPU)
+.. [go back]"
+            wm=$(echo "$options" | fzf --reverse --height=10 --color=16 )
+            echo -en "$LINE_UP$CLEAR_LINE"
+            case "$wm" in
+                "gnome [default]")
+                    systemd-cat -t xorg startx ~/.config/environments/xinitrc-gnome
+                    ;;
+                "gnome (discrete GPU)")
+                    nvidia-xrun ~/.config/environments/xinitrc-gnome
+                    ;;
+                "plasma")
+                    systemd-cat -t xorg startx ~/.config/environments/xinitrc-plasma
+                    ;;
+                "plasma (discrete GPU)")
+                    nvidia-xrun ~/.config/environments/xinitrc-plasma
+                    ;;
+                ".. [go back]" | *)
+                    return
+                    ;;
+            esac
+            ;;
+        'fullscreen terminal')
+            wayland_env_vars
+            echo -e "${BLUE}Starting fullscreen terminal with app:${RESET_FMT}"
+            options="kitty [default]
+alacritty
+.. [go back]"
+            app=$(echo "$options" | fzf --reverse --height=10 --color=16 )
+            echo -en "$LINE_UP$CLEAR_LINE"
+            if [ "$app " = "" ] || [ "$app" = "kitty [default]" ]; then
+                app="kitty"
+            elif [ "$app" = ".. [go back]" ] || [ "$app" = "" ]; then
+                return
+            fi
+            echo -e "${GREEN}Launching $app fullscreen inside cage...${RESET_FMT}"
+            systemd-cat -t cage ~/Code/cage/build/cage -dt $app
+            echo -en "$LINE_UP$CLEAR_LINE"
+            ;;
+        "poweroff")
+            poweroff
+            ;;
+        "suspend")
+            systemctl suspend
+            ;;
+        "reboot")
+            reboot_chooser
+            echo -en "$LINE_UP$CLEAR_LINE"
+            ;;
+        "logout")
+            exit
+            ;;
+        "virtual console" | *)
+            clear
+            fish
+            clear
+            echo ""
+            ;;
+    esac
+
+}
+
+while :
+do
+    main_menu
+done

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-QT_QPA_PLATFORM=wayland XDG_SESSION_TYPE=wayland dbus-run-session gnome-session
+QT_QPA_PLATFORM=wayland XDG_SESSION_TYPE=wayland XKB_DEFAULT_OPTIONS=capslock:super dbus-run-session gnome-session

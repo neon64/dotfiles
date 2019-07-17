@@ -43,10 +43,11 @@ set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head
 # commands like dbus-run-session (for starting Gnome
 # Terminal) start a non-interactive login shell
 if status --is-login && status --is-interactive
-    if test -z "$DISPLAY" -a "$XDG_VTNR" -eq "1"
-        export _JAVA_AWT_WM_NONREPARENTING=1
-        export MOZ_ENABLE_WAYLAND=1
-        exec systemd-cat -t sway sway
+    if test -z "$DISPLAY" -a "$XDG_VTNR" -gt "0" -a "$XDG_VTNR" -lt "6"
+        set LINE_UP "\033[1A"
+        set CLEAR_LINE "\033[K"
+        echo -e "$LINE_UP$CLEAR_LINE$LINE_UP$CLEAR_LINE$LINE_UP$CLEAR_LINE$LINE_UP"
+        exec choose_de
     end
 end
 
@@ -56,18 +57,19 @@ end
 
 # connects to an existing tmux session before creating a new one
 alias t "tmux a; or tmux"
-# starts Alacritty fullscreen without a wm
-alias al "env NO_WM=1 COLUMNS=$COLUMNS LINES=$LINES startx"
 alias yt "mpsyt"
-alias g "googler --url-handler ~/.config/bin/browse --colors bjdxxy"
+alias s "googler --url-handler ~/.config/bin/browse_web --colors bjdxxy"
 alias ls "exa --classify --git --header"
-alias v "bat"
+alias v "view"
+alias g "git"
+alias ds "check_dotf"
+alias w "browse_web"
+alias blue "manage_bluetooth"
 alias sr "switch_res"
-alias rbw "reboot_to_windows"
+alias reboot "reboot_chooser"
 
 # in case I forget
 alias pac "pikaur"
-alias pac_orphans "pacman -Qqtd | grep -Fv -f (pacman -Qqtdm | psub)" 
 
 # use neovim
 alias vim "nvim"
@@ -82,10 +84,7 @@ if status --is-interactive
     set -g fish_cursor_insert line
 
     # manually set
-    if [ "$TERM" = 'linux' ]
-        bash ~/.config/colors/theme.sh
-        clear
-    else if [ ! -z "$GNOME_TERMINAL_SCREEN" ]  
+    if [ "$TERM" = 'linux' ]; or [ ! -z "$GNOME_TERMINAL_SCREEN" ]; or [ "$TERM" = 'xterm-kitty' ]
         bash ~/.config/colors/theme.sh
     end
 

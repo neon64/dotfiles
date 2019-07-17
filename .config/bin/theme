@@ -1,12 +1,12 @@
 #!/bin/bash
 
-BLUE="\e[34m"
-MAGENTA="\e[35m"
-RED="\e[31m"
-YELLOW="\e[33m"
-GREEN="\e[32m"
-BOLD="\e[1m"
-RESET_FMT="\e[0m"
+BLUE="\033[34m"
+MAGENTA="\033[35m"
+RED="\033[31m"
+YELLOW="\033[33m"
+GREEN="\033[32m"
+BOLD="\033[1m"
+RESET_FMT="\033[0m"
 
 if [ "$1" = '--regen' ]; then
     theme=$(cat ~/.config/colors/current-theme)
@@ -15,7 +15,7 @@ elif [ "$1" = '--current' ]; then
     exit
 else
     echo -e "${BLUE}Select a new theme:${RESET_FMT}"
-    theme=$(ls ~/.config/colors/base16-shell/scripts | sed 's/.sh//g' | fzf --height=20 --min-height=5 --reverse)
+    theme=$(ls ~/.config/colors/base16-shell/scripts | sed 's/.sh//g' | fzf --height=20 --min-height=5 --reverse --color=16 )
 fi
 
 if [ "$theme" = '' ]; then

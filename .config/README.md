@@ -3,6 +3,10 @@
 This repository contains the dotfiles which I want replicated
 between different systems.
 
+Take a look at the [software](https://github.com/neon64/dotfiles/tree/master/.config/SOFTWARE.md) that I use for a preview of what's included.
+
+These dotfiles are complemented by my machine-specific configuration, [arch_machine](https://github.com/neon64/arch_machine). That said, the dotfiles should theoretically work on any UNIX-like system, including macOS, which I use from time to time. I just don't have the time to write i.e.: an installer script for other platforms, so your mileage may vary.
+
 ## How is everything tracked?
 
 I just use plain old git and a couple of shell scripts. Kudos to the extremely simple way of keeping track
@@ -73,15 +77,17 @@ To commit changes:
 In conclusion: it's exactly like normal Git, just with `git` replaced with the
 alias `dotf` (defined in `.config/fish/config.fish`)
 
+There is also a helper fish function called `check_dotf` which you can run that automates the process of keeping dotfiles in sync.
+
 ## Updating your system
 
 To update the system, run:
 
     $ up
 
-On Arch Linux, this will use `pikaur`, on macOS, it will use `brew`. It will also
-update various components (namely language-specific package managers). At the
-moment this includes:
+On Arch Linux, this will use `pikaur`, on macOS, it will use `brew`.
+
+Various other components are also updated:
 
 - Rust (via Rustup)
 - `npm` globally-installed packages

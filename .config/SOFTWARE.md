@@ -37,10 +37,11 @@ Here's a list in no particular order of the apps I use.
      - seems slightly more fancy than Vim, and I love SPC keybindings + Evil Mode
 
 **Browser**
- - Firefox - As a Rust user, I really appreciate all the work that has gone into
-   the 'Firefox Quantum' release, and I also am wary of Google achieving a
-   monopoly over the web with Chrome/Blink
-    - with a custom `userChrome.css` it looks quite spectacular
+ - Firefox
+    - As a Rust user, I really appreciate all the work that has gone into
+   so-called 'Firefox Quantum'
+    - I also must admit I am wary of a Chrome/Blink monopoly over web browsers, and I would use Firefox even if it were somewhat technically inferior.
+    - I'm working on a custom `userChrome.css` to make it look spectacular
  - <strike>Qutebrowser</strike>
     - haven't used for ages
     - I liked the vim keybindings but my config isn't fully complete yet
@@ -51,3 +52,23 @@ Here's a list in no particular order of the apps I use.
     - having issues with this setup at the moment (YouTube and Google Play Music backends aren't very mature)
     - Switched to `mpd` - can now use `ncmpcpp` visualizer, or `cava`
 
+## Useful scripts
+
+I've found that over time it is easier to write my own shell scripts to do things like enable/disable bluetooth or change wallpapers, as I can tailor those scripts to my particular needs rather than trying to make use of a one-size-fits-all GUI application. That said, this definitely isn't for the faint of heart because these scripts are likely brittle and I am constantly updating them.
+
+Most scripts are in `~/.config/bin`, however a few are still in `~/.config/fish/functions` for legacy purposes. I try to write my scripts in bash in case I switch away from fish in the future, but I haven't exactly focused on POSIX portability as such. In fact, I find it pointless to restrict myself to 'pure-POSIX' features when there are other, more modern utilities that would make my life easier.
+
+ - `browse_files`: open a graphical file browser, aliased to `b`
+ - `browse_web`: open a URL or search Google
+ - `dotf`: manage dotfiles with git
+ - `check_dotf` (fish function): check dotfiles are up to date
+ - `intl_keyboard`: activate us-intl keyboard in sway
+ - `launch_util`: command-line app launcher with fzf - currently not used
+ - `package_sizes`: list packages sorted by size
+ - `package_orphans`: list orphaned packages\
+ - `run_gnome_wayland`: starts a Gnome wayland session
+ - `switch_res`: switches resolutions on Sway, aliased to `sr`
+ - `theme`: changes themes
+ - `view`: view file or list directory, aliased to `v`
+ - `wpaper`: change wallpapers
+ - `ytdl`: download music
