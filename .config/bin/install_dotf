@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# load the platform-independent definitions & functions
+source "`dirname $0`/install/definitions"
+# load the platform-independent installation steps
+source "`dirname $0`/install/user"
+
+case $OS in
+        'Linux')
+            distro=$(uname -r)
+            case "$distro" in
+                *ARCH*)
+                    source "`dirname $0`/install/arch"
+                    ;;
+                *)
+                    warn "Unsupported Linux Distro: $distro"
+                    exit 1
+            esac
+            ;;
+        'Darwin')
+            source "`dirname $0`/install/macos"
+            ;;
+        *)
+            warn "Unsupported OS Kernel: $OS"
+            exit 1
+esac
+
+section "1" "2" "system-level configuration"
+
+install_system
+
+section "2" "2" "user-level configuration:"
+
+install_user
+
+echo ""
+
+if $FRESH_INSTALL; then
+    header "Congratulations, installation completed!"
+else
+    header "System updated successfully"
+fi
+
+exit 0

@@ -47,7 +47,7 @@ if status --is-login && status --is-interactive
         set LINE_UP "\033[1A"
         set CLEAR_LINE "\033[K"
         echo -e "$LINE_UP$CLEAR_LINE$LINE_UP$CLEAR_LINE$LINE_UP$CLEAR_LINE$LINE_UP"
-        exec choose_de
+        exec ~/Code/fdm/fdm
     end
 end
 

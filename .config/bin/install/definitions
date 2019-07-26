@@ -9,9 +9,7 @@ YELLOW="\033[33m"
 GREEN="\033[32m"
 BOLD="\033[1m"
 RESET_FMT="\033[0m"
-
-# trap 'last_command=$current_command; current_command=$BASH_COMMAND' DEBUG
-# trap handle_exit EXIT
+OS="`uname`"
 
 case $1 in
     '--update')
@@ -21,16 +19,6 @@ case $1 in
         FRESH_INSTALL=true
         ;;
 esac
-
-# function handle_exit {
-#     if [ "$?" -eq 0 ]; then
-#         echo -e "Clean exit"
-#     elif [ "$?" -eq 196238 ]; then
-#         echo -e "User aborted script"
-#     else
-#         echo -e "${BOLD}====>${RESET_FMT} \`${last_command}\` ${RED}${BOLD}failed with exit code $?, aborting install...${RESET_FMT}"
-#     fi
-# }
 
 function header {
 	echo -e "${BOLD}====> ${BLUE}$1${RESET_FMT}"

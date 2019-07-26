@@ -2,8 +2,8 @@
 
 These came about as I was switching to another Linux machine and realised there was so much manual setting up that needs to be done to install all the apps and change settings etc... Not all of that can be covered by static textual configuration files (except maybe if I ran NixOS), so I decided to write some install scripts to do it.
 
+- `install_dotf` - install the dotfiles (and required packages) on an existing system
 - `arch_0` - configure Arch and dotfiles (nearly) from scratch
-- `arch` - install the dotfiles (and required packages) on an existing system
 
 ## `arch_0`
 
@@ -46,20 +46,17 @@ This is a collection of remarks and things which didn't quite work the last time
 - Firefox is still missing some basic font since websites look a little weird
 - needed to set a desktop background
 
-## `arch`
+## `install_dotf`
 
 Run
 
-    $ ~/.config/bin/install/arch
+    $ ~/.config/bin/install_dotf
 
 to install everything as if from scratch (doing this from time to time is completely safe, it will just skip whatever has already been installed)
 
 You can also update the system with
 
-    $ ~/.config/bin/install/arch --update
-
-This script is split into two general parts. Within each part, basically each
-step will ask for your confirmation.
+    $ ~/.config/bin/install_dotf --update
 
 ### System
 

@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# load the platform-independent definitions & functions
-source "`dirname $0`/definitions"
-# load the platform-independent installation steps
-source "`dirname $0`/common"
-
 # installs the fish shell and everything else required to work with these dotfiles
 base_shell_pkgs=(
     fish # shell of choice
@@ -203,47 +198,33 @@ function update_pkgs {
     pikaur -Syu
 }
 
-section "1" "2" "system-level configuration"
+function install_system {
+    if $FRESH_INSTALL; then
+        if pacman -Q | grep -q 'pikaur'; then
+            warn "\`pikaur\` already installed, using it to install everything else"
+        else
+            header "Installing \`pikaur\`"
+            # first we want install an AUR helper, so we can install more packages more easily
+            mkdir -p $PKG_BUILD_DIR
+            cd $PKG_BUILD_DIR
 
-if $FRESH_INSTALL; then
-    if pacman -Q | grep -q 'pikaur'; then
-        warn "\`pikaur\` already installed, using it to install everything else"
-    else
-        header "Installing \`pikaur\`"
-        # first we want install an AUR helper, so we can install more packages more easily
-        mkdir -p $PKG_BUILD_DIR
-        cd $PKG_BUILD_DIR
+            git clone https://aur.archlinux.org/pikaur.git
+            cd pikaur
+            makepkg -fsri
 
-        git clone https://aur.archlinux.org/pikaur.git
-        cd pikaur
-        makepkg -fsri
+            header "Using \`pikaur\` to install everything else"
+        fi
 
-        header "Using \`pikaur\` to install everything else"
+        cd ~
     fi
 
-    cd ~
-fi
-
-if $FRESH_INSTALL; then
-    echo ""
-    confirm "Install Arch packages?" && install_pkgs
-    echo ""
-else
-    echo ""
-    confirm "Update Arch packages?" && update_pkgs
-    echo ""
-fi
-
-section "2" "2" "user-level configuration:"
-
-install_common
-
-echo ""
-
-if $FRESH_INSTALL; then
-    header "Congratulations, installation completed!"
-else
-    header "System updated successfully"
-fi
-
-exit 0
+    if $FRESH_INSTALL; then
+        echo ""
+        confirm "Install Arch packages?" && install_pkgs
+        echo ""
+    else
+        echo ""
+        confirm "Update Arch packages?" && update_pkgs
+        echo ""
+    fi
+}
