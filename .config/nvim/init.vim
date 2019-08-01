@@ -9,6 +9,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'justinmk/vim-sneak' " `s` and `S` do two letter sneaking
 Plug 'sheerun/vim-polyglot' " many different language packs
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 
 " Let's make it pretty
 Plug 'chriskempson/base16-vim'
@@ -91,3 +92,5 @@ inoremap <Down> <C-o>:echo "No down for you!"<CR>
 " because I'm getting so used to spacemacs
 nnoremap <Space>fs :w<CR>
 nnoremap <Space>qz :q<CR>
+
+nmap <C-p> <Plug>MarkdownPreviewToggle
