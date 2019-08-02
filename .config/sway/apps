@@ -21,7 +21,7 @@ for_window [app_id="gnome-system-monitor"] floating enable; resize set 1024 600
 for_window [app_id="gnome-power-statistics"] floating enable; border normal $borderwidth
 for_window [app_id="libreoffice-startcenter"] border normal $borderwidth
 for_window [app_id="blueman-manager"] floating enable; border normal $borderwidth; resize set 640 480
-for_window [app_id="keepassxc"] border normal $borderwidth
+for_window [app_id="keepassxc"] floating enable; border normal $borderwidth; resize set 1280 768
 for_window [app_id="evolution"] border normal $borderwidth
 
 # default workspaces

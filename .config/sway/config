@@ -83,6 +83,8 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 # more specific configuration at runtime
 exec_always ~/.config/sway/configure.sh
 exec mako
+exec keepassxc
+exec evolution
 
 #
 # Basics:
