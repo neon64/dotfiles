@@ -155,23 +155,23 @@ sed -i "s#/Code/Dotfiles#\$tilde_install_location#" ~/.config/bin/dotf
 
 # run the next installation step
 echo -e "$step_three\\\n"
-echo "Here we call another script, '~/.config/bin/install/arch', which is part of the dotfiles proper."
+echo "Here we call another script, '~/.config/bin/install_dotf', which is part of the dotfiles proper."
 echo "Using a separate script simplifies the source code of the dotfiles, as we can begin to use more features"
 echo "such as splitting the source code into multiple files and sourcing them when needed."
 echo "If all goes well though you won't notice that its a separate script, and everything"
 echo "will just work seamlessly."
 echo ""
-if [[ -x ~/.config/bin/install/arch ]]; then
-    ~/.config/bin/install/arch </dev/tty
+if [[ -x ~/.config/bin/install_dotf ]]; then
+    ~/.config/bin/install_dotf </dev/tty
     status=\$?
     if [ \$status -ne 0 ]; then
        exit \$status
     fi
     echo -e "$step_four\\\n"
-    echo -e "pikaur, the dotfiles were installed. Try logging back in again for changes to take effect."
+    echo -e "Awesome, the dotfiles were installed. Try logging back in again for changes to take effect."
     exit 0
 else
-    echo -e "\${BOLD}====> \${RED}Fatal error, install script ~/.config/bin/install/arch not executable.\${RESET_FMT}"
+    echo -e "\${BOLD}====> \${RED}Fatal error, install script ~/.config/bin/install_dotf not executable.\${RESET_FMT}"
     echo -e "\${BOLD}   -> \${RESET_FMT}Check that the dotfiles were successfully downloaded and the repository checked out successfully."
     echo -e ""
     echo "Aborting script..."
