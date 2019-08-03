@@ -33,6 +33,7 @@ So what does `arch_0` actually do?
 This is a collection of remarks and things which didn't quite work the last time I tried to use the install script. So your mileage may vary. On the bright side though, my system never broke completely and I usually just had to manually fix something and then try running `arch_0` again.
 
 - needed to manually install `git` and `base-devel` in order to build packages like `pikaur` (or even just clone the dotfiles in the first place)
+- needed to install `sudo`
 - pikaur depends on go which is like 500mb on disk - yuck - I should pick another AUR helper
 - there are 10 providers available for ttf-font, which one to choose (I chose `ttf-liberation`)
 - graphics drivers - needed to make a selection
