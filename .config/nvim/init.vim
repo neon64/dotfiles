@@ -21,6 +21,7 @@ let g:airline_powerline_fonts = 0
 syntax enable
 set background=dark
 set termguicolors
+set clipboard=unnamedplus
 " spaces instead of tabs
 set expandtab
 set tabstop=4
