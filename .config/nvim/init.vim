@@ -17,6 +17,7 @@ Plug 'chriskempson/base16-vim'
 call plug#end()
 
 let g:airline_powerline_fonts = 0
+let g:vim_markdown_fenced_languages = ['html', 'python', 'bash=sh', 'c=c']
 
 syntax enable
 set background=dark
@@ -92,6 +93,6 @@ inoremap <Down> <C-o>:echo "No down for you!"<CR>
 
 " because I'm getting so used to spacemacs
 nnoremap <Space>fs :w<CR>
-nnoremap <Space>qz :q<CR>
+nnoremap <Space>wq :wq<CR>
 
 nmap <C-p> <Plug>MarkdownPreviewToggle
