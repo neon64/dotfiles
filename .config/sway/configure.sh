@@ -15,6 +15,10 @@ else
     echo -e " => ${BLUE}Not running in vm${RESET_FMT}"
     echo " - Adding gestures"
     libinput-gestures-setup restart
+
+    # only start up these apps when in actual computer
+    systemd-cat -t keepassxc keepassxc &
+    systemd-cat -t evolution evolution &
 fi
 
 # start mapping tap capslock to escape, and other fancy things

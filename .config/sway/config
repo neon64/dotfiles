@@ -83,8 +83,6 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 # more specific configuration at runtime
 exec_always ~/.config/sway/configure.sh
 exec mako
-exec keepassxc
-exec evolution
 
 #
 # Basics:
@@ -243,7 +241,7 @@ exec evolution
 
     # Sleep
     bindsym $mod+Shift+u exec loginctl lock-session
-    exec swayidle -w timeout 180 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock' lock 'swaylock'
+    exec swayidle -w timeout 180 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' lock 'swaylock'
 
     bar {
         swaybar_command waybar
