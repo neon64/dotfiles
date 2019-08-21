@@ -241,7 +241,7 @@ exec mako
 
     # Sleep
     bindsym $mod+Shift+u exec loginctl lock-session
-    exec swayidle -w timeout 180 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' lock 'swaylock'
+    exec swayidle -w timeout 180 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' lock 'swaylock' before-sleep 'swaylock'
 
     bar {
         swaybar_command waybar

@@ -32,6 +32,7 @@ wm_pkgs=(
     evscript-git # map caps lock to escape on tap + more
     wl-clipboard # clipboard tools
     libinput-gestures # swipe actions for trackpads
+    wdisplays-git # configure displays
 )
 
 # installs packages required for emacs

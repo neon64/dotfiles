@@ -26,7 +26,6 @@ set PATH $PATH $HOME/.config/composer/vendor/bin
 
 set -x EDITOR (which nvim)
 
-set -x SPACEMACSDIR "~/.config/spacemacs"
 set -e FZF_DEFAULT_OPTS
 set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"
 set -x FZF_CTRL_T_COMMAND "fd --hidden --exclude '**/.git/'"
@@ -67,7 +66,10 @@ alias ds "check_dotf"
 alias w "browse_web"
 alias blue "manage_bluetooth"
 alias sr "switch_res"
-alias reboot "reboot_chooser"
+
+if test -x /usr/bin/reboot_chooser
+    alias reboot "reboot_chooser"
+end
 
 # in case I forget
 alias pac "pikaur"
