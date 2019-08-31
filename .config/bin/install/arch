@@ -33,6 +33,7 @@ wm_pkgs=(
     wl-clipboard # clipboard tools
     libinput-gestures # swipe actions for trackpads
     wdisplays-git # configure displays
+    adwaita-qt # nice theme
 )
 
 # installs packages required for emacs

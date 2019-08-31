@@ -318,7 +318,7 @@ exec mako
     client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $urgent-bd-color     $urgent-bd-color
 
     # window borders and gaps
-    default_border pixel $borderwidth
+    default_border normal $borderwidth
     default_floating_border none
     hide_edge_borders both
     focus_wrapping no
