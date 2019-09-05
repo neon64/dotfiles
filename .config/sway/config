@@ -16,7 +16,7 @@ set $browser firefox-nightly
 
 # preferred application launcher
 set $menu rofi -show combi
-
+ 
 # movement keys
 set $up l
 set $down k

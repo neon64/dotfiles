@@ -22,7 +22,6 @@ let g:vim_markdown_fenced_languages = ['html', 'python', 'bash=sh', 'c=c']
 syntax enable
 set background=dark
 set termguicolors
-set clipboard=unnamedplus
 " spaces instead of tabs
 set expandtab
 set tabstop=4

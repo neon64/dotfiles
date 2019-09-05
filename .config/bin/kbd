@@ -1,0 +1,13 @@
+#!/bin/bash
+
+if [ "$1" = "intl" ]; then
+    echo "Activating international keyboard layout"
+    swaymsg input \* xkb_variant intl
+    swaymsg input \* xkb_layout us
+    swaymsg input "1:1:AT_Translated_Set_2_keyboard" xkb_options caps:super
+else
+    echo "Resetting keyboard layout"
+    swaymsg input \* xkb_variant "basic"
+    # need an extra layer of quotes around options since the shell eats a layer
+    swaymsg input "1:1:AT_Translated_Set_2_keyboard" xkb_options '"caps:super,altwin:ctrl_alt_win"'
+fi
