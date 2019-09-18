@@ -66,6 +66,7 @@ alias ds "check_dotf"
 alias w "browse_web"
 alias blue "manage_bluetooth"
 alias sr "switch_res"
+alias clock "tty-clock -sSc"
 
 if test -x /usr/bin/reboot_chooser
     alias reboot "reboot_chooser"

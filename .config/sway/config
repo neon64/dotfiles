@@ -240,8 +240,9 @@ exec mako
     bindsym --locked XF86MonBrightnessDown exec brillo -U 5 -u 100000
 
     # Sleep
-    bindsym $mod+Shift+u exec loginctl lock-session
-    exec swayidle -w timeout 180 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' lock 'swaylock' before-sleep 'swaylock'
+    bindsym $mod+Shift+u exec swaylock
+    exec swayidle -w timeout 180 'swaylock -f' timeout 320 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f'
+    # exec swayidle -w timeout 180 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' lock 'swaylock' unlock 'killall swaylock' before-sleep 'swaylock'
 
     bar {
         swaybar_command waybar

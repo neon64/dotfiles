@@ -95,3 +95,5 @@ nnoremap <Space>fs :w<CR>
 nnoremap <Space>wq :wq<CR>
 
 nmap <C-p> <Plug>MarkdownPreviewToggle
+imap <C-s> <Esc>:w<CR>i
+nmap <C-s> :w<CR>
