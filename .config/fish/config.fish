@@ -88,7 +88,7 @@ if status --is-interactive
     set -g fish_cursor_insert line
 
     # manually set
-    if [ "$TERM" = 'linux' ]; or [ ! -z "$GNOME_TERMINAL_SCREEN" ]; or [ "$TERM" = 'xterm-kitty' ]; or [ ! -z "$SSH_TTY" ]
+    if [ ! -z "$GNOME_TERMINAL_SCREEN" ]; or [ "$TERM" = 'xterm-kitty' ]; or [ ! -z "$SSH_TTY" ]
         bash ~/.config/colors/theme.sh
     end
 

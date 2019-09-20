@@ -303,8 +303,8 @@ exec mako
     set $bg-color              $base01
     set $focused-bg-color      $base00
 
-    set $inner-bd-color         $base01
-    set $focused-inner-bd-color $base03
+    set $inner-bd-color         $base02
+    set $focused-inner-bd-color $base02
 
     set $inactive-text-color   $base03
     set $text-color            $base05

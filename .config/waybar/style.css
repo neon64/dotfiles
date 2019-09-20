@@ -11,8 +11,8 @@
 
 window#waybar {
     /* background: rgba(43, 48, 59, 0.5); */
-    background-color: rgba(0, 0, 0, 0.5);
-    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
+    background-color: @base01; /* rgba(0, 0, 0, 0.8); */
+    /* border-bottom: 1px solid @base04;rgba(100, 114, 125, 0.5); */
     color: white;
 }
 
