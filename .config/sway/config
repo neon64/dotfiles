@@ -324,7 +324,7 @@ exec mako
     hide_edge_borders both
     focus_wrapping no
 
-    font Cantarell 11
+    font pango:Input Sans Narrow 9
 
 # You may want this:
 #

@@ -73,10 +73,8 @@ extra_shell_pkgs=(
 # apps which I use
 recommended_apps=(
     alacritty # nice terminal emulator written in rust
-    ttf-hack # new default terminal font
-    otf-fantasque-sans-mono # sweet font with a handwriting feel
-    otf-fira-code # nice coding font with ligatures
-    otf-fira-mono # nice coding font without ligatures
+    ttf-input # terminal font
+    otf-hasklig # nice coding font with ligatures
     firefox # browser of choice
     ttf-liberation # sans-serif font for firefox
     code # VS Code editor

@@ -1,6 +1,5 @@
 {
-    "editor.fontFamily": "Hack",
-    "editor.fontLigatures": true,
+    "editor.fontFamily": "Hasklig",
     "editor.minimap.enabled": true,
     "editor.detectIndentation": true,
     "files.associations": {
@@ -32,5 +31,10 @@
     "vim.useSystemClipboard": true,
     "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.synctex.synctexjs.enabled": false,
-    "editor.rulers": [80]
+    "editor.rulers": [
+        80
+    ],
+    "git.enableSmartCommit": true,
+    "workbench.colorTheme": "Base16 Tomorrow Dark",
+    "editor.fontLigatures": true
 }
