@@ -18,7 +18,7 @@ else
 
     # only start up these apps when in actual computer
     systemd-cat -t keepassxc keepassxc &
-    systemd-cat -t evolution evolution &
+    systemd-cat -t mailspring mailspring &
 fi
 
 # start mapping tap capslock to escape, and other fancy things
