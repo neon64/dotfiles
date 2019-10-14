@@ -13,6 +13,7 @@ set $term alacritty
 
 # preferred web browser
 set $browser firefox-nightly
+set $files nautilus
 
 # preferred application launcher
 set $menu rofi -show combi
@@ -99,6 +100,7 @@ exec mako
 
     # start your launcher
     bindsym $mod+d exec $menu
+    bindsym $mod+s exec $files
     # bindsym $mod+d exec alacritty --title "Command Launcher" --config-file ~/.config/alacritty/alacritty_big.yml -e ~/.config/bin/launch_util
 
     # Drag floating windows by holding down $mod and left mouse button. Resize
@@ -200,7 +202,6 @@ exec mako
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
     bindsym $mod+t layout splith
