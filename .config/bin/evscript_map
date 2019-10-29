@@ -1,9 +1,3 @@
-//! [device] # this section is optional, all these fields have nice defaults
-//! name = "evscript demo"
-//! bustype = 6 # https://github.com/cmr/evdev/blob/04761b788fcd6722b6283fb98d1578b81559fd1a/src/lib.rs#L471-L489
-//! vendor = 1
-//! product = 2
-//! version = 3
 //! [events] # this is required! because the kernel will violently reject events not defined here
 //! keys = ['ESC', 'LEFTSHIFT', '9', '0']
 
@@ -11,18 +5,15 @@ fn main() ~ evdevs, uinput {
     should_esc := false
     should_lshift := false
     should_rshift := false
-    println("Type something!!")
     loop {
-        println("Type something!!")
         evts := next_events(evdevs)
-        println("Type something!!")
-        /* for i len(evts) { */
-        /*     evt := evts[i] */
-        /*     println("Event on " + device_name(evdevs[evt.device_idx]) + " | kind " + */
-        /*        str(evt.kind) + "	code " + str(evt.code) + "	value " + str(evt.value)) */
-        /*     xcape(mut should_esc, evt, KEY_CAPSLOCK(), [KEY_ESC()]) */
-        /*     xcape(mut should_lshift, evt, KEY_LEFTSHIFT(), [KEY_LEFTSHIFT(), KEY_9()]) */
-        /*     xcape(mut should_rshift, evt, KEY_RIGHTSHIFT(), [KEY_LEFTSHIFT(), KEY_0()]) */
-        /* } */
+        for i len(evts) {
+            evt := evts[i]
+            // println("Event on " + device_name(evdevs[evt.device_idx]) + " | kind " +
+            //    str(evt.kind) + "	code " + str(evt.code) + "	value " + str(evt.value))
+            xcape(mut should_esc, evt, KEY_CAPSLOCK(), [KEY_ESC()])
+            xcape(mut should_lshift, evt, KEY_LEFTSHIFT(), [KEY_LEFTSHIFT(), KEY_9()])
+            xcape(mut should_rshift, evt, KEY_RIGHTSHIFT(), [KEY_LEFTSHIFT(), KEY_0()])
+        }
     }
 }
