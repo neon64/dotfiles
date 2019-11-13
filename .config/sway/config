@@ -13,7 +13,7 @@ set $term alacritty
 
 # preferred web browser
 set $browser firefox-nightly
-set $files nautilus
+set $files nautilus -w
 
 # preferred application launcher
 set $menu rofi -show combi
@@ -76,7 +76,6 @@ input "1:1:AT_Translated_Set_2_keyboard" {
 input "2:7:SynPS/2_Synaptics_TouchPad" {
     tap enabled
     middle_emulation disabled
-    dwt disabled
     natural_scroll enabled
     click_method clickfinger
 }
