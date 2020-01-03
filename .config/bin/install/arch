@@ -34,6 +34,7 @@ wm_pkgs=(
     libinput-gestures # swipe actions for trackpads
     wdisplays-git # configure displays
     adwaita-qt # nice theme
+    wob # wayland overlay bar - for volume and brightness control
 )
 
 # installs packages required for emacs
@@ -83,6 +84,8 @@ recommended_apps=(
     keepassxc # password manager
     qt5-wayland # makes keepassxc work in Gnome
     zathura zathura-pdf-mupdf # pdf viewer
+    spotify # spotify client
+    spotifywm-git # fixes the WM_CLASS of the spotify window
 )
 
 # while it is possible to do withut these Gnome apps, I find they make my life so much

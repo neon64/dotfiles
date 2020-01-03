@@ -24,6 +24,7 @@ for_window [class="VirtualBox Manager"] border normal $borderwidth
 for_window [class="VirtualBox Machine"] border normal $borderwidth
 for_window [app_id="evolution"] border normal $borderwidth
 for_window [class="Mailspring"] border pixel $borderwidth
+for_window [class="Spotify"] border pixel $borderwidth
 
 # default workspaces
 assign [class="qutebrowser"] 1
@@ -37,6 +38,7 @@ assign [class="Emacs"] 3
 assign [class="GitKraken"] 4
 assign [class="VirtualBox Machine"] 5
 assign [class="VirtualBox Manager"] 5
+assign [class="Spotify"] 7
 assign [app_id="evolution"] 8
 assign [class="Mailspring"] 8
 assign [app_id="geary"] 8
