@@ -67,6 +67,7 @@ alias w "browse_web"
 alias blue "manage_bluetooth"
 alias sr "switch_res"
 alias clock "tty-clock -sSc"
+alias ping "prettyping --nolegend"
 
 if test -x /usr/bin/reboot_chooser
     alias reboot "reboot_chooser"

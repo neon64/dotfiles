@@ -152,6 +152,12 @@ gtk_theme=(
     arc-icon-theme # icon theme
 )
 
+mail_pkgs=(
+    notmuch # email database
+    gmailieer # sync with gmail
+    astroid # GUI client for notmuch
+)
+
 function install_group {
     name=$1
     shift
@@ -192,6 +198,7 @@ function install_pkgs {
     install_group xorg_pkgs ${xorg_pkgs[@]}
     install_group virtualbox_guest_pkgs ${virtualbox_guest_pkgs[@]}
     install_group bluetooth_pkgs ${bluetooth_pkgs[@]}
+    install_group mail_pkgs ${mail_pkgs[@]}
     confirm " - custom version of mps-youtube which interacts nicely with mpd (requires python)?" && install_custom_mpsyt
     confirm " - setuid root the \`evscript\` binary?" && setuid_evscript
     header "Installed all requested packages!"

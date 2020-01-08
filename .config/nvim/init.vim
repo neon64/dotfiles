@@ -11,11 +11,15 @@ Plug 'justinmk/vim-sneak' " `s` and `S` do two letter sneaking
 Plug 'sheerun/vim-polyglot' " many different language packs
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
 Plug 'xavierd/clang_complete'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'paretje/deoplete-notmuch', {'for': 'mail'}
 
 " Let's make it pretty
 Plug 'chriskempson/base16-vim'
 
 call plug#end()
+
+let g:deoplete#enable_at_startup = 1
 
 let g:airline_powerline_fonts = 0
 let g:vim_markdown_fenced_languages = ['html', 'python', 'bash=sh', 'c=c']
