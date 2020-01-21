@@ -26,7 +26,6 @@ set PATH $PATH $HOME/.config/composer/vendor/bin
 
 set -x EDITOR (which nvim)
 
-set -x SPACEMACSDIR "~/.config/spacemacs"
 set -e FZF_DEFAULT_OPTS
 set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"
 set -x FZF_CTRL_T_COMMAND "fd --hidden --exclude '**/.git/'"
@@ -38,16 +37,17 @@ set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head
 ###				   AUTOSTART
 ### ========================================
 
+
 # start sway upon login to tty1
 # we check `status --is-interactive` because
 # commands like dbus-run-session (for starting Gnome
 # Terminal) start a non-interactive login shell
 if status --is-login && status --is-interactive
-    if test -z "$DISPLAY" -a "$XDG_VTNR" -gt "0" -a "$XDG_VTNR" -lt "6"
+    if set -q XDG_VTNR && test "$XDG_VTNR" -gt "0" -a "$XDG_VTNR" -lt "6"
         set LINE_UP "\033[1A"
         set CLEAR_LINE "\033[K"
         echo -e "$LINE_UP$CLEAR_LINE$LINE_UP$CLEAR_LINE$LINE_UP$CLEAR_LINE$LINE_UP"
-        exec choose_de
+        exec ~/Code/fdm/fdm
     end
 end
 
@@ -66,7 +66,12 @@ alias ds "check_dotf"
 alias w "browse_web"
 alias blue "manage_bluetooth"
 alias sr "switch_res"
-alias reboot "reboot_chooser"
+alias clock "tty-clock -sSc"
+alias ping "prettyping --nolegend"
+
+if test -x /usr/bin/reboot_chooser
+    alias reboot "reboot_chooser"
+end
 
 # in case I forget
 alias pac "pikaur"
@@ -84,7 +89,7 @@ if status --is-interactive
     set -g fish_cursor_insert line
 
     # manually set
-    if [ "$TERM" = 'linux' ]; or [ ! -z "$GNOME_TERMINAL_SCREEN" ]; or [ "$TERM" = 'xterm-kitty' ]
+    if [ ! -z "$GNOME_TERMINAL_SCREEN" ]; or [ "$TERM" = 'xterm-kitty' ]; or [ ! -z "$SSH_TTY" ]
         bash ~/.config/colors/theme.sh
     end
 
@@ -119,3 +124,4 @@ if status --is-interactive
     set -g fish_color_user brgreen
     set -g fish_color_valid_path \x2d\x2dunderline
 end
+

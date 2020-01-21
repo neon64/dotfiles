@@ -15,10 +15,13 @@ else
     echo -e " => ${BLUE}Not running in vm${RESET_FMT}"
     echo " - Adding gestures"
     libinput-gestures-setup restart
+
+    # only start up these apps when in actual computer
+    systemd-cat -t keepassxc keepassxc &
 fi
 
 # start mapping tap capslock to escape, and other fancy things
 pgrep "evscript"
 if [ $? -ne 0 ]; then
-    evscript -f ~/.config/bin/evscript_map -d /dev/input/event2 /dev/input/event3 > /tmp/evscript_log
+    evscript -f ~/.config/bin/evscript_map -d /dev/input/event5
 fi

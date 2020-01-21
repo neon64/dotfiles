@@ -13,10 +13,11 @@ set $term alacritty
 
 # preferred web browser
 set $browser firefox-nightly
+set $files nautilus -w
 
 # preferred application launcher
 set $menu rofi -show combi
-
+ 
 # movement keys
 set $up l
 set $down k
@@ -75,7 +76,6 @@ input "1:1:AT_Translated_Set_2_keyboard" {
 input "2:7:SynPS/2_Synaptics_TouchPad" {
     tap enabled
     middle_emulation disabled
-    # dwt disabled
     natural_scroll enabled
     click_method clickfinger
 }
@@ -99,6 +99,7 @@ exec mako
 
     # start your launcher
     bindsym $mod+d exec $menu
+    bindsym $mod+s exec $files
     # bindsym $mod+d exec alacritty --title "Command Launcher" --config-file ~/.config/alacritty/alacritty_big.yml -e ~/.config/bin/launch_util
 
     # Drag floating windows by holding down $mod and left mouse button. Resize
@@ -200,7 +201,6 @@ exec mako
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
     bindsym $mod+t layout splith
@@ -225,9 +225,15 @@ exec mako
 #
 
     # Volume
-    bindsym --locked XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+
-    bindsym --locked XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-
-    bindsym --locked XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle
+    exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
+    bindsym XF86AudioRaiseVolume exec amixer -q set Master 2%+ unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
+    bindsym XF86AudioLowerVolume exec amixer -q set Master 2%- unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
+    bindsym XF86AudioMute exec (amixer get Master | grep off > /dev/null && amixer -q set Master unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob) || (amixer -q set Master mute && echo 0 > $SWAYSOCK.wob)
+
+    # Volume
+    # bindsym --locked XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+
+    # bindsym --locked XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-
+    # bindsym --locked XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle
 
     # Media player
     bindsym --locked XF86AudioPlay exec mpc toggle
@@ -236,12 +242,14 @@ exec mako
     bindsym --locked XF86AudioNext exec mpc next
 
     # Brightness (a fade over 100ms)
-    bindsym --locked XF86MonBrightnessUp exec brillo -A 5 -u 100000
-    bindsym --locked XF86MonBrightnessDown exec brillo -U 5 -u 100000
+    bindsym --locked XF86MonBrightnessUp exec brillo -A 5 -u 100000 && brillo -G | awk '{print int($1)}' > $SWAYSOCK.wob
+    bindsym --locked XF86MonBrightnessDown exec brillo -U 5 -u 100000 && brillo -G | awk '{print int($1)}' > $SWAYSOCK.wob
+
 
     # Sleep
-    bindsym $mod+Shift+u exec loginctl lock-session
-    exec swayidle -w timeout 180 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock' lock 'swaylock'
+    bindsym $mod+Shift+u exec swaylock
+    exec swayidle -w timeout 180 'swaylock -f' timeout 320 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f'
+    # exec swayidle -w timeout 180 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' lock 'swaylock' unlock 'killall swaylock' before-sleep 'swaylock'
 
     bar {
         swaybar_command waybar
@@ -302,8 +310,8 @@ exec mako
     set $bg-color              $base01
     set $focused-bg-color      $base00
 
-    set $inner-bd-color         $base01
-    set $focused-inner-bd-color $base03
+    set $inner-bd-color         $base02
+    set $focused-inner-bd-color $base02
 
     set $inactive-text-color   $base03
     set $text-color            $base05
@@ -318,12 +326,12 @@ exec mako
     client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $urgent-bd-color     $urgent-bd-color
 
     # window borders and gaps
-    default_border pixel $borderwidth
+    default_border normal $borderwidth
     default_floating_border none
     hide_edge_borders both
     focus_wrapping no
 
-    font Cantarell 11
+    font pango:Input Sans Narrow 9
 
 # You may want this:
 #

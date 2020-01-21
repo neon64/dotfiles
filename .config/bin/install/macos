@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# load the platform-independent definitions & functions
-source "`dirname $0`/definitions"
-# load the platform-independent installation steps
-source "`dirname $0`/common"
-
 # installs the fish shell and everything else required to work with these dotfiles
 base_shell_pkgs=(
     fish # shell of choice
@@ -24,8 +19,6 @@ function install_group {
     confirm " - \`$name\`?" && brew install "$@"
 }
 
-section "1" "2" "system-level configuration"
-
 function install_pkgs {
         install_group base_shell_pkgs "${base_shell_pkgs[@]}"
 }
@@ -34,26 +27,14 @@ function update_pkgs {
        brew upgrade
 }
 
-if $FRESH_INSTALL; then
-    echo ""
-    confirm "Install packages through Homebrew?" && install_pkgs
-    echo ""
-else
-    echo ""
-    confirm "Update packages through Homebrew?" && update_pkgs
-    echo ""
-fi
-
-section "2" "2" "user-level configuration:"
-
-install_common
-
-echo ""
-
-if $FRESH_INSTALL; then
-    header "Congratulations, installation completed!"
-else
-    header "System updated successfully"
-fi
-
-exit 0
+function install_system {
+    if $FRESH_INSTALL; then
+        echo ""
+        confirm "Install packages through Homebrew?" && install_pkgs
+        echo ""
+    else
+        echo ""
+        confirm "Update packages through Homebrew?" && update_pkgs
+        echo ""
+    fi
+}

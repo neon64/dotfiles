@@ -25,9 +25,12 @@ generate_lockscreen() {
     echo -e "${GREEN}Generating lockscreen background...${RESET_FMT}"
     text="Type password to unlock..."
     dest=~/.local/share/swaylock_bg.jpg
-    dimensions=$(swaymsg -t get_outputs --raw | jq -r "(.[0].current_mode.width | tostring) + \"x\" + (.[0].current_mode.height | tostring) + \"^\"")
-    echo "Using dimensions $dimensions"
-    convert ~/Pictures/Wallpapers/wallpaper-current.jpg -resize "$dimensions" -quality 95 -blur 40x20 -font /usr/share/fonts/cantarell/Cantarell-Light.otf -pointsize 36 -fill white -gravity center -annotate +0+400 "$text" $dest
+    width=$(swaymsg -t get_outputs --raw | jq -r ".[0].current_mode.width | tostring")
+    height=$(swaymsg -t get_outputs --raw | jq -r ".[0].current_mode.height | tostring")
+    textheight=`expr $height / 3`
+    dimensions="${width}x${height}^"
+    echo "Using dimensions $dimensions, placing text at y=$textheight"
+    convert ~/Pictures/Wallpapers/wallpaper-current.jpg -resize "$dimensions" -quality 95 -blur 40x20 -font /usr/share/fonts/cantarell/Cantarell-Light.otf -pointsize 36 -fill white -gravity Center -draw "text 0,${textheight} '$text'" $dest
     echo -e "Done"
 }
 

@@ -4,29 +4,29 @@
     border: none;
     border-radius: 0;
     /* we use `serif` as a fallback so its clear if our proper font isn't installed */
-    font-family: "Cantarell", serif;
-    font-size: 14px;
+    font-family: "Input Sans Narrow", serif;
+    font-size: 13px;
     min-height: 0;
 }
 
 window#waybar {
     /* background: rgba(43, 48, 59, 0.5); */
-    background-color: rgba(0, 0, 0, 0.5);
-    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
-    color: white;
+    background-color: @base01; /* rgba(0, 0, 0, 0.8); */
+    /* border-bottom: 1px solid @base04;rgba(100, 114, 125, 0.5); */
+    color: @base07;
 }
 
 #workspaces button {
-    padding: 0 8px;
+    padding: 0 12px;
     background: transparent;
-    color: white;
+    color: @base07;
     border-bottom: 3px solid transparent;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 #workspaces button.focused {
     background: rgba(100, 114, 125, 0.4);
-    border-bottom: 3px solid white;
+    border-bottom: 3px solid @base07;
 }
 
 #workspaces button:hover {
@@ -38,7 +38,7 @@ window#waybar {
 
 #mode {
     background: #64727D;
-    border-bottom: 3px solid white;
+    border-bottom: 3px solid @base07;
 }
 
 #clock, #battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #mpd, #tray, #mode, #idle_inhibitor, #backlight {
@@ -52,7 +52,6 @@ window#waybar {
 
 #clock {
     /* background: rgba(100, 114, 125, 0.4); */
-    color: #fff;
     border-bottom: 3px solid @base0E;
     /* background-color: rgba(100, 114, 125, 0.8);
     border-bottom: 3px solid rgb(83, 97, 107); */
@@ -152,7 +151,7 @@ window#waybar {
 }
 
 #idle_inhibitor {
-    color: #eee;
+    color: @base07;
     border-bottom: 3px solid rgba(236, 236, 236, 0.1);
 }
 

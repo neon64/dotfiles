@@ -1,3 +1,13 @@
 #!/bin/bash
 
-swaymsg -t get_outputs --pretty | grep "    " | awk "{print \$1}" | fzf --reverse --height=10 --min-height=5 --color=16 | xargs swaymsg output "*" res
+if [ -z "$SWAYSOCK" ]; then
+    echo "Not running inside sway, trying to set fb console resolution."
+    echo -n "xres: "
+    read xres
+    echo -n "yres: "
+    read yres
+    fbset -xres "$xres" -yres "$yres"
+
+else
+    swaymsg -t get_outputs --pretty | grep "    " | awk "{print \$1}" | fzf --reverse --height=10 --min-height=5 --color=16 | xargs swaymsg output "*" res
+fi
