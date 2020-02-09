@@ -35,6 +35,7 @@ wm_pkgs=(
     wdisplays-git # configure displays
     adwaita-qt # nice theme
     wob # wayland overlay bar - for volume and brightness control
+    playerctl # control music
 )
 
 # installs packages required for emacs

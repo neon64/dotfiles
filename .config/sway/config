@@ -127,7 +127,7 @@ exec mako
 
     bindsym Print exec swayshot
     bindsym Mod1+Print exec swayshot window
-    bindsym Shift+Print exec swayshot region
+    bindsym $mod+Shift+s exec swayshot region
 
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning \

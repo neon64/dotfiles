@@ -8,3 +8,6 @@ main_window.jump_to_page_7=C-7
 main_window.jump_to_page_8=C-8
 main_window.jump_to_page_9=C-9
 main_window.quit=C-q
+
+# toggle queue (this command is its own inverse)
+thread_view.run(hooks::trash %2, hooks::trash %2)=d
