@@ -12,7 +12,7 @@ function read_confirm
 end
 
 function get_unpushed_commits
-    set --local has_upstream (command dotf rev-parse --abbrev-ref '@{upstream}' 2>/dev/null)
+    set --local has_upstream (command dotf rev-parse --abbrev-ref '@{upstream}')
     if test -n "$has_upstream"  # check there is an upstream repo configured
         and test "$has_upstream" != '@{upstream}' # Fixed #179, dont check the empty repo
         command dotf rev-list --left-right --count 'HEAD...@{upstream}' \
@@ -23,7 +23,7 @@ function get_unpushed_commits
 end
 
 function get_unpulled_commits
-    set --local has_upstream (command dotf rev-parse --abbrev-ref '@{upstream}' 2>/dev/null)
+    set --local has_upstream (command dotf rev-parse --abbrev-ref '@{upstream}')
     if test -n "$has_upstream"  # check there is an upstream repo configured
         and test "$has_upstream" != '@{upstream}' # Fixed #179, dont check the empty repo
         command dotf rev-list --left-right --count 'HEAD...@{upstream}' \
