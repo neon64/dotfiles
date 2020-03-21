@@ -10,7 +10,7 @@ if [ $? -eq 0 ]; then
     swaymsg input "*" xkb_options caps:super
     echo " - Switching to gnome-terminal"
     # alacritty is really laggy inside a VM
-    swaymsg set '$term' dbus-launch gnome-terminal
+    # swaymsg set '$term' dbus-launch gnome-terminal
 else
     echo -e " => ${BLUE}Not running in vm${RESET_FMT}"
     echo " - Adding gestures"

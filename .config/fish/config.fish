@@ -20,9 +20,10 @@ set PATH $PATH $HOME/.config/composer/vendor/bin
 # Under the status quo $MANPATH was unset, so `man` would use default paths.
 # OCaml upset this by setting $MANPATH.. Thus I manually commented out the line.
 # This will probably be broken by package updates
-# if test -d $HOME/.opam
+if test -d $HOME/.opam
+    source /home/chris/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
 #     source $HOME/.opam/opam-init/init.fish #> /dev/null 2> /dev/null; or true
-# end
+end
 
 set -x EDITOR (which nvim)
 
@@ -125,3 +126,5 @@ if status --is-interactive
     set -g fish_color_valid_path \x2d\x2dunderline
 end
 
+# opam configuration
+source /home/chris/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
