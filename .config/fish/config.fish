@@ -125,6 +125,3 @@ if status --is-interactive
     set -g fish_color_user brgreen
     set -g fish_color_valid_path \x2d\x2dunderline
 end
-
-# opam configuration
-source /home/chris/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
