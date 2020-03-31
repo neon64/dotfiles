@@ -12,7 +12,7 @@ set $term alacritty
 # set $term ~/Code/Rust/alacritty_new_window_cwd/target/release/alacritty_new_window_cwd
 
 # preferred web browser
-set $browser firefox-nightly
+set $browser firefox
 set $files nautilus -w
 
 # preferred application launcher
