@@ -35,7 +35,6 @@
         80
     ],
     "git.enableSmartCommit": true,
-    "workbench.colorTheme": "Base16 Tomorrow Dark",
     "editor.fontLigatures": true,
     "latex-workshop.latex.tools": [
         {
@@ -69,5 +68,7 @@
                 "%DOCFILE%"
             ]
         }
-    ]
+    ],
+    "oneDarkPro.vivid": true,
+    "workbench.colorTheme": "Eva Dark"
 }
