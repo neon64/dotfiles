@@ -162,11 +162,11 @@ mail_pkgs=(
 function install_group {
     name=$1
     shift
-    confirm " - \`$name\`?" && pikaur -S --needed "$@"
+    confirm " - \`$name\`?" && yay -S --needed "$@"
 }
 
 function install_custom_mpsyt {
-    pikaur -S --needed python-mpd2
+    yay -S --needed python-mpd2
     pip3 install --user -U git+https://github.com/vn-ki/mps-youtube.git@mpd
 }
 
@@ -206,24 +206,24 @@ function install_pkgs {
 }
 
 function update_pkgs {
-    pikaur -Syu
+    yay -Syu
 }
 
 function install_system {
     if $FRESH_INSTALL; then
-        if pacman -Q | grep -q 'pikaur'; then
-            warn "\`pikaur\` already installed, using it to install everything else"
+        if pacman -Q | grep -q 'yay'; then
+            warn "\`yay\` already installed, using it to install everything else"
         else
-            header "Installing \`pikaur\`"
+            header "Installing \`yay-bin\`"
             # first we want install an AUR helper, so we can install more packages more easily
             mkdir -p $PKG_BUILD_DIR
             cd $PKG_BUILD_DIR
 
-            git clone https://aur.archlinux.org/pikaur.git
-            cd pikaur
+            git clone https://aur.archlinux.org/yay-bin.git
+            cd yay-bin
             makepkg -fsri
 
-            header "Using \`pikaur\` to install everything else"
+            header "Using \`yay\` to install everything else"
         fi
 
         cd ~

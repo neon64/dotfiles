@@ -11,6 +11,14 @@ if test -d $HOME/.local/bin
     set -x PATH $PATH $HOME/.local/bin
 end
 
+if test -d /usr/local/bin
+    set -x PATH /usr/local/bin $PATH
+end
+
+if test -d /usr/local/sbin
+    set -x PATH /usr/local/sbin $PATH
+end
+
 set PATH $PATH $HOME/.config/composer/vendor/bin
 
 # used for the Rust Language Server
@@ -48,7 +56,7 @@ if status --is-login && status --is-interactive
         set LINE_UP "\033[1A"
         set CLEAR_LINE "\033[K"
         echo -e "$LINE_UP$CLEAR_LINE$LINE_UP$CLEAR_LINE$LINE_UP$CLEAR_LINE$LINE_UP"
-        exec ~/Code/fdm/fdm
+        exec ~/code/fdm/fdm
     end
 end
 
@@ -75,7 +83,7 @@ if test -x /usr/bin/reboot_chooser
 end
 
 # in case I forget
-alias pac "pikaur"
+alias pac "yay"
 
 # use neovim
 alias vim "nvim"

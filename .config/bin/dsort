@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# from https://notgnoshi.github.io/shell-utilities
-
-du -a -d 1 -h | sort -h
-

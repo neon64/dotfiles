@@ -9,15 +9,14 @@ set $mod Mod4
 set $term alacritty
 # set $term cage -d -- alacritty
 # set $term gnome-terminal
-# set $term ~/Code/Rust/alacritty_new_window_cwd/target/release/alacritty_new_window_cwd
 
 # preferred web browser
 set $browser firefox
-set $files nautilus -w
+set $files io.elementary.files -n
 
 # preferred application launcher
 set $menu rofi -show combi
- 
+
 # movement keys
 set $up l
 set $down k
@@ -31,7 +30,7 @@ set $borderwidth 1
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
 
-output * bg ~/Pictures/Wallpapers/wallpaper-current.jpg fill
+output * bg ~/pics/wallpapers/wallpaper-current.jpg fill
 
 #
 # Example output configuration:
@@ -111,9 +110,6 @@ exec mako
     # reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # screenshot using a 'timestamped' filename
-    # bindsym $mod+Shift+s exec bash -c "slurp -d | grim -g - ~/Pictures/Screenshots/$(date +u%Y-%m-%d-%H%M%S_grim.png)"
-
     # swayshot
     #
     # Print screen helper for sway: add keyboard shortcuts for screenshots:
@@ -124,7 +120,6 @@ exec mako
     # Save screenshots to $SCREENSHOTS folder.
     # The default value is XDG_PICTURES_DIR, see
     # https://wiki.archlinux.org/index.php/XDG_user_directories
-
     bindsym Print exec swayshot
     bindsym Mod1+Print exec swayshot window
     bindsym $mod+Shift+s exec swayshot region

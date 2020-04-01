@@ -34,7 +34,8 @@ This is a collection of remarks and things which didn't quite work the last time
 
 - needed to manually install `git` and `base-devel` in order to build packages like `pikaur` (or even just clone the dotfiles in the first place)
 - needed to install `sudo`
-- pikaur depends on go which is like 500mb on disk - yuck - I should pick another AUR helper
+- yay depends on go which is like 500mb on disk - yuck - I should pick another AUR helper
+    - switched to pikaur, but now am trying yay-bin instead
 - there are 10 providers available for ttf-font, which one to choose (I chose `ttf-liberation`)
 - graphics drivers - needed to make a selection
 - two providers for cargo (rust or rustup)? - need to install rust packages before wm_pkgs since swaylock-blur-git needs Rust - **Fixed**

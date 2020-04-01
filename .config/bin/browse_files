@@ -1,5 +1,7 @@
 #!/bin/bash
 # (B)rowses a file or folder in a GUI
 
-systemd-cat nautilus ${1-.} &
+actual_path=$(realpath "${1-.}")
+
+systemd-cat io.elementary.files -n "$actual_path" &
 disown
