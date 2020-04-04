@@ -10,9 +10,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'justinmk/vim-sneak' " `s` and `S` do two letter sneaking
 Plug 'sheerun/vim-polyglot' " many different language packs
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
-Plug 'xavierd/clang_complete'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'paretje/deoplete-notmuch', {'for': 'mail'}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Let's make it pretty
 Plug 'chriskempson/base16-vim'
