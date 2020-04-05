@@ -1,4 +1,0 @@
-#!/bin/bash
-
-swaymsg input \* xkb_variant intl
-swaymsg input \* xkb_layout us

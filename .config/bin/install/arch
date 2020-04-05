@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# load the platform-independent definitions & functions
-source "`dirname $0`/definitions"
-# load the platform-independent installation steps
-source "`dirname $0`/common"
-
 # installs the fish shell and everything else required to work with these dotfiles
 base_shell_pkgs=(
     fish # shell of choice
@@ -37,6 +32,10 @@ wm_pkgs=(
     evscript-git # map caps lock to escape on tap + more
     wl-clipboard # clipboard tools
     libinput-gestures # swipe actions for trackpads
+    wdisplays-git # configure displays
+    adwaita-qt # nice theme
+    wob # wayland overlay bar - for volume and brightness control
+    playerctl # control music
 )
 
 # installs packages required for emacs
@@ -76,10 +75,8 @@ extra_shell_pkgs=(
 # apps which I use
 recommended_apps=(
     alacritty # nice terminal emulator written in rust
-    ttf-hack # new default terminal font
-    otf-fantasque-sans-mono # sweet font with a handwriting feel
-    otf-fira-code # nice coding font with ligatures
-    otf-fira-mono # nice coding font without ligatures
+    ttf-input # terminal font
+    otf-hasklig # nice coding font with ligatures
     firefox # browser of choice
     ttf-liberation # sans-serif font for firefox
     code # VS Code editor
@@ -88,6 +85,8 @@ recommended_apps=(
     keepassxc # password manager
     qt5-wayland # makes keepassxc work in Gnome
     zathura zathura-pdf-mupdf # pdf viewer
+    spotify # spotify client
+    spotifywm-git # fixes the WM_CLASS of the spotify window
 )
 
 # while it is possible to do withut these Gnome apps, I find they make my life so much
@@ -154,14 +153,20 @@ gtk_theme=(
     arc-icon-theme # icon theme
 )
 
+mail_pkgs=(
+    notmuch # email database
+    gmailieer # sync with gmail
+    astroid # GUI client for notmuch
+)
+
 function install_group {
     name=$1
     shift
-    confirm " - \`$name\`?" && pikaur -S --needed "$@"
+    confirm " - \`$name\`?" && yay -S --needed "$@"
 }
 
 function install_custom_mpsyt {
-    pikaur -S --needed python-mpd2
+    yay -S --needed python-mpd2
     pip3 install --user -U git+https://github.com/vn-ki/mps-youtube.git@mpd
 }
 
@@ -194,56 +199,43 @@ function install_pkgs {
     install_group xorg_pkgs ${xorg_pkgs[@]}
     install_group virtualbox_guest_pkgs ${virtualbox_guest_pkgs[@]}
     install_group bluetooth_pkgs ${bluetooth_pkgs[@]}
+    install_group mail_pkgs ${mail_pkgs[@]}
     confirm " - custom version of mps-youtube which interacts nicely with mpd (requires python)?" && install_custom_mpsyt
     confirm " - setuid root the \`evscript\` binary?" && setuid_evscript
     header "Installed all requested packages!"
 }
 
 function update_pkgs {
-    pikaur -Syu
+    yay -Syu
 }
 
-section "1" "2" "system-level configuration"
+function install_system {
+    if $FRESH_INSTALL; then
+        if pacman -Q | grep -q 'yay'; then
+            warn "\`yay\` already installed, using it to install everything else"
+        else
+            header "Installing \`yay-bin\`"
+            # first we want install an AUR helper, so we can install more packages more easily
+            mkdir -p $PKG_BUILD_DIR
+            cd $PKG_BUILD_DIR
 
-if $FRESH_INSTALL; then
-    if pacman -Q | grep -q 'pikaur'; then
-        warn "\`pikaur\` already installed, using it to install everything else"
-    else
-        header "Installing \`pikaur\`"
-        # first we want install an AUR helper, so we can install more packages more easily
-        mkdir -p $PKG_BUILD_DIR
-        cd $PKG_BUILD_DIR
+            git clone https://aur.archlinux.org/yay-bin.git
+            cd yay-bin
+            makepkg -fsri
 
-        git clone https://aur.archlinux.org/pikaur.git
-        cd pikaur
-        makepkg -fsri
+            header "Using \`yay\` to install everything else"
+        fi
 
-        header "Using \`pikaur\` to install everything else"
+        cd ~
     fi
 
-    cd ~
-fi
-
-if $FRESH_INSTALL; then
-    echo ""
-    confirm "Install Arch packages?" && install_pkgs
-    echo ""
-else
-    echo ""
-    confirm "Update Arch packages?" && update_pkgs
-    echo ""
-fi
-
-section "2" "2" "user-level configuration:"
-
-install_common
-
-echo ""
-
-if $FRESH_INSTALL; then
-    header "Congratulations, installation completed!"
-else
-    header "System updated successfully"
-fi
-
-exit 0
+    if $FRESH_INSTALL; then
+        echo ""
+        confirm "Install Arch packages?" && install_pkgs
+        echo ""
+    else
+        echo ""
+        confirm "Update Arch packages?" && update_pkgs
+        echo ""
+    fi
+}

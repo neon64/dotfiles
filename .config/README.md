@@ -85,7 +85,7 @@ To update the system, run:
 
     $ up
 
-On Arch Linux, this will use `pikaur`, on macOS, it will use `brew`.
+On Arch Linux, this will use `yay`, on macOS, it will use `brew`.
 
 Various other components are also updated:
 

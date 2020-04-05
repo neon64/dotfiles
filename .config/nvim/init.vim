@@ -9,13 +9,20 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'tpope/vim-fugitive'
 Plug 'justinmk/vim-sneak' " `s` and `S` do two letter sneaking
 Plug 'sheerun/vim-polyglot' " many different language packs
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Let's make it pretty
 Plug 'chriskempson/base16-vim'
 
 call plug#end()
 
+let g:deoplete#enable_at_startup = 1
+
 let g:airline_powerline_fonts = 0
+let g:vim_markdown_fenced_languages = ['html', 'python', 'bash=sh', 'c=c']
+" path to directory where library can be found
+let g:clang_library_path='/usr/lib/'
 
 syntax enable
 set background=dark
@@ -90,4 +97,8 @@ inoremap <Down> <C-o>:echo "No down for you!"<CR>
 
 " because I'm getting so used to spacemacs
 nnoremap <Space>fs :w<CR>
-nnoremap <Space>qz :q<CR>
+nnoremap <Space>wq :wq<CR>
+
+nmap <C-p> <Plug>MarkdownPreviewToggle
+imap <C-s> <Esc>:w<CR>i
+nmap <C-s> :w<CR>

@@ -3,7 +3,7 @@ configuration {
     width: 30;
     lines: 7;
 /*	columns: 1;*/
-	font: "cantarell 12";
+	font: "Cantarell 12";
 	bw: 0;
 /*	location: 0;*/
 	padding: 30;

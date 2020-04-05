@@ -3,16 +3,16 @@ function read_confirm
     read -l -n1 confirm -p "$argv[1]"
 
     switch "$confirm"
-      case ' ' Y y
+      case '' Y y
         return 0
-      case N n
+      case '*'
         return 1
     end
   end
 end
 
 function get_unpushed_commits
-    set --local has_upstream (command dotf rev-parse --abbrev-ref '@{upstream}' 2>/dev/null)
+    set --local has_upstream (command dotf rev-parse --abbrev-ref '@{upstream}')
     if test -n "$has_upstream"  # check there is an upstream repo configured
         and test "$has_upstream" != '@{upstream}' # Fixed #179, dont check the empty repo
         command dotf rev-list --left-right --count 'HEAD...@{upstream}' \
@@ -23,7 +23,7 @@ function get_unpushed_commits
 end
 
 function get_unpulled_commits
-    set --local has_upstream (command dotf rev-parse --abbrev-ref '@{upstream}' 2>/dev/null)
+    set --local has_upstream (command dotf rev-parse --abbrev-ref '@{upstream}')
     if test -n "$has_upstream"  # check there is an upstream repo configured
         and test "$has_upstream" != '@{upstream}' # Fixed #179, dont check the empty repo
         command dotf rev-list --left-right --count 'HEAD...@{upstream}' \
@@ -34,15 +34,15 @@ function get_unpulled_commits
 end
 
 function commit_prompt
-    echo -n (set_color green)'Would you like to commit them?'(set_color normal)' [Y/n] '
+    echo -n (set_color green)'Would you like to commit them?'(set_color normal)' (Y/n) '
 end
 
 function push_prompt
-    echo -n (set_color green)'Would you like to push them?'(set_color normal)' [Y/n] '
+    echo -n (set_color green)'Would you like to push them?'(set_color normal)' (Y/n) '
 end
 
 function pull_prompt
-    echo -n (set_color green)'Would you like to pull them?'(set_color normal)' [Y/n] '
+    echo -n (set_color green)'Would you like to pull them?'(set_color normal)' (Y/n) '
 end
 
 function check_dotf
@@ -68,7 +68,6 @@ function check_dotf
         # for some reason there is 1 too many newlines outputted here.. grr very annoying
         echo "You have unsaved changes to your dotfiles:"
         dotf -C $HOME status -s
-        echo ""
         if read_confirm commit_prompt
             dotf commit -a
         end
