@@ -1,5 +1,5 @@
 {
     "require": {
-        "atomic-deploy/client": "^0.1.10"
+        "atomic-deploy/client": "^0.2"
     }
 }

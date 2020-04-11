@@ -232,7 +232,6 @@ key_bindings:
   - { key: Q,        mods: Control,          action: Quit                }
   - { key: W,        mods: Control,          action: Quit                }
   - { key: C,        mods: Control|Shift,    chars: "\x03"               }
-    #  - { key: T,        mods: Control,          command: { program: "bash", args: ["-c", "~/Code/Rust/alacritty_new_window_cwd/target/release/alacritty_new_window_cwd"] } }
   - { key: Insert,   mods: Shift,            action: PasteSelection      }
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
