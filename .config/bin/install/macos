@@ -5,7 +5,7 @@ base_shell_pkgs=(
     fish # shell of choice
     neovim # text editor - either use because its awesome, or as console backup
     tmux # terminal multiplexer, provides multiple concurrent panes whilst running system updates using the `up` script
-    lsd # file listing in Rust
+    exa # file listing in Rust
     bat # cat clone with extras (also just happens to be written in Rust)
     git # version control
     fzf # fuzzy file finder
