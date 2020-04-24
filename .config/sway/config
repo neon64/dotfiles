@@ -12,7 +12,7 @@ set $term alacritty
 
 # preferred web browser
 set $browser firefox
-set $files io.elementary.files -n
+set $files nautilus
 
 # preferred application launcher
 set $menu rofi -show combi

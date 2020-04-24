@@ -19,7 +19,7 @@ end
 function up_inner
     # run our install script but with the `--update` parameter, which saves
     # time by not reinstalling things that (we hope) are already installed
-    install_dotf --update
+    install_dotf --autoUpdate
 
     echo ""
     echo "Press any key to exit..."

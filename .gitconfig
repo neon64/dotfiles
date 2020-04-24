@@ -1,5 +1,5 @@
 [user]
-	email = c.chamberlain@iinet.net.au
+	email = chris@chamberlain.id.au
 	name = Chris Chamberlain
 [include]
 	# includes special platform specific configuration items (eg: credential helper)

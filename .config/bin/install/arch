@@ -227,9 +227,7 @@ function install_system {
         fi
 
         cd ~
-    fi
 
-    if $FRESH_INSTALL; then
         echo ""
         confirm "Install Arch packages?" && install_pkgs
         echo ""

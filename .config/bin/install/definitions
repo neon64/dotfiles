@@ -10,10 +10,15 @@ GREEN="\033[32m"
 BOLD="\033[1m"
 RESET_FMT="\033[0m"
 OS="`uname`"
+NO_CONFIRM=false
 
 case $1 in
     '--update')
         FRESH_INSTALL=false
+        ;;
+    '--autoUpdate')
+        FRESH_INSTALL=false
+        NO_CONFIRM=true
         ;;
     * )
         FRESH_INSTALL=true
@@ -38,6 +43,9 @@ function warn {
 }
 
 function confirm {
+    if $NO_CONFIRM; then
+        return 0
+    fi
     echo -en "${BOLD}====> ${GREEN}$1${RESET_FMT}"
     while true; do
         read -n1 -p " (y/n/e) " yn
