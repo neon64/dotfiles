@@ -41,3 +41,5 @@ caps-lock-key-hl-color=ffd204FF
 caps-lock-bs-hl-color=ee2e24FF
 
 font=Cantarell Light
+
+fade-in=0.25

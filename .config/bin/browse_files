@@ -3,5 +3,5 @@
 
 actual_path=$(realpath "${1-.}")
 
-systemd-cat io.elementary.files -n "$actual_path" &
+systemd-cat nautilus -n "$actual_path" &
 disown
