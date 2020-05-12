@@ -1,5 +1,5 @@
 {
-    "editor.fontFamily": "Hasklig",
+    "editor.fontFamily": "JetBrains Mono",
     "editor.minimap.enabled": true,
     "editor.detectIndentation": true,
     "files.associations": {
@@ -8,7 +8,7 @@
     },
     "workbench.startupEditor": "welcomePage",
     "files.trimTrailingWhitespace": true,
-    "window.zoomLevel": 0,
+    "window.zoomLevel": 1,
     "php.suggest.basic": false,
     "editor.wordWrap": "on",
     "breadcrumbs.enabled": true,
@@ -27,7 +27,6 @@
         "<C-w>": false,
         "<C-q>": false
     },
-    "editor.fontSize": 13,
     "vim.useSystemClipboard": true,
     "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.synctex.synctexjs.enabled": false,
@@ -68,5 +67,7 @@
                 "%DOCFILE%"
             ]
         }
-    ]
+    ],
+    "editor.fontSize": 13,
+    "workbench.colorTheme": "Eva Dark Bold"
 }
