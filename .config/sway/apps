@@ -12,6 +12,7 @@ for_window [app_id="Alacritty"] border pixel $borderwidth
 
 for_window [app_id="org.gnome.Nautilus"] border none
 for_window [app_id="gnome-control-center"] border none; floating enable
+for_window [app_id="mpv"] floating enable
 for_window [app_id="gnome-calculator"] border none; floating enable
 for_window [app_id="gnome-clocks"] border none; floating enable
 for_window [app_id="gnome-tweaks"] border none; floating enable
@@ -48,3 +49,6 @@ assign [app_id="geary"] 8
 assign [class="keepassxc"] 9
 assign [app_id="keepassxc"] 9
 assign [app_id="blueman-manager"] 10
+assign [class="Typora"] 4
+assign [class="jetbrains-idea"] 3
+assign [class="jetbrains-clion"] 3
