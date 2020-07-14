@@ -8,23 +8,24 @@
     "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "clock", "idle_inhibitor", "tray"],
     // Modules configuration
     "sway/window": {
-        "max-length": 80
+        "format": "{}",
+        "max-length": 50
     },
     "sway/workspaces": {
         "disable-scroll": false,
         "all-outputs": true,
         "format": "{icon}",
         "format-icons": {
-            "1": "",
-            "2": "",
+            "1": "",
+            "2": "",
             "3": "",
-            "4": "",
-            "5": "",
-            "6": "6",
-            "7": "",
-            "8": "",
-            "9": "",
-            "10": "",
+            "4": "",
+            "5": "",
+            "6": "",
+            "7": "",
+            "8": "",
+            "9": "",
+            "10": "",
             "urgent": "",
             "focused": "",
             "default": ""
@@ -38,6 +39,7 @@
         "spacing": 10
     },
     "clock": {
+        "format": "{:%I:%M%p}",
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
@@ -119,11 +121,11 @@
         "format-icons": ["", ""]
     },
     "custom/spotify": {
-        "format": " {}",
-        "max-length": 40,
-        "interval": 30, // Remove this if your script is endless and write in loop
-        "exec": "$HOME/.config/waybar/mediaplayer.sh 2> /dev/null", // Script in resources folder
-        "exec-if": "pgrep mpd"
+        "format": "  {}",
+        "return-type": "json",
+        "max-length": 60,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null",
+        "exec-if": "pgrep spotify"
     },
     "idle_inhibitor": {
         "format": "{icon}",

@@ -4,8 +4,8 @@
     border: none;
     border-radius: 0;
     /* we use `serif` as a fallback so its clear if our proper font isn't installed */
-    font-family: "Input Sans Narrow", serif;
-    font-size: 13px;
+    font-family: "Input Sans Narrow", "la-regular-400", "la-solid-900", serif;
+    font-size: 12px;
     min-height: 0;
 }
 
@@ -20,6 +20,7 @@ window#waybar {
     padding: 0 12px;
     background: transparent;
     color: @base07;
+    font-size: 14px;
     border-bottom: 3px solid transparent;
     transition: background-color 0.3s ease, border-color 0.3s ease;
 }
@@ -146,8 +147,9 @@ window#waybar {
 }
 
 #custom-spotify {
-    background: #66cc99;
-    color: #2a5c45;
+    /*background: #66cc99;
+    color: #2a5c45;*/
+    border-bottom: 3px solid @base0B;
 }
 
 #idle_inhibitor {

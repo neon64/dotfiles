@@ -24,8 +24,8 @@ wm_pkgs=(
     slurp # select area to screenshot
     mako # notification daemon
     swayshot # screenshot wrapper
-    cantarell-fonts # chosen UI font for sway and waybar
-    otf-font-awesome # chosen icon font for waybar
+    ttf-input # chosen UI font for sway and waybar
+    ttf-line-awesome # chosen icon font for waybar - open-source version of FontAwesome with thinner icons
     swaylock-blur-git # cool util which blurs background for swaylock
     brillo # provides an `xbacklight` replacement for wayland, used in sway config
     alsa-utils # provides an `amixer` command used for volume control
@@ -69,14 +69,13 @@ extra_shell_pkgs=(
     gnome-keyring # provider for libsecret - allows us to store git credentials for the command line
     hwinfo # useful for debugging info like framebuffer resolutions
     reptyr # attach background process to a terminal
-    expac # extra pacman info
 )
 
 # apps which I use
 recommended_apps=(
     alacritty # nice terminal emulator written in rust
     ttf-input # terminal font
-    otf-hasklig # nice coding font with ligatures
+    ttf-jetbrains-mono # nice coding font with ligatures
     firefox # browser of choice
     ttf-liberation # sans-serif font for firefox
     code # VS Code editor

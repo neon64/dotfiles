@@ -1,99 +1,51 @@
+# i3 config file (v4)
+
 ### Variables
 #
 # use super as the modifier key -
 # warning - on most keyboards nothing maps to super by default so you will
 # be unable to exit or launch anything!
-set $mod Mod4
+    set $mod Mod4
 
-# preferred terminal emulator
-set $term alacritty
-# set $term cage -d -- alacritty
-# set $term gnome-terminal
+    exec_always setxkbmap -option "caps:super,altwin:ctrl_alt_win"
 
-# preferred web browser
-set $browser firefox
-set $files nautilus
+    # preferred terminal emulator
+    set $term gnome-terminal
 
-# preferred application launcher
-set $menu rofi -show combi
+    # preferred web browser
+    set $browser firefox
+    set $files nautilus -w
 
-# movement keys
-set $up l
-set $down k
-set $left j
-set $right semicolon
+    # preferred application launcher
+    set $menu rofi -show combi
 
-# ricing
-set $borderwidth 1
+    # movement keys
+    set $up l
+    set $down k
+    set $left j
+    set $right semicolon
+
+    # ricing
+    set $borderwidth 5
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
 
-output * bg ~/pics/wallpapers/wallpaper-current.jpg fill
+    exec_always --no-startup-id feh --bg-fill ~/pics/wallpapers/wallpaper-current.jpg
 
-#
-# Example output configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running swaymsg -t get_outputs
+    exec_always --no-startup-id compton
 
-# Generic Keyboard
-input * {
-    xkb_options caps:super
-}
+    exec --no-startup-id xautolock -time 5 -locker i3lock-fancy-multimonitor &
 
-# 2010 MacBook Pro hardware
-input "1452:566:bcm5974" {
-    tap enabled
-    natural_scroll enabled
-    #dwt disabled
-    #accel_profile adaptive
-    #accel_profile adaptive
-    #pointer_accel -100, 100
-    click_method clickfinger
-}
-
-input "1452:566:Apple_Inc._Apple_Internal_Keyboard_/_Trackpad" {
-    xkb_options caps:super,ctrl:swap_lwin_lctl
-}
-
-input "1452:591:Apple_Inc._Apple_Keyboard" {
-    xkb_options caps:super,ctrl:swap_lwin_lctl
-}
-
-# Wireless mouse
-input "1452:781:Robert_Chamberlain’s_M" {
-    tap enabled
-    natural_scroll enabled
-}
-
-# Thinkpad X1 Extreme Hardware
-input "1:1:AT_Translated_Set_2_keyboard" {
-    # according to the xkb docs, we map control to alt, and then alt to win, thus
-    # we have a poor man's emulation of an Apple keyboard.
-    xkb_options caps:super,altwin:ctrl_alt_win
-}
-
-input "2:7:SynPS/2_Synaptics_TouchPad" {
-    tap enabled
-    middle_emulation disabled
-    natural_scroll enabled
-    click_method clickfinger
-}
-
-# more specific configuration at runtime
-exec_always ~/.config/sway/configure.sh
-exec mako
+    exec --no-startup-id $HOME/.config/polybar/launch.sh
+    # exec --no-startup-id polybar bottom
 
 #
 # Basics:
 #
-    bindsym $mod+Shift+i exec bash -c "echo $(swaymsg -t get_tree | grep -C 50 '\"focused\": true') > $HOME/foo"
-
     # the $term variable is expanded at runtime
-    bindsym $mod+Return exec $$term
+    bindsym $mod+Return exec $term
     bindsym $mod+x exec alacritty --title "Floating Terminal" --config-file ~/.config/alacritty/alacritty_big.yml -e fish -c 'env fish_custom_greeting= fish'
     bindsym $mod+c exec $browser
 
@@ -103,16 +55,20 @@ exec mako
     # start your launcher
     bindsym $mod+d exec $menu
     bindsym $mod+s exec $files
-    # bindsym $mod+d exec alacritty --title "Command Launcher" --config-file ~/.config/alacritty/alacritty_big.yml -e ~/.config/bin/launch_util
 
     # Drag floating windows by holding down $mod and left mouse button. Resize
     # them with right mouse button + $mod. Despite the name, also works for
     # non-floating windows. Change normal to inverse to use left mouse button
     # for resizing and right mouse button for dragging.
-    floating_modifier $mod normal
+    floating_modifier Mod4
 
     # reload the configuration file
     bindsym $mod+Shift+c reload
+
+    # screenshot using a 'timestamped' filename
+    # bindsym $mod+Shift+s exec bash -c "slurp -d | grim -g - ~/Pictures/Screenshots/$(date +u%Y-%m-%d-%H%M%S_grim.png)"
+
+    bindsym $mod+Shift+s exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/pics/'
 
     # swayshot
     #
@@ -124,23 +80,18 @@ exec mako
     # Save screenshots to $SCREENSHOTS folder.
     # The default value is XDG_PICTURES_DIR, see
     # https://wiki.archlinux.org/index.php/XDG_user_directories
+
     bindsym Print exec swayshot
     bindsym Mod1+Print exec swayshot window
-    bindsym $mod+Shift+s exec swayshot region
+    bindsym Shift+Print exec swayshot region
 
-    # exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning \
-        -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.'\
-        -b 'Yes, exit sway' 'swaymsg exit'
-    # used to be: exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"ww
+    # exit i3 (logs you out of your X session)
+    bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
 #
 # Moving around
 #
     # Move your focus around using the home row
-    #bindsym $mod+$left exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs left
-    #bindsym $mod+$down exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs down
-    #bindsym $mod+$up exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs up
-    #bindsym $mod+$right exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs right
     bindsym $mod+$left focus left
     bindsym $mod+$right focus right
     bindsym $mod+$up focus up
@@ -162,11 +113,13 @@ exec mako
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+
+    bindsym $mod+n move workspace to output up
+    bindsym $mod+m move workspace to output down
 #
 # Workspaces:
 #
 
-    workspace 10
     # switch to workspace
     bindsym $mod+1 workspace 1
     bindsym $mod+2 workspace 2
@@ -178,6 +131,9 @@ exec mako
     bindsym $mod+8 workspace 8
     bindsym $mod+9 workspace 9
     bindsym $mod+0 workspace 10
+
+    workspace 10 output 0
+
     # move focused container to workspace
     bindsym $mod+Shift+1 move container to workspace 1
     bindsym $mod+Shift+2 move container to workspace 2
@@ -224,35 +180,28 @@ exec mako
 #
 
     # Volume
-    exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
-    bindsym XF86AudioRaiseVolume exec amixer -q set Master 2%+ unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
-    bindsym XF86AudioLowerVolume exec amixer -q set Master 2%- unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
-    bindsym XF86AudioMute exec (amixer get Master | grep off > /dev/null && amixer -q set Master unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob) || (amixer -q set Master mute && echo 0 > $SWAYSOCK.wob)
+    bindsym XF86AudioRaiseVolume exec amixer -q set Master 2%+ unmute
+    bindsym XF86AudioLowerVolume exec amixer -q set Master 2%- unmute
+    bindsym XF86AudioMute exec (amixer get Master | grep off > /dev/null && amixer -q set Master unmute ) || (amixer -q set Master mute && echo 0 > $SWAYSOCK.wob)
 
     # Volume
-    # bindsym --locked XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+
-    # bindsym --locked XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-
-    # bindsym --locked XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle
+    # bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+
+    # bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-
+    # bindsym XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle
 
     # Media player
-    bindsym --locked XF86AudioPlay exec mpc toggle
+    bindsym XF86AudioPlay exec mpc toggle
     # bindsym XF86AudioPause exec mpc pause
-    bindsym --locked XF86AudioPrev exec mpc prev
-    bindsym --locked XF86AudioNext exec mpc next
+    bindsym XF86AudioPrev exec mpc prev
+    bindsym XF86AudioNext exec mpc next
 
     # Brightness (a fade over 100ms)
-    bindsym --locked XF86MonBrightnessUp exec brillo -A 5 -u 100000 && brillo -G | awk '{print int($1)}' > $SWAYSOCK.wob
-    bindsym --locked XF86MonBrightnessDown exec brillo -U 5 -u 100000 && brillo -G | awk '{print int($1)}' > $SWAYSOCK.wob
+    bindsym XF86MonBrightnessUp exec xbacklight -inc 10;  exec pkill --signal SIGRTMIN+11 i3blocks
+    bindsym XF86MonBrightnessDown exec xbacklight -dec 10;  exec pkill --signal SIGRTMIN+11 i3blocks
 
 
     # Sleep
-    bindsym $mod+Shift+u exec swaylock
-    exec swayidle -w timeout 180 'swaylock -f' timeout 320 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f'
-    # exec swayidle -w timeout 180 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' lock 'swaylock' unlock 'killall swaylock' before-sleep 'swaylock'
-
-    bar {
-        swaybar_command waybar
-    }
+    bindsym $mod+Shift+u exec --no-startup-id i3lock-fancy-multimonitor
 
 #
 # Resize mode:
@@ -296,26 +245,42 @@ exec mako
     # If there are multiple scratchpad windows, this command cycles through them.
     bindsym $mod+minus scratchpad show
 
-### Ricing
+    ## Base16 OneDark
+    # Author: Lalit Magant (http://github.com/tilal6991)
 
-    include colorscheme
+    set $base00 #282c34
+    set $base01 #353b45
+    set $base02 #3e4451
+    set $base03 #545862
+    set $base04 #565c64
+    set $base05 #abb2bf
+    set $base06 #b6bdca
+    set $base07 #c8ccd4
+    set $base08 #e06c75
+    set $base09 #d19a66
+    set $base0A #e5c07b
+    set $base0B #98c379
+    set $base0C #56b6c2
+    set $base0D #61afef
+    set $base0E #c678dd
+    set $base0F #be5046
 
     # fits Base16-Tomorrow-Night theme
-    set $bd-color              $base01
-    set $focused-bd-color      $base00
-    set $urgent-bd-color       $base08
-    set $indicator             $base0B
+    set $bd-color              #353b45
+    set $focused-bd-color      #282c34
+    set $urgent-bd-color       #e06c75
+    set $indicator             #98c379
 
-    set $bg-color              $base01
-    set $focused-bg-color      $base00
+    set $bg-color              #353b45
+    set $focused-bg-color      #282c34
 
-    set $inner-bd-color         $base02
-    set $focused-inner-bd-color $base02
+    set $inner-bd-color         #3e4451
+    set $focused-inner-bd-color #3e4451
 
-    set $inactive-text-color   $base03
-    set $text-color            $base05
-    set $focused-text-color    $base07
-    set $urgent-bg-color       $base08
+    set $inactive-text-color   #545862
+    set $text-color            #abb2bf
+    set $focused-text-color    #c8ccd4
+    set $urgent-bg-color       #e06c75
 
     # window colors
     #                       border              background          text                  indicator      child border
@@ -324,20 +289,45 @@ exec mako
     client.focused_inactive $bd-color           $bg-color           $text-color           $inner-bd-color     $inner-bd-color
     client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $urgent-bd-color     $urgent-bd-color
 
+
     # window borders and gaps
     default_border normal $borderwidth
     default_floating_border none
     hide_edge_borders both
     focus_wrapping no
+    # gaps outer 8
+    # gaps inner 16
+    # border_radius 8
+    default_border none
+    # title_align center
 
-    font pango:Input Sans Narrow 9
+    font pango:Input Mono 10
 
-# You may want this:
-#
-# include ~/.config/sway/conf.d/*
-#
-# Protip:
-#
-# include ~/.config/sway/`hostname`/*
+    for_window [class="Alacritty"] border pixel 0
+    for_window [class="Nautilus"] border none
 
-include ~/.config/sway/apps
+    assign [class="qutebrowser"] 1
+    assign [class="Atom"] 3
+    # let us open a terminal on any window
+    # assign [class="Gnome-terminal"] 2
+    # assign [class="Alacritty"] 2
+    assign [class="Firefox"] 1
+    assign [class="Code"] 3`
+    assign [class="Evolution"] 7
+    assign [class="Geary"] 7
+    assign [class="Google-chrome"] 1
+    assign [class="firefox"] 1
+    assign [class="code-oss"] 3
+    assign [class="keepassxc"] 9
+    assign [class="GitKraken"] 4
+
+    for_window [class="Gnome-calculator"] floating enable
+    for_window [class="Gnome-calculator"] border none
+    for_window [title="Question"] floating enable
+    for_window [class="chromium"] border none
+    for_window [class="Firefox"] border none
+    for_window [class="Code"] border none
+    for_window [class="Gnome-control-center"] floating enable
+    for_window [class="Gnome-terminal"] border none
+
+    # exitfor_window [class=".*"] title_format "<span size="smaller">%title</span>"

@@ -88,7 +88,7 @@ function entry_point() {
     echo ""
 
     # `-e` allows the default value to actually work
-    read -e -i "~/Code/dotfiles" -p "$(echo -e ${GREEN}Where should the dotfiles repository be installed? ${RESET_FMT})" rel_install_location </dev/tty
+    read -e -i "~/code/dotfiles" -p "$(echo -e ${GREEN}Where should the dotfiles repository be installed? ${RESET_FMT})" rel_install_location </dev/tty
 
     echo ""
 
@@ -142,7 +142,7 @@ if [ \$status -ne 0 ]; then
     echo -e "\${BOLD}   -> \${YELLOW}Warning: clone of repository failed with exit code \$status\${RESET_FMT}"
 fi
 echo -e "\${BOLD}====> \${BLUE}Attempting to checkout dotfiles repository \${RESET_FMT}"
-dotf checkout && dotf submodule update --init --recursive 
+dotf checkout && dotf submodule update --init --recursive
 if dotf diff-index --quiet HEAD; then
     echo -e "\${BOLD}====> \${GREEN}Dotfiles repository checked out successfully\${RESET_FMT}"
 else

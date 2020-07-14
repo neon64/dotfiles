@@ -133,3 +133,5 @@ if status --is-interactive
     set -g fish_color_user brgreen
     set -g fish_color_valid_path \x2d\x2dunderline
 end
+
+thefuck --alias | source
