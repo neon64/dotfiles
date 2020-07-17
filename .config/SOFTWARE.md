@@ -10,8 +10,8 @@ Here's a list in no particular order of the apps I use.
 
 **Window Manager**
  - sway, as my daily driver when I'm on Linux
-        - `waybar` as the bar, with icons from `otf-font-awesome`.
-        - `rofi` - as of sway 1.0 it works really nicely (except perhaps window switching)
+        - `waybar` as the bar, with icons from `ttf-line-awesome`.
+        - `wofi` (similar to rofi)
         - `fzf` drives a lot of my config
  - On my old machine I had Gnome installed, just in case. There's nothing in my
    dotfiles really specific to Gnome though.
@@ -29,28 +29,22 @@ Here's a list in no particular order of the apps I use.
  - [Fisherman](https://github.com/fisherman/fisherman)
 
 **Editor**
+ - CLion / Intellij IDEA IDEs
  - Visual Studio Code
  - [Neovim](https://github.com/neovim/neovim), when I need to use the command line
      - [vim-plug](https://github.com/junegunn/vim-plug)
      - I'm now trying to learn vim as a primary text editor. Hopefully it works out.
 - Emacs with [Doom Emacs](https://github.com/hlissner/doom-emacs) config
+     - haven't gotten to learn it
      - seems slightly more fancy than Vim, and I love SPC keybindings + Evil Mode
 
 **Browser**
  - Firefox
-    - As a Rust user, I really appreciate all the work that has gone into
-   so-called 'Firefox Quantum'
-    - I also must admit I am wary of a Chrome/Blink monopoly over web browsers, and I would use Firefox even if it were somewhat technically inferior.
+    - I am wary of a Chrome/Blink monopoly over web browsers, and I would use Firefox even if it were somewhat technically inferior (though I believe at the moment they are basically neck and neck)
     - I'm working on a custom `userChrome.css` to make it look spectacular
- - <strike>Qutebrowser</strike>
-    - haven't used for ages
-    - I liked the vim keybindings but my config isn't fully complete yet
 
 **Music**
- - YouTube (including mps-youtube in terminal)
- - <strike>Mopidy as a backend and then ncmpcpp for a terminal UI</strike>
-    - having issues with this setup at the moment (YouTube and Google Play Music backends aren't very mature)
-    - Switched to `mpd` - can now use `ncmpcpp` visualizer, or `cava`
+ - Spotify
 
 ## Useful scripts
 
@@ -62,7 +56,7 @@ Most scripts are in `~/.config/bin`, however a few are still in `~/.config/fish/
  - `browse_web`: open a URL or search Google
  - `dotf`: manage dotfiles with git
  - `check_dotf` (fish function): check dotfiles are up to date
- - `intl_keyboard`: activate us-intl keyboard in sway
+ - `kbd`: activate us-intl keyboard in sway
  - `launch_util`: command-line app launcher with fzf - currently not used
  - `package_sizes`: list packages sorted by size
  - `package_orphans`: list orphaned packages\
