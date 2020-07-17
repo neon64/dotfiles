@@ -15,7 +15,11 @@ set $browser firefox
 set $files nautilus
 
 # preferred application launcher
-set $menu rofi -show combi
+set $menu wofi --show drun --width=700 --prompt= --no-actions --height=300 --allow-images
+
+# rofi -show combi
+
+#
 
 # movement keys
 set $up l

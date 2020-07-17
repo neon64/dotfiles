@@ -8,17 +8,17 @@ indicator
 indicator-radius=120
 indicator-thickness=8
 
-key-hl-color=cccccc
+key-hl-color=ffffff
 
 separator-color=00000000
 
-inside-color=00000088
+inside-color=00000044
 inside-clear-color=ffd20400
 inside-caps-lock-color=009ddc00
 inside-ver-color=d9d8d800
 inside-wrong-color=ee2e2400
 
-ring-color=231f20D9
+ring-color=#231f20D9
 ring-clear-color=231f20D9
 ring-caps-lock-color=231f20D9
 ring-ver-color=231f20D9

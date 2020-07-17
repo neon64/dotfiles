@@ -28,6 +28,8 @@ for_window [class="Mailspring"] border pixel $borderwidth
 for_window [class="Spotify"] border pixel $borderwidth
 for_window [app_id="astroid"] border pixel $borderwidth
 for_window [app_id="io.elementary.files"] border pixel $borderwidth
+for_window [app_id="pavucontrol"] floating enable
+
 
 # default workspaces
 assign [class="qutebrowser"] 1

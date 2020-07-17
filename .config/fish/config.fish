@@ -28,10 +28,10 @@ set PATH $PATH $HOME/.config/composer/vendor/bin
 # Under the status quo $MANPATH was unset, so `man` would use default paths.
 # OCaml upset this by setting $MANPATH.. Thus I manually commented out the line.
 # This will probably be broken by package updates
-if test -d $HOME/.opam
-    source /home/chris/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
-#     source $HOME/.opam/opam-init/init.fish #> /dev/null 2> /dev/null; or true
-end
+# if test -d $HOME/.opam
+#     source /home/chris/.opam/opam-init/init.fish > /dev/null 2> /dev/null; or true
+# #     source $HOME/.opam/opam-init/init.fish #> /dev/null 2> /dev/null; or true
+# end
 
 set -x EDITOR (which nvim)
 
@@ -52,8 +52,12 @@ set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head
 # commands like dbus-run-session (for starting Gnome
 # Terminal) start a non-interactive login shell
 if status --is-login && status --is-interactive
+    if set -q XDG_VTNR && test "$XDG_VTNR" -eq "1" && test ! -e /tmp/sway-autoopen.tag
+        touch /tmp/sway-autoopen.tag
+        env _JAVA_AWT_WM_NONREPARENTING=1 MOZ_ENABLE_WAYLAND=1 QT_QPA_PLATFORM=wayland-egl QT_STYLE_OVERRIDE=adwaita XDG_SESSION_TYPE=wayland systemd-cat -t sway sway --my-next-gpu-wont-be-nvidia
+    end
     if set -q XDG_VTNR && test "$XDG_VTNR" -gt "0" -a "$XDG_VTNR" -lt "6"
-        set LINE_UP "\033[1A"
+        # set LINE_UP "\033[1A"
         set CLEAR_LINE "\033[K"
         echo -e "$LINE_UP$CLEAR_LINE$LINE_UP$CLEAR_LINE$LINE_UP$CLEAR_LINE$LINE_UP"
         exec ~/code/fdm/fdm
