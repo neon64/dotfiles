@@ -22,6 +22,9 @@ window:
     columns: 80
     lines: 24
 
+  dynamic_title: true
+
+
   # Window padding (changes require restart)
   #
   # Blank space added around the window in pixels. This padding is scaled
@@ -120,7 +123,7 @@ font:
 #
 # To completely disable the visual bell, set its duration to 0.
 #
-visual_bell:
+bell:
   animation: Linear #EaseOutExpo
   duration: 200
 
@@ -166,8 +169,6 @@ mouse:
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-
-dynamic_title: true
 
 cursor:
   # Cursor style

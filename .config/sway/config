@@ -17,10 +17,6 @@ set $files nautilus
 # preferred application launcher
 set $menu wofi --show drun --width=700 --prompt= --no-actions --height=300 --allow-images
 
-# rofi -show combi
-
-#
-
 # movement keys
 set $up l
 set $down k
@@ -90,6 +86,7 @@ input "2:7:SynPS/2_Synaptics_TouchPad" {
 # more specific configuration at runtime
 exec_always ~/.config/sway/configure.sh
 exec mako
+exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-session save-loop 240
 
 #
 # Basics:
@@ -135,7 +132,7 @@ exec mako
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning \
         -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.'\
-        -b 'Yes, exit sway' 'swaymsg exit'
+        -b 'Yes, exit sway' 'bash -c "~/code/sway-session/sway-session save; swaymsg exit"'
     # used to be: exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"ww
 #
 # Moving around

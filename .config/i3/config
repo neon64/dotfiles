@@ -10,7 +10,7 @@
     exec_always setxkbmap -option "caps:super,altwin:ctrl_alt_win"
 
     # preferred terminal emulator
-    set $term gnome-terminal
+    set $term alacritty
 
     # preferred web browser
     set $browser firefox
@@ -32,21 +32,19 @@
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
 
-    exec_always --no-startup-id feh --bg-fill ~/pics/wallpapers/wallpaper-current.jpg
-
-    exec_always --no-startup-id compton
 
     exec --no-startup-id xautolock -time 5 -locker i3lock-fancy-multimonitor &
-
     exec --no-startup-id $HOME/.config/polybar/launch.sh
-    # exec --no-startup-id polybar bottom
+    exec --no-startup-id xrandr --output HDMI-0 --auto --above eDP-1-1
+    exec --no-startup-id compton
+    exec --no-startup-id feh --bg-fill ~/pics/wallpapers/wallpaper-current.jpg
 
 #
 # Basics:
 #
     # the $term variable is expanded at runtime
     bindsym $mod+Return exec $term
-    bindsym $mod+x exec alacritty --title "Floating Terminal" --config-file ~/.config/alacritty/alacritty_big.yml -e fish -c 'env fish_custom_greeting= fish'
+    # bindsym $mod+x exec alacritty --title "Floating Terminal" --config-file ~/.config/alacritty/alacritty_big.yml -e fish -c 'env fish_custom_greeting= fish'
     bindsym $mod+c exec $browser
 
     # kill focused window
@@ -63,27 +61,13 @@
     floating_modifier Mod4
 
     # reload the configuration file
+
     bindsym $mod+Shift+c reload
 
     # screenshot using a 'timestamped' filename
     # bindsym $mod+Shift+s exec bash -c "slurp -d | grim -g - ~/Pictures/Screenshots/$(date +u%Y-%m-%d-%H%M%S_grim.png)"
 
     bindsym $mod+Shift+s exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/pics/'
-
-    # swayshot
-    #
-    # Print screen helper for sway: add keyboard shortcuts for screenshots:
-    # * Print Scr for whole screen
-    # * Alt + Print Scr for a focused window
-    # * Shift + Print Scr for a selected region
-    #
-    # Save screenshots to $SCREENSHOTS folder.
-    # The default value is XDG_PICTURES_DIR, see
-    # https://wiki.archlinux.org/index.php/XDG_user_directories
-
-    bindsym Print exec swayshot
-    bindsym Mod1+Print exec swayshot window
-    bindsym Shift+Print exec swayshot region
 
     # exit i3 (logs you out of your X session)
     bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
@@ -172,8 +156,8 @@
     bindsym $mod+a focus parent
 
     # manipulate gaps settings
-    bindsym $mod+G gaps inner all plus 10; hide_edge_borders none
-    bindsym $mod+Shift+G gaps inner all set 0; gaps outer all set 0; hide_edge_borders both
+    bindsym $mod+G gaps inner all plus 10 # ; hide_edge_borders none
+    bindsym $mod+Shift+G gaps inner all set 0 #; gaps outer all set 0; hide_edge_borders both
 
 #
 # Special keys
@@ -329,5 +313,6 @@
     for_window [class="Code"] border none
     for_window [class="Gnome-control-center"] floating enable
     for_window [class="Gnome-terminal"] border none
+    for_window [class="Gnome-system-monitor"] floating enable
 
     # exitfor_window [class=".*"] title_format "<span size="smaller">%title</span>"
