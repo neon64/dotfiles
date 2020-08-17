@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+sudo rmmod nouveau nvidia nvidia_drm nvidia_modeset
+sudo bash -c 'echo OFF > /proc/acpi/bbswitch'
+cat /proc/acpi/bbswitch
+

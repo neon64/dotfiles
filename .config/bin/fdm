@@ -1,0 +1,156 @@
+#!/bin/bash
+
+# A really simple 'display manager' with hardcoded options.
+# not actually a display manager, because it just runs after
+# you manually login using the normal tty.
+# powered by fzf
+
+LINE_UP="\033[1A"
+CLEAR_LINE="\033[K"
+BLUE="\e[34m"
+MAGENTA="\e[35m"
+RED="\e[31m"
+YELLOW="\e[33m"
+GREEN="\e[32m"
+BOLD="\e[1m"
+RESET_FMT="\e[0m"
+PREFERRED_SHELL="fish"
+
+wayland_env_vars() {
+    export _JAVA_AWT_WM_NONREPARENTING=1
+    export MOZ_ENABLE_WAYLAND=1
+    export QT_QPA_PLATFORM=wayland-egl
+    export QT_STYLE_OVERRIDE=adwaita
+    # needed for Gnome Shell and Plasma Shell
+    export XDG_SESSION_TYPE=wayland
+
+    # https://wiki.archlinux.org/index.php/GNOME/Keyring#xinitrc_method
+    eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
+    export SSH_AUTH_SOCK
+}
+
+unset_wayland_env_vars() {
+    unset _JAVA_AWT_WM_NONREPARENTING
+    unset MOZ_ENABLE_WAYLAND
+    unset QT_QPA_PLATFORM
+    unset QT_STYLE_OVERRIDE
+    unset XDG_SESSION_TYPE
+}
+
+main_menu() {
+    echo -e "${BLUE}Launch:${RESET_FMT}"
+
+    options="sway
+gnome
+plasma
+xorg
+fullscreen terminal
+virtual console
+poweroff
+reboot
+suspend
+logout"
+    selection=$(echo "$options" | fzf --reverse --height=10 --color=16 )
+    echo -en "$LINE_UP$CLEAR_LINE"
+    case "$selection" in
+        'sway')
+            echo -e "${GREEN}Starting Sway...${RESET_FMT}"
+            wayland_env_vars
+            systemd-cat -t sway sway --my-next-gpu-wont-be-nvidia
+            unset_wayland_env_vars
+            echo -en "$LINE_UP$CLEAR_LINE"
+            ;;
+        'gnome')
+            echo -e "${GREEN}Starting Gnome Shell...${RESET_FMT}"
+            wayland_env_vars
+            systemd-cat -t gnome-session dbus-run-session gnome-session
+            unset_wayland_env_vars
+            echo -en "$LINE_UP$CLEAR_LINE"
+            ;;
+        'plasma')
+            echo -e "${GREEN}Starting KDE Plasma...${RESET_FMT}"
+            wayland_env_vars
+            systemd-cat -t plasma dbus-run-session startplasma-wayland
+            unset_wayland_env_vars
+            echo -en "$LINE_UP$CLEAR_LINE"
+            ;;
+        'xorg')
+            echo -e "${BLUE}Starting Xorg With:${RESET_FMT}"
+            options="gnome [default]
+gnome (discrete GPU)
+plasma
+plasma (discrete GPU)
+i3
+i3 (discrete GPU)
+.. [go back]"
+            wm=$(echo "$options" | fzf --reverse --height=10 --color=16 )
+            echo -en "$LINE_UP$CLEAR_LINE"
+            case "$wm" in
+                "gnome [default]")
+                    systemd-cat -t xorg startx ~/.config/environments/xinitrc-gnome
+                    ;;
+                "gnome (discrete GPU)")
+                    nvidia-xrun ~/.config/environments/xinitrc-gnome
+                    ;;
+                "i3")
+                    systemd-cat -t xorg startx ~/.config/environments/xinitrc-i3
+                    ;;
+                "i3 (discrete GPU)")
+                    nvidia-xrun ~/.config/environments/xinitrc-i3
+                    ;;
+                "plasma")
+                    systemd-cat -t xorg startx ~/.config/environments/xinitrc-plasma
+                    ;;
+                "plasma (discrete GPU)")
+                    nvidia-xrun ~/.config/environments/xinitrc-plasma
+                    ;;
+                ".. [go back]" | *)
+                    return
+                    ;;
+            esac
+            ;;
+        'fullscreen terminal')
+            options="kitty [default]
+alacritty
+.. [go back]"
+            app=$(echo "$options" | fzf --reverse --height=10 --color=16 )
+            echo -en "$LINE_UP$CLEAR_LINE"
+            if [ "$app " = "" ] || [ "$app" = "kitty [default]" ]; then
+                app="kitty"
+            elif [ "$app" = ".. [go back]" ] || [ "$app" = "" ]; then
+                return
+            fi
+            echo -e "${GREEN}Launching $app fullscreen inside cage...${RESET_FMT}"
+            echo -e "${BLUE}Starting fullscreen terminal with app:${RESET_FMT}"
+            wayland_env_vars
+            systemd-cat -t cage ~/Code/cage/build/cage -dt $app
+            unset_wayland_env_vars
+            echo -en "$LINE_UP$CLEAR_LINE"
+            ;;
+        "poweroff")
+            poweroff
+            ;;
+        "suspend")
+            systemctl suspend
+            ;;
+        "reboot")
+            reboot_chooser
+            echo -en "$LINE_UP$CLEAR_LINE"
+            ;;
+        "logout")
+            exit
+            ;;
+        "virtual console" | *)
+            clear
+            $PREFERRED_SHELL
+            clear
+            echo ""
+            ;;
+    esac
+
+}
+
+while :
+do
+    main_menu
+done
