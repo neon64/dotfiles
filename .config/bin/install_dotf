@@ -9,7 +9,7 @@ case $OS in
         'Linux')
             distro=$(uname -r)
             case "$distro" in
-                *ARCH* | *arch*)
+                *ARCH* | *arch* | '4.4.0-18362-Microsoft')
                     source "`dirname $0`/install_dotfiles/arch"
                     ;;
                 *)

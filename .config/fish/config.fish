@@ -107,9 +107,11 @@ if status --is-interactive
     if [ ! -z "$GNOME_TERMINAL_SCREEN" ]; or [ "$TERM" = 'xterm-kitty' ]; or [ ! -z "$SSH_TTY" ]
         bash ~/.config/colors/theme.sh
     end
-
-    set theme (cat ~/.config/colors/current-theme)
-    source ~/.config/colors/base16-fzf/fish/$theme.fish
+    
+    if test -e ~/.config/colors/current-theme
+        set theme (cat ~/.config/colors/current-theme)
+        source ~/.config/colors/base16-fzf/fish/$theme.fish
+    end
 
     # unset all universal variables
     # for v in (set --show | string replace -rf '^\$([^:[]+).*: set in universal.*' '$1')
@@ -140,4 +142,6 @@ if status --is-interactive
     set -g fish_color_valid_path \x2d\x2dunderline
 end
 
-thefuck --alias | source
+if type -q thefuck
+    thefuck --alias | source
+end
