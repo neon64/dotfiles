@@ -37,27 +37,48 @@ unset_wayland_env_vars() {
     unset XDG_SESSION_TYPE
 }
 
+start_sway() {
+    wayland_env_vars
+    grep -q '^flags.*hypervisor' /proc/cpuinfo && export WLR_NO_HARDWARE_CURSORS=1
+    systemd-cat -t sway sway --my-next-gpu-wont-be-nvidia
+    unset_wayland_env_vars
+}
+
+start_sway_nouveau() {
+    sudo modprobe nouveau
+    start_sway
+    kill_discrete_gpu
+}
+
 main_menu() {
     echo -e "${BLUE}Launch:${RESET_FMT}"
 
     options="sway
+sway (with discrete GPU)
 gnome
+gnome (on xorg)
+gnome (on xorg, nvidia drivers)
 plasma
-xorg
-fullscreen terminal
-virtual console
+plasma (on xorg)
+plasma (on xorg, nvidia drivers)
+i3 (on xorg)
+i3 (on xorg, nvidia drivers)
+exit to virtual console
 poweroff
 reboot
 suspend
 logout"
-    selection=$(echo "$options" | fzf --reverse --height=10 --color=16 )
+    selection=$(echo "$options" | fzf --reverse --height=20 --color=16 )
     echo -en "$LINE_UP$CLEAR_LINE"
     case "$selection" in
         'sway')
             echo -e "${GREEN}Starting Sway...${RESET_FMT}"
-            wayland_env_vars
-            systemd-cat -t sway sway --my-next-gpu-wont-be-nvidia
-            unset_wayland_env_vars
+            start_sway
+            echo -en "$LINE_UP$CLEAR_LINE"
+            ;;
+        'sway (with discrete GPU)')
+            echo -e "${GREEN}Starting Sway with Discrete GPU...${RESET_FMT}"
+            start_sway_nouveau
             echo -en "$LINE_UP$CLEAR_LINE"
             ;;
         'gnome')
@@ -67,6 +88,12 @@ logout"
             unset_wayland_env_vars
             echo -en "$LINE_UP$CLEAR_LINE"
             ;;
+        'gnome (on xorg)')
+            systemd-cat -t xorg startx ~/.config/environments/xinitrc-gnome
+            ;;
+        'gnome (on xorg, nvidia drivers)')
+            nvidia-xrun ~/.config/environments/xinitrc-gnome
+            ;;
         'plasma')
             echo -e "${GREEN}Starting KDE Plasma...${RESET_FMT}"
             wayland_env_vars
@@ -74,58 +101,17 @@ logout"
             unset_wayland_env_vars
             echo -en "$LINE_UP$CLEAR_LINE"
             ;;
-        'xorg')
-            echo -e "${BLUE}Starting Xorg With:${RESET_FMT}"
-            options="gnome [default]
-gnome (discrete GPU)
-plasma
-plasma (discrete GPU)
-i3
-i3 (discrete GPU)
-.. [go back]"
-            wm=$(echo "$options" | fzf --reverse --height=10 --color=16 )
-            echo -en "$LINE_UP$CLEAR_LINE"
-            case "$wm" in
-                "gnome [default]")
-                    systemd-cat -t xorg startx ~/.config/environments/xinitrc-gnome
-                    ;;
-                "gnome (discrete GPU)")
-                    nvidia-xrun ~/.config/environments/xinitrc-gnome
-                    ;;
-                "i3")
-                    systemd-cat -t xorg startx ~/.config/environments/xinitrc-i3
-                    ;;
-                "i3 (discrete GPU)")
-                    nvidia-xrun ~/.config/environments/xinitrc-i3
-                    ;;
-                "plasma")
-                    systemd-cat -t xorg startx ~/.config/environments/xinitrc-plasma
-                    ;;
-                "plasma (discrete GPU)")
-                    nvidia-xrun ~/.config/environments/xinitrc-plasma
-                    ;;
-                ".. [go back]" | *)
-                    return
-                    ;;
-            esac
+        'plasma (on xorg')
+            systemd-cat -t xorg startx ~/.config/environments/xinitrc-plasma
             ;;
-        'fullscreen terminal')
-            options="kitty [default]
-alacritty
-.. [go back]"
-            app=$(echo "$options" | fzf --reverse --height=10 --color=16 )
-            echo -en "$LINE_UP$CLEAR_LINE"
-            if [ "$app " = "" ] || [ "$app" = "kitty [default]" ]; then
-                app="kitty"
-            elif [ "$app" = ".. [go back]" ] || [ "$app" = "" ]; then
-                return
-            fi
-            echo -e "${GREEN}Launching $app fullscreen inside cage...${RESET_FMT}"
-            echo -e "${BLUE}Starting fullscreen terminal with app:${RESET_FMT}"
-            wayland_env_vars
-            systemd-cat -t cage ~/Code/cage/build/cage -dt $app
-            unset_wayland_env_vars
-            echo -en "$LINE_UP$CLEAR_LINE"
+        'plasma (on xorg, nvidia drivers')
+            nvidia-xrun ~/.config/environments/xinitrc-plasma
+            ;;
+        'i3 (on xorg)')
+            systemd-cat -t xorg startx ~/.config/environments/xinitrc-i3
+            ;;
+        'i3 (on xorg, nvidia drivers)')
+            nvidia-xrun ~/.config/environments/xinitrc-i3
             ;;
         "poweroff")
             poweroff
@@ -142,15 +128,17 @@ alacritty
             ;;
         "virtual console" | *)
             clear
-            $PREFERRED_SHELL
-            clear
-            echo ""
+            exec $PREFERRED_SHELL
             ;;
     esac
 
 }
 
-while :
-do
-    main_menu
-done
+if [ "$1" == '--auto' ]; then
+    start_sway
+else
+    while :
+    do
+        main_menu
+    done
+fi
