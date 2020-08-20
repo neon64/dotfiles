@@ -39,7 +39,7 @@ unset_wayland_env_vars() {
 
 start_sway() {
     wayland_env_vars
-    grep -q '^flags.*hypervisor' /proc/cpuinfo && export WLR_NO_HARDWARE_CURSORS=1
+    is_in_vm && export WLR_NO_HARDWARE_CURSORS=1
     systemd-cat -t sway sway --my-next-gpu-wont-be-nvidia
     unset_wayland_env_vars
 }

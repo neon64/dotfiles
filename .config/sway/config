@@ -255,8 +255,7 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
 
     # Sleep
     bindsym $mod+Shift+u exec swaylock
-    exec swayidle -w timeout 180 'swaylock -f' timeout 320 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f'
-    # exec swayidle -w timeout 180 'swaylock' timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' lock 'swaylock' unlock 'killall swaylock' before-sleep 'swaylock'
+    exec swayidle -w timeout 600 '! is_in_vm && swaylock -f' timeout 700 '! is_in_vm && swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f'
 
     bar {
         swaybar_command waybar

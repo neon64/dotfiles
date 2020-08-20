@@ -49,7 +49,11 @@ function check_dotf
     # implemented a basic debouncer so that it only updates once every 60 seconds
     if [ "$argv[1]" = "--fast" ]
         set updated_file ~/.cache/dotf_last_updated
-        set last_updated (cat $updated_file 2>/dev/null)
+        if test -e $updated_file
+            set last_updated (cat $updated_file 2>/dev/null)
+        else
+            set last_updated (date -u +'%s')
+        end
         set now (date -u +'%s')
 
         if [ "$last_updated" != "" ]
