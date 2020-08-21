@@ -39,9 +39,6 @@ output * bg ~/pics/wallpapers/wallpaper-current.jpg fill
 #
 # You can get the names of your outputs by running swaymsg -t get_outputs
 
-output eDP-1 position 0 0
-output HDMI-A-1 position 120 -1050
-
 # Generic Keyboard
 input * {
     xkb_options caps:super
@@ -86,9 +83,13 @@ input "1739:0:Synaptics_TM3418-002" {
     click_method clickfinger
 }
 
+output "eDP-1" enable position 0 1050
+output "HDMI-A-1" enable position 120 0
+
 # more specific configuration at runtime
 exec_always ~/.config/sway/configure.sh
 exec mako
+# exec systemd-cat -t kanshi kanshi
 exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-session save-loop 240
 
 #
@@ -168,7 +169,7 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
     bindsym $mod+Shift+Right move right
 
     bindsym $mod+n move workspace to output up
-    bindsym $mod+m move workspace to output down
+    bindsym $mod+m move workspace to output left
 
 #
 # Workspaces:
@@ -256,6 +257,8 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
     # Sleep
     bindsym $mod+Shift+u exec swaylock
     exec swayidle -w timeout 600 '! is_in_vm && swaylock -f' timeout 700 '! is_in_vm && swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f'
+
+    bindsym $mod+i exec killall -SIGUSR1 waybar
 
     bar {
         swaybar_command waybar

@@ -36,6 +36,8 @@ wm_pkgs=(
     adwaita-qt # nice theme
     wob # wayland overlay bar - for volume and brightness control
     playerctl # control music
+    nautilus-open-any-terminal # open in terminal - bound to Ctrl+E
+    kanshi # output management
 )
 
 # installs packages required for emacs

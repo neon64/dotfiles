@@ -55,7 +55,7 @@ if status --is-login && status --is-interactive
     if set -q XDG_VTNR && test "$XDG_VTNR" -eq "1" && test ! -e /tmp/sway-autoopen.tag
         touch /tmp/sway-autoopen.tag
 
-        exec ~/.config/bin/fdm --auto
+        ~/.config/bin/fdm --auto
     end
     if set -q XDG_VTNR && test "$XDG_VTNR" -gt "0" -a "$XDG_VTNR" -lt "6"
         # set LINE_UP "\033[1A"
@@ -71,27 +71,24 @@ end
 
 # connects to an existing tmux session before creating a new one
 alias t "tmux a; or tmux"
-alias yt "mpsyt"
-alias s "googler --url-handler ~/.config/bin/browse_web --colors bjdxxy"
 alias ls "exa --classify --git --header"
 alias v "view"
-alias g "git"
-alias ds "check_dotf"
 alias w "browse_web"
 alias blue "manage_bluetooth"
-alias sr "switch_res"
 alias clock "tty-clock -sSc"
 alias ping "prettyping --nolegend"
+alias b "browse_files"
 
 if test -x /usr/bin/reboot_chooser
     alias reboot "reboot_chooser"
 end
 
-# in case I forget
 alias pac "yay"
 
-# use neovim
-alias vim "nvim"
+if test -x /usr/bin/nvim
+    # use neovim
+    alias vim "nvim"
+end
 
 ### ========================================
 ###				   COLOURS
@@ -106,7 +103,7 @@ if status --is-interactive
     if [ ! -z "$GNOME_TERMINAL_SCREEN" ]; or [ "$TERM" = 'xterm-kitty' ]; or [ ! -z "$SSH_TTY" ]
         bash ~/.config/colors/theme.sh
     end
-    
+
     if test -e ~/.config/colors/current-theme
         set theme (cat ~/.config/colors/current-theme)
         source ~/.config/colors/base16-fzf/fish/$theme.fish

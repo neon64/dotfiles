@@ -1,0 +1,8 @@
+profile asus_monitor {
+    output "eDP-1" enable position 0,1050
+    output "HDMI-A-1" enable position 120,0
+}
+
+profile laptop {
+    output "eDP-1" enable position 0,0
+}
