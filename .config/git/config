@@ -3,10 +3,19 @@
 	name = Chris Chamberlain
 [include]
 	# includes special platform specific configuration items (eg: credential helper)
-	path = ~/.gitconfig-platform-specific
+	path = ./config-platform-specific
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+	path =
+[core]
+	pager = delta
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	side-by-side = true
+	line-numbers-left-format = ""
+	line-numbers-right-format = "| "
+	syntax-theme = base16
 [mergetool "sourcetree"]
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

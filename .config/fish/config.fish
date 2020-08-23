@@ -4,7 +4,7 @@
 
 # this is *prepended* because we want it to override
 # the system rust compiler with our more up to date versions
-set -x PATH $HOME/.cargo/bin $PATH
+set -x PATH $HOME/.local/share/cargo/bin $PATH
 set -x PATH $HOME/.config/bin $PATH
 
 if test -d $HOME/.local/bin
@@ -33,7 +33,24 @@ set PATH $PATH $HOME/.config/composer/vendor/bin
 # #     source $HOME/.opam/opam-init/init.fish #> /dev/null 2> /dev/null; or true
 # end
 
+set -x XDG_CONFIG_HOME "$HOME/.config"
+set -x XDG_DATA_HOME "$HOME/.local/share"
+set -x XDG_CACHE_HOME "$HOME/.cache"
+
 set -x EDITOR (which nvim)
+set -x NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
+set -x CARGO_HOME "$XDG_DATA_HOME"/cargo
+set -x RUSTUP_HOME "$XDG_DATA_HOME"/rustup
+set -x UNISON "$XDG_DATA_HOME"/unison
+set -x STACK_ROOT "$XDG_DATA_HOME"/stack
+set -x HISTFILE "$XDG_DATA_HOME"/bash/history
+set -x LESSKEY "$XDG_CONFIG_HOME"/less/lesskey
+set -x LESSHISTFILE "$XDG_CACHE_HOME"/less/history
+set -x NOTMUCH_CONFIG "$XDG_CONFIG_HOME"/notmuch/notmuchrc
+set -x NMBGIT "$XDG_DATA_HOME"/notmuch/nmbug
+set -x BUNDLE_USER_CONFIG "$XDG_CONFIG_HOME"/bundle
+set -x BUNDLE_USER_CACHE "$XDG_CACHE_HOME"/bundle
+set -x BUNDLE_USER_PLUGIN "$XDG_DATA_HOME"/bundle
 
 set -e FZF_DEFAULT_OPTS
 set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"
@@ -71,7 +88,16 @@ end
 
 # connects to an existing tmux session before creating a new one
 alias t "tmux a; or tmux"
-alias ls "exa --classify --git --header"
+
+if type -q exa
+    alias ls "exa --classify --git --header --color auto --icons -a -s type"
+    alias ll "exa -l --color always --icons -a -s type"
+end
+
+if type -q bat
+    alias cat='bat -pp --theme=base16'
+end
+
 alias v "view"
 alias w "browse_web"
 alias blue "manage_bluetooth"

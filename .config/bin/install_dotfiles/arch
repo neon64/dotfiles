@@ -5,12 +5,12 @@ base_shell_pkgs=(
     fish # shell of choice
     neovim # text editor - either use because its awesome, or as console backup
     tmux # terminal multiplexer, provides multiple concurrent panes whilst running system updates using the `up` script
-    lsd # file listing in Rust
+    exa # file listing in Rust
     bat # cat clone with extras (also just happens to be written in Rust)
+    git-delta-git # diffing
     git # version control
     fzf # fuzzy file finder
     fd # nice alternative to `find`, written in Rust, and used in our fzf config
-    highlight # syntax highlighting when previewing documents
 )
 
 # installs the sway window manager and other utilites used by my particular configuration
@@ -49,10 +49,10 @@ emacs_pkgs=(
 
 # installs packages to play music on the command-line
 music_pkgs=(
-    mpd # music player daemon
-    mpc # command line client to mpd
+    # mpd # music player daemon
+    # mpc # command line client to mpd
     mpv # play music and videos in the command line
-    ncmpcpp # music player terminal client
+    # ncmpcpp # music player terminal client
     cava # audio visualiser
     youtube-dl # `ytdl` command
 )
@@ -75,19 +75,20 @@ extra_shell_pkgs=(
 
 # apps which I use
 recommended_apps=(
-    alacritty # nice terminal emulator written in rust
+    alacritty-ligatures # nice terminal emulator written in rust
     ttf-input # terminal font
     ttf-jetbrains-mono # nice coding font with ligatures
     firefox # browser of choice
     ttf-liberation # sans-serif font for firefox
     code # VS Code editor
-    marktext-bin # text editor
+    typora # text editor
     pavucontrol # visual pulse audio info
     keepassxc # password manager
     qt5-wayland # makes keepassxc work in Gnome
     zathura zathura-pdf-mupdf # pdf viewer
     spotify # spotify client
     spotifywm-git # fixes the WM_CLASS of the spotify window
+    spotify-tui # terminal spotify client
 )
 
 # while it is possible to do withut these Gnome apps, I find they make my life so much
@@ -200,6 +201,7 @@ function install_pkgs {
     install_group xorg_pkgs ${xorg_pkgs[@]}
     install_group virtualbox_guest_pkgs ${virtualbox_guest_pkgs[@]}
     install_group bluetooth_pkgs ${bluetooth_pkgs[@]}
+    install_group printing_pkgs ${printing_pkgs[@]}
     install_group mail_pkgs ${mail_pkgs[@]}
     confirm " - custom version of mps-youtube which interacts nicely with mpd (requires python)?" && install_custom_mpsyt
     confirm " - setuid root the \`evscript\` binary?" && setuid_evscript
