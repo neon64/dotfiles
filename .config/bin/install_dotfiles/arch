@@ -6,6 +6,7 @@ base_shell_pkgs=(
     neovim # text editor - either use because its awesome, or as console backup
     tmux # terminal multiplexer, provides multiple concurrent panes whilst running system updates using the `up` script
     exa # file listing in Rust
+    ttf-nerd-fonts-symbols # fonts for exa
     bat # cat clone with extras (also just happens to be written in Rust)
     git-delta-git # diffing
     git # version control

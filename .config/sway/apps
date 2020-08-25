@@ -30,6 +30,8 @@ for_window [app_id="astroid"] border pixel $borderwidth
 for_window [app_id="io.elementary.files"] border pixel $borderwidth
 for_window [app_id="pavucontrol"] floating enable
 
+for_window [class="Ferdi"] border none
+
 for_window [class="zoom"] idle_inhibit
 
 # default workspaces

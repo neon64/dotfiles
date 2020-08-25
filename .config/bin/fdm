@@ -101,10 +101,10 @@ logout"
             unset_wayland_env_vars
             echo -en "$LINE_UP$CLEAR_LINE"
             ;;
-        'plasma (on xorg')
+        'plasma (on xorg)')
             systemd-cat -t xorg startx ~/.config/environments/xinitrc-plasma
             ;;
-        'plasma (on xorg, nvidia drivers')
+        'plasma (on xorg, nvidia drivers)')
             nvidia-xrun ~/.config/environments/xinitrc-plasma
             ;;
         'i3 (on xorg)')
@@ -126,9 +126,10 @@ logout"
         "logout")
             exit
             ;;
-        "virtual console" | *)
+        "exit to virtual console" | *)
             clear
-            exec $PREFERRED_SHELL
+            $PREFERRED_SHELL
+            clear
             ;;
     esac
 

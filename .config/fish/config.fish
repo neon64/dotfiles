@@ -63,7 +63,6 @@ set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head
 ###				   AUTOSTART
 ### ========================================
 
-
 # start sway upon login to tty1
 # we check `status --is-interactive` because
 # commands like dbus-run-session (for starting Gnome
@@ -90,7 +89,7 @@ end
 alias t "tmux a; or tmux"
 
 if type -q exa
-    alias ls "exa --classify --git --header --color auto --icons -a -s type"
+    alias ls "exa --classify --git --header --color auto -s type"
     alias ll "exa -l --color always --icons -a -s type"
 end
 
@@ -98,11 +97,17 @@ if type -q bat
     alias cat='bat -pp --theme=base16'
 end
 
-alias v "view"
+if type -q prettyping
+    alias ping "prettyping --nolegend"
+end
+
+if type -q nvim
+    alias vim "nvim"
+end
+
 alias w "browse_web"
 alias blue "manage_bluetooth"
 alias clock "tty-clock -sSc"
-alias ping "prettyping --nolegend"
 alias b "browse_files"
 
 if test -x /usr/bin/reboot_chooser
@@ -110,11 +115,6 @@ if test -x /usr/bin/reboot_chooser
 end
 
 alias pac "yay"
-
-if test -x /usr/bin/nvim
-    # use neovim
-    alias vim "nvim"
-end
 
 ### ========================================
 ###				   COLOURS
