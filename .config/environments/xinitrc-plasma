@@ -1,4 +1,5 @@
 #!/bin/bash
 
+export DESKTOP_SESSION=plasma
 export GDK_BACKEND=x11
 exec startplasma-x11
