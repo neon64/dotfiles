@@ -26,15 +26,6 @@ function install_fish_plugins {
     header "Done"
 }
 
-function install_doom_emacs {
-    if test -x ~/.emacs.d/bin/doom; then
-        ~/.emacs.d/bin/doom refresh
-    else
-        git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
-        ~/.emacs.d/bin/doom quickstart
-    fi
-}
-
 function symlink_platform_specific {
     case $OS in
          'Linux')
@@ -60,37 +51,16 @@ function set_color_schemes {
     ~/.config/bin/theme
 }
 
-function regen_color_schemes {
-    ~/.config/bin/theme --regen
-}
-
 function set_fish_as_default_shell {
     chsh -s $(which fish)
 }
 
 function install_user {
-    if ! $FRESH_INSTALL; then
-        header "Checking dotfiles for changes"
-        echo ""
-        fish -c check_dotf
-        echo ""
-    fi
     confirm "Install vim plugins using \`vim-plug\`?" && install_vim_plugins
     confirm "Install fish plugins using \`fisherman\`?" && install_fish_plugins
-    if $FRESH_INSTALL; then
-        # confirm "Install Doom (emacs configuration framework)?" && install_doom_emacs
-        confirm "Choose a color scheme?" && set_color_schemes
-        confirm "Symlink platform-specific dotfiles?" && symlink_platform_specific
-        confirm "Symlink 'Code - OSS' config to normal VS Code config?" && link_code_configs
-        confirm "Set \`dotf\` to ignore untracked files?" && set_dotf_ignore_untracked
-        confirm "Set \`fish\` as default shell?" && set_fish_as_default_shell
-    else
-        # confirm "Update Doom (emacs configuration framework)?" && cd ~/.emacs.d/ && git pull && ~/.emacs.d/bin/doom update
-        confirm "Update color schemes?" && regen_color_schemes
-        if command -v rustup >/dev/null 2>&1; then
-            confirm "Update Rust toolchains?" && rustup update
-        else
-            warn "\`rustup\` not found, skipping Rust update"
-        fi
-    fi
+    confirm "Choose a color scheme?" && set_color_schemes
+    confirm "Symlink platform-specific dotfiles?" && symlink_platform_specific
+    confirm "Symlink 'Code - OSS' config to normal VS Code config?" && link_code_configs
+    confirm "Set \`dotf\` to ignore untracked files?" && set_dotf_ignore_untracked
+    confirm "Set \`fish\` as default shell?" && set_fish_as_default_shell
 }

@@ -5,6 +5,12 @@ These came about as I was switching to another Linux machine and realised there 
 - `install_dotf` - install the dotfiles (and required packages) on an existing system
 - `arch_0` - configure Arch and dotfiles (nearly) from scratch
 
+## Big caveat - the problem with installer scripts
+
+Inevitably, things change as one further fine-tunes their system. Thus, the contents of these install scripts is far from what I actually run on my system on a day-to-day basis. Perhaps the only way of permanently fixing this would be to switch to a distribution like NixOS which is entirely configured by configuration files in a stateless manner.
+
+Alas, Arch is more convenient in the short-term, so I think these install scripts will always remain, albeit somewhat half-baked.
+
 ## `arch_0`
 
 `arch_0` is like 'step 0' for installing the dotfiles on Arch Linux.
@@ -56,9 +62,7 @@ Run
 
 to install everything as if from scratch (doing this from time to time is completely safe, it will just skip whatever has already been installed)
 
-You can also update the system with
-
-    $ ~/.config/bin/install_dotf --update
+System updates are now handled through `topgrade`.
 
 ### System
 

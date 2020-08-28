@@ -72,6 +72,7 @@ extra_shell_pkgs=(
     gnome-keyring # provider for libsecret - allows us to store git credentials for the command line
     hwinfo # useful for debugging info like framebuffer resolutions
     reptyr # attach background process to a terminal
+    topgrade # upgrade everything at once
 )
 
 # apps which I use
@@ -168,11 +169,6 @@ function install_group {
     confirm " - \`$name\`?" && yay -S --needed "$@"
 }
 
-function install_custom_mpsyt {
-    yay -S --needed python-mpd2
-    pip3 install --user -U git+https://github.com/vn-ki/mps-youtube.git@mpd
-}
-
 function setuid_evscript {
     sudo chmod u+s /usr/bin/evscript
 }
@@ -204,40 +200,29 @@ function install_pkgs {
     install_group bluetooth_pkgs ${bluetooth_pkgs[@]}
     install_group printing_pkgs ${printing_pkgs[@]}
     install_group mail_pkgs ${mail_pkgs[@]}
-    confirm " - custom version of mps-youtube which interacts nicely with mpd (requires python)?" && install_custom_mpsyt
     confirm " - setuid root the \`evscript\` binary?" && setuid_evscript
     header "Installed all requested packages!"
 }
 
-function update_pkgs {
-    yay -Syu
-}
-
 function install_system {
-    if $FRESH_INSTALL; then
-        if pacman -Q | grep -q 'yay'; then
-            warn "\`yay\` already installed, using it to install everything else"
-        else
-            header "Installing \`yay-bin\`"
-            # first we want install an AUR helper, so we can install more packages more easily
-            mkdir -p $PKG_BUILD_DIR
-            cd $PKG_BUILD_DIR
-
-            git clone https://aur.archlinux.org/yay-bin.git
-            cd yay-bin
-            makepkg -fsri
-
-            header "Using \`yay\` to install everything else"
-        fi
-
-        cd ~
-
-        echo ""
-        confirm "Install Arch packages?" && install_pkgs
-        echo ""
+    if pacman -Q | grep -q 'yay'; then
+        warn "\`yay\` already installed, using it to install everything else"
     else
-        echo ""
-        confirm "Update Arch packages?" && update_pkgs
-        echo ""
+        header "Installing \`yay-bin\`"
+        # first we want install an AUR helper, so we can install more packages more easily
+        mkdir -p $PKG_BUILD_DIR
+        cd $PKG_BUILD_DIR
+
+        git clone https://aur.archlinux.org/yay-bin.git
+        cd yay-bin
+        makepkg -fsri
+
+        header "Using \`yay\` to install everything else"
     fi
+
+    cd ~
+
+    echo ""
+    confirm "Install Arch packages?" && install_pkgs
+    echo ""
 }

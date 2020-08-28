@@ -20,21 +20,11 @@ function install_group {
 }
 
 function install_pkgs {
-        install_group base_shell_pkgs "${base_shell_pkgs[@]}"
-}
-
-function update_pkgs {
-       brew upgrade
+    install_group base_shell_pkgs "${base_shell_pkgs[@]}"
 }
 
 function install_system {
-    if $FRESH_INSTALL; then
-        echo ""
-        confirm "Install packages through Homebrew?" && install_pkgs
-        echo ""
-    else
-        echo ""
-        confirm "Update packages through Homebrew?" && update_pkgs
-        echo ""
-    fi
+    echo ""
+    confirm "Install packages through Homebrew?" && install_pkgs
+    echo ""
 }

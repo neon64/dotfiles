@@ -105,6 +105,8 @@ if type -q nvim
     alias vim "nvim"
 end
 
+alias up topgrade
+
 alias w "browse_web"
 alias blue "manage_bluetooth"
 alias clock "tty-clock -sSc"
