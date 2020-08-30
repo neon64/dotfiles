@@ -4,22 +4,25 @@
 
 # this is *prepended* because we want it to override
 # the system rust compiler with our more up to date versions
-set -x PATH $HOME/.local/share/cargo/bin $PATH
-set -x PATH $HOME/.config/bin $PATH
+
+contains $PATH $HOME/.local/share/cargo/bin; or set -x PATH $HOME/.local/share/cargo/bin $PATH
+contains $PATH $HOME/.config/bin; or set -x PATH $HOME/.config/bin $PATH
 
 if test -d $HOME/.local/bin
-    set -x PATH $PATH $HOME/.local/bin
+    contains $PATH $HOME/.local/bin ; or set -x PATH $HOME/.local/bin $PATH
 end
 
 if test -d /usr/local/bin
-    set -x PATH /usr/local/bin $PATH
+    contains $PATH /usr/local/bin ; or set -x PATH /usr/local/bin $PATH
 end
 
 if test -d /usr/local/sbin
-    set -x PATH /usr/local/sbin $PATH
+    contains $PATH /usr/local/sbin ; or set -x PATH /usr/local/sbin $PATH
 end
 
-set PATH $PATH $HOME/.config/composer/vendor/bin
+if test -d /usr/local/sbin
+    contains $PATH $HOME/.config/composer/vendor/bin; or set -x PATH $HOME/.config/composer/vendor/bin $PATH
+end
 
 # used for the Rust Language Server
 # set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
@@ -71,7 +74,7 @@ if status --is-login && status --is-interactive
     if set -q XDG_VTNR && test "$XDG_VTNR" -eq "1" && test ! -e /tmp/sway-autoopen.tag
         touch /tmp/sway-autoopen.tag
 
-        ~/.config/bin/fdm --auto
+        ~/.config/bin/fdm
     end
     if set -q XDG_VTNR && test "$XDG_VTNR" -gt "0" -a "$XDG_VTNR" -lt "6"
         # set LINE_UP "\033[1A"

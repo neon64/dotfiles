@@ -54,12 +54,16 @@ main_menu() {
     echo -e "${BLUE}Launch:${RESET_FMT}"
 
     options="sway
-sway (with discrete GPU)
-gnome
+sway (with nouveau)
+gnome (wayland)
+gnome (wayland, with nouveau)
 gnome (on xorg)
+gnome (on xorg, with nouveau)
 gnome (on xorg, nvidia drivers)
-plasma
+plasma (wayland)
+plasma (wayland, with nouveau)
 plasma (on xorg)
+plasma (on xorg, with nouveau)
 plasma (on xorg, nvidia drivers)
 i3 (on xorg)
 i3 (on xorg, nvidia drivers)
@@ -76,33 +80,61 @@ logout"
             start_sway
             echo -en "$LINE_UP$CLEAR_LINE"
             ;;
-        'sway (with discrete GPU)')
-            echo -e "${GREEN}Starting Sway with Discrete GPU...${RESET_FMT}"
+        'sway (with nouveau)')
+            echo -e "${GREEN}Starting Sway with Nouveau...${RESET_FMT}"
             start_sway_nouveau
             echo -en "$LINE_UP$CLEAR_LINE"
             ;;
-        'gnome')
+        'gnome (wayland)')
             echo -e "${GREEN}Starting Gnome Shell...${RESET_FMT}"
             wayland_env_vars
             systemd-cat -t gnome-session dbus-run-session gnome-session
             unset_wayland_env_vars
             echo -en "$LINE_UP$CLEAR_LINE"
             ;;
+        'gnome (wayland, with nouveau)')
+            echo -e "${GREEN}Starting Gnome Shell with Nouveau...${RESET_FMT}"
+            sudo modprobe nouveau
+            wayland_env_vars
+            systemd-cat -t gnome-session dbus-run-session gnome-session
+            unset_wayland_env_vars
+            kill_discrete_gpu
+            echo -en "$LINE_UP$CLEAR_LINE"
+            ;;
         'gnome (on xorg)')
             systemd-cat -t xorg startx ~/.config/environments/xinitrc-gnome
+            ;;
+        'gnome (on xorg, with nouveau)')
+            sudo modprobe nouveau
+            systemd-cat -t xorg startx ~/.config/environments/xinitrc-gnome
+            kill_discrete_gpu
             ;;
         'gnome (on xorg, nvidia drivers)')
             nvidia-xrun ~/.config/environments/xinitrc-gnome
             ;;
-        'plasma')
+        'plasma (wayland)')
             echo -e "${GREEN}Starting KDE Plasma...${RESET_FMT}"
             wayland_env_vars
             systemd-cat -t plasma dbus-run-session startplasma-wayland
             unset_wayland_env_vars
             echo -en "$LINE_UP$CLEAR_LINE"
             ;;
+        'plasma (wayland, with nouveau)')
+            echo -e "${GREEN}Starting KDE Plasma...${RESET_FMT}"
+            sudo modprobe nouveau
+            wayland_env_vars
+            systemd-cat -t plasma dbus-run-session startplasma-wayland
+            unset_wayland_env_vars
+            kill_discrete_gpu
+            echo -en "$LINE_UP$CLEAR_LINE"
+            ;;
         'plasma (on xorg)')
             systemd-cat -t xorg startx ~/.config/environments/xinitrc-plasma
+            ;;
+        'plasma (on xorg, with nouveau)')
+            sudo modprobe nouveau
+            systemd-cat -t xorg startx ~/.config/environments/xinitrc-plasma
+            kill_discrete_gpu
             ;;
         'plasma (on xorg, nvidia drivers)')
             nvidia-xrun ~/.config/environments/xinitrc-plasma

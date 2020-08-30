@@ -1,3 +1,7 @@
 #!/bin/bash
 
-env QT_QPA_PLATFORM=xcb /usr/bin/zoom "$@"
+# the last two env vars are to get
+# https://gitlab.com/jamedjo/gnome-dbus-emulation-wlr
+# this working
+
+env QT_QPA_PLATFORM=xcb XDG_SESSION_TYPE=wayland XDG_CURRENT_DESKTOP=GNOME /usr/bin/zoom "$@"

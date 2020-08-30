@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 
-sudo rmmod nouveau nvidia nvidia_drm nvidia_modeset
+if lsmod | grep -q nouveau; then
+    sudo rmmod nouveau
+fi
+if lsmod | grep -q nvidia; then
+    sudo rmmod nvidia_modeset nvidia_drm nvidia
+fi
 sudo bash -c 'echo OFF > /proc/acpi/bbswitch'
 cat /proc/acpi/bbswitch
 

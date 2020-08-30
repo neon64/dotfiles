@@ -29,12 +29,14 @@ for_window [class="Spotify"] border pixel $borderwidth
 for_window [app_id="astroid"] border pixel $borderwidth
 for_window [app_id="io.elementary.files"] border pixel $borderwidth
 for_window [app_id="pavucontrol"] floating enable
+for_window [title="Launch Application"] floating enable
 
 for_window [class="Ferdi"] border none
 
 for_window [class="zoom"] idle_inhibit
 
 # default workspaces
+assign [class="Ferdi"] 2
 assign [class="qutebrowser"] 1
 assign [class="Firefox"] 1
 assign [app_id="firefox"] 1
@@ -53,7 +55,9 @@ assign [class="Mailspring"] 8
 assign [app_id="geary"] 8
 assign [class="keepassxc"] 9
 assign [app_id="keepassxc"] 9
-assign [app_id="blueman-manager"] 10
 assign [class="Typora"] 4
 assign [class="jetbrains-idea"] 3
 assign [class="jetbrains-clion"] 3
+assign [class="Vncviewer"] 10
+assign [app_id="blueman-manager"] 8
+assign [class="zoom"] 10

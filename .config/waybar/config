@@ -14,16 +14,17 @@
     "sway/workspaces": {
         "disable-scroll": false,
         "all-outputs": true,
-        "format": "{icon}",
+        "format": "<span font='11'>{icon}</span>",
         "format-icons": {
+            "0": "",
             "1": "",
-            "2": "",
+            "2": "",
             "3": "",
-            "4": "",
+            "4": "",
             "5": "",
             "6": "",
-            "7": "",
-            "8": "",
+            "7": "",
+            "8": "",
             "9": "",
             "10": "",
             "urgent": "",
@@ -43,11 +44,11 @@
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% ",
+        "format": "{usage}% <span font='11'></span>",
         "on-click": "gnome-system-monitor"
     },
     "memory": {
-        "format": "{}% ",
+        "format": "{}% <span font='11'></span>",
         "on-click": "gnome-system-monitor"
     },
     "battery": {
@@ -57,9 +58,9 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "{capacity}% {icon}",
+        "format": "{capacity}% <span font='11'>{icon}</span>",
         // "format-good": "", // An empty format will hide the module
-        "format-full": "100% ",
+        "format-full": "100% <span font='11'></span>",
         "format-icons": ["", "", "", "", ""]
     },
     "battery#bat2": {
@@ -67,15 +68,15 @@
     },
     "network": {
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "format-disconnected": "Disconnected ⚠",
+        "format-wifi": "{essid} ({signalStrength}%) <span font='11'></span>",
+        "format-ethernet": "{ipaddr}/{cidr} <span font='11'></span>",
+        "format-disconnected": "Disconnected <span font='11'>⚠</span>",
         "on-click": "2"
     },
     "pulseaudio": {
         "scroll-step": 1,
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
+        "format": "{volume}% <span font='11'>{icon}</span>",
+        "format-bluetooth": "{volume}% <span font='11'>{icon}</span>",
         "format-muted": "",
         "format-icons": {
             "headphones": "",
@@ -117,7 +118,7 @@
         "tooltip-format-disconnected": "MPD (disconnected)"
     },
     "backlight": {
-        "format": "{percent}% {icon}",
+        "format": "{percent}% <span font='11'>{icon}</span>",
         "format-icons": ["", ""]
     },
     "custom/spotify": {
@@ -128,7 +129,7 @@
         "exec-if": "pgrep spotify"
     },
     "idle_inhibitor": {
-        "format": "{icon}",
+        "format": "<span font='11'>{icon}</span>",
         "format-icons": {
             "activated": "",
             "deactivated": ""
