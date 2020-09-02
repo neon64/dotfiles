@@ -22,6 +22,8 @@ window:
     columns: 80
     lines: 24
 
+  dynamic_title: true
+
   # Window padding (changes require restart)
   #
   # Blank space added around the window in pixels. This padding is scaled
@@ -56,19 +58,19 @@ draw_bold_text_with_bright_colors: false
 font:
   # The normal (roman) font face to use.
   normal:
-    family: "Input Mono" # should be "Menlo" or something on macOS.
+    family: "Iosevka Light Extended" # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
     style: Regular
 
   # The bold font face
   bold:
-    family: "Input Mono" # should be "Menlo" or something on macOS.
+    family: "Iosevka Light Extended" # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
-    style: Regular
+    style: Bold
 
   # The italic font face
   italic:
-    family: "Input Mono" # should be "Menlo" or something on macOS.
+    family: "Iosevka Light Extended" # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
     style: Italic
 
@@ -120,7 +122,7 @@ font:
 #
 # To completely disable the visual bell, set its duration to 0.
 #
-visual_bell:
+bell:
   animation: Linear #EaseOutExpo
   duration: 200
 
@@ -166,8 +168,6 @@ mouse:
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
-
-dynamic_title: true
 
 cursor:
   # Cursor style
