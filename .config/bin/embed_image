@@ -16,7 +16,7 @@ make_text() {
 
 embed() {
 	echo -e "${BLUE}Select Markdown document:${RESET_FMT}"
-    file=$(env FZF_DEFAULT_COMMAND="fd --maxdepth 1 -e md -t file" fzf --reverse --height=50%)
+    file=$(env FZF_DEFAULT_COMMAND="fd -e md -t file" fzf --reverse --height=50%)
     if [ -z "$file" ]; then
         echo "No file selected... aborting"
         exit 1
