@@ -97,7 +97,13 @@ if type -q exa
 end
 
 if type -q bat
-    alias cat='bat -pp --theme=base16'
+    function cat --wraps='bat -pp --theme=base16' --description 'alias cat=bat -pp --theme=base16'
+        if test -d $argv
+            cd $argv
+        else
+            bat -pp --theme=base16 $argv;
+        end
+    end
 end
 
 if type -q prettyping

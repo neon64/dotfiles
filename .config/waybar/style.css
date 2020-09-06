@@ -17,7 +17,7 @@ window#waybar {
 }
 
 #workspaces button {
-    padding: 0 14px;
+    padding: 0 6px;
     background: transparent;
     color: @base07;
     border-bottom: 3px solid transparent;
