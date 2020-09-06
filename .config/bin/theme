@@ -33,6 +33,8 @@ echo -e " - Updating waybar colors"
 ln -sf ~/.config/colors/base16-waybar/colors/$theme.css ~/.config/waybar/colors.css
 echo -e " - Updating alacritty config"
 ~/.config/alacritty/build_config.py $theme
+echo -e " - Updating wofi config"
+~/.config/wofi/build_config.py $theme
 
 echo -e " - Updating theme file (used by vim, fzf)"
 echo "$theme" > ~/.config/colors/current-theme

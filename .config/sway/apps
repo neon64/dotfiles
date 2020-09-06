@@ -6,8 +6,8 @@ for_window [title="Login Keyring"] floating enable
 for_window [title="Floating Terminal"] floating enable; border pixel 1; resize set 640 320
 for_window [title="Command Launcher"] floating enable; border pixel 1; resize set 640 320
 
-for_window [app_id="firefox"] border pixel $borderwidth
-for_window [class="code-oss"] border pixel $borderwidth
+for_window [app_id="firefox"] border none
+for_window [class="code-oss"] border none
 for_window [app_id="Alacritty"] border pixel $borderwidth
 
 for_window [app_id="org.gnome.Nautilus"] border none

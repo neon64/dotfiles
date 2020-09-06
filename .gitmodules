@@ -16,3 +16,6 @@
 [submodule ".config/colors/base16-fzf"]
 	path = .config/colors/base16-fzf
 	url = https://github.com/nicodebo/base16-fzf
+[submodule ".config/colors/base16-wofi"]
+	path = .config/colors/base16-wofi
+	url = https://git.sr.ht/~knezi/base16-wofi
