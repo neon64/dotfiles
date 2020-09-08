@@ -1,0 +1,8 @@
+#!/bin/sh
+
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+unset XDG_SESSION_TYPE
+
+xrdb $HOME/.Xresources
+exec dbus-launch startxfce4
