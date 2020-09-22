@@ -1,5 +1,8 @@
 # My Dotfiles
 
+![](screenshots/screenshot_terminal.png)
+![](screenshots/screenshot_whole_desktop.png)
+
 The dotfiles themselves can be found in the [master branch](https://github.com/neon64/dotfiles/tree/master).
 
 These dotfiles should theoretically work on any UNIX-like system, including macOS and msys2, both of which I use from time to time. However the greatest compatibility will be with [Arch Linux](https://www.archlinux.org/), which is what I use daily.
@@ -71,13 +74,11 @@ I just use plain old git and a couple of shell scripts. Kudos to the extremely s
 of dotfiles detailed here:
 https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/.
 
-Over time I've found that more and more tools need manual 'installation', so I've written a few extra scripts to install required dependencies / configure the system automatically.
-
 ## Installation
 
 ### Automatic
 
-If you're on Arch Linux, then I've been working on an installation wizard, `arch_0`, which takes a basic Arch Linux installation and downloads these dotfiles and installs everything needed to make them work.
+If you're on Arch Linux, then I've been working on an installation wizard, [arch_0](https://github.com/neon64/dotfiles/tree/master/.config/bin/install_dotfiles), which takes a basic Arch Linux installation and downloads these dotfiles and installs everything needed to make them work.
 
 In short, you just need to run:
 
@@ -91,7 +92,7 @@ To install these dotfiles onto a new machine:
 
     $ alias dotf='/usr/bin/git --git-dir=$HOME/path/to/dotfiles/ --work-tree=$HOME'
     $ echo "path/to/dotfiles/" >> .gitignore
-    $ git clone --bare https://github.com/neon64/dotfiles $HOME/path/to/dotfiles
+    $ git clone --bare --branch master https://github.com/neon64/dotfiles $HOME/path/to/dotfiles
 
 Then attempt to checkout the configuration files:
 
