@@ -1,6 +1,6 @@
-# Dotfiles
+# My Dotfiles
 
-This repository contains the dotfiles which I want replicated between different systems.
+The dotfiles themselves can be found in the [master branch](https://github.com/neon64/dotfiles/tree/master).
 
 These dotfiles should theoretically work on any UNIX-like system, including macOS and msys2, both of which I use from time to time. However the greatest compatibility will be with [Arch Linux](https://www.archlinux.org/), which is what I use daily.
 
@@ -36,7 +36,8 @@ Here's some of the software contained in these dotfiles:
 
 **Browser**
  - Firefox
-    - I am wary of a Chrome/Blink monopoly over web browsers, and I would use Firefox even if it were somewhat technically inferior (though I believe at the moment they are basically neck and neck)
+    - I am wary of a Chrome/Chromium/Blink monopoly over web browsers, and I would continue to use Firefox even if it were somewhat technically inferior (though I believe at the moment they are basically neck and neck)
+    - https://daverupert.com/2020/09/the-value-of-browser-diversity/
 
 **Music**
  - Spotify
