@@ -1,5 +1,0 @@
-#!/bin/bash
-
-systemctl --user start vncserver@:1.service
-vncviewer 127.0.0.1:5901 -passwd ~/.vnc/passwd
-systemctl --user stop vncserver@:1.service

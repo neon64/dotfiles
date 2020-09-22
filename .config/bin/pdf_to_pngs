@@ -1,3 +1,0 @@
-#!/bin/bash
-
-pdftoppm "$1" "$2" -png

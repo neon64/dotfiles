@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if test -z "$XDG_DATA_HOME"; then
-    XDG_DATA_HOME="$HOME/.local/share"
-fi
-
-# dotfile handling
-git --git-dir="$XDG_DATA_HOME/dotfiles/" --work-tree=$HOME $@

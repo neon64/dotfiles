@@ -1,3 +1,0 @@
-#!/bin/bash
-
-ptpython -i "`dirname $0`/sympy_init.py"
