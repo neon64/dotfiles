@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# env -u DISPLAY -u I3SOCK -u SWAYSOCK -u WAYLAND_DISPLAY -u XDG_SEAT -u XDG_VTNR -u XDG_SESSION_TYPE -u SESSION_MANAGER -u DBUS_SESSION_BUS_ADDRESS vncserver :2
+
 systemctl --user start vncserver@:1.service
 vncviewer 127.0.0.1:5901 -passwd ~/.vnc/passwd
 systemctl --user stop vncserver@:1.service

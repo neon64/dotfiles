@@ -3,9 +3,9 @@
     "position": "top", // Waybar at the bottom of your screen
     "height": 36, // Waybar height
     // Choose the order of the modules
-    "modules-left": ["sway/mode"],
+    "modules-left": ["clock", "sway/mode"],
     "modules-center": ["sway/workspaces"],
-    "modules-right": ["pulseaudio", "backlight", "network", "cpu", "memory", "battery", "clock", "idle_inhibitor", "tray"],
+    "modules-right": [ "pulseaudio", "backlight", "network", "cpu", "memory", "battery", "idle_inhibitor", "tray"],
     // Modules configuration
     "sway/window": {
         "format": "{}",
@@ -44,11 +44,11 @@
         "format-alt": "{:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% <span font='11'></span>",
+        "format": "CPU: {usage}%",
         "on-click": "gnome-system-monitor"
     },
     "memory": {
-        "format": "{}% <span font='11'></span>",
+        "format": "RAM: {}%",
         "on-click": "gnome-system-monitor"
     },
     "battery": {
@@ -61,17 +61,23 @@
         "format": "{capacity}% <span font='11'>{icon}</span>",
         // "format-good": "", // An empty format will hide the module
         "format-full": "100% <span font='11'></span>",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["", "", "", "", ""],
+        "on-click": "gnome-power-statistics"
     },
     "battery#bat2": {
         "bat": "BAT2"
+    },
+    "disk": {
+        "interval": 60,
+        "format": "{percentage_free}% free on {path}",
+        "path": "/"
     },
     "network": {
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) <span font='11'></span>",
         "format-ethernet": "{ipaddr}/{cidr} <span font='11'></span>",
         "format-disconnected": "Disconnected <span font='11'>⚠</span>",
-        "on-click": "2"
+        "on-click": "iwgtk"
     },
     "pulseaudio": {
         "scroll-step": 1,
@@ -119,7 +125,8 @@
     },
     "backlight": {
         "format": "{percent}% <span font='11'>{icon}</span>",
-        "format-icons": ["", ""]
+        "format-icons": ["", ""],
+        "on-click": "wdisplays"
     },
     "custom/spotify": {
         "format": "  {}",

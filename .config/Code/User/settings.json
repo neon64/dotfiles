@@ -68,6 +68,6 @@
             ]
         }
     ],
-    "workbench.colorTheme": "Gruvbox Dark (Hard)",
-    "editor.fontSize": 13
+    "editor.fontSize": 13,
+    "workbench.colorTheme": "Ocean Dark Extended"
 }

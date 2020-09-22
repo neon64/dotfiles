@@ -30,11 +30,17 @@ for_window [app_id="astroid"] border pixel $borderwidth
 for_window [app_id="io.elementary.files"] border pixel $borderwidth
 for_window [app_id="pavucontrol"] floating enable
 for_window [title="Launch Application"] floating enable
+for_window [app_id="iwgtk"] floating enable
+for_window [app_id="wdisplays"] floating enable
+for_window [app_id="evince"] border none
+for_window [app_id="org.gnome.NautilusPreviewer"] floating enable
 
 for_window [app_id="re.sonny.Tangram"] border none
 for_window [class="Ferdi"] border none
 
-for_window [class="zoom"] idle_inhibit
+for_window [class="zoom"] idle_inhibit visible
+for_window [title="Participants"] floating enable
+for_window [title="Chat"] floating enable
 
 # default workspaces
 assign [class="Ferdi"] 2
@@ -57,6 +63,7 @@ assign [app_id="geary"] 8
 assign [class="keepassxc"] 9
 assign [app_id="keepassxc"] 9
 assign [class="Typora"] 4
+assign [class="marktext"] 4
 assign [class="jetbrains-idea"] 3
 assign [class="jetbrains-clion"] 3
 assign [class="Vncviewer"] 10

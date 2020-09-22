@@ -4,6 +4,8 @@
 
 Doesn't.
 
+I have resorted to running Zoom inside of a X11 virtual desktop inside TigerVNC and then connecting to it with a VNC viewer.
+
 ## Getting Zoom screensharing to work
 
 ### "Contents of 2nd camera"

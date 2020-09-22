@@ -14,6 +14,8 @@ set $term alacritty
 set $browser firefox
 set $files nautilus
 
+# env GTK_CSD=0 LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0 ~/code/wofi/build/
+
 # preferred application launcher
 set $menu wofi --show drun --width=700 --prompt= --no-actions --height=300 --allow-images
 
@@ -24,7 +26,7 @@ set $left j
 set $right semicolon
 
 # ricing
-set $borderwidth 1
+set $borderwidth 0
 
 ### Output configuration
 #
@@ -76,7 +78,7 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     xkb_options caps:super,altwin:ctrl_alt_win
 }
 
-input "1739:0:Synaptics_TM3418-002" {
+input "2:7:SynPS/2_Synaptics_TouchPad" {
     tap enabled
     middle_emulation disabled
     natural_scroll enabled
@@ -89,7 +91,7 @@ output "HDMI-A-1" enable position 120 0
 # more specific configuration at runtime
 exec_always ~/.config/sway/configure.sh
 exec mako
-# exec systemd-cat -t kanshi kanshi
+exec systemd-cat -t kanshi kanshi
 exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-session save-loop 240
 
 #
@@ -104,6 +106,7 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
 
     # kill focused window
     bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
 
     # start your launcher
     bindsym $mod+d exec $menu
@@ -312,21 +315,30 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
 
     include colorscheme
 
+    set $arc-light-bg #e7e8eb
+    set $arc-light-bg-3 #969dac
+    set $arc-light-text #dddee2
+
+    set $arc-dark-bg #323843
+    set $arc-dark-bg-2 #2a3039
+    set $arc-dark-bg-3 #2f343f
+    set $arc-dark-text #8c96a2
+
     # fits Base16-Tomorrow-Night theme
-    set $bd-color              $base01
-    set $focused-bd-color      $base00
+    set $bd-color              $arc-dark-bg
+    set $focused-bd-color      $arc-dark-bg-3
     set $urgent-bd-color       $base08
     set $indicator             $base0B
 
-    set $bg-color              $base01
-    set $focused-bg-color      $base00
+    set $bg-color              $arc-dark-bg
+    set $focused-bg-color      $arc-dark-bg-3
 
-    set $inner-bd-color         $base02
-    set $focused-inner-bd-color $base02
+    set $inner-bd-color         $arc-dark-bg
+    set $focused-inner-bd-color $arc-dark-bg-3
 
-    set $inactive-text-color   $base03
-    set $text-color            $base05
-    set $focused-text-color    $base07
+    set $inactive-text-color   $arc-dark-text
+    set $text-color            $arc-dark-text
+    set $focused-text-color    $arc-dark-text
     set $urgent-bg-color       $base08
 
     # window colors
@@ -342,7 +354,7 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
     hide_edge_borders both
     focus_wrapping no
 
-    font pango:Input Sans Narrow 9
+    font pango:Noto Sans Regular 10
 
 # You may want this:
 #
