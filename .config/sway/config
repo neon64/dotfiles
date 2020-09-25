@@ -34,6 +34,8 @@ set $borderwidth 0
 
 output * bg ~/pics/wallpapers/wallpaper-current.jpg fill
 
+# xwayland disable
+
 #
 # Example output configuration:
 #
@@ -78,7 +80,7 @@ input "1:1:AT_Translated_Set_2_keyboard" {
     xkb_options caps:super,altwin:ctrl_alt_win
 }
 
-input "2:7:SynPS/2_Synaptics_TouchPad" {
+input "1739:0:Synaptics_TM3418-002" {
     tap enabled
     middle_emulation disabled
     natural_scroll enabled
@@ -173,6 +175,8 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
 
     bindsym $mod+n move workspace to output up
     bindsym $mod+m move workspace to output left
+
+    bindsym $mod+tab workspace back_and_forth
 
 #
 # Workspaces:
