@@ -24,6 +24,12 @@ if test -d /usr/local/sbin
     contains $PATH $HOME/.config/composer/vendor/bin; or set -x PATH $HOME/.config/composer/vendor/bin $PATH
 end
 
+set -x ANDROID_HOME $HOME/Android/Sdk
+set -x PATH $PATH $ANDROID_HOME/emulator
+set -x PATH $PATH $ANDROID_HOME/tools
+set -x PATH $PATH $ANDROID_HOME/tools/bin
+set -x PATH $PATH $ANDROID_HOME/platform-tools
+
 # used for the Rust Language Server
 # set -x RUST_SRC_PATH $HOME/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src
 
