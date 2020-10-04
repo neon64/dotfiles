@@ -3,7 +3,7 @@ for_window [title="Question"] floating enable
 for_window [title="Preferences"] floating enable
 for_window [title="Editing Profile"] floating enable
 for_window [title="Login Keyring"] floating enable
-for_window [title="Floating Terminal"] floating enable; border pixel 1; resize set 640 320
+for_window [title="Floating Terminal"] floating enable; border pixel 1; resize set 1024 640
 for_window [title="Command Launcher"] floating enable; border pixel 1; resize set 640 320
 
 for_window [app_id="firefox"] border none

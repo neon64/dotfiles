@@ -35,8 +35,6 @@ unset_wayland_env_vars() {
     unset QT_QPA_PLATFORM
     unset QT_STYLE_OVERRIDE
     unset XDG_SESSION_TYPE
-    unset GTK_CSD
-    unset LD_PRELOAD
 }
 
 start_sway() {

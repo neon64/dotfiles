@@ -54,7 +54,6 @@ function fish_user_key_bindings
         echo -e (set_color red)"\nWarning: `fzf` not installed, fuzzy searching shortcuts disabled."(set_color normal)
     end
 
-    set -g fish_escape_delay_ms 50
     fish_hybrid_key_bindings
     # fish_vi_key_bindings
 
