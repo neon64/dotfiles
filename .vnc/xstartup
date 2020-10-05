@@ -6,4 +6,4 @@ unset XDG_SESSION_TYPE
 
 env > env.txt
 
-exec dbus-launch startplasma-wayland
+exec dbus-launch startxfce4

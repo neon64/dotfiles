@@ -41,7 +41,7 @@ window#waybar {
     border-bottom: 3px solid @base07;
 }
 
-#battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #mpd, #tray, #mode, #idle_inhibitor, #backlight {
+#battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #mpd, #tray, #mode, #idle_inhibitor, #backlight, #bluetooth, #custom-bluetooth {
     padding: 0 10px;
     margin: 0 4px;
 }
@@ -62,7 +62,7 @@ window#waybar {
     /* background-color: rgba(255, 255, 255, 0.8);
     border-bottom: 3px solid rgba(204, 204, 204, 0.8);
     color: black; */
-    border-bottom: 3px solid @base0D;
+    border-bottom: 3px solid @base0E;
 }
 
 #battery.charging {
@@ -93,13 +93,13 @@ window#waybar {
     /* background: rgba(46, 204, 113, 0.8);
     border-bottom: 3px solid rgba(38, 172, 93, 0.8);
     color: #000000; */
-    border-bottom: 3px solid @base0B;
+    border-bottom: 3px solid @base0C;
 }
 
 #memory {
     /* background: rgba(155, 88, 182, 0.8);
     border-bottom: 3px solid rgba(126, 72, 147, 0.8); */
-    border-bottom: 3px solid @base0C;
+    border-bottom: 3px solid @base0D;
 }
 
 #network {
@@ -112,6 +112,10 @@ window#waybar {
     /* background: rgba(245, 60, 60, 0.8);
     border-bottom: 3px solid rgba(219, 54, 54, 0.8); */
     border-bottom: 3px solid @base08;
+}
+
+#bluetooth, #custom-bluetooth {
+    border-bottom: 3px solid @base0B;
 }
 
 #pulseaudio {
@@ -154,7 +158,7 @@ window#waybar {
 
 #idle_inhibitor {
     color: @base07;
-    border-bottom: 3px solid @base0E;
+    border-bottom: 3px solid @base0F;
     /* border-bottom: 3px solid rgba(236, 236, 236, 0.1); */
 }
 

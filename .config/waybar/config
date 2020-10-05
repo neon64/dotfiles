@@ -2,10 +2,11 @@
     "layer": "bottom", // Waybar at top layer
     "position": "top", // Waybar at the bottom of your screen
     "height": 36, // Waybar height
+    "output": ["eDP-1"],
     // Choose the order of the modules
     "modules-left": ["clock", "sway/mode"],
     "modules-center": ["sway/workspaces"],
-    "modules-right": [ "pulseaudio", "backlight", "network", "cpu", "memory", "battery", "idle_inhibitor", "tray"],
+    "modules-right": [ "pulseaudio", "backlight", "network", "custom/bluetooth", "cpu", "memory", "battery", "idle_inhibitor", "tray"],
     // Modules configuration
     "sway/window": {
         "format": "{}",
@@ -16,9 +17,9 @@
         "all-outputs": true,
         "format": "<span font='11'>{icon}</span>",
         "format-icons": {
-            "0": "",
+            "0": "",
             "1": "",
-            "2": "",
+            "2": "",
             "3": "",
             "4": "",
             "5": "",
@@ -26,7 +27,7 @@
             "7": "",
             "8": "",
             "9": "",
-            "10": "",
+            "10": "",
             "urgent": "",
             "focused": "",
             "default": ""
@@ -141,5 +142,12 @@
             "activated": "",
             "deactivated": ""
         }
+    },
+    "custom/bluetooth": {
+        "format": " {}",
+        "on-click": "$HOME/.config/waybar/toggle_bluetooth.sh",
+        "return-type": "text",
+        "interval": 30,
+        "exec": "$HOME/.config/waybar/bluetooth.sh 2> /dev/null"
     }
 }

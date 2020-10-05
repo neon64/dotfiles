@@ -93,6 +93,10 @@ output "HDMI-A-1" enable position 120 0
 # more specific configuration at runtime
 exec_always ~/.config/sway/configure.sh
 exec mako
+
+# authentication popups
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
 exec systemd-cat -t kanshi kanshi
 exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-session save-loop 240
 
@@ -177,6 +181,8 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
     bindsym $mod+m move workspace to output left
 
     bindsym $mod+tab workspace back_and_forth
+
+    bindsym --whole-window button2 exec $menu
 
 #
 # Workspaces:

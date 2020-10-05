@@ -20,6 +20,9 @@ set -x NMBGIT "$XDG_DATA_HOME"/notmuch/nmbug
 set -x BUNDLE_USER_CONFIG "$XDG_CONFIG_HOME"/bundle
 set -x BUNDLE_USER_CACHE "$XDG_CACHE_HOME"/bundle
 set -x BUNDLE_USER_PLUGIN "$XDG_DATA_HOME"/bundle
+set -x BROWSER firefox
+
+set -g man_standout -b yellow -o black
 
 ### ========================================
 ###				   AUTOSTART

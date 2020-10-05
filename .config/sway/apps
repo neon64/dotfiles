@@ -67,7 +67,6 @@ assign [class="marktext"] 4
 assign [class="jetbrains-idea"] 3
 assign [class="jetbrains-clion"] 3
 assign [class="Vncviewer"] 10
-assign [app_id="blueman-manager"] 8
 assign [class="zoom"] 10
 assign [app_id="re.sonny.Tangram"] 2
 assign [app_id="syncthing-gtk"] 0
