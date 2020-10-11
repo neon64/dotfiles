@@ -36,7 +36,7 @@ if status --is-login && status --is-interactive
     if set -q XDG_VTNR && test "$XDG_VTNR" -eq "1" && test ! -e /tmp/sway-autoopen.tag
         touch /tmp/sway-autoopen.tag
 
-        ~/.config/bin/fdm
+        ~/.config/bin/fdm --auto
     end
     if set -q XDG_VTNR && test "$XDG_VTNR" -gt "0" -a "$XDG_VTNR" -lt "6"
         # set LINE_UP "\033[1A"

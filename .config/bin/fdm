@@ -40,21 +40,14 @@ unset_wayland_env_vars() {
 start_sway() {
     wayland_env_vars
     is_in_vm && export WLR_NO_HARDWARE_CURSORS=1
-    systemd-cat -t sway sway
+    systemd-cat -t sway ~/code/sway/build/sway/sway
     unset_wayland_env_vars
-}
-
-start_sway_nouveau() {
-    sudo modprobe nouveau
-    start_sway
-    kill_discrete_gpu
 }
 
 main_menu() {
     echo -e "${BLUE}Launch:${RESET_FMT}"
 
     options="sway
-sway (with nouveau)
 gnome (wayland)
 gnome (wayland, with nouveau)
 gnome (on xorg)
@@ -78,11 +71,6 @@ logout"
         'sway')
             echo -e "${GREEN}Starting Sway...${RESET_FMT}"
             start_sway
-            echo -en "$LINE_UP$CLEAR_LINE"
-            ;;
-        'sway (with nouveau)')
-            echo -e "${GREEN}Starting Sway with Nouveau...${RESET_FMT}"
-            start_sway_nouveau
             echo -en "$LINE_UP$CLEAR_LINE"
             ;;
         'gnome (wayland)')
