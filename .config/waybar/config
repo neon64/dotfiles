@@ -2,7 +2,6 @@
     "layer": "bottom", // Waybar at top layer
     "position": "top", // Waybar at the bottom of your screen
     "height": 36, // Waybar height
-    "output": ["eDP-1"],
     // Choose the order of the modules
     "modules-left": ["clock", "sway/mode"],
     "modules-center": ["sway/workspaces"],

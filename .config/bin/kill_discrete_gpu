@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+sudo udevadm trigger --verbose --action=remove --subsystem-match=drm --property-match="MINOR=1"
+sleep 0.1
+
 if lsmod | grep -q nouveau; then
     sudo rmmod nouveau
 fi

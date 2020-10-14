@@ -17,8 +17,7 @@ set $files nautilus
 # env GTK_CSD=0 LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0 ~/code/wofi/build/
 
 # preferred application launcher
-set $menu wofi --show drun --width=700 --prompt= --no-actions --height=300 --allow-images
-
+set $menu ~/.config/sway/toggle_wofi.sh
 # movement keys
 set $up l
 set $down k
@@ -116,7 +115,7 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
     bindsym $mod+q kill
 
     # start your launcher
-    bindsym $mod+d exec $menu
+    bindsym $mod+d exec wofi --show drun --width=700 --prompt= --no-actions --height=300 --allow-images
     bindsym $mod+s exec $files
     # bindsym $mod+d exec alacritty --title "Command Launcher" --config-file ~/.config/alacritty/alacritty_big.yml -e ~/.config/bin/launch_util
 
@@ -184,7 +183,6 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
     bindsym $mod+tab workspace back_and_forth
 
     bindsym --whole-window button2 exec $menu
-
 #
 # Workspaces:
 #
