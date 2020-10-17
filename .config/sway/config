@@ -334,16 +334,16 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
     set $arc-dark-text #8c96a2
 
     # fits Base16-Tomorrow-Night theme
-    set $bd-color              $arc-dark-bg
-    set $focused-bd-color      $arc-dark-bg-3
+    set $bd-color              #595f6e
+    set $focused-bd-color      $arc-dark-bg-2
     set $urgent-bd-color       $base08
     set $indicator             $base0B
 
-    set $bg-color              $arc-dark-bg
-    set $focused-bg-color      $arc-dark-bg-3
+    set $bg-color              #595f6e
+    set $focused-bg-color      $arc-dark-bg-2
 
-    set $inner-bd-color         $arc-dark-bg
-    set $focused-inner-bd-color $arc-dark-bg-3
+    set $inner-bd-color         #595f6e
+    set $focused-inner-bd-color $arc-dark-bg-2
 
     set $inactive-text-color   $arc-dark-text
     set $text-color            $arc-dark-text
@@ -362,7 +362,7 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
     default_floating_border none
     hide_edge_borders both
     focus_wrapping no
-
+    titlebar_padding 6 6
     font pango:Noto Sans Regular 10
 
 # You may want this:
@@ -374,3 +374,5 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
 # include ~/.config/sway/`hostname`/*
 
 include ~/.config/sway/apps
+
+for_window [title="."] title_format "%title (<b>%app_id</b><b>%class</b>)"

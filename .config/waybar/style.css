@@ -4,7 +4,7 @@
     border: none;
     border-radius: 0;
     /* we use `serif` as a fallback so its clear if our proper font isn't installed */
-    font-family: "Input Sans Narrow", "la-regular-400", "la-solid-900", serif;
+    font-family: "Noto Sans", "la-regular-400", "la-solid-900", serif;
     font-size: 12px;
     min-height: 0;
 }
