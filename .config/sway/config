@@ -96,6 +96,7 @@ exec mako
 # authentication popups
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec blueman-applet
+exec /usr/lib/kdeconnectd
 
 exec systemd-cat -t kanshi kanshi
 exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-session save-loop 240

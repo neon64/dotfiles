@@ -2,8 +2,8 @@
 ## in this file. See the following manpages for more: vncserver(1) Xvnc(1).
 ## Several common ones are shown below. Uncomment and modify to your liking.
 ##
-# securitytypes=vncauth,tlsvnc
-desktop=sandbox
+
+session=xfce
+geometry=1920x1080
 localhost
-# alwaysshared
-# geometry=1920x1080
+alwaysshared
