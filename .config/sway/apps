@@ -37,6 +37,7 @@ for_window [app_id="org.gnome.NautilusPreviewer"] floating enable
 
 for_window [app_id="re.sonny.Tangram"] border none
 for_window [class="Ferdi"] border none
+for_window [app_id="syncthing-gtk"] border none; floating enable
 
 for_window [class="zoom"] idle_inhibit visible
 for_window [title="Participants"] floating enable
@@ -61,7 +62,7 @@ assign [app_id="astroid"] 8
 assign [class="Mailspring"] 8
 assign [app_id="geary"] 8
 assign [class="keepassxc"] 9
-assign [app_id="keepassxc"] 9
+assign [app_id="org.keepassxc.KeePassXC"] 9
 assign [class="jetbrains-idea"] 3
 assign [class="jetbrains-clion"] 3
 assign [class="Vncviewer"] 10

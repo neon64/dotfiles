@@ -4,4 +4,4 @@ vte-terminal {
     padding: 10px;
 }
 @import 'colors.css';
-
+@import 'window_decorations.css';

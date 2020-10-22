@@ -1,7 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 # (B)rowses a file or folder in a GUI
 
 actual_path=$(realpath "${1-.}")
 
 systemd-cat nautilus -n "$actual_path" &
-disown

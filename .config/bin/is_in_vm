@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/sh
 
 if grep -q '^flags.*hypervisor' /proc/cpuinfo; then
     exit 0

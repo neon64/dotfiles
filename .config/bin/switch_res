@@ -1,11 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ -z "$SWAYSOCK" ]; then
     echo "Not running inside sway, trying to set fb console resolution."
-    echo -n "xres: "
-    read xres
-    echo -n "yres: "
-    read yres
+    echo "xres: "
+    read -r xres
+    echo "yres: "
+    read -r yres
     fbset -xres "$xres" -yres "$yres"
 
 else

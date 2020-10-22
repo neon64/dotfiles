@@ -1,6 +1,5 @@
 #!/bin/bash
 
-GREEN="\033[32m"
 BLUE="\033[34m"
 RESET_FMT="\033[0m"
 LINE_UP="\033[1A"
@@ -9,7 +8,7 @@ make_text() {
     for i in $1
     do
         b=$(basename $i)
-        echo -e "![$b]($i)" 
+        echo -e "![$b]($i)"
         echo -e "\n - .\n\n"
     done
 }

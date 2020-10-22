@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 if [ "$1" = "intl" ]; then
     echo "Activating international keyboard layout"

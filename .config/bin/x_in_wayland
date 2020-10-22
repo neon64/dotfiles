@@ -1,6 +1,4 @@
-#!/bin/bash
-
-# env -u DISPLAY -u I3SOCK -u SWAYSOCK -u WAYLAND_DISPLAY -u XDG_SEAT -u XDG_VTNR -u XDG_SESSION_TYPE -u SESSION_MANAGER -u DBUS_SESSION_BUS_ADDRESS vncserver :2
+#!/bin/sh
 
 systemctl start vncserver@:2.service
 sleep 2

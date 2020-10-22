@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 sudo udevadm trigger --verbose --action=remove --subsystem-match=drm --property-match="MINOR=1"
 sleep 0.1
@@ -9,6 +9,6 @@ fi
 if lsmod | grep -q nvidia; then
     sudo rmmod nvidia_modeset nvidia_drm nvidia
 fi
-sudo bash -c 'echo OFF > /proc/acpi/bbswitch'
+sudo sh -c 'echo OFF > /proc/acpi/bbswitch'
 cat /proc/acpi/bbswitch
 

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# https://gist.github.com/mzabriskie/6631607#file-git-status
+# runs git status over a whole bunch of directories at a time
+# from https://gist.github.com/mzabriskie/6631607#file-git-status
 
 dir="$1"
 

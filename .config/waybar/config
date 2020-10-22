@@ -5,7 +5,7 @@
     // Choose the order of the modules
     "modules-left": ["clock", "sway/mode"],
     "modules-center": ["sway/workspaces"],
-    "modules-right": [ "pulseaudio", "backlight", "network", "custom/bluetooth", "cpu", "memory", "battery", "idle_inhibitor", "tray"],
+    "modules-right": [ "pulseaudio", "backlight", "network", "custom/bluetooth", "cpu", "battery", "tray", "idle_inhibitor", "custom/power"],
     // Modules configuration
     "sway/window": {
         "format": "{}",
@@ -144,9 +144,18 @@
     },
     "custom/bluetooth": {
         "format": " {}",
-        "on-click": "$HOME/.config/waybar/toggle_bluetooth.sh",
+        "on-click": "blueman-manager",
+        "on-click-right": "$HOME/.config/waybar/toggle_bluetooth.sh",
+        "exec-on-event": false,
+        "signal": 8,
         "return-type": "text",
         "interval": 30,
+        "tooltip": false,
         "exec": "$HOME/.config/waybar/bluetooth.sh 2> /dev/null"
+    },
+    "custom/power": {
+        "format":"",
+        "on-click":"nwgbar -o 0.5",
+        "tooltip": false
     }
 }

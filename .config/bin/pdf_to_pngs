@@ -1,3 +1,3 @@
-#!/bin/bash
+#!/bin/sh
 
 pdftoppm "$1" "$2" -png

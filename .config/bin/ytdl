@@ -1,12 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
-mkdir -p ~/Music/YouTube
-youtube-dl -o "$HOME/Music/YouTube/%(title)s.%(ext)s" --extract-audio --metadata-from-title "%(artist)s - %(title)s" --add-metadata --audio-format m4a "$@"
-
-case "$(uname)" in
-    'Linux')
-        google-musicmanager
-        ;;
-    *)
-        echo "make sure google play music manager is started, in order to upload songs"
-esac
+mkdir -p ~/media/youtube
+youtube-dl -o "$HOME/media/youtube/%(title)s.%(ext)s" --extract-audio --metadata-from-title "%(artist)s - %(title)s" --add-metadata --audio-format m4a "$@"

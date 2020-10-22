@@ -7,8 +7,7 @@ set $mod Mod4
 
 # preferred terminal emulator
 set $term alacritty
-# set $term cage -d -- alacritty
-# set $term gnome-terminal
+set $window_switcher ~/.config/wofi/windows.py
 
 # preferred web browser
 set $browser firefox
@@ -31,7 +30,8 @@ set $borderwidth 0
 #
 # Default wallpaper (more resolutions are available in /usr/share/sway/)
 
-output * bg ~/pics/wallpapers/wallpaper-current.jpg fill
+# azote bg
+exec ~/.azotebg
 
 # xwayland disable
 
@@ -86,16 +86,16 @@ input "1739:0:Synaptics_TM3418-002" {
     click_method clickfinger
 }
 
-output "eDP-1" enable position 0 1050
-output "HDMI-A-1" enable position 120 0
-
 # more specific configuration at runtime
 exec_always ~/.config/sway/configure.sh
 exec mako
 
 # authentication popups
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# startup apps / services
 exec blueman-applet
+exec syncthing-gtk
 exec /usr/lib/kdeconnectd
 
 exec systemd-cat -t kanshi kanshi
@@ -104,7 +104,14 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
 #
 # Basics:
 #
-    bindsym $mod+Shift+i exec bash -c "echo $(swaymsg -t get_tree | grep -C 50 '\"focused\": true') > $HOME/foo"
+
+    # close laptop lid
+    set $laptop_screen eDP-1
+    set $sleep systemctl suspend
+    set $notify notify-send -t 5000
+
+    bindswitch --reload --locked lid:on exec bash -c '[ $(swaymsg -t get_outputs | grep name | wc -l) == 1 ] && ($sleep) || ($notify "Clamshell mode" "Laptop screen off" && swaymsg output $laptop_screen disable)'
+    bindswitch --reload --locked lid:off output $laptop_screen enable
 
     # the $term variable is expanded at runtime
     bindsym $mod+Return exec $$term
@@ -144,9 +151,11 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
     bindsym $mod+Shift+s exec swayshot region
 
     # exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning \
-        -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.'\
-        -b 'Yes, exit sway' 'bash -c "~/code/sway-session/sway-session save; swaymsg exit"'
+    bindsym $mod+Shift+e exec nwgbar -o 0.5
+
+    # swaynag -t warning \
+    #    -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.'\
+    #    -b 'Yes, exit sway' 'bash -c "~/code/sway-session/sway-session save; swaymsg exit"'
     # used to be: exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"ww
 #
 # Moving around
@@ -237,7 +246,7 @@ exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-sessio
     bindsym $mod+space focus mode_toggle
 
     # move focus to the parent container
-    bindsym $mod+a focus parent
+    bindsym $mod+a exec $window_switcher
 
     # manipulate gaps settings
     bindsym $mod+G gaps inner all plus 10; hide_edge_borders none
