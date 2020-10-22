@@ -13,10 +13,9 @@ set $window_switcher ~/.config/wofi/windows.py
 set $browser firefox
 set $files nautilus
 
-# env GTK_CSD=0 LD_PRELOAD=/usr/lib/libgtk3-nocsd.so.0 ~/code/wofi/build/
-
 # preferred application launcher
 set $menu ~/.config/sway/toggle_wofi.sh
+
 # movement keys
 set $up l
 set $down k
@@ -32,8 +31,6 @@ set $borderwidth 0
 
 # azote bg
 exec ~/.azotebg
-
-# xwayland disable
 
 #
 # Example output configuration:
@@ -88,18 +85,13 @@ input "1739:0:Synaptics_TM3418-002" {
 
 # more specific configuration at runtime
 exec_always ~/.config/sway/configure.sh
-exec mako
-
-# authentication popups
-exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 # startup apps / services
-exec blueman-applet
-exec syncthing-gtk
-exec /usr/lib/kdeconnectd
-
+exec mako
 exec systemd-cat -t kanshi kanshi
 exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-session save-loop 240
+# authentication popups
+exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
 #
 # Basics:

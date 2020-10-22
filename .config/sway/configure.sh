@@ -14,7 +14,9 @@ else
 
     # only start up these apps when in actual computer
     systemd-cat -t keepassxc keepassxc &
-    systemd-cat -t
+    systemd-cat -t blueman-applet blueman-applet &
+    systemd-cat -t syncthing syncthing-gtk &
+    systemd-cat -t kdeconnect /usr/lib/kdeconnectd
 fi
 
 # start mapping tap capslock to escape, and other fancy things
