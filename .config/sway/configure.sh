@@ -16,7 +16,7 @@ else
     systemd-cat -t keepassxc keepassxc &
     systemd-cat -t blueman-applet blueman-applet &
     systemd-cat -t syncthing syncthing-gtk &
-    systemd-cat -t kdeconnect /usr/lib/kdeconnectd
+    systemd-cat -t kdeconnect /usr/lib/kdeconnectd &
 fi
 
 # start mapping tap capslock to escape, and other fancy things

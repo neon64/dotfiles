@@ -4,3 +4,17 @@ modified = "*"
 ahead = "⇡${count}"
 diverged = "⇕⇡${ahead_count}⇣${behind_count}"
 behind = "⇣${count}"
+
+
+[battery]
+discharging_symbol=""
+charging_symbol=""
+format="[$percentage $symbol]($style) "
+
+[[battery.display]]
+threshold = 10
+style = "bold red"
+
+[[battery.display]]  # "bold yellow" style when capacity is between 10% and 30%
+threshold = 20
+style = "bold yellow"
