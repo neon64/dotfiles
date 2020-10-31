@@ -1,0 +1,46 @@
+
+### Ricing
+
+include colorscheme
+
+set $arc-light-bg #e7e8eb
+set $arc-light-bg-3 #969dac
+set $arc-light-text #dddee2
+
+set $arc-dark-bg #323843
+set $arc-dark-bg-2 #2a3039
+set $arc-dark-bg-3 #2f343f
+set $arc-dark-text #8c96a2
+
+# fits Base16-Tomorrow-Night theme
+set $bd-color              #595f6e
+set $focused-bd-color      $arc-dark-bg-2
+set $urgent-bd-color       $base08
+set $indicator             $base0B
+
+set $bg-color              #595f6e
+set $focused-bg-color      $arc-dark-bg-2
+
+set $inner-bd-color         #595f6e
+set $focused-inner-bd-color $arc-dark-bg-2
+
+set $inactive-text-color   $arc-dark-text
+set $text-color            $arc-dark-text
+set $focused-text-color    $arc-dark-text
+set $urgent-bg-color       $base08
+
+# window colors
+#                       border              background          text                  indicator      child border
+client.focused          $focused-bd-color   $focused-bg-color   $focused-text-color   $focused-inner-bd-color     $focused-inner-bd-color
+client.unfocused        $bd-color           $bg-color           $text-color           $inner-bd-color     $inner-bd-color
+client.focused_inactive $bd-color           $bg-color           $text-color           $inner-bd-color     $inner-bd-color
+client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $urgent-bd-color     $urgent-bd-color
+
+# window borders and gaps
+default_border normal $borderwidth
+default_floating_border none
+hide_edge_borders both
+focus_wrapping no
+titlebar_padding 6 6
+font pango:Noto Sans Regular 10
+

@@ -1,0 +1,208 @@
+#
+# Basics:
+#
+
+    # close laptop lid
+    set $laptop_screen eDP-1
+    set $sleep systemctl suspend
+    set $notify notify-send -t 5000
+
+    # bindswitch --reload --locked lid:on exec bash -c '[ $(swaymsg -t get_outputs | grep name | wc -l) == 1 ] && ($sleep) || ($notify "Clamshell mode" "Laptop screen off" && swaymsg output $laptop_screen disable)'
+    # bindswitch --reload --locked lid:off output $laptop_screen enable
+
+    # the $term variable is expanded at runtime
+    bindsym $mod+Return exec $$term
+    bindsym $mod+x exec alacritty --title "Floating Terminal" --config-file ~/.config/alacritty/alacritty_big.yml -e fish -c 'env fish_custom_greeting= fish'
+    bindsym $mod+c exec $browser
+
+    # kill focused window
+    bindsym $mod+Shift+q kill
+    bindsym $mod+q kill
+
+    # start your launcher
+    bindsym $mod+d exec $menu
+    bindsym $mod+s exec $files
+    # bindsym $mod+d exec alacritty --title "Command Launcher" --config-file ~/.config/alacritty/alacritty_big.yml -e ~/.config/bin/launch_util
+
+    # Drag floating windows by holding down $mod and left mouse button. Resize
+    # them with right mouse button + $mod. Despite the name, also works for
+    # non-floating windows. Change normal to inverse to use left mouse button
+    # for resizing and right mouse button for dragging.
+    floating_modifier $mod normal
+
+    # reload the configuration file
+    bindsym $mod+Shift+c reload
+
+    # swayshot is a print screen helper for sway
+    # * Print Scr for whole screen
+    # * Alt + Print Scr for a focused window
+    # * Shift + Print Scr for a selected region
+    #
+    # Save screenshots to $SCREENSHOTS folder.
+    # The default value is XDG_PICTURES_DIR, see
+    # https://wiki.archlinux.org/index.php/XDG_user_directories
+    #
+    # the actual configuration is in:
+    # /etc/sway/config.d/swayshot
+
+    # exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+e exec nwgbar -o 0.5
+
+#
+# Moving around
+#
+    # Move your focus around using the home row
+    bindsym $mod+$left focus left
+    bindsym $mod+$right focus right
+    bindsym $mod+$up focus up
+    bindsym $mod+$down focus down
+
+    # _move_ the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+
+    bindsym $mod+n move workspace to output up
+    bindsym $mod+m move workspace to output left
+
+    bindsym $mod+tab workspace back_and_forth
+
+#
+# Workspaces:
+#
+
+    workspace 10
+    # switch to workspace
+    bindsym $mod+grave workspace 0
+    bindsym $mod+1 workspace 1
+    bindsym $mod+2 workspace 2
+    bindsym $mod+3 workspace 3
+    bindsym $mod+4 workspace 4
+    bindsym $mod+5 workspace 5
+    bindsym $mod+6 workspace 6
+    bindsym $mod+7 workspace 7
+    bindsym $mod+8 workspace 8
+    bindsym $mod+9 workspace 9
+    bindsym $mod+0 workspace 10
+    # move focused container to workspace
+    bindsym $mod+Shift+grave move container to workspace 0
+    bindsym $mod+Shift+1 move container to workspace 1
+    bindsym $mod+Shift+2 move container to workspace 2
+    bindsym $mod+Shift+3 move container to workspace 3
+    bindsym $mod+Shift+4 move container to workspace 4
+    bindsym $mod+Shift+5 move container to workspace 5
+    bindsym $mod+Shift+6 move container to workspace 6
+    bindsym $mod+Shift+7 move container to workspace 7
+    bindsym $mod+Shift+8 move container to workspace 8
+    bindsym $mod+Shift+9 move container to workspace 9
+    bindsym $mod+Shift+0 move container to workspace 10
+
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+b splith
+    bindsym $mod+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+w layout tabbed
+    bindsym $mod+e layout toggle split
+    bindsym $mod+t layout splith
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # switch windows
+    bindsym $mod+a exec $window_switcher
+
+    # manipulate gaps settings
+    bindsym $mod+G gaps inner all plus 10; hide_edge_borders none
+    bindsym $mod+Shift+G gaps inner all set 0; gaps outer all set 0; hide_edge_borders both
+
+#
+# Special keys
+#
+
+    # Volume
+    # exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
+    bindsym XF86AudioRaiseVolume exec amixer -q set Master 2%+ unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
+    bindsym XF86AudioLowerVolume exec amixer -q set Master 2%- unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
+    bindsym XF86AudioMute exec (amixer get Master | grep off > /dev/null && amixer -q set Master unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob) || (amixer -q set Master mute && echo 0 > $SWAYSOCK.wob)
+
+    # Volume
+    # bindsym --locked XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+
+    # bindsym --locked XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-
+    # bindsym --locked XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle
+
+    # Media player
+    bindsym --locked XF86AudioPlay exec mpc toggle
+    # bindsym XF86AudioPause exec mpc pause
+    bindsym --locked XF86AudioPrev exec mpc prev
+    bindsym --locked XF86AudioNext exec mpc next
+
+    # Brightness (a fade over 100ms)
+    bindsym --locked XF86MonBrightnessUp exec brillo -A 5 -u 100000 && brillo -G | awk '{print int($1)}' > $SWAYSOCK.wob
+    bindsym --locked XF86MonBrightnessDown exec brillo -U 5 -u 100000 && brillo -G | awk '{print int($1)}' > $SWAYSOCK.wob
+
+
+    # Sleep
+    bindsym $mod+Shift+u exec swaylock
+    # exec swayidle -w timeout 600 '! is_in_vm && swaylock -f' timeout 700 '! is_in_vm && swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f'
+
+    bindsym $mod+i exec killall -SIGUSR1 waybar
+
+    bar {
+        swaybar_command waybar
+
+        position top
+    }
+
+#
+# Resize mode:
+#
+
+    bindsym $mod+r mode "resize"
+
+    mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j         resize shrink width 10px
+        bindsym k         resize grow height 10px
+        bindsym l         resize shrink height 10px
+        bindsym semicolon resize grow width 10px
+
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink width 10px
+        bindsym Down        resize grow height 10px
+        bindsym Up          resize shrink height 10px
+        bindsym Right       resize grow width 10px
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
+
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+equal move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show

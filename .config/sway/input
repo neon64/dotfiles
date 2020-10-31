@@ -1,0 +1,43 @@
+# Generic Keyboard
+input * {
+    xkb_options caps:super
+}
+
+# 2010 MacBook Pro hardware
+input "1452:566:bcm5974" {
+    tap enabled
+    natural_scroll enabled
+    #dwt disabled
+    #accel_profile adaptive
+    #accel_profile adaptive
+    #pointer_accel -100, 100
+    click_method clickfinger
+}
+
+input "1452:566:Apple_Inc._Apple_Internal_Keyboard_/_Trackpad" {
+    xkb_options caps:super,ctrl:swap_lwin_lctl
+}
+
+input "1452:591:Apple_Inc._Apple_Keyboard" {
+    xkb_options caps:super,ctrl:swap_lwin_lctl
+}
+
+# Wireless mouse
+input "1452:781:Robert_Chamberlain’s_M" {
+    tap enabled
+    natural_scroll enabled
+}
+
+# Thinkpad X1 Extreme Hardware
+input "1:1:AT_Translated_Set_2_keyboard" {
+    # according to the xkb docs, we map control to alt, and then alt to win, thus
+    # we have a poor man's emulation of an Apple keyboard.
+    xkb_options caps:super,altwin:ctrl_alt_win
+}
+
+input "1739:0:Synaptics_TM3418-002" {
+    tap enabled
+    middle_emulation disabled
+    natural_scroll enabled
+    click_method clickfinger
+}

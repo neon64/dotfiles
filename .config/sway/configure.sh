@@ -9,17 +9,18 @@ if grep -q "^flags.*\ hypervisor" /proc/cpuinfo; then
     swaymsg set '$term' dbus-launch gnome-terminal
 else
     echo "Not running in vm"
-    echo " - Adding gestures"
+    echo "- Adding gestures"
     libinput-gestures-setup restart
 
-    # only start up these apps when in actual computer
-    systemd-cat -t keepassxc keepassxc &
-    systemd-cat -t blueman-applet blueman-applet &
-    systemd-cat -t syncthing syncthing-gtk &
-    systemd-cat -t kdeconnect /usr/lib/kdeconnectd &
+    sleep 1
+    echo "- Starting up startup apps"
+    # only start up these apps when running on an actual system
+    pgrep "keepassxc" || systemd-cat -t keepassxc keepassxc &
+    pgrep "blueman-applet" || systemd-cat -t blueman-applet blueman-applet &
+    pgrep "syncthing-gtk" ||  systemd-cat -t syncthing syncthing-gtk &
 fi
 
 # start mapping tap capslock to escape, and other fancy things
-if ! pgrep "evscript"; then
-    evscript -f ~/.config/bin/evscript_map.dyon -d /dev/input/event5
-fi
+# if ! pgrep "evscript"; then
+    # evscript -f ~/.config/bin/evscript_map.dyon -d /dev/input/event5
+# fi

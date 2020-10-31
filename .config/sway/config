@@ -14,7 +14,8 @@ set $browser firefox
 set $files nautilus
 
 # preferred application launcher
-set $menu ~/.config/sway/toggle_wofi.sh
+set $menu wofi
+set $menu_toggle ~/.config/sway/toggle_wofi.sh
 
 # movement keys
 set $up l
@@ -26,355 +27,34 @@ set $right semicolon
 set $borderwidth 0
 
 ### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/sway/)
 
-# azote bg
-exec ~/.azotebg
-
-#
-# Example output configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running swaymsg -t get_outputs
-
-# Generic Keyboard
-input * {
-    xkb_options caps:super
-}
-
-# 2010 MacBook Pro hardware
-input "1452:566:bcm5974" {
-    tap enabled
-    natural_scroll enabled
-    #dwt disabled
-    #accel_profile adaptive
-    #accel_profile adaptive
-    #pointer_accel -100, 100
-    click_method clickfinger
-}
-
-input "1452:566:Apple_Inc._Apple_Internal_Keyboard_/_Trackpad" {
-    xkb_options caps:super,ctrl:swap_lwin_lctl
-}
-
-input "1452:591:Apple_Inc._Apple_Keyboard" {
-    xkb_options caps:super,ctrl:swap_lwin_lctl
-}
-
-# Wireless mouse
-input "1452:781:Robert_Chamberlain’s_M" {
-    tap enabled
-    natural_scroll enabled
-}
-
-# Thinkpad X1 Extreme Hardware
-input "1:1:AT_Translated_Set_2_keyboard" {
-    # according to the xkb docs, we map control to alt, and then alt to win, thus
-    # we have a poor man's emulation of an Apple keyboard.
-    xkb_options caps:super,altwin:ctrl_alt_win
-}
-
-input "1739:0:Synaptics_TM3418-002" {
-    tap enabled
-    middle_emulation disabled
-    natural_scroll enabled
-    click_method clickfinger
-}
+# exec ~/.azotebg
 
 # more specific configuration at runtime
 exec_always ~/.config/sway/configure.sh
 
-# startup apps / services
+# notification daemon
 exec mako
+# dynamic output management
 exec systemd-cat -t kanshi kanshi
+# session restore
 exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-session save-loop 240
 # authentication popups
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+# kde connect daemon
+exec /usr/lib/kdeconnectd
 
-#
-# Basics:
-#
+# input mappings / libinput config
+include input
 
-    # close laptop lid
-    set $laptop_screen eDP-1
-    set $sleep systemctl suspend
-    set $notify notify-send -t 5000
+# key/mouse/lid switch bindings
+include bindings
 
-    bindswitch --reload --locked lid:on exec bash -c '[ $(swaymsg -t get_outputs | grep name | wc -l) == 1 ] && ($sleep) || ($notify "Clamshell mode" "Laptop screen off" && swaymsg output $laptop_screen disable)'
-    bindswitch --reload --locked lid:off output $laptop_screen enable
+# colors and fonts
+include rice
 
-    # the $term variable is expanded at runtime
-    bindsym $mod+Return exec $$term
-    bindsym $mod+x exec alacritty --title "Floating Terminal" --config-file ~/.config/alacritty/alacritty_big.yml -e fish -c 'env fish_custom_greeting= fish'
-    bindsym $mod+c exec $browser
+# app-specific settings and overrides
+include apps
 
-    # kill focused window
-    bindsym $mod+Shift+q kill
-    bindsym $mod+q kill
-
-    # start your launcher
-    bindsym $mod+d exec wofi --show drun --width=700 --prompt= --no-actions --height=300 --allow-images
-    bindsym $mod+s exec $files
-    # bindsym $mod+d exec alacritty --title "Command Launcher" --config-file ~/.config/alacritty/alacritty_big.yml -e ~/.config/bin/launch_util
-
-    # Drag floating windows by holding down $mod and left mouse button. Resize
-    # them with right mouse button + $mod. Despite the name, also works for
-    # non-floating windows. Change normal to inverse to use left mouse button
-    # for resizing and right mouse button for dragging.
-    floating_modifier $mod normal
-
-    # reload the configuration file
-    bindsym $mod+Shift+c reload
-
-    # swayshot
-    #
-    # Print screen helper for sway: add keyboard shortcuts for screenshots:
-    # * Print Scr for whole screen
-    # * Alt + Print Scr for a focused window
-    # * Shift + Print Scr for a selected region
-    #
-    # Save screenshots to $SCREENSHOTS folder.
-    # The default value is XDG_PICTURES_DIR, see
-    # https://wiki.archlinux.org/index.php/XDG_user_directories
-    bindsym Print exec swayshot
-    bindsym Mod1+Print exec swayshot window
-    bindsym $mod+Shift+s exec swayshot region
-
-    # exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec nwgbar -o 0.5
-
-    # swaynag -t warning \
-    #    -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.'\
-    #    -b 'Yes, exit sway' 'bash -c "~/code/sway-session/sway-session save; swaymsg exit"'
-    # used to be: exec bash -c "zenity --question --text='Are you sure you want to exit sway?' && swaymsg exit"ww
-#
-# Moving around
-#
-    # Move your focus around using the home row
-    #bindsym $mod+$left exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs left
-    #bindsym $mod+$down exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs down
-    #bindsym $mod+$up exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs up
-    #bindsym $mod+$right exec ~/Code/navigate_sway_emacs/target/release/navigate_sway_emacs right
-    bindsym $mod+$left focus left
-    bindsym $mod+$right focus right
-    bindsym $mod+$up focus up
-    bindsym $mod+$down focus down
-
-    # or use $mod+[up|down|left|right]
-    bindsym $mod+Left focus left
-    bindsym $mod+Down focus down
-    bindsym $mod+Up focus up
-    bindsym $mod+Right focus right
-
-    # _move_ the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
-    # ditto, with arrow keys
-    bindsym $mod+Shift+Left move left
-    bindsym $mod+Shift+Down move down
-    bindsym $mod+Shift+Up move up
-    bindsym $mod+Shift+Right move right
-
-    bindsym $mod+n move workspace to output up
-    bindsym $mod+m move workspace to output left
-
-    bindsym $mod+tab workspace back_and_forth
-
-    bindsym --whole-window button2 exec $menu
-#
-# Workspaces:
-#
-
-    workspace 10
-    # switch to workspace
-    bindsym $mod+grave workspace 0
-    bindsym $mod+1 workspace 1
-    bindsym $mod+2 workspace 2
-    bindsym $mod+3 workspace 3
-    bindsym $mod+4 workspace 4
-    bindsym $mod+5 workspace 5
-    bindsym $mod+6 workspace 6
-    bindsym $mod+7 workspace 7
-    bindsym $mod+8 workspace 8
-    bindsym $mod+9 workspace 9
-    bindsym $mod+0 workspace 10
-    # move focused container to workspace
-    bindsym $mod+Shift+grave move container to workspace 0
-    bindsym $mod+Shift+1 move container to workspace 1
-    bindsym $mod+Shift+2 move container to workspace 2
-    bindsym $mod+Shift+3 move container to workspace 3
-    bindsym $mod+Shift+4 move container to workspace 4
-    bindsym $mod+Shift+5 move container to workspace 5
-    bindsym $mod+Shift+6 move container to workspace 6
-    bindsym $mod+Shift+7 move container to workspace 7
-    bindsym $mod+Shift+8 move container to workspace 8
-    bindsym $mod+Shift+9 move container to workspace 9
-    bindsym $mod+Shift+0 move container to workspace 10
-
-#
-# Layout stuff:
-#
-    # You can "split" the current object of your focus with
-    # $mod+b or $mod+v, for horizontal and vertical splits
-    # respectively.
-    bindsym $mod+b splith
-    bindsym $mod+v splitv
-
-    # Switch the current container between different layout styles
-    bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
-    bindsym $mod+t layout splith
-    # Make the current focus fullscreen
-    bindsym $mod+f fullscreen
-
-    # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
-
-    # Swap focus between the tiling area and the floating area
-    bindsym $mod+space focus mode_toggle
-
-    # move focus to the parent container
-    bindsym $mod+a exec $window_switcher
-
-    # manipulate gaps settings
-    bindsym $mod+G gaps inner all plus 10; hide_edge_borders none
-    bindsym $mod+Shift+G gaps inner all set 0; gaps outer all set 0; hide_edge_borders both
-
-#
-# Special keys
-#
-
-    # Volume
-    exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
-    bindsym XF86AudioRaiseVolume exec amixer -q set Master 2%+ unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
-    bindsym XF86AudioLowerVolume exec amixer -q set Master 2%- unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
-    bindsym XF86AudioMute exec (amixer get Master | grep off > /dev/null && amixer -q set Master unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob) || (amixer -q set Master mute && echo 0 > $SWAYSOCK.wob)
-
-    # Volume
-    # bindsym --locked XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+
-    # bindsym --locked XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-
-    # bindsym --locked XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle
-
-    # Media player
-    bindsym --locked XF86AudioPlay exec mpc toggle
-    # bindsym XF86AudioPause exec mpc pause
-    bindsym --locked XF86AudioPrev exec mpc prev
-    bindsym --locked XF86AudioNext exec mpc next
-
-    # Brightness (a fade over 100ms)
-    bindsym --locked XF86MonBrightnessUp exec brillo -A 5 -u 100000 && brillo -G | awk '{print int($1)}' > $SWAYSOCK.wob
-    bindsym --locked XF86MonBrightnessDown exec brillo -U 5 -u 100000 && brillo -G | awk '{print int($1)}' > $SWAYSOCK.wob
-
-
-    # Sleep
-    bindsym $mod+Shift+u exec swaylock
-    exec swayidle -w timeout 600 '! is_in_vm && swaylock -f' timeout 700 '! is_in_vm && swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f'
-
-    bindsym $mod+i exec killall -SIGUSR1 waybar
-
-    bar {
-        swaybar_command waybar
-    }
-
-#
-# Resize mode:
-#
-
-    bindsym $mod+r mode "resize"
-
-    mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
-
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j         resize shrink width 10px
-        bindsym k         resize grow height 10px
-        bindsym l         resize shrink height 10px
-        bindsym semicolon resize grow width 10px
-
-        # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10px
-        bindsym Down        resize grow height 10px
-        bindsym Up          resize shrink height 10px
-        bindsym Right       resize grow width 10px
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-    }
-
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
-
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+equal move scratchpad
-
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
-
-### Ricing
-
-    include colorscheme
-
-    set $arc-light-bg #e7e8eb
-    set $arc-light-bg-3 #969dac
-    set $arc-light-text #dddee2
-
-    set $arc-dark-bg #323843
-    set $arc-dark-bg-2 #2a3039
-    set $arc-dark-bg-3 #2f343f
-    set $arc-dark-text #8c96a2
-
-    # fits Base16-Tomorrow-Night theme
-    set $bd-color              #595f6e
-    set $focused-bd-color      $arc-dark-bg-2
-    set $urgent-bd-color       $base08
-    set $indicator             $base0B
-
-    set $bg-color              #595f6e
-    set $focused-bg-color      $arc-dark-bg-2
-
-    set $inner-bd-color         #595f6e
-    set $focused-inner-bd-color $arc-dark-bg-2
-
-    set $inactive-text-color   $arc-dark-text
-    set $text-color            $arc-dark-text
-    set $focused-text-color    $arc-dark-text
-    set $urgent-bg-color       $base08
-
-    # window colors
-    #                       border              background          text                  indicator      child border
-    client.focused          $focused-bd-color   $focused-bg-color   $focused-text-color   $focused-inner-bd-color     $focused-inner-bd-color
-    client.unfocused        $bd-color           $bg-color           $text-color           $inner-bd-color     $inner-bd-color
-    client.focused_inactive $bd-color           $bg-color           $text-color           $inner-bd-color     $inner-bd-color
-    client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $urgent-bd-color     $urgent-bd-color
-
-    # window borders and gaps
-    default_border normal $borderwidth
-    default_floating_border none
-    hide_edge_borders both
-    focus_wrapping no
-    titlebar_padding 6 6
-    font pango:Noto Sans Regular 10
-
-# You may want this:
-#
-# include ~/.config/sway/conf.d/*
-#
-# Protip:
-#
-# include ~/.config/sway/`hostname`/*
-
-include ~/.config/sway/apps
-
-for_window [title="."] title_format "%title (<b>%app_id</b><b>%class</b>)"
+# includes, amongst other things, a fix for DISPLAY and WAYLAND_DISPLAY env-vars on Arch Linux
+include /etc/sway/config.d/*

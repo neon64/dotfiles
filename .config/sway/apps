@@ -10,7 +10,7 @@ for_window [app_id="firefox"] border none
 for_window [class="code-oss"] border none
 for_window [app_id="Alacritty"] border pixel $borderwidth
 
-for_window [app_id="org.gnome.Nautilus"] border none
+for_window [app_id="org.gnome.Nautilus"] border none; floating enable
 for_window [app_id="gnome-control-center"] border none; floating enable
 for_window [app_id="mpv"] floating enable
 for_window [app_id="gnome-calculator"] border none; floating enable
@@ -69,3 +69,5 @@ assign [class="Vncviewer"] 10
 assign [class="zoom"] 10
 assign [app_id="re.sonny.Tangram"] 2
 assign [app_id="syncthing-gtk"] 0
+
+for_window [title="."] title_format "%title (<b>%app_id</b><b>%class</b>)"
