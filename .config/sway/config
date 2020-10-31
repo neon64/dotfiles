@@ -28,7 +28,7 @@ set $borderwidth 0
 
 ### Output configuration
 
-# exec ~/.azotebg
+exec ~/.azotebg
 
 # more specific configuration at runtime
 exec_always ~/.config/sway/configure.sh
