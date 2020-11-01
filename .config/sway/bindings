@@ -7,8 +7,8 @@
     set $sleep systemctl suspend
     set $notify notify-send -t 5000
 
-    # bindswitch --reload --locked lid:on exec bash -c '[ $(swaymsg -t get_outputs | grep name | wc -l) == 1 ] && ($sleep) || ($notify "Clamshell mode" "Laptop screen off" && swaymsg output $laptop_screen disable)'
-    # bindswitch --reload --locked lid:off output $laptop_screen enable
+    bindswitch --reload --locked lid:on exec bash -c '[ $(swaymsg -t get_outputs | grep name | wc -l) == 1 ] && ($sleep) || (swaymsg output $laptop_screen disable && $notify "Clamshell mode" "Laptop screen off")'
+    bindswitch --reload --locked lid:off output $laptop_screen enable
 
     # the $term variable is expanded at runtime
     bindsym $mod+Return exec $$term
@@ -16,7 +16,6 @@
     bindsym $mod+c exec $browser
 
     # kill focused window
-    bindsym $mod+Shift+q kill
     bindsym $mod+q kill
 
     # start your launcher
@@ -132,7 +131,7 @@
 #
 
     # Volume
-    # exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
+    exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
     bindsym XF86AudioRaiseVolume exec amixer -q set Master 2%+ unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
     bindsym XF86AudioLowerVolume exec amixer -q set Master 2%- unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
     bindsym XF86AudioMute exec (amixer get Master | grep off > /dev/null && amixer -q set Master unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob) || (amixer -q set Master mute && echo 0 > $SWAYSOCK.wob)

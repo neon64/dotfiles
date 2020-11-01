@@ -6,7 +6,8 @@ set -x XDG_CONFIG_HOME "$HOME/.config"
 set -x XDG_DATA_HOME "$HOME/.local/share"
 set -x XDG_CACHE_HOME "$HOME/.cache"
 
-set -x EDITOR (which nvim)
+# set -x EDITOR (which nvim)
+set -x EDITOR "code -w"
 set -x NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
 set -x CARGO_HOME "$XDG_DATA_HOME"/cargo
 set -x RUSTUP_HOME "$XDG_DATA_HOME"/rustup

@@ -69,5 +69,6 @@
         }
     ],
     "editor.fontSize": 13,
-    "workbench.colorTheme": "Ocean Dark Extended"
+    "workbench.colorTheme": "Ocean Dark Extended",
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim"
 }

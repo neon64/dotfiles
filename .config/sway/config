@@ -1,8 +1,7 @@
-### Variables
-#
 # use super as the modifier key -
 # warning - on most keyboards nothing maps to super by default so you will
 # be unable to exit or launch anything!
+# Thus, we map the caps-lock key to super by default
 set $mod Mod4
 
 # preferred terminal emulator
@@ -26,9 +25,8 @@ set $right semicolon
 # ricing
 set $borderwidth 0
 
-### Output configuration
-
-exec ~/.azotebg
+# input mappings / libinput config
+include input
 
 # more specific configuration at runtime
 exec_always ~/.config/sway/configure.sh
@@ -44,8 +42,8 @@ exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # kde connect daemon
 exec /usr/lib/kdeconnectd
 
-# input mappings / libinput config
-include input
+# background
+exec ~/.azotebg
 
 # key/mouse/lid switch bindings
 include bindings

@@ -3,7 +3,7 @@
     "position": "top", // Waybar at the bottom of your screen
     "height": 36, // Waybar height
     // Choose the order of the modules
-    "modules-left": ["clock", "sway/mode"],
+    "modules-left": ["custom/player", "clock", "sway/mode"],
     "modules-center": ["sway/workspaces"],
     "modules-right": [ "pulseaudio", "backlight", "network", "custom/bluetooth", "cpu", "battery", "tray", "idle_inhibitor", "custom/power"],
     // Modules configuration
@@ -128,12 +128,12 @@
         "format-icons": ["", ""],
         "on-click": "wdisplays"
     },
-    "custom/spotify": {
-        "format": "  {}",
+    "custom/player": {
+        "format": "{}",
         "return-type": "json",
         "max-length": 60,
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null",
-        "exec-if": "pgrep spotify"
+        "on-click": "playerctl play-pause"
     },
     "idle_inhibitor": {
         "format": "<span font='11'>{icon}</span>",

@@ -1,29 +1,33 @@
-#!/bin/bash
+#!/bin/sh
+
+# Run a Windows VM with kvm/virtio/qemu/spice/Intel GVT-g
+# I've found it is reasonably fast while my laptop is plugged into battery
+sudo virsh start windows10 && virt-viewer -c qemu:///system --attach windows10
 
 # An experiment to run a VM of my actual Windows install, using raw disk access
 #
 # This screwed up my windows activation and permanently broke
 # Windows Hello fingerprint. I suggest you do not try it at home (or at work).
 
-MACHINE="Windows 10"
+# MACHINE="Windows 10"
 
-sudo systemctl disable --now windows.automount
-sudo systemctl stop windows.mount
-echo "Changing boot params"
-sudo sed -i "s/default arch/default windows/" /boot/loader/loader.conf
-echo "Unmounting boot dir"
-sudo umount -v /boot
-sleep 1
-echo "Starting vm"
-VBoxManage startvm "$MACHINE"
+# sudo systemctl disable --now windows.automount
+# sudo systemctl stop windows.mount
+# echo "Changing boot params"
+# sudo sed -i "s/default arch/default windows/" /boot/loader/loader.conf
+# echo "Unmounting boot dir"
+# sudo umount -v /boot
+# sleep 1
+# echo "Starting vm"
+# VBoxManage startvm "$MACHINE"
 
-echo "Waiting for VM \"$MACHINE\" to shutdown..."
-until $(VBoxManage showvminfo --machinereadable "$MACHINE" | grep -q ^VMState=.poweroff.)
-do
-    sleep 5
-    echo -n "."
-done
+# echo "Waiting for VM \"$MACHINE\" to shutdown..."
+# until $(VBoxManage showvminfo --machinereadable "$MACHINE" | grep -q ^VMState=.poweroff.)
+# do
+#     sleep 5
+#     echo -n "."
+# done
 
-echo ""
-sudo systemctl enable --now windows.automount
-sudo sed -i "s/default windows/default arch/" /boot/loader/loader.conf
+# echo ""
+# sudo systemctl enable --now windows.automount
+# sudo sed -i "s/default windows/default arch/" /boot/loader/loader.conf

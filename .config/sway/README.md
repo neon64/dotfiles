@@ -1,5 +1,15 @@
 # Sway configuration
 
+Tools used:
+
+- waybar
+- mako
+- wofi
+- wob
+- kanshi - monitor config
+- azote - background chooser
+- ngwmenu - for logout/shutdown menu
+
 ## Getting Zoom whiteboard annotation to work
 
 Doesn't.

@@ -41,7 +41,7 @@ window#waybar {
     border-bottom: 3px solid @base07;
 }
 
-#battery, #cpu, #memory, #network, #pulseaudio, #custom-spotify, #mpd, #tray, #mode, #idle_inhibitor, #backlight, #bluetooth, #custom-bluetooth, #custom-power {
+#battery, #cpu, #memory, #network, #pulseaudio, #custom-player, #mpd, #tray, #mode, #idle_inhibitor, #backlight, #bluetooth, #custom-bluetooth, #custom-power {
     padding: 0 10px;
     margin: 0 4px;
     transition: border-bottom-color 1s ease;
@@ -151,7 +151,7 @@ window#waybar {
     background: transparent;
 }
 
-#custom-spotify {
+#custom-player {
     /*background: #66cc99;
     color: #2a5c45;*/
     border-bottom: 3px solid @base0B;

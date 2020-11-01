@@ -9,6 +9,7 @@ fi
 if lsmod | grep -q nvidia; then
     sudo rmmod nvidia_modeset nvidia_drm nvidia
 fi
+sudo modprobe bbswitch
 sudo sh -c 'echo OFF > /proc/acpi/bbswitch'
 cat /proc/acpi/bbswitch
 
