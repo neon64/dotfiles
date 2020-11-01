@@ -34,7 +34,7 @@ exec_always ~/.config/sway/configure.sh
 # notification daemon
 exec mako
 # dynamic output management
-exec systemd-cat -t kanshi kanshi
+exec_always pkill kanshi; systemd-cat -t kanshi kanshi
 # session restore
 exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-session save-loop 240
 # authentication popups

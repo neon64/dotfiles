@@ -136,21 +136,14 @@
     bindsym XF86AudioLowerVolume exec amixer -q set Master 2%- unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
     bindsym XF86AudioMute exec (amixer get Master | grep off > /dev/null && amixer -q set Master unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob) || (amixer -q set Master mute && echo 0 > $SWAYSOCK.wob)
 
-    # Volume
-    # bindsym --locked XF86AudioRaiseVolume exec --no-startup-id amixer -q sset Master 5%+
-    # bindsym --locked XF86AudioLowerVolume exec --no-startup-id amixer -q sset Master 5%-
-    # bindsym --locked XF86AudioMute        exec --no-startup-id amixer -q sset Master toggle
-
     # Media player
-    bindsym --locked XF86AudioPlay exec mpc toggle
-    # bindsym XF86AudioPause exec mpc pause
-    bindsym --locked XF86AudioPrev exec mpc prev
-    bindsym --locked XF86AudioNext exec mpc next
+    bindsym --locked XF86AudioPlay exec playerctl play-pause
+    bindsym --locked XF86AudioPrev exec playerctl previous
+    bindsym --locked XF86AudioNext exec playerctl next
 
     # Brightness (a fade over 100ms)
     bindsym --locked XF86MonBrightnessUp exec brillo -A 5 -u 100000 && brillo -G | awk '{print int($1)}' > $SWAYSOCK.wob
     bindsym --locked XF86MonBrightnessDown exec brillo -U 5 -u 100000 && brillo -G | awk '{print int($1)}' > $SWAYSOCK.wob
-
 
     # Sleep
     bindsym $mod+Shift+u exec swaylock
