@@ -1,30 +1,3 @@
-# use super as the modifier key -
-# warning - on most keyboards nothing maps to super by default so you will
-# be unable to exit or launch anything!
-# Thus, we map the caps-lock key to super by default
-set $mod Mod4
-
-# preferred terminal emulator
-set $term alacritty
-set $window_switcher ~/.config/wofi/windows.py
-
-# preferred web browser
-set $browser firefox
-set $files nautilus
-
-# preferred application launcher
-set $menu wofi
-set $menu_toggle ~/.config/sway/toggle_wofi.sh
-
-# movement keys
-set $up l
-set $down k
-set $left j
-set $right semicolon
-
-# ricing
-set $borderwidth 0
-
 # input mappings / libinput config
 include input
 
@@ -33,17 +6,26 @@ exec_always ~/.config/sway/configure.sh
 
 # notification daemon
 exec mako
-# dynamic output management
-exec_always pkill kanshi; systemd-cat -t kanshi kanshi
+
 # session restore
-exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-session save-loop 240
+exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-session save-loop 24
+
 # authentication popups
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
 # kde connect daemon
 exec /usr/lib/kdeconnectd
 
+# screen management
+# see this issue https://github.com/emersion/kanshi/issues/43
+# we restart kanshi on reload to ensure output configuration is reapplied
+exec_always pkill kanshi; exec kanshi
+
 # background
-exec ~/.azotebg
+output * bg #1d1f25 solid_color
+
+# fade windows in and out
+exec ~/.config/sway/fader.py
 
 # key/mouse/lid switch bindings
 include bindings
@@ -56,3 +38,7 @@ include apps
 
 # includes, amongst other things, a fix for DISPLAY and WAYLAND_DISPLAY env-vars on Arch Linux
 include /etc/sway/config.d/*
+
+bar {
+    swaybar_command waybar
+}

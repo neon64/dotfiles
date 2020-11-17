@@ -1,12 +1,27 @@
 " Specify a directory for plugins (for Neovim: ~/.local/share/nvim/plugged)
 call plug#begin('~/.local/share/nvim/plugged')
 
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" stopped using nerdtree, I never actually use it
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-sensible' " sensible defaults
 Plug 'tpope/vim-commentary' " use `gc` to comment
+Plug 'tpope/vim-fugitive'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
+
+" improvements to netrw fileborwser
+" Plug 'tpope/vim-vinegar' 
+
+Plug 'kristijanhusak/defx-icons'
+if has('nvim')
+  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/defx.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+
 Plug 'justinmk/vim-sneak' " `s` and `S` do two letter sneaking
 Plug 'sheerun/vim-polyglot' " many different language packs
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
@@ -15,9 +30,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Let's make it pretty
 Plug 'chriskempson/base16-vim'
 
-call plug#end()
+" It was said to always load this one last
+Plug 'ryanoasis/vim-devicons'
 
-let g:deoplete#enable_at_startup = 1
+call plug#end()
 
 let g:airline_powerline_fonts = 0
 let g:vim_markdown_fenced_languages = ['html', 'python', 'bash=sh', 'c=c']

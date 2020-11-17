@@ -1,0 +1,33 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+    {
+        "key": "ctrl+1",
+        "command": "marky-edit.toggleHeading1",
+        "when": "resourceExtname == '.md'"
+    },
+    {
+        "key": "ctrl+2",
+        "command": "marky-edit.toggleHeading2",
+        "when": "resourceExtname  == '.md'"
+    },
+    {
+        "key": "ctrl+3",
+        "command": "marky-edit.toggleHeading3",
+        "when": "resourceExtname  == '.md'"
+    },
+    {
+        "key": "ctrl+4",
+        "command": "marky-edit.toggleHeading4",
+        "when": "resourceExtname  == '.md'"
+    },
+    {
+        "key": "ctrl+5",
+        "command": "marky-edit.toggleHeading5",
+        "when": "resourceExtname  == '.md'"
+    },
+    {
+        "key": "ctrl+6",
+        "command": "marky-edit.toggleHeading6",
+        "when": "resourceExtname  == '.md'"
+    }
+]

@@ -1,30 +1,30 @@
 
-for_window [title="Question"] floating enable
-for_window [title="Preferences"] floating enable
-for_window [title="Editing Profile"] floating enable
-for_window [title="Login Keyring"] floating enable
-for_window [title="Floating Terminal"] floating enable; border pixel 1; resize set 1024 640
-for_window [title="Command Launcher"] floating enable; border pixel 1; resize set 640 320
+for_window [title="^Question"] floating enable
+for_window [title="^Editing Profile"] floating enable
+for_window [title="^Login Keyring"] floating enable
+for_window [title="^Floating Terminal"] floating enable; border pixel 1; resize set 1024 640
+for_window [title="^Command Launcher"] floating enable; border pixel 1; resize set 640 320
 
-for_window [app_id="firefox"] border none
+# for_window [app_id="firefox"] border none
 for_window [class="code-oss"] border none
+for_window [class="Emacs"] border none
+for_window [app_id="emacs"] border none
 for_window [app_id="Alacritty"] border pixel $borderwidth
 
-for_window [app_id="org.gnome.Nautilus"] border none; floating enable
-for_window [app_id="gnome-control-center"] border none; floating enable
+for_window [app_id="org.gnome.Nautilus"] floating enable
+for_window [app_id="gnome-control-center"] floating enable
 for_window [app_id="mpv"] floating enable
-for_window [app_id="gnome-calculator"] border none; floating enable
-for_window [app_id="gnome-clocks"] border none; floating enable
-for_window [app_id="gnome-tweaks"] border none; floating enable
-for_window [app_id="eog"] border none; floating enable
-for_window [app_id="gnome-system-monitor"] border none; floating enable; resize set 1024 600
-for_window [app_id="gnome-power-statistics"] floating enable; border normal $borderwidth
-for_window [app_id="blueman-manager"] floating enable; border normal $borderwidth; resize set 640 480
-for_window [app_id="keepassxc"] floating enable; border normal $borderwidth; resize set 1280 768
+for_window [app_id="gnome-calculator"] floating enable
+for_window [app_id="org.gnome.clocks"] floating enable
+for_window [app_id="gnome-tweaks"] floating enable
+for_window [app_id="eog"] floating enable
+for_window [app_id="gnome-system-monitor"] floating enable; resize set 1024 600
+for_window [app_id="gnome-power-statistics"] floating enable
+for_window [app_id="blueman-manager"] floating enable; resize set 640 480
+for_window [app_id="keepassxc"] floating enable; resize set 1280 768
 for_window [class="VirtualBox Manager"] border normal $borderwidth
 for_window [class="VirtualBox Machine"] border normal $borderwidth
 for_window [app_id="evolution"] border normal $borderwidth
-for_window [class="Mailspring"] border pixel $borderwidth
 for_window [class="Spotify"] border pixel $borderwidth
 for_window [app_id="astroid"] border pixel $borderwidth
 for_window [app_id="io.elementary.files"] border pixel $borderwidth
@@ -52,7 +52,6 @@ assign [class="Google-chrome"] 1
 assign [class="Atom"] 3
 assign [class="Code"] 3
 assign [class="code-oss"] 3
-assign [class="Emacs"] 3
 assign [class="GitKraken"] 4
 assign [class="VirtualBox Machine"] 5
 assign [class="VirtualBox Manager"] 5
@@ -69,5 +68,28 @@ assign [class="Vncviewer"] 10
 assign [class="zoom"] 10
 assign [app_id="re.sonny.Tangram"] 2
 assign [app_id="syncthing-gtk"] 0
+assign [class="Emacs"] 3
 
-for_window [title="."] title_format "%title (<b>%app_id</b><b>%class</b>)"
+for_window [title="." app_id="Alacritty"] title_format "%title (<b>%app_id</b><b>%class</b>)"
+# bindsym ctrl+t [app_id="firefox"] exec notify-send -t 5000 "bad"
+# bindsym --whole-window ctrl+button1 [app_id="firefox"]  exec notify-send -t 5000 "bad"
+# for_window [title=".", app_id="Alacritty"] title_format "%title (<b>%app_id</b><b>%class</b>)"
+# for_window [title="Mozilla Firefox"] title_format "%title"
+
+# trying to make Firefox suitable in tabless mode
+# no_focus [app_id="firefox" title="^(?!New Tab - Mozilla Firefox).*$"]
+focus_on_window_activation urgent
+
+# Title bar icons
+# https://gist.github.com/dmelliot/437924ff581f3f1edd59f44833be6cc6
+for_window [app_id="firefox"] title_format "<span foreground='#FF6611'>  </span>%title"
+# for_window [app_id="Alacritty"] title_format "<tt></tt><span foreground='#00FF00' background='#000000'>  </span><tt> </tt>%title"
+for_window [app_id="Alacritty"] title_format "%title"
+for_window [app_id="org.gnome.Nautilus"] title_format "%title - Files"
+for_window [title="Gmail"] title_format "<tt></tt><span foreground='#FFFFFF' >  </span><tt> </tt>%title"
+for_window [title="Trello"] title_format "<tt></tt><span foreground='#FFFFFF' >  </span><tt> </tt>%title"
+for_window [class="VirtualBox Machine"] title_format "<tt></tt><span  background='#073624' foreground='#AAAAFF' >  </span><tt> </tt>%title"
+for_window [class="VirtualBox Manager"] title_format "<tt></tt><span  background='#073642' foreground='#AAAAFF' >  </span><tt> </tt>%title"
+for_window [class="libreoffice-writer"] title_format "<tt></tt><span  background='#073642' foreground='#adc5e7' >  </span><tt> </tt>%title"
+for_window [class="libreoffice-calc"] title_format "<tt></tt><span  background='#073642' foreground='#add58a' >  </span><tt> </tt>%title"
+for_window [class="libreoffice-impress"] title_format "<tt></tt><span  background='#073642' foreground='#d07e7e' >  </span><tt> </tt>%title"

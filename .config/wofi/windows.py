@@ -1,6 +1,9 @@
 #!/bin/python3
 
 # from: https://github.com/tobiaspc/wofi-scripts
+# modified to include drun menu as well
+# TODO: migrate this from Python to get much quicker startup times!! (perhaps should be a mode integrated into wofi?)
+#       see this issue: https://todo.sr.ht/~scoopta/wofi/117
 
 from argparse import ArgumentParser
 import subprocess
@@ -64,17 +67,11 @@ def parse_windows(windows):
 def build_wofi_string(windows):
     return enter.join(windows).encode("UTF-8")
 
-# Executes wofi with the given input string
-def show_wofi(windows):
-
-    command="wofi -p \"Windows: \" -d -i --hide-scroll"
-
-    process = subprocess.Popen(command,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
-    return process.communicate(input=windows)[0]
-
 # Returns the sway window id of the window that was selected by the user inside wofi
 def parse_id(windows, parsed_windows, selected):
     selected = (selected.decode("UTF-8"))[:-1] # Remove new line character
+    if selected == "":
+        return None
     window_index = int(parsed_windows.index(selected)) # Get index of selected window in the parsed window array
     return str(windows[window_index].get('id')) # Get sway window id based on the index
 
@@ -88,6 +85,12 @@ def switch_window(id):
 # Entry point
 if __name__ == "__main__":
 
+    # launch combined window switcher and app menu
+    command="wofi -S dmenu,drun -i"
+
+    process = subprocess.Popen(command,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+    print("opened wofi")
+
     parser = ArgumentParser(description="Wofi based window switcher")
 
     windows = get_windows()
@@ -96,8 +99,10 @@ if __name__ == "__main__":
 
     wofi_string = build_wofi_string(parsed_windows)
 
-    selected = show_wofi(wofi_string)
+    print("sending windows to wofi")
+    selected = process.communicate(input=wofi_string)[0]
 
     selected_id = parse_id(windows, parsed_windows, selected)
 
-    switch_window(selected_id)
+    if selected_id is not None:
+        switch_window(selected_id)

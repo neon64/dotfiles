@@ -58,7 +58,7 @@ function check_dotf
 
         if [ "$last_updated" != "" ]
             set difference (math $now - $last_updated)
-            if test $difference -lt 3600
+            if test $difference -lt 86400
                 return
             end
         end
@@ -73,7 +73,7 @@ function check_dotf
         echo "You have unsaved changes to your dotfiles:"
         dotf -C $HOME status -s
         if read_confirm commit_prompt
-            tmux new-session 'dotf commit -a' \; split-window -v 'dotf diff HEAD; read -s -n 1 key'
+            tmux new-session 'dotf commit -a' \; split-window -h 'dotf diff HEAD; read -s -n 1 key'
         end
     end
 

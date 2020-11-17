@@ -1,28 +1,32 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
 
+(add-to-list 'load-path "~/.config/doom/i3-emacs/")
+(require 'i3)
+(require 'i3-integration )
+(i3-one-window-per-frame-mode-on)
 ;; Place your private configuration here
 
 ;; Line spacing using info from here: https://stackoverflow.com/questions/26437034/emacs-line-height
 ;; Set the padding between lines
-(defvar line-padding 1)
-(defun add-line-padding ()
-    "Add extra padding between lines"
-    ; remove padding overlays if they already exist
-    (let ((overlays (overlays-at (point-min))))
-        (while overlays
-        (let ((overlay (car overlays)))
-            (if (overlay-get overlay 'is-padding-overlay)
-                (delete-overlay overlay)))
-        (setq overlays (cdr overlays))))
+;; (defvar line-padding 1)
+;; (defun add-line-padding ()
+;;     "Add extra padding between lines"
+;;     ; remove padding overlays if they already exist
+;;     (let ((overlays (overlays-at (point-min))))
+;;         (while overlays
+;;         (let ((overlay (car overlays)))
+;;             (if (overlay-get overlay 'is-padding-overlay)
+;;                 (delete-overlay overlay)))
+;;         (setq overlays (cdr overlays))))
 
-    ;; add a new padding overlay
-    (let ((padding-overlay (make-overlay (point-min) (point-max))))
-        (overlay-put padding-overlay 'is-padding-overlay t)
-        (overlay-put padding-overlay 'line-spacing (* .1 line-padding))
-        (overlay-put padding-overlay 'line-height (+ 1 (* .1 line-padding))))
-    (setq mark-active nil))
+;;     ;; add a new padding overlay
+;;     (let ((padding-overlay (make-overlay (point-min) (point-max))))
+;;         (overlay-put padding-overlay 'is-padding-overlay t)
+;;         (overlay-put padding-overlay 'line-spacing (* .1 line-padding))
+;;         (overlay-put padding-overlay 'line-height (+ 1 (* .1 line-padding))))
+;;     (setq mark-active nil))
 
-(add-hook 'buffer-list-update-hook 'add-line-padding)
+;; (add-hook 'buffer-list-update-hook 'add-line-padding)
 
 ;; The default font to use.
 ;; Expects either a `font-spec', font object, an XFT font string or an XLFD font
@@ -31,47 +35,49 @@
 ;; Examples:
 ;;   (setq doom-font (font-spec :family \"Fira Mono\" :size 12))
 ;;   (setq doom-font \"Terminus (TTF):pixelsize=12:antialias=off\")
-(setq doom-font (font-spec :family "Fira Code" :size 16))
+(setq doom-font (font-spec :family "Iosevka" :size 14))
+(setq-default line-spacing 0.25)
 
 ;; The font to use when `doom-big-font-mode' is enabled. Expects either a
 ;; `font-spec' or a XFT font string. See `doom-font' for examples.")
-(setq doom-big-font (font-spec :family "Fira Code" :size 24))
+;; (setq doom-big-font (font-spec :family "Fira Code" :size 24))
 
+;; vim-sneak through whole buffer, not just the line
 (setq evil-snipe-scope 'buffer)
 
-(map!
-      :m "C-j"           #'evil-window-left
-      :m "C-;"           #'evil-window-right
-      :m "C-k"           #'evil-window-down
-      :m "C-l"           #'evil-window-up
-      :m "C-J"           #'evil-window-move-left
-      :m "C-:"           #'evil-window-move-right
-      :m "C-K"           #'evil-window-move-down
-      :m "C-L"           #'evil-window-move-up
+;; (map!
+;;       :m "C-j"           #'evil-window-left
+;;       :m "C-;"           #'evil-window-right
+;;       :m "C-k"           #'evil-window-down
+;;       :m "C-l"           #'evil-window-up
+;;       :m "C-J"           #'evil-window-move-left
+;;       :m "C-:"           #'evil-window-move-right
+;;       :m "C-K"           #'evil-window-move-down
+;;       :m "C-L"           #'evil-window-move-up
 
-      (:map evil-window-map
-        ;; Navigation
-        "h"       #'noop
-        "j"       #'evil-window-left
-        "k"       #'evil-window-down
-        "l"       #'evil-window-up
-        ";"       #'evil-window-right
-        ;; Swapping windows
-        "J"       #'+evil/window-move-left
-        "K"       #'+evil/window-move-down
-        "L"       #'+evil/window-move-up
-        ":"       #'+evil/window-move-right
-      )
-)
+;;       (:map evil-window-map
+;;         ;; Navigation
+;;         "h"       #'noop
+;;         "j"       #'evil-window-left
+;;         "k"       #'evil-window-down
+;;         "l"       #'evil-window-up
+;;         ";"       #'evil-window-right
+;;         ;; Swapping windows
+;;         "J"       #'+evil/window-move-left
+;;         "K"       #'+evil/window-move-down
+;;         "L"       #'+evil/window-move-up
+;;         ":"       #'+evil/window-move-right
+;;       )
+;; )
 
-(map! :leader
-      :desc "M-x"                                "`" #'execute-extended-command
-      (:prefix ("q" . "session")
-        :desc "Close Frame"                      "z" #'save-buffers-kill-terminal
-        :desc "Close Frame without saving"       "Z" #'evil-quit-all-with-error-code
-        :desc "Quit Emacs server"                "q" #'save-buffers-kill-emacs
-        :desc "Quit Emacs server without saving" "Q" #'kill-emacs)
-      )
+;; (map! :leader
+;;       :desc "M-x"                                "`" #'execute-extended-command
+;;       (:prefix ("q" . "session")
+;;         :desc "Close Frame"                      "z" #'save-buffers-kill-terminal
+;;         :desc "Close Frame without saving"       "Z" #'evil-quit-all-with-error-code
+;;         :desc "Quit Emacs server"                "q" #'save-buffers-kill-emacs
+;;         :desc "Quit Emacs server without saving" "Q" #'kill-emacs)
+;;       )
 
 ;; give us some space around the Emacs window
 ;; (setq-default left-margin-width 1 right-margin-width 1)

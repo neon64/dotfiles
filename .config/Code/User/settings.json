@@ -69,6 +69,8 @@
         }
     ],
     "editor.fontSize": 13,
+    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
+    "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
+    "markdown-preview-enhanced.mathRenderingOption": "None",
     "workbench.colorTheme": "Ocean Dark Extended",
-    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim"
 }

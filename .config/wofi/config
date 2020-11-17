@@ -1,6 +1,9 @@
 mode=drun
+hide_scroll=true
 width=700
 prompt=
 no_actions=true
 height=300
 allow_images=true
+key_down = Control_L-j
+key_up = Control_L-k

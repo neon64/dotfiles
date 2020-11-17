@@ -11,8 +11,11 @@
 
 window#waybar {
     /* background: rgba(43, 48, 59, 0.5); */
-    background-color: rgba(24, 24, 24, 0.5);
-    /* border-bottom: 1px solid @base04;rgba(100, 114, 125, 0.5); */
+    background: #1d1f25;
+    /* background: linear-gradient(180deg, rgba(20, 20, 20, 0.5), rgba(20, 20, 20, 0.0) 100%); */
+    /* background-color: transparent; */
+
+    /* border-top: 1px solid @base04;rgba(100, 114, 125, 0.5); */
     color: @base07;
 }
 
@@ -20,31 +23,31 @@ window#waybar {
     padding: 0 18px;
     background: transparent;
     color: @base07;
-    border-bottom: 3px solid transparent;
-    transition: background-color 0.5s ease, border-color 0.15s ease;
+    border-top: 3px solid transparent;
+    transition: background 0.5s ease, border-color 0.15s ease;
 }
 
 #workspaces button.focused {
-    background: rgba(100, 114, 125, 0.1);
-    border-bottom: 3px solid @base07;
+    background: linear-gradient(180deg, rgba(100, 114, 125, 0.1), transparent);
+    border-top: 3px solid @base07;
 }
 
 #workspaces button:hover {
     box-shadow: inherit;
     text-shadow: inherit;
-    background: rgba(100, 114, 125, 0.2);
-    border-bottom: 3px solid #ccc;
+    background:  linear-gradient(180deg, rgba(100, 114, 125, 0.2), transparent);
+    border-top: 3px solid #ccc;
 }
 
 #mode {
     background: #64727D;
-    border-bottom: 3px solid @base07;
+    /* border-top: 3px solid @base07; */
 }
 
 #battery, #cpu, #memory, #network, #pulseaudio, #custom-player, #mpd, #tray, #mode, #idle_inhibitor, #backlight, #bluetooth, #custom-bluetooth, #custom-power {
     padding: 0 10px;
     margin: 0 4px;
-    transition: border-bottom-color 1s ease;
+    transition: border-top-color 1s ease;
 }
 
 #window {
@@ -54,23 +57,23 @@ window#waybar {
 #clock {
     padding: 0 20px;
     /* background:rgba(100, 114, 125, 0.1); */
-    /* border-bottom: 3px solid @base03; */
+    /* border-top: 3px solid @base03; */
     /* background-color: rgba(100, 114, 125, 0.8);
-    border-bottom: 3px solid rgb(83, 97, 107); */
+    border-top: 3px solid rgb(83, 97, 107); */
 }
 
 #battery {
     /* background-color: rgba(255, 255, 255, 0.8);
-    border-bottom: 3px solid rgba(204, 204, 204, 0.8);
+    border-top: 3px solid rgba(204, 204, 204, 0.8);
     color: black; */
-    border-bottom: 3px solid @base0D;
+    /* border-top: 3px solid @base0D; */
 }
 
 #battery.charging {
     /* color: white;
     background-color: rgba(38, 166, 91, 0.8);
-    border-bottom-color: rgba(35, 155, 85, 0.8); */
-    border-bottom: 3px solid @base0B;
+    border-top-color: rgba(35, 155, 85, 0.8); */
+    /* border-top: 3px solid @base0B; */
 }
 
 @keyframes blink {
@@ -92,59 +95,59 @@ window#waybar {
 
 #cpu {
     /* background: rgba(46, 204, 113, 0.8);
-    border-bottom: 3px solid rgba(38, 172, 93, 0.8);
+    border-top: 3px solid rgba(38, 172, 93, 0.8);
     color: #000000; */
-    border-bottom: 3px solid @base0C;
+    /* border-top: 3px solid @base0C; */
 }
 
 #memory {
     /* background: rgba(155, 88, 182, 0.8);
-    border-bottom: 3px solid rgba(126, 72, 147, 0.8); */
-    border-bottom: 3px solid @base0D;
+    border-top: 3px solid rgba(126, 72, 147, 0.8); */
+    /* border-top: 3px solid @base0D; */
 }
 
 #network {
     /* background: rgba(41, 128, 185, 0.8);
-    border-bottom: 3px solid rgba(34, 110, 160, 0.8); */
-    border-bottom: 3px solid @base0A;
+    border-top: 3px solid rgba(34, 110, 160, 0.8); */
+    /* border-top: 3px solid @base0A; */
 }
 
 #network.disconnected {
     /* background: rgba(245, 60, 60, 0.8);
-    border-bottom: 3px solid rgba(219, 54, 54, 0.8); */
-    border-bottom: 3px solid @base08;
+    border-top: 3px solid rgba(219, 54, 54, 0.8); */
+    /* border-top: 3px solid @base08; */
 }
 
 #bluetooth, #custom-bluetooth {
-    border-bottom: 3px solid @base0B;
+    /* border-top: 3px solid @base0B; */
 }
 
 #pulseaudio {
     /* background: rgba(241, 196, 15, 0.8);
-    border-bottom: 3px solid rgba(190, 155, 13, 0.8);
+    border-top: 3px solid rgba(190, 155, 13, 0.8);
     color: black;*/
-    border-bottom: 3px solid @base08;
+    /* border-top: 3px solid @base08; */
 }
 
 #pulseaudio.muted {
     /* background: rgba(144, 177, 177, 0.8);
-    border-bottom: 3px solid rgba(105, 129, 129, 0.8);
+    border-top: 3px solid rgba(105, 129, 129, 0.8);
     color: #2a5c45;*/
-    border-bottom: 3px solid rgba(144, 177, 177, 0.8);
+    /* border-top: 3px solid rgba(144, 177, 177, 0.8); */
 }
 
 #backlight {
     /* background: rgba(241, 143, 15, 0.8);
-    border-bottom: 3px solid rgba(177, 106, 13, 0.8);
+    border-top: 3px solid rgba(177, 106, 13, 0.8);
     color: black;*/
-    border-bottom: 3px solid @base09;
+    /* border-top: 3px solid @base09; */
 }
 
 #mpd {
     margin-left: 30px;
     /* background: rgba(100, 114, 125, 0.4); */
     color: #eee;
-    border-bottom: 3px solid rgba(236, 236, 236, 0.1);
+    border-top: 3px solid rgba(236, 236, 236, 0.1);
 }
 
 #mpd.disconnected {
@@ -154,11 +157,11 @@ window#waybar {
 #custom-player {
     /*background: #66cc99;
     color: #2a5c45;*/
-    border-bottom: 3px solid @base0B;
+    /* border-top: 3px solid @base0B; */
 }
 
 #idle_inhibitor {
-    border-bottom: 3px solid @base02;
+    /* border-top: 3px solid @base02; */
     margin-right: 0;
     margin-left: 0;
     padding: 0 4px;
@@ -171,11 +174,11 @@ window#waybar {
 #custom-power {
     margin-left: 0;
     padding: 0 10px 0 4px;
-    border-bottom: 3px solid @base02;
+    /* border-top: 3px solid @base02; */
 }
 
 #tray {
     margin-right: 0;
     padding-right: 4px;
-    border-bottom: 3px solid @base02;
+    /* border-top: 3px solid @base02; */
 }

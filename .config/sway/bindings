@@ -1,26 +1,46 @@
+# use super as the modifier key -
+# warning - on most keyboards nothing maps to super by default so you will
+# be unable to exit or launch anything!
+# Thus, we map the caps-lock key to super by default
+set $mod Mod4
+
+# preferred terminal emulator
+set $term alacritty
+set $window_switcher ~/.config/wofi/windows.py
+
+# movement keys
+set $up l
+set $down k
+set $left j
+set $right semicolon
+
+set $laptop_screen eDP-1
+set $sleep systemctl suspend
+set $notify notify-send -t 5000
+
 #
 # Basics:
 #
 
     # close laptop lid
-    set $laptop_screen eDP-1
-    set $sleep systemctl suspend
-    set $notify notify-send -t 5000
-
     bindswitch --reload --locked lid:on exec bash -c '[ $(swaymsg -t get_outputs | grep name | wc -l) == 1 ] && ($sleep) || (swaymsg output $laptop_screen disable && $notify "Clamshell mode" "Laptop screen off")'
     bindswitch --reload --locked lid:off output $laptop_screen enable
 
     # the $term variable is expanded at runtime
     bindsym $mod+Return exec $$term
     bindsym $mod+x exec alacritty --title "Floating Terminal" --config-file ~/.config/alacritty/alacritty_big.yml -e fish -c 'env fish_custom_greeting= fish'
-    bindsym $mod+c exec $browser
+    bindsym $mod+c exec swaymsg [app_id="firefox"] focus || firefox
 
     # kill focused window
     bindsym $mod+q kill
+    bindsym button3 kill
 
     # start your launcher
-    bindsym $mod+d exec $menu
-    bindsym $mod+s exec $files
+    bindsym $mod+d exec $window_switcher
+    bindsym $mod+s exec swaymsg [app_id="org.gnome.Nautilus"] focus || nautilus
+
+    bindsym $mod+shift+s sticky enable; exec notify-send -t 1000 "made sticky"
+    bindsym $mod+shift+u sticky disable; exec notify-send -t 1000 "removed sticky"
     # bindsym $mod+d exec alacritty --title "Command Launcher" --config-file ~/.config/alacritty/alacritty_big.yml -e ~/.config/bin/launch_util
 
     # Drag floating windows by holding down $mod and left mouse button. Resize
@@ -32,7 +52,7 @@
     # reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # swayshot is a print screen helper for sway
+    # grimshot is a print screen helper for sway
     # * Print Scr for whole screen
     # * Alt + Print Scr for a focused window
     # * Shift + Print Scr for a selected region
@@ -40,9 +60,9 @@
     # Save screenshots to $SCREENSHOTS folder.
     # The default value is XDG_PICTURES_DIR, see
     # https://wiki.archlinux.org/index.php/XDG_user_directories
-    #
-    # the actual configuration is in:
-    # /etc/sway/config.d/swayshot
+    bindsym Print exec grimshot save screen
+    bindsym Mod1+Print exec grimshot save win
+    bindsym Shift+Print exec grimshot copy area
 
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec nwgbar -o 0.5
@@ -56,6 +76,25 @@
     bindsym $mod+$up focus up
     bindsym $mod+$down focus down
 
+    bindsym ctrl+1 focus tab 0
+    bindsym ctrl+2 focus tab 1
+    bindsym ctrl+3 focus tab 2
+    bindsym ctrl+4 focus tab 3
+    bindsym ctrl+5 focus tab 4
+    bindsym ctrl+6 focus tab 5
+    bindsym ctrl+7 focus tab 6
+    bindsym ctrl+8 focus tab 7
+    bindsym ctrl+9 focus tab 8
+    bindsym alt+1 focus tab 0
+    bindsym alt+2 focus tab 1
+    bindsym alt+3 focus tab 2
+    bindsym alt+4 focus tab 3
+    bindsym alt+5 focus tab 4
+    bindsym alt+6 focus tab 5
+    bindsym alt+7 focus tab 6
+    bindsym alt+8 focus tab 7
+    bindsym alt+9 focus tab 8
+
     # _move_ the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
     bindsym $mod+Shift+$down move down
@@ -66,6 +105,8 @@
     bindsym $mod+m move workspace to output left
 
     bindsym $mod+tab workspace back_and_forth
+    workspace_auto_back_and_forth yes
+
 
 #
 # Workspaces:
@@ -108,8 +149,8 @@
 
     # Switch the current container between different layout styles
     bindsym $mod+w layout tabbed
-    bindsym $mod+e layout toggle split
-    bindsym $mod+t layout splith
+    bindsym $mod+e layout stacking
+    bindsym $mod+r layout toggle split
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
 
@@ -119,8 +160,8 @@
     # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
 
-    # switch windows
-    bindsym $mod+a exec $window_switcher
+    # focus parent
+    bindsym $mod+a focus parent
 
     # manipulate gaps settings
     bindsym $mod+G gaps inner all plus 10; hide_edge_borders none
@@ -146,22 +187,16 @@
     bindsym --locked XF86MonBrightnessDown exec brillo -U 5 -u 100000 && brillo -G | awk '{print int($1)}' > $SWAYSOCK.wob
 
     # Sleep
-    bindsym $mod+Shift+u exec swaylock
-    # exec swayidle -w timeout 600 '! is_in_vm && swaylock -f' timeout 700 '! is_in_vm && swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f'
+    bindsym $mod+u exec swaylock
+    exec swayidle -w timeout 600 '! is_in_vm && swaylock -f' timeout 700 '! is_in_vm && swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f'
 
     bindsym $mod+i exec killall -SIGUSR1 waybar
-
-    bar {
-        swaybar_command waybar
-
-        position top
-    }
 
 #
 # Resize mode:
 #
 
-    bindsym $mod+r mode "resize"
+    bindsym $mod+shift+r mode "resize"
 
     mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -193,8 +228,8 @@
     # You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
-    bindsym $mod+equal move scratchpad
+    bindsym $mod+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    bindsym $mod+equal scratchpad show

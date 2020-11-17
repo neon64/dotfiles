@@ -1,9 +1,9 @@
 window {
     margin: 0px;
     border: 1px solid #1d2021;
-    border-radius: 5px;
+    border-radius: 0px;
     /* background-color: #3c3836; */
-    font-family: "Input Sans Narrow";
+    font-family: "Noto Sans";
     color: #fbf1c7;
     font-size: 14px;
 }
@@ -11,7 +11,7 @@ window {
 #input {
     margin: 5px;
     border: none;
-    border-radius: 5px;
+    border-radius: 0;
     color: #fbf1c7;
     padding: 10px;
     /* font-size: 1.1em; */
@@ -40,15 +40,16 @@ image {
 }
 
 #entry {
-    border-radius: 5px;
     padding: 10px;
     outline: none;
-    /* color: #fbf1c7; */
-}
-
-#entry:selected {
-    /* background-color: #504945; */
-    /* color: #fbf1c7; */
 }
 
 {{color_scheme}}
+
+#entry:nth-child(even) {
+	background-color: #2b303b;
+}
+
+#entry:nth-child(even):selected {
+	background-color: #4f5b66;
+}

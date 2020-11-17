@@ -22,6 +22,7 @@ set -x BUNDLE_USER_CONFIG "$XDG_CONFIG_HOME"/bundle
 set -x BUNDLE_USER_CACHE "$XDG_CACHE_HOME"/bundle
 set -x BUNDLE_USER_PLUGIN "$XDG_DATA_HOME"/bundle
 set -x BROWSER firefox
+set -x LIBVIRT_DEFAULT_URI "qemu:///system"
 
 set -g man_standout -b yellow -o black
 
@@ -84,7 +85,7 @@ alias blue "manage_bluetooth"
 alias clock "tty-clock -sSc"
 alias b "browse_files"
 
-alias pac "yay"
+alias pac "paru"
 
 ### ========================================
 ###				   COLOURS

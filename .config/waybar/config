@@ -1,5 +1,5 @@
 {
-    "layer": "bottom", // Waybar at top layer
+    "layer": "top", // Waybar at top layer
     "position": "top", // Waybar at the bottom of your screen
     "height": 36, // Waybar height
     // Choose the order of the modules
@@ -74,9 +74,9 @@
     },
     "network": {
         // "interface": "wlp2s0", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) <span font='11'></span>",
-        "format-ethernet": "{ipaddr}/{cidr} <span font='11'></span>",
-        "format-disconnected": "Disconnected <span font='11'>⚠</span>",
+        "format-wifi": "<span font='11'></span> {essid} ({signalStrength}%)",
+        "format-ethernet": "<span font='11'></span> {ipaddr}/{cidr}",
+        "format-disconnected": "<span font='11'>⚠</span> Disconnected",
         "on-click": "iwgtk"
     },
     "pulseaudio": {

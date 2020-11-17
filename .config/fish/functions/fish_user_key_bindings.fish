@@ -6,7 +6,8 @@ function fish_user_key_bindings
     fish_hybrid_key_bindings
 
     # mash Ctrl+H to go home
-    bind \cH -M insert cd "echo -e \n\n" "commandline -f repaint"
+    # - got rid of this because it conflicts with Ctrl+T to open a new tab
+    # bind \cH -M insert cd "echo -e \n\n" "commandline -f repaint
 
     # only init fzf key bindings if they are installed
     if not type -q "fzf_key_bindings"

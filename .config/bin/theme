@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 BLUE="\033[34m"
 RED="\033[31m"
@@ -11,35 +11,54 @@ elif [ "$1" = '--current' ]; then
     cat ~/.config/colors/current-theme
     exit
 else
-    echo -e "${BLUE}Select a new theme:${RESET_FMT}"
-    theme=$(ls ~/.config/colors/base16-shell/scripts | sed 's/.sh//g' | fzf --height=20 --min-height=5 --reverse --color=16 )
+    printf "${BLUE}%s${RESET_FMT}\n" "Select a new theme:"
+    theme=$(find ~/.config/colors/base16-shell/scripts/* -printf "%f\n" | sed 's/.sh//g' | fzf --height=20 --min-height=5 --reverse --color=16 )
 fi
 
 if [ "$theme" = '' ]; then
-    echo -e "${RED}No theme chosen, exiting...${RESET_FMT}"
+    printf "${RED}%s${RESET_FMT}\n" "No theme chosen, exiting..."
     exit 1
 else
-    echo -e "${GREEN}Applying theme $theme${RESET_FMT}"
+    printf "${GREEN}%s %s${RESET_FMT}\n" "Applying theme" "$theme"
 fi
 
-echo -e " - Updating shell init script"
-ln -sf ~/.config/colors/base16-shell/scripts/$theme.sh ~/.config/colors/theme.sh
-echo -e " - Updating swaywm colors"
-ln -sf ~/.config/colors/base16-sway/themes/$theme.config ~/.config/sway/colorscheme
-echo -e " - Updating waybar colors"
-ln -sf ~/.config/colors/base16-waybar/colors/$theme.css ~/.config/waybar/colors.css
-echo -e " - Updating alacritty config"
-~/.config/alacritty/build_config.py $theme
-echo -e " - Updating wofi config"
-~/.config/wofi/build_config.py $theme
+echo " - Updating shell init script"
+ln -sf "$HOME/.config/colors/base16-shell/scripts/$theme.sh" ~/.config/colors/theme.sh
+echo " - Updating swaywm colors"
+ln -sf "$HOME/.config/colors/base16-sway/themes/$theme.config" ~/.config/sway/colorscheme
+echo " - Updating waybar colors"
+ln -sf "$HOME/.config/colors/base16-waybar/colors/$theme.css" ~/.config/waybar/colors.css
+echo " - Updating alacritty config"
+~/.config/alacritty/build_config.py "$theme"
+echo " - Updating wofi config"
+~/.config/wofi/build_config.py "$theme"
 
-echo -e " - Updating theme file (used by vim, fzf)"
+echo " - Updating theme file (used by vim, fzf)"
 echo "$theme" > ~/.config/colors/current-theme
 
+current_wallpaper=$(cat ~/.azotebg | grep "swaybg -o" | awk '{ print $4}' | tr -d \' )
+
+# note, this only supports a single output
+generate_lockscreen() {
+    echo " - Generating lockscreen background..."
+    text="Type password to unlock..."
+    dest=~/.local/share/swaylock_bg.jpg
+    width=$(swaymsg -t get_outputs --raw | jq -r ".[0].current_mode.width | tostring")
+    height=$(swaymsg -t get_outputs --raw | jq -r ".[0].current_mode.height | tostring")
+    textheight=$(expr "$height" / 3)
+    dimensions="${width}x${height}^"
+    echo "  - Using dimensions $dimensions, placing text at y=$textheight"
+    convert "$current_wallpaper" -resize "$dimensions" -quality 95 -blur 40x20 -font /usr/share/fonts/cantarell/Cantarell-Light.otf -pointsize 36 -fill white -gravity Center -draw "text 0,${textheight} '$text'" $dest
+    echo "  - Done"
+}
+
+# regenerate lockscreen background
+generate_lockscreen
+
 if [ "$2" = '--no-reload' ]; then
-    echo -e "${BLUE}Skipping reload...${RESET_FMT}"
+    printf "${BLUE}%s${RESET_FMT}\n" "Skipping reload..."
 else
-    echo -e "${BLUE}Reloading sway...${RESET_FMT}"
+    printf "${BLUE}%s${RESET_FMT}\n" "Reloading sway..."
     swaymsg reload
 fi
 

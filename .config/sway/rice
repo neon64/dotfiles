@@ -10,23 +10,26 @@ set $arc-light-text #dddee2
 set $arc-dark-bg #323843
 set $arc-dark-bg-2 #2a3039
 set $arc-dark-bg-3 #2f343f
+set $arc-dark-darkest #21242b
 set $arc-dark-text #8c96a2
 
+set $base005 #2D323D
+
 # fits Base16-Tomorrow-Night theme
-set $bd-color              #595f6e
-set $focused-bd-color      $arc-dark-bg-2
+set $bd-color              $arc-dark-darkest
+set $focused-bd-color      $base005
 set $urgent-bd-color       $base08
 set $indicator             $base0B
 
-set $bg-color              #595f6e
-set $focused-bg-color      $arc-dark-bg-2
+set $bg-color              $arc-dark-darkest
+set $focused-bg-color      $base005
 
-set $inner-bd-color         #595f6e
-set $focused-inner-bd-color $arc-dark-bg-2
+set $inner-bd-color         $base00
+set $focused-inner-bd-color $base00
 
-set $inactive-text-color   $arc-dark-text
-set $text-color            $arc-dark-text
-set $focused-text-color    $arc-dark-text
+set $inactive-text-color   $base02
+set $text-color            $base02
+set $focused-text-color    $arc-light-text
 set $urgent-bg-color       $base08
 
 # window colors
@@ -37,10 +40,16 @@ client.focused_inactive $bd-color           $bg-color           $text-color     
 client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $urgent-bd-color     $urgent-bd-color
 
 # window borders and gaps
+
+# slightly inspired by https://www.reddit.com/r/swaywm/comments/e6ihm8/smooth_fading_in_sway/
+
+set $borderwidth 1
 default_border normal $borderwidth
-default_floating_border none
+default_floating_border normal $borderwidth
 hide_edge_borders both
-focus_wrapping no
-titlebar_padding 6 6
+gaps inner 10
+gaps outer 0
+focus_wrapping yes
+titlebar_padding 6 8
 font pango:Noto Sans Regular 10
 
