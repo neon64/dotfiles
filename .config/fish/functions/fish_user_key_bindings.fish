@@ -30,8 +30,8 @@ function fish_user_key_bindings
     bind -M insert \cg fzf-cd-widget
     bind \cr fzf-run-widget
     bind -M insert \cr fzf-run-widget
-    bind \ct fzf-history-widget
-    bind -M insert \ct fzf-history-widget
+    bind \ch fzf-history-widget
+    bind -M insert \ch fzf-history-widget
 
     function fzf-run-widget -d "Run executables in PATH"
         set -l commandline (__fzf_parse_commandline)

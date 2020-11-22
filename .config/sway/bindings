@@ -62,7 +62,7 @@ set $notify notify-send -t 5000
     # https://wiki.archlinux.org/index.php/XDG_user_directories
     bindsym Print exec grimshot save screen
     bindsym Mod1+Print exec grimshot save win
-    bindsym Shift+Print exec grimshot copy area
+    bindsym Shift+Print exec grimshot save area
 
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec nwgbar -o 0.5
@@ -94,6 +94,8 @@ set $notify notify-send -t 5000
     bindsym alt+7 focus tab 6
     bindsym alt+8 focus tab 7
     bindsym alt+9 focus tab 8
+    bindsym ctrl+tab focus tab next
+    bindsym ctrl+shift+tab focus tab prev
 
     # _move_ the focused window with the same, but add Shift
     bindsym $mod+Shift+$left move left
