@@ -8,16 +8,15 @@ The dotfiles themselves can be found in the [master branch](https://github.com/n
 These dotfiles should theoretically work on any UNIX-like system, including macOS and msys2, both of which I use from time to time. However the greatest compatibility will be with [Arch Linux](https://www.archlinux.org/), which is what I use daily.
 
 
-## Installation
+## Getting started
+
+### Install onto a new machine
 
 To install these dotfiles onto a new machine:
 
     $ alias dotf='/usr/bin/git --git-dir=$HOME/path/to/dotfiles/ --work-tree=$HOME'
     $ echo "path/to/dotfiles/" >> .gitignore
     $ git clone --bare --branch master https://github.com/neon64/dotfiles $HOME/path/to/dotfiles
-
-Then attempt to checkout the configuration files into your home directory:
-
     $ dotf checkout
 
 You will most likely have to decide what to do with the existing dotfiles on your system.
@@ -33,17 +32,11 @@ Also run the following to ensure untracked files (i.e.: the rest of your home di
 
     $ dotf config --local status.showUntrackedFiles no
 
-### Semi-automatic installation
+### Install dependencies and configure the system
 
-If you're on Arch Linux, you can run the following install script to install a whole heap of packages which power my dotfiles (things like `sway`, `firefox` and loads of little things like `ttf-font-waesome` etc...), as well as plugins for `nvim`, `fish` and `emacs`:
+See the [install scripts README](https://github.com/neon64/dotfiles/tree/master/.config/bin/install_dotfiles) for more advice on what to do next, as well as some scripts you may  be able to run.
 
-    $ ~/.config/bin/install_dotf
-
-If you're not on Arch Linux, I'm afraid I don't have an all-in-one solution yet. However, try taking a look inside of `~/.config/bin/install/common` for some bits you will be able to run.
-
-See the [installation guide](https://github.com/neon64/dotfiles/tree/master/.config/bin/install) for more information and caveats.
-
-### How to edit these dotfiles?
+## Editing the dotfiles
 
 The brilliant benefit of just using plain `git` to manage dotfiles (as detailed [here](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/)), is that making changes is easy.
 
@@ -63,7 +56,7 @@ To commit changes:
 
 In conclusion: it's exactly like normal Git, just with `git` replaced with the script `dotf` (which is just a wrapper for git internally)
 
-## About these dotfiles
+## About the dotfiles
 
 ### Included software
 
@@ -101,15 +94,14 @@ I've found that over time it is easier to write my own shell scripts to do thing
  - [browse_files](https://github.com/neon64/dotfiles/blob/master/.config/bin/browse_files): open a graphical file browser, aliased to `b`
  - [browse_web](https://github.com/neon64/dotfiles/blob/master/.config/bin/browse_web): open a URL or search Google
  - [dotf](https://github.com/neon64/dotfiles/blob/master/.config/bin/dotf): manage these dotfiles with git
- - `check_dotf` (fish function): check dotfiles are up to date
- - [fdm](https://github.com/neon64/dotfiles/blob/master/.config/bin/fdm) - FZF display manager - launch different desktop environments from the command-line (sway, gnome, plasma, i3, etc...)
+ - [check_dotf.fish](https://github.com/neon64/dotfiles/blob/master/.config/fish/functions/check_dotf.fish): a Fish function to check dotfiles are up to date
+ - [fdm](https://github.com/neon64/dotfiles/blob/master/.config/bin/fdm) - FZF display manager - launch different desktop environments from the command-line (sway, gnome, plasma, i3, etc...) - (currently unused - see [greetd](https://sr.ht/~kennylevinsen/greetd/) instead)
  - [kbd](https://github.com/neon64/dotfiles/blob/master/.config/bin/kbd): activate us-intl keyboard in sway
- - [launch_util](https://github.com/neon64/dotfiles/blob/master/.config/bin/launch_util): command-line app launcher with fzf - currently not used
+ - [launch_util](https://github.com/neon64/dotfiles/blob/master/.config/bin/launch_util): command-line app launcher with fzf (currently unused)
  - [package_sizes](https://github.com/neon64/dotfiles/blob/master/.config/bin/package_sizes): list packages sorted by size
  - [package_orphans](https://github.com/neon64/dotfiles/blob/master/.config/bin/package_orphans): list orphaned packages
  - [switch_res](https://github.com/neon64/dotfiles/blob/master/.config/bin/switch_res): switches resolutions on Sway, aliased to `sr`
  - [theme](https://github.com/neon64/dotfiles/blob/master/.config/bin/theme): changes themes
- - [wpaper](https://github.com/neon64/dotfiles/blob/master/.config/bin/wpaper): change wallpapers for sway and generates a new lockscreen image
 
 ### Machine-specific configuration
 
