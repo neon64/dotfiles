@@ -8,7 +8,7 @@ exec_always ~/.config/sway/configure.sh
 exec mako
 
 # session restore
-exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-session save-loop 24
+# exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-session save-loop 24
 
 # authentication popups
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1

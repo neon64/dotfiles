@@ -34,8 +34,8 @@ set -g man_standout -b yellow -o black
 # we check `status --is-interactive` because
 # commands like dbus-run-session (for starting Gnome
 # Terminal) start a non-interactive login shell
-if status --is-login && status --is-interactive
-    if set -q XDG_VTNR && test "$XDG_VTNR" -eq "1" && test ! -e /tmp/sway-autoopen.tag
+if status --is-login; and status --is-interactive
+    if set -q XDG_VTNR; and test "$XDG_VTNR" -eq "1"; and test ! -e /tmp/sway-autoopen.tag
         touch /tmp/sway-autoopen.tag
 
         ~/.config/bin/fdm --auto
