@@ -25,7 +25,9 @@ endif
 Plug 'justinmk/vim-sneak' " `s` and `S` do two letter sneaking
 Plug 'sheerun/vim-polyglot' " many different language packs
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app & yarn install'  }
+" language server stuff
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'jackguo380/vim-lsp-cxx-highlight'
 
 " Let's make it pretty
 Plug 'chriskempson/base16-vim'
@@ -47,6 +49,7 @@ set termguicolors
 set expandtab
 set tabstop=4
 set shiftwidth=4
+set guifont=Iosevka:h12
 
 " colorscheme
 " add colorscheme to match master_theme
@@ -54,8 +57,8 @@ set shiftwidth=4
 let master_theme = system('cat $HOME/.config/colors/current-theme')
 execute 'colorscheme' master_theme
 
-hi! Normal guibg=NONE ctermbg=NONE
-hi! EndOfBuffer guifg='#002b36'
+" hi! Normal guibg=NONE ctermbg=NONE
+" hi! EndOfBuffer guifg='#002b36'
 
 " FINDING FILES
 "

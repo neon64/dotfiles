@@ -1,5 +1,9 @@
 @import "colors.css";
 
+@define-color arc-light-text #dddee2;
+@define-color arc-dark-darkest #1d1f25;
+@define-color base005 #2D323D;
+
 * {
     border: none;
     border-radius: 0;
@@ -22,21 +26,23 @@ window#waybar {
 #workspaces button {
     padding: 0 18px;
     background: transparent;
-    color: @base07;
-    border-top: 3px solid transparent;
-    transition: background 0.5s ease, border-color 0.15s ease;
+    color: @base02;
+    /* border-top: 3px solid transparent; */
+    /* transition: background 0.5s ease, border-color 0.15s ease; */
 }
 
 #workspaces button.focused {
-    background: linear-gradient(180deg, rgba(100, 114, 125, 0.1), transparent);
-    border-top: 3px solid @base07;
+    background: @base005;
+    /* background: linear-gradient(180deg, rgba(100, 114, 125, 0.1), transparent); */
+    color: @arc-light-text;
 }
 
 #workspaces button:hover {
     box-shadow: inherit;
     text-shadow: inherit;
-    background:  linear-gradient(180deg, rgba(100, 114, 125, 0.2), transparent);
-    border-top: 3px solid #ccc;
+    color: @arc-light-text;
+    /* background:  linear-gradient(180deg, rgba(100, 114, 125, 0.2), transparent); */
+    /* border-top: 3px solid #ccc; */
 }
 
 #mode {

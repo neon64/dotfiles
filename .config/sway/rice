@@ -40,16 +40,12 @@ client.focused_inactive $bd-color           $bg-color           $text-color     
 client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $urgent-bd-color     $urgent-bd-color
 
 # window borders and gaps
-
-# slightly inspired by https://www.reddit.com/r/swaywm/comments/e6ihm8/smooth_fading_in_sway/
-
 set $borderwidth 1
 default_border normal $borderwidth
 default_floating_border normal $borderwidth
 hide_edge_borders both
 gaps inner 10
 gaps outer 0
-focus_wrapping yes
 titlebar_padding 6 8
 font pango:Noto Sans Regular 10
 

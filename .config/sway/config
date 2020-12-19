@@ -19,13 +19,14 @@ exec /usr/lib/kdeconnectd
 # screen management
 # see this issue https://github.com/emersion/kanshi/issues/43
 # we restart kanshi on reload to ensure output configuration is reapplied
-exec_always pkill kanshi; exec kanshi
+# exec_always pkill kanshi; exec kanshi
 
 # background
-output * bg #1d1f25 solid_color
+# output * bg #1d1f25 solid_color
+exec ~/.azotebg
 
 # fade windows in and out
-exec ~/.config/sway/fader.py
+# exec ~/.config/sway/fader.py
 
 # key/mouse/lid switch bindings
 include bindings
@@ -42,3 +43,10 @@ include /etc/sway/config.d/*
 bar {
     swaybar_command waybar
 }
+
+focus_on_window_activation urgent
+focus_wrapping yes
+workspace_auto_back_and_forth no
+
+# output "eDP-1" max_render_time 6
+# for_window [app_id="^alacritty$"] max_render_time 1

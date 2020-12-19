@@ -19,7 +19,7 @@ else
     )
 
     if [ -z "${CONNECTED_DEVICES}" ]; then
-        TEXT='not connected'
+        TEXT='none'
     else
         TEXT="${CONNECTED_DEVICES}"
     fi

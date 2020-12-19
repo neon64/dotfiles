@@ -73,4 +73,7 @@
     "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
     "markdown-preview-enhanced.mathRenderingOption": "None",
     "workbench.colorTheme": "Ocean Dark Extended",
+    "ccls.codeLens.localVariables": true,
+    "ccls.codeLens.renderInline": true,
+    "ccls.codeLens.enabled": false
 }

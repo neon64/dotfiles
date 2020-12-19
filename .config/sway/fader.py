@@ -9,7 +9,7 @@ from time import sleep
 
 
 AC_TRANS   = 1        # opacity of active window
-INAC_TRANS = 0.7      # opacity of inactive windows
+INAC_TRANS = 0.9      # opacity of inactive windows
 FLOAT_INAC = 0.9      # opacity of inactive floating windows
 FADE_TIME  = 0.2      # time taken for fade to complete
 FRAME_T    = 0.01     # time between each opacity change

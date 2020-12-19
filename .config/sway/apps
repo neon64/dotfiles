@@ -40,8 +40,8 @@ for_window [class="Ferdi"] border none
 for_window [app_id="syncthing-gtk"] border none; floating enable
 
 for_window [class="zoom"] idle_inhibit visible
-for_window [title="Participants"] floating enable
-for_window [title="Chat"] floating enable
+# for_window [title="Participants"] floating enable
+# for_window [title="Chat"] floating enable
 
 # default workspaces
 assign [class="Ferdi"] 2
@@ -75,21 +75,32 @@ for_window [title="." app_id="Alacritty"] title_format "%title (<b>%app_id</b><b
 # bindsym --whole-window ctrl+button1 [app_id="firefox"]  exec notify-send -t 5000 "bad"
 # for_window [title=".", app_id="Alacritty"] title_format "%title (<b>%app_id</b><b>%class</b>)"
 # for_window [title="Mozilla Firefox"] title_format "%title"
+for_window [title="shotman"] move position 30 30
+for_window [title="shotman"] border none
 
 # trying to make Firefox suitable in tabless mode
 # no_focus [app_id="firefox" title="^(?!New Tab - Mozilla Firefox).*$"]
-focus_on_window_activation urgent
 
-# Title bar icons
-# https://gist.github.com/dmelliot/437924ff581f3f1edd59f44833be6cc6
-for_window [app_id="firefox"] title_format "<span foreground='#FF6611'>  </span>%title"
 # for_window [app_id="Alacritty"] title_format "<tt></tt><span foreground='#00FF00' background='#000000'>  </span><tt> </tt>%title"
 for_window [app_id="Alacritty"] title_format "%title"
 for_window [app_id="org.gnome.Nautilus"] title_format "%title - Files"
-for_window [title="Gmail"] title_format "<tt></tt><span foreground='#FFFFFF' >  </span><tt> </tt>%title"
-for_window [title="Trello"] title_format "<tt></tt><span foreground='#FFFFFF' >  </span><tt> </tt>%title"
 for_window [class="VirtualBox Machine"] title_format "<tt></tt><span  background='#073624' foreground='#AAAAFF' >  </span><tt> </tt>%title"
 for_window [class="VirtualBox Manager"] title_format "<tt></tt><span  background='#073642' foreground='#AAAAFF' >  </span><tt> </tt>%title"
 for_window [class="libreoffice-writer"] title_format "<tt></tt><span  background='#073642' foreground='#adc5e7' >  </span><tt> </tt>%title"
 for_window [class="libreoffice-calc"] title_format "<tt></tt><span  background='#073642' foreground='#add58a' >  </span><tt> </tt>%title"
 for_window [class="libreoffice-impress"] title_format "<tt></tt><span  background='#073642' foreground='#d07e7e' >  </span><tt> </tt>%title"
+
+
+# Title bar icons
+# https://gist.github.com/dmelliot/437924ff581f3f1edd59f44833be6cc6
+# <span foreground='#FF6611'>
+for_window [app_id="firefox"] title_format "   %title"
+for_window [title="^Messenger — Mozilla Firefox"] title_format "<tt></tt>  <tt></tt>%title"
+for_window [title="^Facebook — Mozilla Firefox"] title_format "<tt></tt>  <tt></tt>%title"
+for_window [title="YouTube"] title_format "<tt></tt>  <tt></tt>%title"
+for_window [title="^Google Search"] title_format "<tt></tt>  <tt></tt>%title"
+for_window [title="^Google Drive"] title_format "<tt></tt>  <tt></tt>%title"
+for_window [title="Gmail"] title_format "<tt></tt><span foreground='#FFFFFF' >  </span><tt></tt>%title"
+for_window [title="Trello"] title_format "<tt></tt><span foreground='#FFFFFF' >  </span><tt></tt>%title"
+
+
