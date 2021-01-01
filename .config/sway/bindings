@@ -65,7 +65,7 @@ bindsym Mod1+Print exec shotman window
 bindsym Shift+Print exec shotman area
 
 # exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec nwgbar -o 0.5
+bindsym $mod+Shift+e exec ~/.config/nwg-launchers/nwgbar/run.sh
 
 #
 # Moving around

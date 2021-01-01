@@ -1,5 +1,5 @@
 {
-    "layer": "top", // Waybar at top layer
+    "layer": "bottom", // Waybar at top layer
     "position": "top", // Waybar at the bottom of your screen
     "height": 36, // Waybar height
     // Choose the order of the modules
@@ -160,7 +160,7 @@
     },
     "custom/power": {
         "format":"",
-        "on-click":"nwgbar -o 0.5",
+        "on-click":"~/.config/nwg-launchers/nwgbar/run.sh",
         "tooltip": false
     }
 }

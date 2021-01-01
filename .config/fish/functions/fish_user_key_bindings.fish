@@ -28,10 +28,12 @@ function fish_user_key_bindings
     # change Alt+C to Ctrl+G, so it's like 'Go-to' directory
     bind \cg fzf-cd-widget
     bind -M insert \cg fzf-cd-widget
-    bind \cr fzf-run-widget
-    bind -M insert \cr fzf-run-widget
-    bind \ch fzf-history-widget
-    bind -M insert \ch fzf-history-widget
+    bind \ch fzf-run-widget
+    bind -M insert \ch fzf-run-widget
+
+    # Ctrl+R is the bash keybinding
+    bind \cr fzf-history-widget
+    bind -M insert \cr fzf-history-widget
 
     function fzf-run-widget -d "Run executables in PATH"
         set -l commandline (__fzf_parse_commandline)

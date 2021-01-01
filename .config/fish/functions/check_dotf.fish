@@ -73,7 +73,8 @@ function check_dotf
         echo "You have unsaved changes to your dotfiles:"
         dotf -C $HOME status -s
         if read_confirm commit_prompt
-            tmux new-session 'dotf commit -a' \; split-window -h 'dotf diff HEAD; read -s -n 1 key'
+            env EDITOR=nvim dotf commit -a
+            # tmux new-session 'dotf commit -a' \; split-window -h 'dotf diff HEAD; read -s -n 1 key'
         end
     end
 
