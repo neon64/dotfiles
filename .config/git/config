@@ -9,6 +9,7 @@
 	path =
 [core]
 	pager = delta
+	excludesfile = /home/chris/.config/git/global-ignore
 [interactive]
 	diffFilter = delta --color-only
 [delta]

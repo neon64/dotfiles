@@ -15,7 +15,8 @@
 
 window#waybar {
     /* background: rgba(43, 48, 59, 0.5); */
-    background: #1d1f25;
+    /* background: #1d1f25; */
+    background: rgba(29,31,37, 0.9);
     /* background: linear-gradient(180deg, rgba(20, 20, 20, 0.5), rgba(20, 20, 20, 0.0) 100%); */
     /* background-color: transparent; */
 

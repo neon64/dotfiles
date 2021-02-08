@@ -12,7 +12,7 @@ elif [ "$1" = '--current' ]; then
     exit
 else
     printf "${BLUE}%s${RESET_FMT}\n" "Select a new theme:"
-    theme=$(find ~/.config/colors/base16-shell/scripts/* -printf "%f\n" | sed 's/.sh//g' | fzf --height=20 --min-height=5 --reverse --color=16 )
+    theme=$(find ~/.config/colors/base16-shell/scripts/* -printf "%f\n" | sed 's/.sh//g' | fzf --height=20 --min-height=5 --reverse )
 fi
 
 if [ "$theme" = '' ]; then
@@ -32,6 +32,8 @@ echo " - Updating alacritty config"
 ~/.config/alacritty/build_config.py "$theme"
 echo " - Updating wofi config"
 ~/.config/wofi/build_config.py "$theme"
+echo " - Updating fzf colour scheme in fish"
+fish -c "source $HOME/.config/colors/base16-fzf/fish/$theme.fish"
 
 echo " - Updating theme file (used by vim, fzf)"
 echo "$theme" > ~/.config/colors/current-theme

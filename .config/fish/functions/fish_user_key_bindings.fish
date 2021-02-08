@@ -35,6 +35,32 @@ function fish_user_key_bindings
     bind \cr fzf-history-widget
     bind -M insert \cr fzf-history-widget
 
+    function fzf-cd-widget -d "Change directory"
+        set -l commandline (__fzf_parse_commandline)
+        set -l dir $commandline[1]
+        set -l fzf_query $commandline[2]
+
+        test -n "$FZF_ALT_C_COMMAND"; or set -l FZF_ALT_C_COMMAND "
+        command find -L \$dir -mindepth 1 \\( -path \$dir'*/\\.*' -o -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' \\) -prune \
+        -o -type d -print 2> /dev/null | sed 's@^\./@@'"
+        test -n "$FZF_TMUX_HEIGHT"; or set FZF_TMUX_HEIGHT 40%
+        begin
+        set -lx FZF_DEFAULT_OPTS "--height $FZF_TMUX_HEIGHT --reverse --bind=ctrl-z:ignore $FZF_DEFAULT_OPTS $FZF_ALT_C_OPTS"
+        eval "$FZF_ALT_C_COMMAND | "(__fzfcmd)' +m --query "'$fzf_query'"' | cut -f 1 -d ' ' --complement | read -l result
+
+        set trimmed_result (string trim -l "$result")
+
+        if [ -n "$trimmed_result" ]
+            cd $trimmed_result
+
+            # Remove last token from commandline.
+            commandline -t ""
+        end
+        end
+
+        commandline -f repaint
+    end
+
     function fzf-run-widget -d "Run executables in PATH"
         set -l commandline (__fzf_parse_commandline)
         set -l dir $commandline[1]

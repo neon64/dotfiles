@@ -103,4 +103,4 @@ for_window [title="^Google Drive"] title_format "<tt></tt>  <tt></tt>%title"
 for_window [title="Gmail"] title_format "<tt></tt><span foreground='#FFFFFF' >  </span><tt></tt>%title"
 for_window [title="Trello"] title_format "<tt></tt><span foreground='#FFFFFF' >  </span><tt></tt>%title"
 
-
+workspace_layout tabbed

@@ -1,10 +1,5 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR FZF_ALT_C_COMMAND:fd\x20\x2d\x2dtype\x20d\x20\x2d\x2dhidden\x20\x2d\x2dexclude\x20\x27\x2a\x2a/\x2egit/\x27
-SETUVAR FZF_CTRL_T_COMMAND:fd\x20\x2d\x2dhidden\x20\x2d\x2dexclude\x20\x27\x2a\x2a/\x2egit/\x27
-SETUVAR FZF_CTRL_T_OPTS:\x2d\x2dpreview\x20\x27highlight\x20\x2d\x2dforce\x20\x2d\x2dout\x2dformat\x3dansi\x20\x7b\x7d\x20\x7c\x20head\x20\x2dn\x20100\x27
-SETUVAR FZF_DEFAULT_COMMAND:fd\x20\x2d\x2dhidden\x20\x2d\x2dexclude\x20\x27\x2a\x2a/\x2egit/\x27
-SETUVAR FZF_DEFAULT_OPTS:\x0a\x20\x20\x2d\x2dcolor\x3dbg\x2b\x3a\x23343d46\x2cbg\x3a\x232b303b\x2cspinner\x3a\x2396b5b4\x2chl\x3a\x238fa1b3\x0a\x20\x20\x2d\x2dcolor\x3dfg\x3a\x23a7adba\x2cheader\x3a\x238fa1b3\x2cinfo\x3a\x23ebcb8b\x2cpointer\x3a\x2396b5b4\x0a\x20\x20\x2d\x2dcolor\x3dmarker\x3a\x2396b5b4\x2cfg\x2b\x3a\x23dfe1e8\x2cprompt\x3a\x23ebcb8b\x2chl\x2b\x3a\x238fa1b3\x0a
 SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d
@@ -13,7 +8,7 @@ SETUVAR _fisher_decors_2F_fish_2D_colored_2D_man_files:/home/chris/\x2econfig/fi
 SETUVAR _fisher_decors_2F_fish_2D_colors_files:/home/chris/\x2econfig/fish/functions/colors\x2efish\x1e/home/chris/\x2econfig/fish/completions/colors\x2efish
 SETUVAR _fisher_fishgretel_2F_fasd_files:/home/chris/\x2econfig/fish/functions/__fasd_print_completion\x2efish\x1e/home/chris/\x2econfig/fish/functions/a\x2efish\x1e/home/chris/\x2econfig/fish/functions/d\x2efish\x1e/home/chris/\x2econfig/fish/functions/f\x2efish\x1e/home/chris/\x2econfig/fish/functions/fasd_cd\x2efish\x1e/home/chris/\x2econfig/fish/functions/s\x2efish\x1e/home/chris/\x2econfig/fish/functions/sd\x2efish\x1e/home/chris/\x2econfig/fish/functions/sf\x2efish\x1e/home/chris/\x2econfig/fish/functions/z\x2efish\x1e/home/chris/\x2econfig/fish/functions/zz\x2efish\x1e/home/chris/\x2econfig/fish/conf\x2ed/__fasd_run\x2efish\x1e/home/chris/\x2econfig/fish/conf\x2ed/aliases\x2efish\x1e/home/chris/\x2econfig/fish/completions/a\x2efish\x1e/home/chris/\x2econfig/fish/completions/d\x2efish\x1e/home/chris/\x2econfig/fish/completions/f\x2efish\x1e/home/chris/\x2econfig/fish/completions/fasd\x2efish\x1e/home/chris/\x2econfig/fish/completions/s\x2efish\x1e/home/chris/\x2econfig/fish/completions/sd\x2efish\x1e/home/chris/\x2econfig/fish/completions/sf\x2efish\x1e/home/chris/\x2econfig/fish/completions/z\x2efish\x1e/home/chris/\x2econfig/fish/completions/zz\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:/home/chris/\x2econfig/fish/functions/fisher\x2efish\x1e/home/chris/\x2econfig/fish/completions/fisher\x2efish
-SETUVAR _fisher_plugins:decors/fish\x2dcolors\x1edecors/fish\x2dcolored\x2dman\x1efishgretel/fasd\x1ejorgebucaran/fisher
+SETUVAR _fisher_plugins:decors/fish\x2dcolors\x1edecors/fish\x2dcolored\x2dman\x1ejorgebucaran/fisher\x1efishgretel/fasd
 SETUVAR fish_color_autosuggestion:555\x1eyellow
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:green

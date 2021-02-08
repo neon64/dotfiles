@@ -44,7 +44,7 @@ set $borderwidth 1
 default_border normal $borderwidth
 default_floating_border normal $borderwidth
 hide_edge_borders both
-gaps inner 10
+gaps inner 0
 gaps outer 0
 titlebar_padding 6 8
 font pango:Noto Sans Regular 10
