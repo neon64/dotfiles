@@ -6,9 +6,8 @@ SETUVAR __fish_init_3_x:\x1d
 SETUVAR __fish_initialized:3100
 SETUVAR _fisher_decors_2F_fish_2D_colored_2D_man_files:/home/chris/\x2econfig/fish/functions/man\x2efish
 SETUVAR _fisher_decors_2F_fish_2D_colors_files:/home/chris/\x2econfig/fish/functions/colors\x2efish\x1e/home/chris/\x2econfig/fish/completions/colors\x2efish
-SETUVAR _fisher_fishgretel_2F_fasd_files:/home/chris/\x2econfig/fish/functions/__fasd_print_completion\x2efish\x1e/home/chris/\x2econfig/fish/functions/a\x2efish\x1e/home/chris/\x2econfig/fish/functions/d\x2efish\x1e/home/chris/\x2econfig/fish/functions/f\x2efish\x1e/home/chris/\x2econfig/fish/functions/fasd_cd\x2efish\x1e/home/chris/\x2econfig/fish/functions/s\x2efish\x1e/home/chris/\x2econfig/fish/functions/sd\x2efish\x1e/home/chris/\x2econfig/fish/functions/sf\x2efish\x1e/home/chris/\x2econfig/fish/functions/z\x2efish\x1e/home/chris/\x2econfig/fish/functions/zz\x2efish\x1e/home/chris/\x2econfig/fish/conf\x2ed/__fasd_run\x2efish\x1e/home/chris/\x2econfig/fish/conf\x2ed/aliases\x2efish\x1e/home/chris/\x2econfig/fish/completions/a\x2efish\x1e/home/chris/\x2econfig/fish/completions/d\x2efish\x1e/home/chris/\x2econfig/fish/completions/f\x2efish\x1e/home/chris/\x2econfig/fish/completions/fasd\x2efish\x1e/home/chris/\x2econfig/fish/completions/s\x2efish\x1e/home/chris/\x2econfig/fish/completions/sd\x2efish\x1e/home/chris/\x2econfig/fish/completions/sf\x2efish\x1e/home/chris/\x2econfig/fish/completions/z\x2efish\x1e/home/chris/\x2econfig/fish/completions/zz\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:/home/chris/\x2econfig/fish/functions/fisher\x2efish\x1e/home/chris/\x2econfig/fish/completions/fisher\x2efish
-SETUVAR _fisher_plugins:decors/fish\x2dcolors\x1edecors/fish\x2dcolored\x2dman\x1ejorgebucaran/fisher\x1efishgretel/fasd
+SETUVAR _fisher_plugins:decors/fish\x2dcolors\x1edecors/fish\x2dcolored\x2dman\x1ejorgebucaran/fisher
 SETUVAR fish_color_autosuggestion:555\x1eyellow
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:green
