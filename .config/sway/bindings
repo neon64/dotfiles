@@ -7,6 +7,7 @@ set $mod Mod4
 # preferred terminal emulator
 set $term alacritty
 set $window_switcher ~/.config/wofi/windows.py
+set $web_search rofi -lines 10 -padding 0 -show search -modi search:~/.config/wofi/web_search.py -i -p "Search: "
 
 # movement keys
 set $up l
@@ -29,7 +30,7 @@ bindswitch --reload --locked lid:off output $laptop_screen enable
 # the $term variable is expanded at runtime
 bindsym $mod+Return exec $$term
 bindsym $mod+x exec alacritty --title "Floating Terminal" --config-file ~/.config/alacritty/alacritty_big.yml -e fish -c 'env fish_custom_greeting= fish'
-bindsym $mod+c exec swaymsg [app_id="firefox"] focus || firefox
+bindsym $mod+f exec firefox --new-window
 
 # kill focused window
 bindsym $mod+q kill
@@ -37,6 +38,7 @@ bindsym button3 kill
 
 # start your launcher
 bindsym $mod+d exec $window_switcher
+bindsym $mod+g exec $web_search
 bindsym $mod+s exec swaymsg [app_id="org.gnome.Nautilus"] focus || nautilus
 
 bindsym $mod+shift+s sticky enable; exec notify-send -t 1000 "made sticky"
@@ -155,7 +157,7 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout stacking
 bindsym $mod+r layout toggle split
 # Make the current focus fullscreen
-bindsym $mod+f fullscreen
+bindsym $mod+shift+f fullscreen
 
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
@@ -167,8 +169,8 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # manipulate gaps settings
-bindsym $mod+G gaps inner all plus 10; hide_edge_borders none
-bindsym $mod+Shift+G gaps inner all set 0; gaps outer all set 0; hide_edge_borders both
+# bindsym $mod+G gaps inner all plus 10; hide_edge_borders none
+# bindsym $mod+Shift+G gaps inner all set 0; gaps outer all set 0; hide_edge_borders both
 
 #
 # Special keys
@@ -176,9 +178,9 @@ bindsym $mod+Shift+G gaps inner all set 0; gaps outer all set 0; hide_edge_borde
 
 # Volume
 exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 2%+ unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
-bindsym XF86AudioLowerVolume exec amixer -q set Master 2%- unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
-bindsym XF86AudioMute exec (amixer get Master | grep off > /dev/null && amixer -q set Master unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob) || (amixer -q set Master mute && echo 0 > $SWAYSOCK.wob)
+bindsym --locked XF86AudioRaiseVolume exec amixer -q set Master 2%+ unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
+bindsym --locked XF86AudioLowerVolume exec amixer -q set Master 2%- unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
+bindsym --locked XF86AudioMute exec (amixer get Master | grep off > /dev/null && amixer -q set Master unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob) || (amixer -q set Master mute && echo 0 > $SWAYSOCK.wob)
 
 # Media player
 bindsym --locked XF86AudioPlay exec playerctl play-pause

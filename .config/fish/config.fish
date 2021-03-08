@@ -31,7 +31,7 @@ set -x EMACSDIR "$XDG_CONFIG_HOME/emacs"
 set -x DOOMDIR "$XDG_CONFIG_HOME/doom"
 set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"
 set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head -n 100'"
-set -x FZF_CTRL_T_COMMAND "fd --hidden --exclude '**/.git/'"
+set -x FZF_CTRL_T_COMMAND "fd --exclude '**/.git/'"
 set -x FZF_ALT_C_COMMAND "fasd -d -R"
 
 set -g man_standout -b yellow -o black
@@ -75,6 +75,11 @@ alias b "browse_files"
 alias gc "git checkout (git branch --all -v | fzf --layout=reverse --height=20 --pointer='' | tr -d '[:space:]')"
 
 alias pac "paru"
+
+function cd -d "Register directory and change to directory"
+  fasd -A $argv
+  builtin cd $argv
+end
 
 ### ========================================
 ###				   COLOURS
