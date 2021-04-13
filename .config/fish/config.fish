@@ -33,6 +33,7 @@ set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"
 set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head -n 100'"
 set -x FZF_CTRL_T_COMMAND "fd --exclude '**/.git/'"
 set -x FZF_ALT_C_COMMAND "fasd -d -R"
+set -x FZF_ALT_C_OPTS "--no-sort"
 
 set -g man_standout -b yellow -o black
 
@@ -42,6 +43,8 @@ set -g man_standout -b yellow -o black
 
 # connects to an existing tmux session before creating a new one
 alias t "tmux a; or tmux"
+
+alias top "bpytop"
 
 if type -q exa
     alias ls "exa --classify --git --header --color auto -s type"

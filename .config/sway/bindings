@@ -24,13 +24,16 @@ set $notify notify-send -t 5000
 #
 
 # close laptop lid
-bindswitch --reload --locked lid:on exec bash -c '[ $(swaymsg -t get_outputs | grep name | wc -l) == 1 ] && ($sleep) || (swaymsg output $laptop_screen disable && $notify "Clamshell mode" "Laptop screen off")'
-bindswitch --reload --locked lid:off output $laptop_screen enable
+# bindswitch --reload --locked lid:on exec bash -c '[ $(swaymsg -t get_outputs | grep name | wc -l) == 1 ] && ($sleep) || (swaymsg output $laptop_screen disable && $notify "Clamshell mode" "Laptop screen off")'
+# bindswitch --reload --locked lid:off output $laptop_screen enable
 
 # the $term variable is expanded at runtime
 bindsym $mod+Return exec $$term
-bindsym $mod+x exec alacritty --title "Floating Terminal" --config-file ~/.config/alacritty/alacritty_big.yml -e fish -c 'env fish_custom_greeting= fish'
-bindsym $mod+f exec firefox --new-window
+bindsym $mod+x exec alacritty --title "Floating Terminal"
+
+
+# bindsym $mod+f exec firefox --new-window
+bindsym $mod+f exec firefox-nightly
 
 # kill focused window
 bindsym $mod+q kill

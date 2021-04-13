@@ -10,6 +10,8 @@
 [core]
 	pager = delta
 	excludesfile = /home/chris/.config/git/global-ignore
+	autocrlf = false
+	eol = lf
 [interactive]
 	diffFilter = delta --color-only
 [delta]

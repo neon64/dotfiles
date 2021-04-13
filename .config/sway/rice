@@ -14,21 +14,22 @@ set $arc-dark-darkest #21242b
 set $arc-dark-text #8c96a2
 
 set $base005 #2D323D
+set $browserBarColor #393f4c
 
 # fits Base16-Tomorrow-Night theme
 set $bd-color              $arc-dark-darkest
-set $focused-bd-color      $base005
+set $focused-bd-color      $browserBarColor
 set $urgent-bd-color       $base08
 set $indicator             $base0B
 
 set $bg-color              $arc-dark-darkest
-set $focused-bg-color      $base005
+set $focused-bg-color      $browserBarColor
 
 set $inner-bd-color         $base00
 set $focused-inner-bd-color $base00
 
 set $inactive-text-color   $base02
-set $text-color            $base02
+set $text-color            $base04
 set $focused-text-color    $arc-light-text
 set $urgent-bg-color       $base08
 

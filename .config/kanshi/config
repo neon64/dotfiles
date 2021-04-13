@@ -1,12 +1,19 @@
-profile main {
-    output eDP-1 enable position 0,0
-    output HDMI-A-1 enable mode 1920x1080 position 0,1280
-}
-
 profile laptop {
     output "eDP-1" enable position 0,0
 }
 
-profile docked {
+profile dell_ultrawide_splitscreen {
+    output DP-1 enable position 0,0 mode 1920x1600
+    output HDMI-A-1 enable position 1920,0 mode 1920x1600
+    output eDP-1 disable
+}
+
+profile dell_ultrawide_full {
+    output DP-2 enable position 0,0 mode 3840x1600
+    output eDP-1 disable
+}
+
+profile docked_with_viewsonic {
+    output eDP-1 disable
     output "HDMI-A-1" enable position 0,0
 }

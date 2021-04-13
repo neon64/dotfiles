@@ -1,7 +1,33 @@
-/* #tracking-protection-icon-box {visibility: collapse !important;}
-#tracking-protection-icon-container {display: none;} */
-
 /* hides the native tabs */
 #TabsToolbar {
-    visibility: collapse;
+    display: none;
+}
+
+#navigator-toolbox {
+    /* extra padding so that the url popup isn't cut off */
+    padding-top: 2px;
+    /* unsure if this is needed */
+    border-top: 0 !important;
+    /* remove top border from nav bar */
+    --tabs-border-color: transparent !important;
+    /* background color matches theme */
+    background-color: #393f4c !important;
+}
+
+/* unsure if any of this stuff is required */
+
+#navigator-toolbar::before {
+  border: 0 !important;
+}
+
+.tab-background {
+  border: 0 !important;
+}
+
+#PersonalToolbar {
+  border-top: 0 !important;
+}
+
+#nav-bar {
+  border-top: 0 !important;
 }
