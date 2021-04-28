@@ -1,4 +1,5 @@
-image=~/.local/share/swaylock_bg.jpg
+screenshots
+effect-blur=10x2
 
 clock
 timestr=%I:%M %p

@@ -57,7 +57,6 @@ floating_modifier $mod normal
 # reload the configuration file
 bindsym $mod+Shift+c reload
 
-# grimshot is a print screen helper for sway
 # * Print Scr for whole screen
 # * Alt + Print Scr for a focused window
 # * Shift + Print Scr for a selected region
@@ -91,16 +90,16 @@ bindsym ctrl+7 focus tab 6
 bindsym ctrl+8 focus tab 7
 bindsym ctrl+9 focus tab 8
 bindsym ctrl+0 focus tab 9
-bindsym alt+1 focus tab 0
-bindsym alt+2 focus tab 1
-bindsym alt+3 focus tab 2
-bindsym alt+4 focus tab 3
-bindsym alt+5 focus tab 4
-bindsym alt+6 focus tab 5
-bindsym alt+7 focus tab 6
-bindsym alt+8 focus tab 7
-bindsym alt+9 focus tab 8
-bindsym alt+0 focus tab 9
+# bindsym alt+1 focus tab 0
+# bindsym alt+2 focus tab 1
+# bindsym alt+3 focus tab 2
+# bindsym alt+4 focus tab 3
+# bindsym alt+5 focus tab 4
+# bindsym alt+6 focus tab 5
+# bindsym alt+7 focus tab 6
+# bindsym alt+8 focus tab 7
+# bindsym alt+9 focus tab 8
+# bindsym alt+0 focus tab 9
 bindsym ctrl+tab focus tab next
 bindsym ctrl+shift+tab focus tab prev
 
