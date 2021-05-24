@@ -21,6 +21,8 @@ exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # we restart kanshi on reload to ensure output configuration is reapplied
 exec_always "pkill kanshi; kanshi"
 
+exec_always "wlsunset -l 37.8 -L 145.0"
+
 # background
 # output * bg #1d1f25 solid_color
 exec ~/.azotebg

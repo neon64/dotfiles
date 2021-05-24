@@ -1,1 +1,1 @@
-/home/chris/.config/colors/base16-shell/scripts/base16-ocean.sh
+/home/chris/.config/colors/base16-shell/scripts/base16-google-dark.sh
