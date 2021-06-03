@@ -7,23 +7,3 @@ RESET_FMT="\033[0m"
 
 echo " - Updating alacritty config"
 ~/.config/alacritty/build_config.py "$theme"
-echo " - Updating wofi config"
-~/.config/wofi/build_config.py "$theme"
-
-echo " - Updating theme file (used by vim, fzf)"
-echo "$theme" > ~/.config/colors/current-theme
-
-if [ "$2" = '--no-reload' ]; then
-    printf "${BLUE}%s${RESET_FMT}\n" "Skipping reload..."
-else
-    printf "${BLUE}%s${RESET_FMT}\n" "Reloading sway..."
-    swaymsg reload
-fi
-
-# alacritty will auto-reload the config
-
-if [ "$TERM" = 'linux' ]; then
-    bash ~/.config/colors/theme.sh
-    # clear the screen on the Linux VTE to avoid awkward half change of color scheme
-    clear
-fi

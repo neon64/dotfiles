@@ -6,6 +6,10 @@
 
 include "$HOME/.cache/wal/colors-sway"
 
+# background
+output * background $wallpaper fill
+# exec ~/.azotebg
+
 # set $arc-light-bg #e7e8eb
 # set $arc-light-bg-3 #969dac
 # set $arc-light-text #dddee2

@@ -23,10 +23,6 @@ exec_always "pkill kanshi; kanshi"
 
 exec_always "wlsunset -l 37.8 -L 145.0"
 
-# background
-# output * bg #1d1f25 solid_color
-exec ~/.azotebg
-
 # fade windows in and out
 # exec ~/.config/sway/fader.py
 
