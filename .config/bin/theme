@@ -5,57 +5,13 @@ RED="\033[31m"
 GREEN="\033[32m"
 RESET_FMT="\033[0m"
 
-if [ "$1" = '--regen' ]; then
-    theme=$(cat ~/.config/colors/current-theme)
-elif [ "$1" = '--current' ]; then
-    cat ~/.config/colors/current-theme
-    exit
-else
-    printf "${BLUE}%s${RESET_FMT}\n" "Select a new theme:"
-    theme=$(find ~/.config/colors/base16-shell/scripts/* -printf "%f\n" | sed 's/.sh//g' | fzf --height=20 --min-height=5 --reverse )
-fi
-
-if [ "$theme" = '' ]; then
-    printf "${RED}%s${RESET_FMT}\n" "No theme chosen, exiting..."
-    exit 1
-else
-    printf "${GREEN}%s %s${RESET_FMT}\n" "Applying theme" "$theme"
-fi
-
-echo " - Updating shell init script"
-ln -sf "$HOME/.config/colors/base16-shell/scripts/$theme.sh" ~/.config/colors/theme.sh
-echo " - Updating swaywm colors"
-ln -sf "$HOME/.config/colors/base16-sway/themes/$theme.config" ~/.config/sway/colorscheme
-echo " - Updating waybar colors"
-ln -sf "$HOME/.config/colors/base16-waybar/colors/$theme.css" ~/.config/waybar/colors.css
 echo " - Updating alacritty config"
 ~/.config/alacritty/build_config.py "$theme"
 echo " - Updating wofi config"
 ~/.config/wofi/build_config.py "$theme"
-echo " - Updating fzf colour scheme in fish"
-fish -c "source $HOME/.config/colors/base16-fzf/fish/$theme.fish"
 
 echo " - Updating theme file (used by vim, fzf)"
 echo "$theme" > ~/.config/colors/current-theme
-
-current_wallpaper=$(cat ~/.azotebg | grep "swaybg -o" | awk '{ print $4}' | tr -d \' )
-
-# note, this only supports a single output
-generate_lockscreen() {
-    echo " - Generating lockscreen background..."
-    text="Type password to unlock..."
-    dest=~/.local/share/swaylock_bg.jpg
-    width=$(swaymsg -t get_outputs --raw | jq -r ".[0].current_mode.width | tostring")
-    height=$(swaymsg -t get_outputs --raw | jq -r ".[0].current_mode.height | tostring")
-    textheight=$(expr "$height" / 3)
-    dimensions="${width}x${height}^"
-    echo "  - Using dimensions $dimensions, placing text at y=$textheight"
-    convert "$current_wallpaper" -resize "$dimensions" -quality 95 -blur 40x20 -font /usr/share/fonts/cantarell/Cantarell-Light.otf -pointsize 36 -fill white -gravity Center -draw "text 0,${textheight} '$text'" $dest
-    echo "  - Done"
-}
-
-# regenerate lockscreen background
-generate_lockscreen
 
 if [ "$2" = '--no-reload' ]; then
     printf "${BLUE}%s${RESET_FMT}\n" "Skipping reload..."

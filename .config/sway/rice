@@ -1,52 +1,56 @@
 
 ### Ricing
 
-include colorscheme
+# base16 color scheme
+# include colorscheme
 
-set $arc-light-bg #e7e8eb
-set $arc-light-bg-3 #969dac
-set $arc-light-text #dddee2
+include "$HOME/.cache/wal/colors-sway"
 
-set $arc-dark-bg #323843
-set $arc-dark-bg-2 #2a3039
-set $arc-dark-bg-3 #2f343f
-set $arc-dark-darkest #21242b
-set $arc-dark-text #8c96a2
+# set $arc-light-bg #e7e8eb
+# set $arc-light-bg-3 #969dac
+# set $arc-light-text #dddee2
 
-set $base005 #2D323D
-set $browserBarColor #393f4c
+# set $arc-dark-bg #323843
+# set $arc-dark-bg-2 #2a3039
+# set $arc-dark-bg-3 #2f343f
+# set $arc-dark-darkest #21242b
+# set $arc-dark-text #8c96a2
+
+# set $base005 #2D323D
+# set $browserBarColor #393f4c
 
 # fits Base16-Tomorrow-Night theme
-set $bd-color              $arc-dark-darkest
-set $focused-bd-color      $browserBarColor
-set $urgent-bd-color       $base08
-set $indicator             $base0B
+set $bd-color              $background
+set $focused-bd-color      $color15
+set $urgent-bd-color       $color14
+set $indicator             $color11
 
-set $bg-color              $arc-dark-darkest
-set $focused-bg-color      $browserBarColor
+set $bg-color              $background
+set $focused-bg-color      $color15
 
-set $inner-bd-color         $base00
-set $focused-inner-bd-color $base00
+set $inner-bd-color         $background
+set $focused-inner-bd-color $color15
 
-set $inactive-text-color   $base02
-set $text-color            $base04
-set $focused-text-color    $arc-light-text
-set $urgent-bg-color       $base08
+set $inactive-text-color   $color15
+set $text-color            $color15
+set $focused-text-color    $color15
+
+set $urgent-bg-color       $color13
 
 # window colors
-#                       border              background          text                  indicator      child border
-client.focused          $focused-bd-color   $focused-bg-color   $focused-text-color   $focused-inner-bd-color     $focused-inner-bd-color
-client.unfocused        $bd-color           $bg-color           $text-color           $inner-bd-color     $inner-bd-color
-client.focused_inactive $bd-color           $bg-color           $text-color           $inner-bd-color     $inner-bd-color
-client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $urgent-bd-color     $urgent-bd-color
+#                       border              background          text                  indicator          child border
+client.focused          $focused-bd-color   $focused-bg-color   $focused-text-color   $indicator     $focused-inner-bd-color
+client.unfocused        $bd-color           $bg-color           $text-color           $indicator     $inner-bd-color
+client.focused_inactive $bd-color           $bg-color           $text-color           $indicator     $inner-bd-color
+client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-color   $indicator     $urgent-bd-color
 
 # window borders and gaps
-set $borderwidth 1
+set $borderwidth 3
 default_border normal $borderwidth
 default_floating_border normal $borderwidth
-hide_edge_borders both
-gaps inner 0
-gaps outer 0
+# hide_edge_borders both
+gaps inner 20
+gaps outer 20
 titlebar_padding 6 8
 font pango:Noto Sans Regular 10
 

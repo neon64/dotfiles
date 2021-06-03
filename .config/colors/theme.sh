@@ -1,1 +1,0 @@
-/home/chris/.config/colors/base16-shell/scripts/base16-google-dark.sh

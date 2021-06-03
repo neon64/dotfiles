@@ -4,16 +4,9 @@ import os
 from os.path import expanduser
 home = expanduser("~")
 
-if len(sys.argv) < 2 or sys.argv[1] == '':
-    theme_file = open(home + "/.config/colors/current-theme")
-    theme = theme_file.read().strip()
-    theme_file.close()
-else:
-    theme = sys.argv[1]
-
 files = ["alacritty", "alacritty_big"]
 
-colors = open(f"{home}/.config/colors/base16-alacritty/colors/{theme}.yml")
+colors = open(f"{home}/.cache/wal/alacritty-colors.yml")
 color_scheme = colors.read()
 
 for file in files:

@@ -49,6 +49,3 @@ bar {
 focus_on_window_activation urgent
 focus_wrapping yes
 workspace_auto_back_and_forth no
-
-# output "eDP-1" max_render_time 6
-# for_window [app_id="^alacritty$"] max_render_time 1

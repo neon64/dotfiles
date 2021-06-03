@@ -128,7 +128,7 @@ bell:
   duration: 200
 
 # Background opacity
-background_opacity: 1
+background_opacity: 0.95
 
 # Mouse bindings
 #

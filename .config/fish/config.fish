@@ -2,6 +2,9 @@
 ###				PATH & ENV VARS
 ### ========================================
 
+# sets up fzf colorscheme and LS_COLORS
+source $HOME/.cache/wal/colors.fish
+
 set -x XDG_CONFIG_HOME "$HOME/.config"
 set -x XDG_DATA_HOME "$HOME/.local/share"
 set -x XDG_CACHE_HOME "$HOME/.cache"
@@ -88,17 +91,16 @@ end
 ###				   COLOURS
 ### ========================================
 
-if test -e ~/.config/colors/current-theme
-    set theme (cat ~/.config/colors/current-theme)
-    source ~/.config/colors/base16-fzf/fish/$theme.fish
-end
+# if test -e ~/.config/colors/current-theme
+#     set theme (cat ~/.config/colors/current-theme)
+#     source ~/.config/colors/base16-fzf/fish/$theme.fish
+# end
 
-# Base16 Shell
 if status --is-interactive
     # manually set
-    if [ ! -z "$GNOME_TERMINAL_SCREEN" ]; or [ "$TERM" = 'xterm-kitty' ]; or [ ! -z "$SSH_TTY" ]
-        bash ~/.config/colors/theme.sh
-    end
+    # if [ ! -z "$GNOME_TERMINAL_SCREEN" ]; or [ "$TERM" = 'xterm-kitty' ]; or [ ! -z "$SSH_TTY" ]
+    #     bash ~/.config/colors/theme.sh
+    # end
 
     if test -x /usr/bin/reboot_chooser
         alias reboot "reboot_chooser"
