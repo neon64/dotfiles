@@ -75,5 +75,12 @@
     "workbench.colorTheme": "Wal",
     "ccls.codeLens.localVariables": true,
     "ccls.codeLens.renderInline": true,
-    "ccls.codeLens.enabled": false
+    "ccls.codeLens.enabled": false,
+    "workbench.editorAssociations": [
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ],
+    "mesonbuild.configureOnOpen": true
 }

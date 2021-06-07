@@ -11,6 +11,7 @@ for_window [class="code-oss"] border pixel $borderwidth
 for_window [class="Emacs"] border none
 for_window [app_id="emacs"] border none
 for_window [app_id="Alacritty"] border pixel $borderwidth
+for_window [app_id="org.gnome.Nautilus"] border pixel $borderwidth
 
 for_window [app_id="org.gnome.Nautilus"] floating enable
 for_window [app_id="gnome-control-center"] floating enable
@@ -18,7 +19,6 @@ for_window [app_id="mpv"] floating enable
 for_window [app_id="gnome-calculator"] floating enable
 for_window [app_id="org.gnome.clocks"] floating enable
 for_window [app_id="gnome-tweaks"] floating enable
-for_window [app_id="eog"] floating enable
 for_window [app_id="gnome-system-monitor"] floating enable; resize set 1024 600
 for_window [app_id="gnome-power-statistics"] floating enable
 for_window [app_id="blueman-manager"] floating enable; resize set 640 480
@@ -33,12 +33,11 @@ for_window [app_id="pavucontrol"] floating enable
 for_window [title="Launch Application"] floating enable
 for_window [app_id="iwgtk"] floating enable
 for_window [app_id="wdisplays"] floating enable
-for_window [app_id="evince"] border none
 for_window [app_id="org.gnome.NautilusPreviewer"] floating enable
 
-for_window [app_id="re.sonny.Tangram"] border none
-for_window [class="Ferdi"] border none
-for_window [app_id="syncthing-gtk"] border none; floating enable
+# for_window [app_id="re.sonny.Tangram"] border none
+# for_window [class="Ferdi"] border none
+for_window [app_id="syncthing-gtk"] floating enable
 
 for_window [class="zoom"] idle_inhibit visible
 # for_window [title="Participants"] floating enable
@@ -79,7 +78,7 @@ assign [class="Emacs"] 3
 # for_window [title="Mozilla Firefox"] title_format "%title"
 for_window [title="shotman"] move position 30 30
 for_window [title="shotman"] border none
-for_window [class="notion-nativefier-46aee8"] border none
+# for_window [class="notion-nativefier-46aee8"] border none
 
 # IntelliJ startup window
 for_window [title="win0"] floating enable

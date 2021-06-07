@@ -33,7 +33,7 @@ bindsym $mod+x exec alacritty --title "Floating Terminal"
 
 
 # bindsym $mod+f exec firefox --new-window
-bindsym $mod+f exec firefox-nightly
+bindsym $mod+f exec firefox
 
 # kill focused window
 bindsym $mod+q kill
@@ -171,8 +171,8 @@ bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
 # manipulate gaps settings
-bindsym $mod+G gaps inner all plus 10; hide_edge_borders none
-bindsym $mod+Shift+G gaps inner all set 0; gaps outer all set 0; hide_edge_borders both
+bindsym $mod+G gaps inner all plus 10;
+bindsym $mod+Shift+G gaps inner all set 0; gaps outer all set 0;
 
 #
 # Special keys

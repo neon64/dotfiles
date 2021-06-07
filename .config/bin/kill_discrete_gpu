@@ -1,15 +1,21 @@
 #!/bin/sh
 
+echo "Disabling card1"
 sudo udevadm trigger --verbose --action=remove --subsystem-match=drm --property-match="MINOR=1"
-sleep 0.1
+sleep 0.5
 
+exit 0
+echo "Removing driver"
 if lsmod | grep -q nouveau; then
     sudo rmmod nouveau
 fi
 if lsmod | grep -q nvidia; then
     sudo rmmod nvidia_modeset nvidia_drm nvidia
 fi
-sudo modprobe bbswitch
-sudo sh -c 'echo OFF > /proc/acpi/bbswitch'
-cat /proc/acpi/bbswitch
+sleep 0.5
+
+#echo "Cutting power with bbswitch"
+#sudo modprobe bbswitch
+#sudo sh -c 'echo OFF > /proc/acpi/bbswitch'
+#cat /proc/acpi/bbswitch
 

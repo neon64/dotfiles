@@ -6,7 +6,7 @@ home = expanduser("~")
 
 files = ["alacritty", "alacritty_big"]
 
-colors = open(f"{home}/.cache/wal/alacritty-colors.yml")
+colors = open(f"{home}/.cache/wal/colors-alacritty.yml")
 color_scheme = colors.read()
 
 for file in files:

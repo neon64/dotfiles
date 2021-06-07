@@ -1,0 +1,15 @@
+.titlebar,
+.titlebar .background {
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+headerbar {
+  border-radius: 0px;
+}
+
+window, window.background, window.titlebar {
+  border-radius: 0px;
+}

@@ -21,7 +21,7 @@ exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # we restart kanshi on reload to ensure output configuration is reapplied
 exec_always "pkill kanshi; kanshi"
 
-exec_always "wlsunset -l 37.8 -L 145.0"
+# exec_always "pkill wlsunset; wlsunset -l 37.8 -L 145.0"
 
 # fade windows in and out
 # exec ~/.config/sway/fader.py

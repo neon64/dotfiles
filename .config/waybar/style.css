@@ -1,4 +1,4 @@
-@import "../../.cache/wal/colors-waybar.css";
+@import "../../.cache/wal/colors-wofi.css";
 
 * {
     border: none;
@@ -29,7 +29,7 @@ window#waybar {
 }
 
 #workspaces button.focused {
-    background: @color6;
+    background: @backgroundLight;
     /* background: linear-gradient(180deg, rgba(100, 114, 125, 0.1), transparent); */
     color: @arc-light-text;
 }

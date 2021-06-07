@@ -6,6 +6,7 @@
 #       see this issue: https://todo.sr.ht/~scoopta/wofi/117
 
 from argparse import ArgumentParser
+from os.path import expanduser
 import subprocess
 import json
 
@@ -88,7 +89,7 @@ if __name__ == "__main__":
     # launch combined window switcher and app menu
     command="wofi -S dmenu,drun -i"
 
-    process = subprocess.Popen(command,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE)
+    process = subprocess.Popen(command,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE, cwd=expanduser("~"))
     print("opened wofi")
 
     parser = ArgumentParser(description="Wofi based window switcher")
