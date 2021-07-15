@@ -4,8 +4,8 @@
     border: none;
     border-radius: 0;
     /* we use `serif` as a fallback so its clear if our proper font isn't installed */
-    font-family: "Noto Sans", "la-regular-400", "la-solid-900", serif;
-    font-size: 12px;
+    font-family: "Jost *", "la-regular-400", "la-solid-900", serif;
+    font-size: 14px;
     min-height: 0;
 }
 
@@ -29,7 +29,7 @@ window#waybar {
 }
 
 #workspaces button.focused {
-    background: @backgroundLight;
+    background: shade(@background, 1.5);
     /* background: linear-gradient(180deg, rgba(100, 114, 125, 0.1), transparent); */
     color: @arc-light-text;
 }

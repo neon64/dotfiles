@@ -2,6 +2,7 @@
 
 mkdir -p ~/pics/wallpapers
 
-wallpaper=$(ls ~/pics/wallpapers | fzf --reverse --height=10 --min-height=5)
+wallpaper=$(fd . --base-directory ~/pics/wallpapers | fzf --reverse --height=10 --min-height=5)
 
-wal -i "$HOME/pics/wallpapers/$wallpaper" --backend  wal -o ~/.config/bin/theme
+echo "set \$wallpaper ~/pics/wallpapers/$wallpaper" > ~/.config/sway/wallpaper-default
+swaymsg reload

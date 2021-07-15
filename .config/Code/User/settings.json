@@ -10,7 +10,6 @@
     "files.trimTrailingWhitespace": true,
     "window.zoomLevel": 1,
     "php.suggest.basic": false,
-    "editor.wordWrap": "on",
     "breadcrumbs.enabled": true,
     "cSpell.language": "en-GB",
     "cSpell.numSuggestions": 8,

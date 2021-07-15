@@ -1,12 +1,10 @@
 
 ### Ricing
 
-# base16 color scheme
-# include colorscheme
-
 # set $wallpaper "$HOME/pics/wallpapers/guillaume-fischer--JPCZcxeqzM-unsplash.jpg"
 
-include "$HOME/.cache/wal/colors-sway"
+include "$HOME/.cache/wal/colors-sway-extra"
+include wallpaper-default
 
 # background
 output * background $wallpaper fill
@@ -27,18 +25,18 @@ output * background $wallpaper fill
 
 # fits Base16-Tomorrow-Night theme
 set $bd-color              $backgroundLight
-set $focused-bd-color      $backgroundLight2
+set $focused-bd-color      $background
 set $urgent-bd-color       $color14
 set $indicator             $color11
 
 set $bg-color              $backgroundLight
-set $focused-bg-color      $backgroundLight2
+set $focused-bg-color      $background
 
 set $inner-bd-color         $backgroundLight
-set $focused-inner-bd-color $backgroundLight2
+set $focused-inner-bd-color $background
 
-set $inactive-text-color   $foregroundDark
-set $text-color            $foregroundDark
+set $inactive-text-color   $foreground
+set $text-color            $foreground
 set $focused-text-color    $color15
 
 set $urgent-bg-color       $color13
@@ -58,5 +56,7 @@ default_floating_border pixel $borderwidth
 gaps inner 20
 gaps outer 20
 titlebar_padding 6 8
-font pango:Noto Sans Regular 10
+font pango:Jost* 11
+
+# Noto Sans Regular 10
 
