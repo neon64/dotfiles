@@ -39,7 +39,6 @@ for_window [app_id="org.gnome.NautilusPreviewer"] floating enable
 # for_window [class="Ferdi"] border none
 for_window [app_id="syncthing-gtk"] floating enable
 
-for_window [class="zoom"] idle_inhibit visible
 # for_window [title="Participants"] floating enable
 # for_window [title="Chat"] floating enable
 
@@ -66,7 +65,6 @@ assign [app_id="org.keepassxc.KeePassXC"] 9
 # assign [class="jetbrains-idea"] 3
 # assign [class="jetbrains-clion"] 3
 assign [class="Vncviewer"] 10
-assign [class="zoom"] 10
 assign [app_id="re.sonny.Tangram"] 2
 assign [app_id="syncthing-gtk"] 0
 assign [class="Emacs"] 3
@@ -95,6 +93,13 @@ for_window [class="libreoffice-writer"] title_format "<tt></tt><span  background
 for_window [class="libreoffice-calc"] title_format "<tt></tt><span  background='#073642' foreground='#add58a' >  </span><tt> </tt>%title"
 for_window [class="libreoffice-impress"] title_format "<tt></tt><span  background='#073642' foreground='#d07e7e' >  </span><tt> </tt>%title"
 
+# Zoom
+for_window [class="zoom"] idle_inhibit visible
+for_window [class="zoom" title="zoom"] floating enable; border none
+for_window [class="zoom" title="Zoom Meeting"] floating disable
+for_window [class="zoom" title="Zoom - Free Account"] floating enable
+for_window [class="zoom" title="Settings"] floating enable
+for_window [class="zoom" title="Zoom - Licensed Account"] floating enable
 
 # Title bar icons
 # https://gist.github.com/dmelliot/437924ff581f3f1edd59f44833be6cc6

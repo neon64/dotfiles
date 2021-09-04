@@ -4,5 +4,10 @@ mkdir -p ~/pics/wallpapers
 
 wallpaper=$(fd . --base-directory ~/pics/wallpapers | fzf --reverse --height=10 --min-height=5)
 
+if [ "$wallpaper" = '' ]; then
+    echo "No wallpaper selected, aborting..."
+    exit 1
+fi
+
 echo "set \$wallpaper ~/pics/wallpapers/$wallpaper" > ~/.config/sway/wallpaper-default
 swaymsg reload

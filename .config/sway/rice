@@ -24,16 +24,16 @@ output * background $wallpaper fill
 # set $browserBarColor #393f4c
 
 # fits Base16-Tomorrow-Night theme
-set $bd-color              $backgroundLight
-set $focused-bd-color      $background
+set $bd-color              $background
+set $focused-bd-color      $backgroundLight
 set $urgent-bd-color       $color14
 set $indicator             $color11
 
-set $bg-color              $backgroundLight
-set $focused-bg-color      $background
+set $bg-color              $background
+set $focused-bg-color      $backgroundLight
 
-set $inner-bd-color         $backgroundLight
-set $focused-inner-bd-color $background
+set $inner-bd-color         $background
+set $focused-inner-bd-color $backgroundLight
 
 set $inactive-text-color   $foreground
 set $text-color            $foreground
@@ -52,7 +52,7 @@ client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-co
 set $borderwidth 3
 default_border normal $borderwidth
 default_floating_border pixel $borderwidth
-# hide_edge_borders both
+hide_edge_borders smart
 gaps inner 20
 gaps outer 20
 titlebar_padding 6 8

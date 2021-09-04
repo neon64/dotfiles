@@ -4,7 +4,8 @@
     "editor.detectIndentation": true,
     "files.associations": {
         ".*": "shellscript",
-        "env-example": "shellscript"
+        "env-example": "shellscript",
+        "*.pl": "prolog"
     },
     "workbench.startupEditor": "welcomePage",
     "files.trimTrailingWhitespace": true,
@@ -71,15 +72,13 @@
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
     "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
     "markdown-preview-enhanced.mathRenderingOption": "None",
-    "workbench.colorTheme": "Wal",
+    "workbench.colorTheme": "Wal Bordered",
     "ccls.codeLens.localVariables": true,
     "ccls.codeLens.renderInline": true,
     "ccls.codeLens.enabled": false,
-    "workbench.editorAssociations": [
-        {
-            "viewType": "jupyter.notebook.ipynb",
-            "filenamePattern": "*.ipynb"
-        }
-    ],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb",
+        "*.docx": "default"
+    },
     "mesonbuild.configureOnOpen": true
 }

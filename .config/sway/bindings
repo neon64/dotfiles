@@ -180,9 +180,9 @@ bindsym $mod+Shift+G gaps inner all set 0; gaps outer all set 0;
 
 # Volume
 exec mkfifo $SWAYSOCK.wob && tail -f $SWAYSOCK.wob | wob
-bindsym --locked XF86AudioRaiseVolume exec amixer -q set Master 2%+ unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
-bindsym --locked XF86AudioLowerVolume exec amixer -q set Master 2%- unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob
-bindsym --locked XF86AudioMute exec (amixer get Master | grep off > /dev/null && amixer -q set Master unmute && amixer sget Master | grep 'Right:' | awk -F'[][]' '{ print substr($2, 0, length($2)-1) }' > $SWAYSOCK.wob) || (amixer -q set Master mute && echo 0 > $SWAYSOCK.wob)
+bindsym --locked XF86AudioRaiseVolume exec pamixer -u && pamixer -i 1 && pamixer --get-volume >> $SWAYSOCK.wob
+bindsym --locked XF86AudioLowerVolume exec pamixer -u && pamixer -d 1 && pamixer --get-volume >> $SWAYSOCK.wob
+bindsym --locked XF86AudioMute exec $HOME/.config/sway/toggle_mute.sh
 
 # Media player
 bindsym --locked XF86AudioPlay exec playerctl play-pause
