@@ -6,7 +6,7 @@ set $mod Mod4
 
 # preferred terminal emulator
 set $term alacritty
-set $window_switcher ~/.config/wofi/windows.py
+set $window_switcher wofi
 set $web_search rofi -lines 10 -padding 0 -show search -modi search:~/.config/wofi/web_search.py -i -p "Search: "
 
 # movement keys
@@ -112,9 +112,6 @@ bindsym $mod+Shift+$right move right
 bindsym $mod+n move workspace to output up
 bindsym $mod+m move workspace to output left
 
-bindsym $mod+tab workspace back_and_forth
-
-
 #
 # Workspaces:
 #
@@ -165,7 +162,14 @@ bindsym $mod+shift+f fullscreen
 bindsym $mod+Shift+space floating toggle
 
 # Swap focus between the tiling area and the floating area
-bindsym $mod+space focus mode_toggle
+bindsym $mod+space exec env RUST_BACKTRACE=1 \
+    $HOME/.local/share/cargo/bin/swayr switch-window >> /tmp/swayr.log 2>&1
+
+bindsym $mod+Tab exec env RUST_BACKTRACE=1 \
+    $HOME/.local/share/cargo/bin/swayr switch-to-urgent-or-lru-window >> /tmp/swayr.log 2>&1
+
+bindsym $mod+t exec env RUST_BACKTRACE=1 \
+    $HOME/.local/share/cargo/bin/swayr shuffle-tile-workspace exclude-floating >> /tmp/swayr.log 2>&1
 
 # focus parent
 bindsym $mod+a focus parent

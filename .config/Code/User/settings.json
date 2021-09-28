@@ -80,5 +80,6 @@
         "*.ipynb": "jupyter.notebook.ipynb",
         "*.docx": "default"
     },
-    "mesonbuild.configureOnOpen": true
+    "mesonbuild.configureOnOpen": true,
+    "javascript.updateImportsOnFileMove.enabled": "always"
 }
