@@ -72,7 +72,7 @@
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
     "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
     "markdown-preview-enhanced.mathRenderingOption": "None",
-    "workbench.colorTheme": "Wal Bordered",
+    "workbench.colorTheme": "Gruvbox Dark Soft",
     "ccls.codeLens.localVariables": true,
     "ccls.codeLens.renderInline": true,
     "ccls.codeLens.enabled": false,

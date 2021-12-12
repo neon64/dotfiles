@@ -15,6 +15,17 @@ else
     set -x EDITOR (which nvim)
 end
 
+if [ -z "$WSL_DISTRO_NAME" ]
+    # do nothing
+else
+    # set env vars
+    set -x WSLENV "WT_SESSION::WT_PROFILE_ID"
+    set -x DISPLAY ":0"
+    set -x XDG_RUNTIME_DIR "/mnt/wslg/runtime-dir"
+    set -x WAYLAND_DISPLAY "wayland-0"
+    set -x PULSE_SERVER "/mnt/wslg/PulseServer"
+end
+
 set -x NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
 set -x CARGO_HOME "$XDG_DATA_HOME"/cargo
 set -x RUSTUP_HOME "$XDG_DATA_HOME"/rustup
@@ -29,7 +40,13 @@ set -x BUNDLE_USER_CONFIG "$XDG_CONFIG_HOME"/bundle
 set -x BUNDLE_USER_CACHE "$XDG_CACHE_HOME"/bundle
 set -x BUNDLE_USER_PLUGIN "$XDG_DATA_HOME"/bundle
 set -x LIBVIRT_DEFAULT_URI "qemu:///system"
-set -x BROWSER "firefox"
+
+if string match -rq '(m|M)icrosoft' (uname -r)
+    set -x BROWSER "wsl-open"
+else
+    set -x BROWSER "firefox"
+end
+
 set -x EMACSDIR "$XDG_CONFIG_HOME/emacs"
 set -x DOOMDIR "$XDG_CONFIG_HOME/doom"
 set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"

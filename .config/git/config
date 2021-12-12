@@ -2,8 +2,8 @@
 	email = chris@chamberlain.id.au
 	name = Chris Chamberlain
 [include]
-	# includes special platform specific configuration items (eg: credential helper)
-	path = ./config-platform-specific
+# includes special platform specific configuration items (eg: credential helper)
+path = ./config-platform-specific
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =

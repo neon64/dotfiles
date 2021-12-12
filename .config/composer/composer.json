@@ -1,6 +1,6 @@
 {
     "require": {
         "franzl/studio": "^0.15.0",
-        "deployer/deployer": "dev-master"
+        "deployer/deployer": "v7.0.0-rc.3"
     }
 }

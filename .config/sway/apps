@@ -36,6 +36,7 @@ for_window [app_id="wdisplays"] floating enable
 for_window [app_id="org.gnome.NautilusPreviewer"] floating enable
 for_window [title="Firefox — Sharing Indicator"] floating enable
 
+for_window [class="anytype2"] border none
 # for_window [app_id="re.sonny.Tangram"] border none
 # for_window [class="Ferdi"] border none
 for_window [app_id="syncthing-gtk"] floating enable
