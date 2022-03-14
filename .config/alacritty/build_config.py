@@ -19,3 +19,5 @@ for file in files:
     dest.close()
 
 colors.close()
+
+print("Build alacritty config")
