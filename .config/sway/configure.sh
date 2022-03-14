@@ -21,6 +21,6 @@ else
 fi
 
 # start mapping tap capslock to escape, and other fancy things
-# if ! pgrep "evscript"; then
-    # evscript -f ~/.config/bin/evscript_map.dyon -d /dev/input/event5
-# fi
+if ! pgrep "evscript"; then
+    evscript -f ~/.config/bin/evscript_map.dyon -d /dev/input/event5
+fi

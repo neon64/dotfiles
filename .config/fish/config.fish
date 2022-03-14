@@ -50,9 +50,15 @@ end
 
 set -x EMACSDIR "$XDG_CONFIG_HOME/emacs"
 set -x DOOMDIR "$XDG_CONFIG_HOME/doom"
-set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"
+if type -q fd
+    set -x FZF_DEFAULT_COMMAND "fd --hidden --exclude '**/.git/'"
+    set -x FZF_CTRL_T_COMMAND "fd --exclude '**/.git/'"
+else if type -q fdfind
+    # support Debian
+    set -x FZF_DEFAULT_COMMAND "fdfind --hidden --exclude '**/.git/'"
+    set -x FZF_CTRL_T_COMMAND "fdfind --exclude '**/.git/'"
+end
 set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head -n 100'"
-set -x FZF_CTRL_T_COMMAND "fd --exclude '**/.git/'"
 set -x FZF_ALT_C_COMMAND "fasd -d -R"
 set -x FZF_ALT_C_OPTS "--no-sort"
 

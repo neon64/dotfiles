@@ -1,24 +1,24 @@
 #!/bin/bash
 
+dir="$(dirname $0)"
 # load the platform-independent definitions & functions
-source "${dirname $0}/install_dotfiles/definitions"
+. "$dir/install_dotfiles/definitions"
 # load the platform-independent installation steps
-source "${dirname $0}/install_dotfiles/user"
+. "$dir/install_dotfiles/user"
 
 case $OS in
         'Linux')
             distro=$(uname -r)
             case "$distro" in
                 *ARCH* | *arch* | '4.4.0-18362-Microsoft')
-                    source "${dirname $0}/install_dotfiles/arch"
+                    source "$dir/install_dotfiles/arch"
                     ;;
                 *)
-                    warn "Unsupported Linux Distro: $distro"
-                    exit 1
+                    warn "Unsupported linux distro: $distro. Not installing any packages"
             esac
             ;;
         'Darwin')
-            source "${dirname $0}/install_dotfiles/macos"
+            source "$dir/install_dotfiles/macos"
             ;;
         *)
             warn "Unsupported OS Kernel: $OS"

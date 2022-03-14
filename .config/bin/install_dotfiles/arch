@@ -8,7 +8,7 @@ base_shell_pkgs=(
     exa # file listing in Rust
     ttf-nerd-fonts-symbols # fonts for exa
     bat # cat clone with extras (also just happens to be written in Rust)
-    git-delta-git # diffing
+    git-delta # diffing
     git # version control
     fzf # fuzzy file finder
     fd # nice alternative to `find`, written in Rust, and used in our fzf config
@@ -24,21 +24,19 @@ wm_pkgs=(
     rofi # app launcher
     slurp # select area to screenshot
     mako # notification daemon
-    swayshot # screenshot wrapper
     ttf-input # chosen UI font for sway and waybar
     ttf-line-awesome # chosen icon font for waybar - open-source version of FontAwesome with thinner icons
-    swaylock-blur-git # cool util which blurs background for swaylock
     brillo # provides an `xbacklight` replacement for wayland, used in sway config
     alsa-utils # provides an `amixer` command used for volume control
     evscript-git # map caps lock to escape on tap + more
     wl-clipboard # clipboard tools
     libinput-gestures # swipe actions for trackpads
-    wdisplays-git # configure displays
-    adwaita-qt # nice theme
+    wdisplays # configure displays
     wob # wayland overlay bar - for volume and brightness control
     playerctl # control music
     nautilus-open-any-terminal # open in terminal - bound to Ctrl+E
     kanshi # output management
+    pywal-git # colour schemes
 )
 
 # installs packages required for emacs
@@ -166,26 +164,16 @@ mail_pkgs=(
 function install_group {
     name=$1
     shift
-    confirm " - \`$name\`?" && yay -S --needed "$@"
+    confirm " - \`$name\`?" && paru -S --needed "$@"
 }
 
 function setuid_evscript {
     sudo chmod u+s /usr/bin/evscript
 }
 
-function configure_rustup {
-    rustup install stable
-    rustup install nightly && rustup default nightly
-    if ls "$HOME/.cargo/bin" | grep -q "cargo-add"; then
-        echo "'cargo-add' already installed"
-    else
-        cargo install cargo-add
-    fi
-}
-
 function install_pkgs {
     install_group base_shell_pkgs "${base_shell_pkgs[@]}"
-    install_group rust_pkgs ${rust_pkgs[@]} && configure_rustup
+    install_group rust_pkgs ${rust_pkgs[@]}
     install_group wm_pkgs ${wm_pkgs[@]}
     install_group extra_shell_pkgs ${extra_shell_pkgs[@]}
     install_group emacs_pkgs ${emacs_pkgs[@]}
@@ -205,19 +193,20 @@ function install_pkgs {
 }
 
 function install_system {
-    if pacman -Q | grep -q 'yay'; then
-        warn "\`yay\` already installed, using it to install everything else"
+    if pacman -Q | grep -q 'paru'; then
+        warn "\`paru\` already installed, using it to install everything else"
     else
-        header "Installing \`yay-bin\`"
+        header "Installing \`paru\`"
         # first we want install an AUR helper, so we can install more packages more easily
         mkdir -p $PKG_BUILD_DIR
         cd $PKG_BUILD_DIR
 
-        git clone https://aur.archlinux.org/yay-bin.git
-        cd yay-bin
-        makepkg -fsri
+        sudo pacman -S --needed base-devel
+        git clone https://aur.archlinux.org/paru.git
+        cd paru
+        makepkg -si
 
-        header "Using \`yay\` to install everything else"
+        header "Using \`paru\` to install everything else"
     fi
 
     cd ~

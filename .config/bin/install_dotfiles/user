@@ -8,20 +8,12 @@ function link_code_configs {
     ln -s ~/.config/Code ~/.config/Code\ -\ OSS
 }
 
-function install_vim_plugins {
-    # install `vim-plug`
-    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-    nvim +PlugInstall +qall && header "Done"
-}
-
 function install_fish_plugins {
-    header "Installing fisherman"
+    header "Installing fisher"
     curl -Lo ~/.config/fish/functions/fisher.fish --create-dirs https://git.io/fisher
 
-    header "Using fisherman to install plugins"
-    fish -c "fisher"
+    header "Using fisher to install plugins"
+    fish -c 'fisher update'
 
     header "Done"
 }
@@ -56,8 +48,7 @@ function set_fish_as_default_shell {
 }
 
 function install_user {
-    confirm "Install vim plugins using \`vim-plug\`?" && install_vim_plugins
-    confirm "Install fish plugins using \`fisherman\`?" && install_fish_plugins
+    confirm "Install fish plugins using \`fisher\`?" && install_fish_plugins
     confirm "Choose a color scheme?" && set_color_schemes
     confirm "Symlink platform-specific dotfiles?" && symlink_platform_specific
     confirm "Symlink 'Code - OSS' config to normal VS Code config?" && link_code_configs
