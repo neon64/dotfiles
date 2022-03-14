@@ -21,7 +21,7 @@ exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 # we restart kanshi on reload to ensure output configuration is reapplied
 exec_always "pkill kanshi; kanshi"
 
-exec env RUST_BACKTRACE=1 $HOME/.local/share/cargo/bin/swayrd > /tmp/swayrd.log 2>&1
+# exec env RUST_BACKTRACE=1 $HOME/.local/share/cargo/bin/swayrd > /tmp/swayrd.log 2>&1
 
 # exec_always "pkill wlsunset; wlsunset -l 37.8 -L 145.0"
 

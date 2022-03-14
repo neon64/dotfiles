@@ -72,7 +72,6 @@
     "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
     "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
     "markdown-preview-enhanced.mathRenderingOption": "None",
-    "workbench.colorTheme": "Gruvbox Dark Soft",
     "ccls.codeLens.localVariables": true,
     "ccls.codeLens.renderInline": true,
     "ccls.codeLens.enabled": false,
@@ -81,5 +80,8 @@
         "*.docx": "default"
     },
     "mesonbuild.configureOnOpen": true,
-    "javascript.updateImportsOnFileMove.enabled": "always"
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "workbench.colorTheme": "Ocean Dark Extended",
+    "haskell.serverExecutablePath": "/usr/bin/haskell-language-server-8.8.4",
+    "shellcheck.enable": false
 }

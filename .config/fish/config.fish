@@ -8,6 +8,7 @@ source $HOME/.cache/wal/colors.fish
 set -x XDG_CONFIG_HOME "$HOME/.config"
 set -x XDG_DATA_HOME "$HOME/.local/share"
 set -x XDG_CACHE_HOME "$HOME/.cache"
+set -x GHCUP_USE_XDG_DIRS 1
 
 if [ "$TERM_PROGRAM" = "vscode" ]
     set -x EDITOR "code -w"

@@ -127,9 +127,6 @@ bell:
   animation: Linear #EaseOutExpo
   duration: 200
 
-# Background opacity
-background_opacity: 1
-
 # Mouse bindings
 #
 # Currently doesn't support modifiers. Both the `mouse` and `action` fields must

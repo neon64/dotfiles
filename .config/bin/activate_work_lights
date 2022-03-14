@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+
+import asyncio
+from os import popen
+from homeassistant_api import Client
+import toml
+from xdg import BaseDirectory
+
+cfg = toml.load(next(BaseDirectory.load_config_paths('')) + "activate_work_lights.toml")
+
+ssid = popen('iw wlan0 info | grep ssid').read().replace('ssid', '').strip()
+print("Current WiFi SSID: " + ssid)
+if ssid != cfg["home_ssid"]:
+    print("Not at home")
+    exit(0)
+
+# secret = popen('secret-tool lookup application home-assistant-python-api').read()
+# print("Loaded long-lived HomeAssistant key:", secret)
+
+async def main():
+    client = Client(
+      cfg["api_endpoint"],
+      cfg["api_secret"]
+    )
+    scene = client.get_domain("scene")
+    print("Activating scene")
+    scene.turn_on(entity_id=cfg["activate_scene"])
+    print("Activated")
+
+asyncio.run(main())
+
+
