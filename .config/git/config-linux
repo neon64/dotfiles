@@ -1,0 +1,4 @@
+[credential]
+helper = /usr/lib/git-core/git-credential-libsecret
+# Old method 
+# helper = /usr/bin/git-credential-gnome-keyring
