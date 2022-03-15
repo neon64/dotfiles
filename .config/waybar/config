@@ -51,7 +51,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "custom/player", "sway/mode",],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "network", "custom/bluetooth", "cpu", "battery", "clock", "sway/language", "tray", "idle_inhibitor", "custom/power"],
+    "modules-right": ["pulseaudio", "network", "custom/bluetooth", "cpu", "battery", "clock", "sway/language", "tray", "idle_inhibitor", "custom/night_mode", "custom/power"],
     "output": ["eDP-1", "DP-2", "HDMI-A-1"],
     "sway/workspaces": {
         "disable-scroll": false,
@@ -188,6 +188,15 @@
             "activated": "",
             "deactivated": ""
         }
+    },
+    "custom/night_mode": {
+        "return-type": "json",
+        "format": "<span font='11'>{}</span>",
+        "on-click": "$HOME/.config/waybar/toggle_night_mode.sh",
+        "exec-on-event": false,
+        "signal": 9,
+        "interval": 300,
+        "exec": "$HOME/.config/waybar/night_mode.sh"
     },
     "custom/bluetooth": {
         "format": " {}",

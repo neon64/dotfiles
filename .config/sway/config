@@ -23,8 +23,6 @@ exec_always "pkill kanshi; kanshi"
 
 # exec env RUST_BACKTRACE=1 $HOME/.local/share/cargo/bin/swayrd > /tmp/swayrd.log 2>&1
 
-# exec_always "pkill wlsunset; wlsunset -l 37.8 -L 145.0"
-
 # fade windows in and out
 # exec ~/.config/sway/fader.py
 
@@ -40,9 +38,10 @@ include apps
 # includes, amongst other things, a fix for DISPLAY and WAYLAND_DISPLAY env-vars on Arch Linux
 include /etc/sway/config.d/*
 
-bar {
-    swaybar_command waybar
-}
+exec_always pgrep waybar || waybar
+#bar {
+#    swaybar_command waybar
+#}
 
 focus_on_window_activation urgent
 focus_wrapping yes

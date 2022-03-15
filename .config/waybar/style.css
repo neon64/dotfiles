@@ -47,7 +47,7 @@ window#waybar {
     /* border-top: 3px solid @color7; */
 }
 
-#battery, #cpu, #memory, #network, #pulseaudio, #custom-player, #mpd, #tray, #mode, #idle_inhibitor, #backlight, #bluetooth, #custom-bluetooth, #custom-power {
+#battery, #cpu, #memory, #network, #pulseaudio, #custom-player, #mpd, #tray, #mode, #idle_inhibitor, #backlight, #bluetooth, #custom-bluetooth, #custom-power, #custom-night_mode {
     padding: 0 10px;
     margin: 0 4px;
     transition: border-top-color 1s ease;
@@ -163,14 +163,15 @@ window#waybar {
     /* border-top: 3px solid @base0B; */
 }
 
-#idle_inhibitor {
+#idle_inhibitor, #custom-night_mode {
     /* border-top: 3px solid @color2; */
     margin-right: 0;
     margin-left: 0;
     padding: 0 4px;
 }
 
-#idle_inhibitor.activated {
+#idle_inhibitor.activated,
+#custom-night_mode.activated {
     background: rgba(100, 114, 125, 0.4);
 }
 
