@@ -14,15 +14,13 @@ function header {
 
 function section {
     echo ""
-    echo ""
-    echo ""
     padding="$(printf '%0.1s' -{1..500})"
     printf "%*.*s ${BOLD}%s${RESET_FMT} %*.*s\n" 0 "$(((termwidth-2-${#1})/2))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding"
     echo ""
 }
 
 function warn {
-	echo -e "${BOLD}   -> ${YELLOW}Warning: $1${RESET_FMT}"
+	echo -e "${BOLD}   -> ${YELLOW}$1${RESET_FMT}"
 }
 
 function confirm {
@@ -44,49 +42,56 @@ function center() {
 }
 
 function entry_point() {
-    clear
     echo ""
-    center "Welcome to my dotfiles installation wizard!"
+    center "NEON64's DOTFILES"
     echo ""
     echo -e "If anything goes wrong, you usually should be safe to rerun\nthis command and it will try everything again.\nBut also note this isn't designed to cover every single edge case,\nso please don't run this unless you have read through the script\nand understand what you're doing. Good luck!"
 
-    section "STEP ONE: CHECK USER"
-    echo -e "These dotfiles work best when installed as a normal, non-root user.\nSo we'll do a quick check to make sure the current user isn't root"
+
+    section "PRE-INSTALLATION CHECKS"
+    echo -e "These dotfiles work best when installed as a normal, non-root user.\nSo we'll do a quick check to make sure the current user isn't root,\nas well as a few other sanity checks."
     echo ""
 
     if [ `whoami` = "root" ]; then
         header "You are currently logged in as 'root'. Aborting."
         exit 1
     else
-        header "You are currently logged in as '`whoami`'. Dotfiles will be installed for this user."
+        header "Dotfiles will be installed for user '`whoami`'."
         username=`whoami`
     fi
-
-    section "STEP TWO: INSTALL DOTFILES REPO"
-
-    echo -e "Here we perform the bare minimum work to get the dotfiles repo onto this machine.\nIf you have already installed all the applications/tools which these dotfiles\nfunction with, or prefer to have a more manual install, then after running\nstep two you can exit the script and install apps & perform misc setup yourself."
-    echo ""
 
     other_homedir=$( getent passwd "$username" | cut -d: -f6 )
     if [ "$other_homedir" = "" ]; then
         warn "The home directory for this user shouldn't be empty. Perhaps the user doesn't exist?"
         exit 1
     fi
-
-    header "Performing pre-installation checks"
+    header "Checked home-dir exists"
 
     ping -q -w 1 -c 1 "github.com" > /dev/null
     if [ $? -ne 0 ]; then
         warn "no internet connection - installation will fail"
+        exit 1
     fi
+    header "Checked connection to github.com"
 
-    if ! which mgit > /dev/null; then
+    if ! which git > /dev/null; then
         warn "git not found - installation will fail"
+        exit 1
     fi
+    header "Checked git is installed"
 
-    header "Installing dotfiles for user '$username'
+    echo ""
+    confirm "Would you like to install the dotfiles" || exit 1
+    echo ""
 
-    step_three=$(section "STEP THREE: RUN ACTUAL INSTALL SCRIPT")
+    section "INSTALL DOTFILES"
+
+    echo -e "Here we perform the bare minimum work to get the dotfiles repo onto this machine.\nIf you have already installed all the applications/tools which these dotfiles\nfunction with, or prefer to have a more manual install, then after running\nstep two you can exit the script and install apps & perform misc setup yourself."
+    echo ""
+
+    header "Installing dotfiles for user '$username'"
+
+    step_three=$(section "STEP THREE: RUN SETUP SCRIPT")
     step_four=$(section "STEP FOUR - PROFIT")
 
     read -d '' commands <<EOF
@@ -104,10 +109,10 @@ echo -e "\${BOLD}   -> \${RESET_FMT}Now running as '\`whoami\`'\${RESET_FMT}"
 cd ~
 echo -e "\${BOLD}   -> \${RESET_FMT}Now at '\`pwd\`'\${RESET_FMT}"
 echo -e "\${BOLD}====> \${BLUE}Creating 'dotf' alias\${RESET_FMT}"
-alias dotf='/usr/bin/git --git-dir="\$install_location" --work-tree=\$HOME' && echo "Done"
+alias dotf='/usr/bin/git --git-dir="\$install_location" --work-tree=\$HOME' && echo -e "\${BOLD}   ->\${RESET_FMT} Done"
 echo -e "$\{BOLD}====> \${BLUE}Adding \$install_location to '.gitignore'\${RESET_FMT}"
 if cat ~/.gitignore | grep -qi "\$install_location"; then
-   echo "Already in .gitignore"
+   echo -e "\${BOLD}   ->\${RESET_FMT} Already in .gitignore"
 else
    echo "\$install_location" >> ~/.gitignore
 fi
@@ -115,24 +120,17 @@ echo -e "\${BOLD}====> \${BLUE}Cloning dotfiles repository...\${RESET_FMT}"
 git clone --bare --branch master "\$dotfiles_url" "\$install_location"
 status=\$?
 if [ \$status -ne 0 ]; then
-    echo -e "\${BOLD}   -> \${YELLOW}Warning: clone of repository failed with exit code \$status\${RESET_FMT}"
+    echo -e "\${BOLD}   -> \${YELLOW}clone of repository failed with exit code \$status\${RESET_FMT}"
 fi
 echo -e "\${BOLD}====> \${BLUE}Attempting to checkout dotfiles repository \${RESET_FMT}"
 dotf checkout master && dotf submodule update --init --recursive
 if dotf diff-index --quiet HEAD; then
     echo -e "\${BOLD}====> \${GREEN}Dotfiles repository checked out successfully\${RESET_FMT}"
 else
-    echo -e "\${BOLD}   -> \${RED}Error checking out the dotfiles\${RESET_FMT}"
+    echo -e "\${BOLD}   -> \${YELLOW}error checking out the dotfiles\${RESET_FMT}"
 fi
 
 # run the next installation step
-echo -e "$step_three\\\n"
-echo "Here we call another script, \$setup_script, which is part of the dotfiles proper."
-echo "Using a separate script simplifies the source code of the dotfiles, as we can begin to use more features"
-echo "such as splitting the source code into multiple files and sourcing them when needed."
-echo "If all goes well though you won't notice that its a separate script, and everything"
-echo "will just work seamlessly."
-echo ""
 if [[ -x \$setup_script ]]; then
     \$setup_script </dev/tty
     status=\$?

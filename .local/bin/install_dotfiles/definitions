@@ -31,15 +31,15 @@ function header {
 
 function section {
     echo ""
-    title=$(echo "$3"| tr a-z A-Z)
-    text="PART $1/$2: $title"
+    title=$(echo "$1"| tr a-z A-Z)
+    text="$title"
     padding="$(printf '%0.1s' -{1..500})"
-    printf "%*.*s ${BOLD}${MAGENTA}%s${RESET_FMT} %*.*s\n" 0 "$(((termwidth-2-${#text})/2))" "$padding" "$text" 0 "$(((termwidth-1-${#text})/2))" "$padding"
+    printf "%*.*s ${BOLD}%s${RESET_FMT} %*.*s\n" 0 "$(((termwidth-2-${#text})/2))" "$padding" "$text" 0 "$(((termwidth-1-${#text})/2))" "$padding"
     echo ""
 }
 
 function warn {
-	echo -e "${BOLD}   -> ${YELLOW}Warning: $1${RESET_FMT}"
+	echo -e "${BOLD}   -> ${YELLOW}$1${RESET_FMT}"
 }
 
 function confirm {

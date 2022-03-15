@@ -64,7 +64,7 @@ function install_user {
     confirm "Set \`fish\` as default shell?" && set_fish_as_default_shell
 }
 
-section "1" "2" "system-level configuration"
+section "system-level configuration"
 
 case $OS in
         'Linux')
@@ -87,7 +87,7 @@ case $OS in
             exit 1
 esac
 
-section "2" "2" "user-level configuration:"
+section "user-level configuration"
 
 install_user
 
