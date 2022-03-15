@@ -97,19 +97,12 @@ if type -q nvim
 end
 
 alias up topgrade
-
 alias w "browse_web"
-alias blue "manage_bluetooth"
 alias clock "tty-clock -sSc"
 alias b "browse_files"
 alias gc "git checkout (git branch --all -v | fzf --layout=reverse --height=20 --pointer='' | tr -d '[:space:]')"
 
 alias pac "paru"
-
-function cd -d "Register directory and change to directory"
-  fasd -A $argv
-  builtin cd $argv
-end
 
 ### ========================================
 ###				   COLOURS
@@ -125,10 +118,6 @@ if status --is-interactive
     # if [ ! -z "$GNOME_TERMINAL_SCREEN" ]; or [ "$TERM" = 'xterm-kitty' ]; or [ ! -z "$SSH_TTY" ]
     #     bash ~/.config/colors/theme.sh
     # end
-
-    if test -x /usr/bin/reboot_chooser
-        alias reboot "reboot_chooser"
-    end
 
     starship init fish | source
 end
