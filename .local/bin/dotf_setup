@@ -40,11 +40,11 @@ function symlink_platform_specific {
 }
 
 function set_dotf_ignore_untracked {
-    .config/bin/dotf config --local status.showUntrackedFiles no && header "Done"
+    .local/bin/dotf config --local status.showUntrackedFiles no && header "Done"
 }
 
 function set_color_schemes {
-    ~/.config/bin/theme
+    ~/.local/bin/theme
 }
 
 function set_fish_as_default_shell {
