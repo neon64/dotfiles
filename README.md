@@ -7,16 +7,35 @@ The dotfiles themselves can be found in the [master branch](https://github.com/n
 
 These dotfiles should theoretically work on any UNIX-like system, including macOS and msys2, both of which I use from time to time. However the greatest compatibility will be with [Arch Linux](https://www.archlinux.org/), which is what I use daily.
 
+## Installation
 
-## Getting started
+### Automatic installation
 
-### Install onto a new machine
+    $ curl "https://raw.githubusercontent.com/neon64/dotfiles/master/.local/bin/dotf_install" | bash
 
-To install these dotfiles onto a new machine:
+#### What does the install script do?
 
-    $ alias dotf='/usr/bin/git --git-dir=$HOME/path/to/dotfiles/ --work-tree=$HOME'
-    $ echo "path/to/dotfiles/" >> .gitignore
-    $ git clone --bare --branch master https://github.com/neon64/dotfiles $HOME/path/to/dotfiles
+1. run a `git clone` of the repository and attempts to `git checkout` the dotfiles (*note:* this will fail if you have existing dotfiles on your system)
+2. it does some other miscellaneous stuff like setting up the `dotf` alias, as outlined in the [manual installation guide](https://github.com/neon64/dotfiles/blob/master/.config/README.md#manual-installation)
+3. it tries to run `~/.local/bin/dotf_setup`, which performs some further setup.
+    - On arch & macOS it will try and install some packages for you.
+    - Updates are now handled through `topgrade`.
+    - Installs fisher & fish plugins
+    - Links "platform specific" dotfiles
+    - Sets up `dotf` to ignore untracked files
+    - Sets `fish` as the default shell
+4. at the end, you should be able to log back in as that user and have everything working (fish shell, sway, terminal utils etc...)
+
+### Manual installation
+
+To install these dotfiles manually, only a couple of commands are needed:
+
+    $ alias dotf='/usr/bin/git --git-dir=$HOME/.local/share/dotfiles/ --work-tree=$HOME'
+    $ echo ".local/share/dotfiles/" >> .gitignore
+    $ git clone --bare --branch master https://github.com/neon64/dotfiles $HOME/.local/share/dotfiles
+
+Then attempt to checkout the configuration files into your home directory:
+
     $ dotf checkout
 
 You will most likely have to decide what to do with the existing dotfiles on your system.
@@ -24,19 +43,19 @@ You will most likely have to decide what to do with the existing dotfiles on you
 If `fish` isn't already installed, you'll need to install it now using an
 appropriate package manager and also eventually set it as the default shell.
 
-Also update the git repo location used by the script `~/.config/bin/dotf` to point
-to wherever you stored the bare dotfiles repository (default is
-`~/.local/share/dotfiles`)
+Also update the git repo location used by the script `~/.local/bin/dotf` to point
+to wherever you stored the bare dotfiles repository (by default we use `~/.local/share/dotfiles`)
 
 Also run the following to ensure untracked files (i.e.: the rest of your home directory) don't show up when running `dotf` commands.
 
     $ dotf config --local status.showUntrackedFiles no
 
-### Install dependencies and configure the system
+### Aside: the problem with installer scripts
 
-See the [install scripts README](https://github.com/neon64/dotfiles/tree/master/.config/bin/install_dotfiles) for more advice on what to do next, as well as some scripts you may  be able to run.
+Inevitably, things change as people fine-tune their system. Thus, the contents of these install scripts may not reflect what I actually run on my system on a day-to-day basis. Perhaps the only way of permanently fixing this would be to switch to a distribution like NixOS which is entirely configured by configuration files in a stateless manner.
 
-## Editing the dotfiles
+Alas, Arch is more convenient in the short-term, so I think these install scripts will always remain, albeit somewhat half-baked.
+### How to edit these dotfiles?
 
 The brilliant benefit of just using plain `git` to manage dotfiles (as detailed [here](https://developer.atlassian.com/blog/2016/02/best-way-to-store-dotfiles-git-bare-repo/)), is that making changes is easy.
 
@@ -56,7 +75,7 @@ To commit changes:
 
 In conclusion: it's exactly like normal Git, just with `git` replaced with the script `dotf` (which is just a wrapper for git internally)
 
-## About the dotfiles
+## About these dotfiles
 
 ### Included software
 
@@ -94,14 +113,13 @@ I've found that over time it is easier to write my own shell scripts to do thing
  - [browse_files](https://github.com/neon64/dotfiles/blob/master/.config/bin/browse_files): open a graphical file browser, aliased to `b`
  - [browse_web](https://github.com/neon64/dotfiles/blob/master/.config/bin/browse_web): open a URL or search Google
  - [dotf](https://github.com/neon64/dotfiles/blob/master/.config/bin/dotf): manage these dotfiles with git
- - [check_dotf.fish](https://github.com/neon64/dotfiles/blob/master/.config/fish/functions/check_dotf.fish): a Fish function to check dotfiles are up to date
- - [fdm](https://github.com/neon64/dotfiles/blob/master/.config/bin/fdm) - FZF display manager - launch different desktop environments from the command-line (sway, gnome, plasma, i3, etc...) - (currently unused - see [greetd](https://sr.ht/~kennylevinsen/greetd/) instead)
  - [kbd](https://github.com/neon64/dotfiles/blob/master/.config/bin/kbd): activate us-intl keyboard in sway
  - [launch_util](https://github.com/neon64/dotfiles/blob/master/.config/bin/launch_util): command-line app launcher with fzf (currently unused)
  - [package_sizes](https://github.com/neon64/dotfiles/blob/master/.config/bin/package_sizes): list packages sorted by size
  - [package_orphans](https://github.com/neon64/dotfiles/blob/master/.config/bin/package_orphans): list orphaned packages
  - [switch_res](https://github.com/neon64/dotfiles/blob/master/.config/bin/switch_res): switches resolutions on Sway, aliased to `sr`
  - [theme](https://github.com/neon64/dotfiles/blob/master/.config/bin/theme): changes themes
+ - [wpaper](https://github.com/neon64/dotfiles/blob/master/.config/bin/wpaper): change wallpapers for sway and generates a new lockscreen image
 
 ### Machine-specific configuration
 
