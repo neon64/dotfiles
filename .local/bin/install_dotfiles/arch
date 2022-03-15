@@ -192,7 +192,7 @@ function install_pkgs {
     header "Installed all requested packages!"
 }
 
-function install_system {
+function install_arch {
     if pacman -Q | grep -q 'paru'; then
         warn "\`paru\` already installed, using it to install everything else"
     else

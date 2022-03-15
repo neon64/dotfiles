@@ -1,5 +1,9 @@
 #!/bin/bash
 
+dir="$(dirname $0)"
+# load the platform-independent definitions & functions
+. "$dir/install_dotfiles/definitions"
+
 function link_code_configs {
     if [[ -d ~/.config/Code\ -\ OSS/ ]]; then
         echo "Already exists, trashing old config"
@@ -44,6 +48,10 @@ function set_color_schemes {
 }
 
 function set_fish_as_default_shell {
+    if ! which fish > /dev/null; then
+        warn "fish not found. aborting"
+        exit 1
+    fi
     chsh -s $(which fish)
 }
 
@@ -55,3 +63,40 @@ function install_user {
     confirm "Set \`dotf\` to ignore untracked files?" && set_dotf_ignore_untracked
     confirm "Set \`fish\` as default shell?" && set_fish_as_default_shell
 }
+
+section "1" "2" "system-level configuration"
+
+case $OS in
+        'Linux')
+            distro=$(uname -r)
+            case "$distro" in
+                *ARCH* | *arch* )
+                    source "$dir/install_dotfiles/arch"
+                    install_arch
+                    ;;
+                *)
+                    warn "Unsupported linux distro: $distro. Not installing any packages"
+            esac
+            ;;
+        'Darwin')
+            source "$dir/install_dotfiles/macos"
+            install_mac
+            ;;
+        *)
+            warn "Unsupported OS Kernel: $OS"
+            exit 1
+esac
+
+section "2" "2" "user-level configuration:"
+
+install_user
+
+echo ""
+
+if $FRESH_INSTALL; then
+    header "Congratulations, installation completed!"
+else
+    header "System updated successfully"
+fi
+
+exit 0

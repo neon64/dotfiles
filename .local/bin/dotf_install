@@ -38,26 +38,6 @@ function confirm {
     done
 }
 
-function create_account {
-    read -p "Enter a username: " username </dev/tty
-
-    # wheel is needed for `sudo` access,
-    # input is needed for libinput-gestures
-    # video is needed for ???
-    useradd -m -G wheel,video,input $username
-    passwd $username </dev/tty
-    header "Account created and password set..."
-
-    # anyone in `%wheel` can use `sudo`
-    header "Enabling \`sudo\` for anybody in %wheel"
-    sed -i "s/# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/" /etc/sudoers
-    echo ""
-}
-
-function existing_account {
-    read -p "Then enter the username of your existing user account: " username </dev/tty
-}
-
 function center() {
     padding="$(printf '%0.1s' ={1..500})"
     printf "%*.*s ${GREEN}%s${RESET_FMT} %*.*s\n" 0 "$(((termwidth-2-${#1})/2))" "$padding" "$1" 0 "$(((termwidth-1-${#1})/2))" "$padding"
@@ -71,12 +51,12 @@ function entry_point() {
     echo -e "If anything goes wrong, you usually should be safe to rerun\nthis command and it will try everything again.\nBut also note this isn't designed to cover every single edge case,\nso please don't run this unless you have read through the script\nand understand what you're doing. Good luck!"
 
     section "STEP ONE: CHECK USER"
-    echo -e "These dotfiles work best when installed as a normal, non-root user.\nSo we'll do a quick check to make sure the current user isn't root,\nand if we are root we can create a new user and run the rest of the\nscript as that user."
+    echo -e "These dotfiles work best when installed as a normal, non-root user.\nSo we'll do a quick check to make sure the current user isn't root"
     echo ""
 
     if [ `whoami` = "root" ]; then
-        header "You are currently logged in as 'root'"
-        confirm "Would you like to create a new user account?" && create_account || existing_account
+        header "You are currently logged in as 'root'. Aborting."
+        exit 1
     else
         header "You are currently logged in as '`whoami`'. Dotfiles will be installed for this user."
         username=`whoami`
@@ -87,17 +67,11 @@ function entry_point() {
     echo -e "Here we perform the bare minimum work to get the dotfiles repo onto this machine.\nIf you have already installed all the applications/tools which these dotfiles\nfunction with, or prefer to have a more manual install, then after running\nstep two you can exit the script and install apps & perform misc setup yourself."
     echo ""
 
-    # `-e` allows the default value to actually work
-    read -e -i "~/code/dotfiles" -p "$(echo -e ${GREEN}Where should the dotfiles repository be installed? ${RESET_FMT})" rel_install_location </dev/tty
-
-    echo ""
-
     other_homedir=$( getent passwd "$username" | cut -d: -f6 )
     if [ "$other_homedir" = "" ]; then
         warn "The home directory for this user shouldn't be empty. Perhaps the user doesn't exist?"
         exit 1
     fi
-    install_location="${rel_install_location/#\~/$other_homedir}"
 
     header "Performing pre-installation checks"
 
@@ -106,10 +80,11 @@ function entry_point() {
         warn "no internet connection - installation will fail"
     fi
 
-    header "Ensuring \`base-devel\` and \`git\` are installed"
-    sudo pacman -S --needed --noconfirm base-devel git
+    if ! which mgit > /dev/null; then
+        warn "git not found - installation will fail"
+    fi
 
-    header "Installing dotfiles for user '$username' in \`$install_location\`"
+    header "Installing dotfiles for user '$username'
 
     step_three=$(section "STEP THREE: RUN ACTUAL INSTALL SCRIPT")
     step_four=$(section "STEP FOUR - PROFIT")
@@ -121,9 +96,10 @@ YELLOW="\\\e[33m"
 GREEN="\\\e[32m"
 BOLD="\\\e[1m"
 RESET_FMT="\\\e[0m"
+install_location=".local/share/dotfiles"
+setup_script=".local/bin/dotf_setup"
+dotfiles_url="https://github.com/neon64/dotfiles"
 shopt -s expand_aliases
-rel_install_location="$rel_install_location"
-install_location="$install_location"
 echo -e "\${BOLD}   -> \${RESET_FMT}Now running as '\`whoami\`'\${RESET_FMT}"
 cd ~
 echo -e "\${BOLD}   -> \${RESET_FMT}Now at '\`pwd\`'\${RESET_FMT}"
@@ -136,33 +112,29 @@ else
    echo "\$install_location" >> ~/.gitignore
 fi
 echo -e "\${BOLD}====> \${BLUE}Cloning dotfiles repository...\${RESET_FMT}"
-git clone --bare "https://github.com/neon64/dotfiles" "\$install_location"
+git clone --bare --branch master "\$dotfiles_url" "\$install_location"
 status=\$?
 if [ \$status -ne 0 ]; then
     echo -e "\${BOLD}   -> \${YELLOW}Warning: clone of repository failed with exit code \$status\${RESET_FMT}"
 fi
 echo -e "\${BOLD}====> \${BLUE}Attempting to checkout dotfiles repository \${RESET_FMT}"
-dotf checkout && dotf submodule update --init --recursive
+dotf checkout master && dotf submodule update --init --recursive
 if dotf diff-index --quiet HEAD; then
     echo -e "\${BOLD}====> \${GREEN}Dotfiles repository checked out successfully\${RESET_FMT}"
 else
     echo -e "\${BOLD}   -> \${RED}Error checking out the dotfiles\${RESET_FMT}"
 fi
 
-tilde_install_location="${rel_install_location/#\~/}"
-echo -e "\${BOLD}====> \${BLUE}Updating dotfiles location inside '~/.config/bin/dotf' to '~\$tilde_install_location'\${RESET_FMT}"
-sed -i "s#/Code/dotfiles#\$tilde_install_location#" ~/.config/bin/dotf
-
 # run the next installation step
 echo -e "$step_three\\\n"
-echo "Here we call another script, '~/.config/bin/install_dotf', which is part of the dotfiles proper."
+echo "Here we call another script, \$setup_script, which is part of the dotfiles proper."
 echo "Using a separate script simplifies the source code of the dotfiles, as we can begin to use more features"
 echo "such as splitting the source code into multiple files and sourcing them when needed."
 echo "If all goes well though you won't notice that its a separate script, and everything"
 echo "will just work seamlessly."
 echo ""
-if [[ -x ~/.config/bin/install_dotf ]]; then
-    ~/.config/bin/install_dotf </dev/tty
+if [[ -x \$setup_script ]]; then
+    \$setup_script </dev/tty
     status=\$?
     if [ \$status -ne 0 ]; then
        exit \$status
@@ -171,7 +143,7 @@ if [[ -x ~/.config/bin/install_dotf ]]; then
     echo -e "Awesome, the dotfiles were installed. Try logging back in again for changes to take effect."
     exit 0
 else
-    echo -e "\${BOLD}====> \${RED}Fatal error, install script ~/.config/bin/install_dotf not executable.\${RESET_FMT}"
+    echo -e "\${BOLD}====> \${RED}Fatal error, install script ~/.local/bin/dotf_setup not executable.\${RESET_FMT}"
     echo -e "\${BOLD}   -> \${RESET_FMT}Check that the dotfiles were successfully downloaded and the repository checked out successfully."
     echo -e ""
     echo "Aborting script..."

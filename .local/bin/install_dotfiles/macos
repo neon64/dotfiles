@@ -23,7 +23,7 @@ function install_pkgs {
     install_group base_shell_pkgs "${base_shell_pkgs[@]}"
 }
 
-function install_system {
+function install_mac {
     echo ""
     confirm "Install packages through Homebrew?" && install_pkgs
     echo ""
