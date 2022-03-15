@@ -67,7 +67,7 @@ function entry_point() {
     fi
     header "Checked home-dir exists"
 
-    ping -q -w 1 -c 1 "github.com" > /dev/null
+    curl "https://github.com" > /dev/null
     if [ $? -ne 0 ]; then
         warn "no internet connection - installation will fail"
         exit 1
