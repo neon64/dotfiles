@@ -5,7 +5,7 @@ include input
 exec_always ~/.config/sway/configure.sh
 
 # notification daemon
-exec mako
+exec_always pgrep swaync || swaync
 
 # session restore
 # exec ~/code/sway-session/sway-session restore && ~/code/sway-session/sway-session save-loop 24

@@ -1,7 +1,18 @@
 /* based on colors-waybar.css */
 
 @define-color foreground {foreground};
+@define-color foreground1 #{foreground.lighten(15)};
 @define-color background {background};
+@define-color background00 #{background.darken(15)};
+@define-color background0 #{background.darken(5)};
+@define-color background1 {background};
+@define-color background2 #{background.lighten(5)};
+@define-color background3 #{background.lighten(10)};
+/* @define-color foregroundDark {foreground.darken(15)}
+@define-color backgroundDark {background.lighten(5)}
+@define-color backgroundLight {background.lighten(5)}
+@define-color backgroundLight2 {background.lighten(12)} */
+
 @define-color cursor {cursor};
 
 @define-color color0 {color0};

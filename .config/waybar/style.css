@@ -12,7 +12,7 @@
 window#waybar {
     /* background: rgba(43, 48, 59, 0.5); */
     /* background: #1d1f25; */
-    background: @background; /*rgba(29,31,37, 0.9);*/
+    background: @background0; /*rgba(29,31,37, 0.9);*/
     /* background: linear-gradient(180deg, rgba(20, 20, 20, 0.5), rgba(20, 20, 20, 0.0) 100%); */
     /* background-color: transparent; */
 
@@ -47,7 +47,9 @@ window#waybar {
     /* border-top: 3px solid @color7; */
 }
 
-#battery, #cpu, #memory, #network, #pulseaudio, #custom-player, #mpd, #tray, #mode, #idle_inhibitor, #backlight, #bluetooth, #custom-bluetooth, #custom-power, #custom-night_mode {
+#battery, #cpu, #memory, #network, #pulseaudio, #custom-player, #mpd, #tray, #mode,
+#idle_inhibitor, #backlight, #bluetooth, #custom-bluetooth, #custom-power, #custom-night_mode,
+#custom-notification {
     padding: 0 10px;
     margin: 0 4px;
     transition: border-top-color 1s ease;
@@ -163,7 +165,7 @@ window#waybar {
     /* border-top: 3px solid @base0B; */
 }
 
-#idle_inhibitor, #custom-night_mode {
+#idle_inhibitor, #custom-night_mode, #clock {
     /* border-top: 3px solid @color2; */
     margin-right: 0;
     margin-left: 0;

@@ -1,21 +1,33 @@
 #!/usr/bin/env python
 
 import asyncio
-from os import popen
+from os import getuid
+from time import sleep
+import subprocess
 from homeassistant_api import Client
 import toml
 from xdg import BaseDirectory
+from urllib.parse import urlparse
 
 cfg = toml.load(next(BaseDirectory.load_config_paths('')) + "activate_work_lights.toml")
 
-ssid = popen('iw wlan0 info | grep ssid').read().replace('ssid', '').strip()
+print("Seeing if connected to wifi yet")
+retries = 0
+exitcode = 1
+while exitcode != 0 and retries < 30:
+    host = urlparse(cfg["api_endpoint"]).netloc
+    exitcode, _ = subprocess.getstatusoutput(f"ping -q -w 10 -c 1 {host}")
+    print("Ping returned: ", exitcode)
+    if exitcode != 0:
+        retries += 1
+        sleep(0.5)
+
+exitcode, ssid = subprocess.getstatusoutput('iw wlan0 info | grep ssid')
+ssid = ssid.replace('ssid', '').strip()
 print("Current WiFi SSID: " + ssid)
 if ssid != cfg["home_ssid"]:
     print("Not at home")
     exit(0)
-
-# secret = popen('secret-tool lookup application home-assistant-python-api').read()
-# print("Loaded long-lived HomeAssistant key:", secret)
 
 async def main():
     client = Client(
@@ -24,8 +36,18 @@ async def main():
     )
     scene = client.get_domain("scene")
     print("Activating scene")
-    scene.turn_on(entity_id=cfg["activate_scene"])
+    scene.turn_on(entity_id=cfg["daylight_scene"])
     print("Activated")
+
+    user = getuid()
+    exitcode, output = subprocess.getstatusoutput(f"env DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/{user}/bus dunstify -A 'off,Turn off' -A 'warm,Evening warmth' \"Turned up the lights in your room\"")
+    print("dunstify:", exitcode)
+    response = output.strip()
+    if response == "off":
+        scene.turn_on(entity_id=cfg["off_scene"])
+    elif response == "warm":
+        scene.turn_on(entity_id=cfg["warm_scene"])
+    print("Notification response: ", response)
 
 asyncio.run(main())
 

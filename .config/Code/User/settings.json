@@ -27,7 +27,6 @@
         "<C-w>": false,
         "<C-q>": false
     },
-    "vim.useSystemClipboard": true,
     "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.synctex.synctexjs.enabled": false,
     "editor.rulers": [

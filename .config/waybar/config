@@ -51,7 +51,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "custom/player", "sway/mode",],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "network", "custom/bluetooth", "cpu", "battery", "clock", "sway/language", "tray", "idle_inhibitor", "custom/night_mode", "custom/power"],
+    "modules-right": ["pulseaudio", "network", "custom/bluetooth", "cpu", "battery", "sway/language", "tray", "idle_inhibitor", "custom/night_mode", "custom/power", "clock", "custom/notification"],
     "output": ["eDP-1", "DP-2", "HDMI-A-1"],
     "sway/workspaces": {
         "disable-scroll": false,
@@ -213,5 +213,21 @@
         "format":"",
         "on-click":"~/.config/nwg-launchers/nwgbar/run.sh",
         "tooltip": false
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": " <span foreground='red'></span>",
+            "none": "",
+            "dnd-notification": " <span foreground='red'></span>",
+            "dnd-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     }
 }]

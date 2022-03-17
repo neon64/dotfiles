@@ -44,8 +44,12 @@ bindsym $mod+d exec $window_switcher
 # bindsym $mod+g exec $web_search
 bindsym $mod+s exec swaymsg [app_id="org.gnome.Nautilus"] focus || nautilus
 
-bindsym $mod+shift+s sticky enable; exec notify-send -t 1000 "made sticky"
-bindsym $mod+shift+u sticky disable; exec notify-send -t 1000 "removed sticky"
+bindsym $mod+shift+s sticky toggle; exec notify-send -t 1000 "toggled sticky"
+# bindsym $mod+shift+u sticky disable; exec notify-send -t 1000 "removed sticky"
+
+# Toggle control center
+bindsym $mod+shift+n exec swaync-client -t -sw
+
 # bindsym $mod+d exec alacritty --title "Command Launcher" --config-file ~/.config/alacritty/alacritty_big.yml -e ~/.config/bin/launch_util
 
 # Drag floating windows by holding down $mod and left mouse button. Resize
