@@ -1,6 +1,11 @@
 {
     "require": {
-        "franzl/studio": "^0.15.0",
-        "deployer/deployer": "v7.0.0-rc.3"
+        "deployer/deployer": "v7.0.0-rc.3",
+        "franzl/studio": "^0.15.0"
+    },
+    "config": {
+        "allow-plugins": {
+            "franzl/studio": true
+        }
     }
 }

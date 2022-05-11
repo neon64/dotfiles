@@ -3,7 +3,7 @@
 SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d
-SETUVAR __fish_initialized:3100
+SETUVAR __fish_initialized:3400
 SETUVAR _fisher_decors_2F_fish_2D_colored_2D_man_files:/home/chris/\x2econfig/fish/functions/man\x2efish
 SETUVAR _fisher_decors_2F_fish_2D_colors_files:/home/chris/\x2econfig/fish/functions/colors\x2efish\x1e/home/chris/\x2econfig/fish/completions/colors\x2efish
 SETUVAR _fisher_jorgebucaran_2F_fisher_files:/home/chris/\x2econfig/fish/functions/fisher\x2efish\x1e/home/chris/\x2econfig/fish/completions/fisher\x2efish
@@ -43,4 +43,5 @@ SETUVAR fish_pager_color_completion:normal
 SETUVAR fish_pager_color_description:B3A06D\x1eyellow
 SETUVAR fish_pager_color_prefix:white\x1e\x2d\x2dbold\x1e\x2d\x2dunderline
 SETUVAR fish_pager_color_progress:brwhite\x1e\x2d\x2dbackground\x3dcyan
+SETUVAR fish_pager_color_selected_background:\x2dr
 SETUVAR fish_user_paths:/opt/llvm90/bin\x1e/home/chris/\x2elocal/share/npm/bin\x1e/home/chris/\x2elocal/share/cargo/bin\x1e/home/chris/\x2econfig/bin\x1e/home/chris/\x2elocal/bin\x1e/home/chris/\x2econfig/composer/vendor/bin\x1e/home/chris/Android/Sdk/emulator\x1e/home/chris/Android/Sdk/tools\x1e/home/chris/Android/Sdk/tools/bin\x1e/home/chris/Android/Sdk/platform\x2dtools

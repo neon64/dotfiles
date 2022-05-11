@@ -6,7 +6,7 @@
     "modules-left": ["sway/workspaces", "custom/player", "sway/mode",],
     "modules-center": ["sway/window"],
     "modules-right": [],
-    "output": "DP-1",
+    "output": [],
    // Modules configuration
     "sway/workspaces": {
         "disable-scroll": false,
@@ -52,7 +52,7 @@
     "modules-left": ["sway/workspaces", "custom/player", "sway/mode",],
     "modules-center": ["sway/window"],
     "modules-right": ["pulseaudio", "network", "custom/bluetooth", "cpu", "battery", "sway/language", "tray", "idle_inhibitor", "custom/night_mode", "custom/power", "clock", "custom/notification"],
-    "output": ["eDP-1", "DP-2", "HDMI-A-1"],
+    "output": ["eDP-1", "DP-2", "DP-1", "HDMI-A-1"],
     "sway/workspaces": {
         "disable-scroll": false,
         "all-outputs": true,
@@ -225,9 +225,9 @@
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
-        "exec": "swaync-client -swb",
-        "on-click": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw",
+        "exec": "$HOME/code/SwayNotificationCenter/build/src/swaync-client -swb",
+        "on-click": "$HOME/code/SwayNotificationCenter/build/src/swaync-client -t -sw",
+        "on-click-right": "$HOME/code/SwayNotificationCenter/build/src/swaync-client -d -sw",
         "escape": true
     }
 }]

@@ -173,7 +173,8 @@ window#waybar {
 }
 
 #idle_inhibitor.activated,
-#custom-night_mode.activated {
+#custom-night_mode.activated,
+#custom-notification.cc-open {
     background: rgba(100, 114, 125, 0.4);
 }
 

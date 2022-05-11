@@ -9,7 +9,6 @@
     },
     "workbench.startupEditor": "welcomePage",
     "files.trimTrailingWhitespace": true,
-    "window.zoomLevel": 1,
     "php.suggest.basic": false,
     "breadcrumbs.enabled": true,
     "cSpell.language": "en-GB",
@@ -82,5 +81,14 @@
     "javascript.updateImportsOnFileMove.enabled": "always",
     "workbench.colorTheme": "Ocean Dark Extended",
     "haskell.serverExecutablePath": "/usr/bin/haskell-language-server-8.8.4",
-    "shellcheck.enable": false
+    "shellcheck.enable": false,
+    "rewrap.autoWrap.enabled": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "cSpell.enableFiletypes": [
+        "!haskell"
+    ],
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    }
 }
