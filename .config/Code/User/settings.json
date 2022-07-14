@@ -3,7 +3,6 @@
     "editor.minimap.enabled": true,
     "editor.detectIndentation": true,
     "files.associations": {
-        ".*": "shellscript",
         "env-example": "shellscript",
         "*.pl": "prolog"
     },
@@ -11,12 +10,9 @@
     "files.trimTrailingWhitespace": true,
     "php.suggest.basic": false,
     "breadcrumbs.enabled": true,
-    "cSpell.language": "en-GB",
-    "cSpell.numSuggestions": 8,
     "window.menuBarVisibility": "toggle",
     "window.titleBarStyle": "native",
     "[jade]": {},
-    "open-in-browser.default": "firefox",
     "editor.lineHeight": 24,
     "vim.enableNeovim": true,
     "vim.neovimPath": "/usr/bin/nvim",
@@ -90,5 +86,20 @@
     "notebook.cellToolbarLocation": {
         "default": "right",
         "jupyter-notebook": "left"
-    }
+    },
+    "window.zoomLevel": 1,
+    "[latex]": {
+        "editor.defaultFormatter": "mathematic.vscode-latex"
+    },
+    "latex-workshop.synctex.afterBuild.enabled": true,
+    "cSpell.userWords": [
+        "alloc",
+        "endignore",
+        "LPVM",
+        "optimisation",
+        "optimizable",
+        "struct",
+        "TCMC",
+        "Wybe"
+    ]
 }

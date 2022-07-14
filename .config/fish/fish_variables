@@ -4,11 +4,12 @@ SETUVAR __fish_init_2_39_8:\x1d
 SETUVAR __fish_init_2_3_0:\x1d
 SETUVAR __fish_init_3_x:\x1d
 SETUVAR __fish_initialized:3400
-SETUVAR _fisher_decors_2F_fish_2D_colored_2D_man_files:/home/chris/\x2econfig/fish/functions/man\x2efish
-SETUVAR _fisher_decors_2F_fish_2D_colors_files:/home/chris/\x2econfig/fish/functions/colors\x2efish\x1e/home/chris/\x2econfig/fish/completions/colors\x2efish
-SETUVAR _fisher_jorgebucaran_2F_fisher_files:/home/chris/\x2econfig/fish/functions/fisher\x2efish\x1e/home/chris/\x2econfig/fish/completions/fisher\x2efish
+SETUVAR _fisher_decors_2F_fish_2D_colored_2D_man_files:\x7e/\x2econfig/fish/functions/man\x2efish
+SETUVAR _fisher_decors_2F_fish_2D_colors_files:\x7e/\x2econfig/fish/functions/colors\x2efish\x1e\x7e/\x2econfig/fish/completions/colors\x2efish
+SETUVAR _fisher_jorgebucaran_2F_fisher_files:\x7e/\x2econfig/fish/functions/fisher\x2efish\x1e\x7e/\x2econfig/fish/completions/fisher\x2efish
 SETUVAR _fisher_plugins:decors/fish\x2dcolors\x1edecors/fish\x2dcolored\x2dman\x1ejorgebucaran/fisher\x1etimnew/fasd\x2efish
-SETUVAR _fisher_timnew_2F_fasd_2E_fish_files:/home/chris/\x2econfig/fish/functions/__fasd_print_completion\x2efish\x1e/home/chris/\x2econfig/fish/functions/fasd_cd\x2efish\x1e/home/chris/\x2econfig/fish/functions/j\x2efish\x1e/home/chris/\x2econfig/fish/functions/jj\x2efish\x1e/home/chris/\x2econfig/fish/conf\x2ed/__fasd_run\x2efish\x1e/home/chris/\x2econfig/fish/completions/fasd\x2efish\x1e/home/chris/\x2econfig/fish/completions/fasd_cd\x2efish\x1e/home/chris/\x2econfig/fish/completions/j\x2efish\x1e/home/chris/\x2econfig/fish/completions/jj\x2efish
+SETUVAR _fisher_timnew_2F_fasd_2E_fish_files:\x7e/\x2econfig/fish/functions/__fasd_print_completion\x2efish\x1e\x7e/\x2econfig/fish/functions/fasd_cd\x2efish\x1e\x7e/\x2econfig/fish/functions/j\x2efish\x1e\x7e/\x2econfig/fish/functions/jj\x2efish\x1e\x7e/\x2econfig/fish/conf\x2ed/__fasd_run\x2efish\x1e\x7e/\x2econfig/fish/completions/fasd\x2efish\x1e\x7e/\x2econfig/fish/completions/fasd_cd\x2efish\x1e\x7e/\x2econfig/fish/completions/j\x2efish\x1e\x7e/\x2econfig/fish/completions/jj\x2efish
+SETUVAR _fisher_upgraded_to_4_4:\x1d
 SETUVAR fish_color_autosuggestion:555\x1eyellow
 SETUVAR fish_color_cancel:\x2dr
 SETUVAR fish_color_command:green

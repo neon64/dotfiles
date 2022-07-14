@@ -18,3 +18,8 @@ style = "bold red"
 [[battery.display]]  # "bold yellow" style when capacity is between 10% and 30%
 threshold = 20
 style = "bold yellow"
+
+# I never have starship enabled inside of a container
+# and I don't really want to know that I'm inside of a container in WSL2
+[container]
+disabled=true

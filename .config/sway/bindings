@@ -202,8 +202,8 @@ bindsym --locked XF86MonBrightnessUp exec brillo -A 5 -u 100000 && brillo -G | a
 bindsym --locked XF86MonBrightnessDown exec brillo -U 5 -u 100000 && brillo -G | awk '{print int($1)}' > $SWAYSOCK.wob
 
 # Sleep
-bindsym $mod+u exec swaylock
-exec swayidle -w timeout 600 '! is_in_vm && swaylock -f' timeout 700 '! is_in_vm && swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'swaylock -f'
+bindsym $mod+u exec gtklock -d
+exec swayidle -w timeout 600 '! is_in_vm && gtklock -d' timeout 700 '! is_in_vm && swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' before-sleep 'gtklock -d'
 
 bindsym $mod+i exec killall -SIGUSR1 waybar
 

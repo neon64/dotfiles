@@ -49,7 +49,7 @@
     "position": "top",
     "height": 36,
     // Choose the order of the modules
-    "modules-left": ["sway/workspaces", "custom/player", "sway/mode",],
+    "modules-left": ["sway/workspaces", "custom/player", "sway/mode"],
     "modules-center": ["sway/window"],
     "modules-right": ["pulseaudio", "network", "custom/bluetooth", "cpu", "battery", "sway/language", "tray", "idle_inhibitor", "custom/night_mode", "custom/power", "clock", "custom/notification"],
     "output": ["eDP-1", "DP-2", "DP-1", "HDMI-A-1"],
@@ -208,6 +208,16 @@
         "interval": 30,
         "tooltip": false,
         "exec": "$HOME/.config/waybar/bluetooth.sh 2> /dev/null"
+    },
+    "bluetooth": {
+        "format": " {status}",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
     },
     "custom/power": {
         "format":"",
