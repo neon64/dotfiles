@@ -50,9 +50,20 @@ window#waybar {
 #battery, #cpu, #memory, #network, #pulseaudio, #custom-player, #mpd, #tray, #mode,
 #idle_inhibitor, #backlight, #bluetooth, #custom-bluetooth, #custom-power, #custom-night_mode,
 #custom-notification {
+    color: @color7;
     padding: 0 10px;
     margin: 0 4px;
-    transition: border-top-color 1s ease;
+    /* transition: border-top-color 1s ease; */
+}
+
+
+#battery:hover, #cpu:hover, #memory:hover, #network:hover, #pulseaudio:hover, #custom-player:hover, #mpd:hover, #tray:hover, #mode:hover,
+#idle_inhibitor:hover, #backlight:hover, #bluetooth:hover, #custom-bluetooth:hover, #custom-power:hover, #custom-night_mode:hover, #clock:hover,
+#custom-notification:hover {
+    background: shade(@background, 1.5);
+    border: 0;
+    box-shadow: inherit;
+    text-shadow: inherit;
 }
 
 #window {
@@ -60,6 +71,7 @@ window#waybar {
 }
 
 #clock {
+    color: @color7;
     padding: 0 20px;
     /* background:rgba(100, 114, 125, 0.1); */
     /* border-top: 3px solid @color3; */
