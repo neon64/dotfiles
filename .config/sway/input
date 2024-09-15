@@ -14,13 +14,18 @@ input "1452:566:bcm5974" {
     click_method clickfinger
 }
 
-input "1452:566:Apple_Inc._Apple_Internal_Keyboard_/_Trackpad" {
-    xkb_options caps:super,ctrl:swap_lwin_lctl
+input "1133:45091:MX_Master_3" {
+    accel_profile adaptive
+    pointer_accel 1
 }
 
-input "1452:591:Apple_Inc._Apple_Keyboard" {
-    xkb_options caps:super,ctrl:swap_lwin_lctl
-}
+#input "1452:566:Apple_Inc._Apple_Internal_Keyboard_/_Trackpad" {
+#    xkb_options caps:super,ctrl:swap_lwin_lctl
+#}
+
+#input "1452:591:Apple_Inc._Apple_Keyboard" {
+#    xkb_options caps:super,ctrl:swap_lwin_lctl
+#}
 
 # Wireless mouse
 input "1452:781:Robert_Chamberlain’s_M" {
@@ -32,7 +37,8 @@ input "1452:781:Robert_Chamberlain’s_M" {
 input "1:1:AT_Translated_Set_2_keyboard" {
     # according to the xkb docs, we map control to alt, and then alt to win, thus
     # we have a poor man's emulation of an Apple keyboard.
-    xkb_options caps:super,altwin:ctrl_alt_win
+    xkb_options caps:super
+    #,altwin:ctrl_alt_win
 }
 
 input "1739:0:Synaptics_TM3418-002" {

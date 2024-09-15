@@ -45,5 +45,10 @@
     {
         "key": "ctrl+shift+-",
         "command": "-workbench.action.navigateForward"
-    }
+    },
+    {
+        "key": "ctrl+e",
+        "command": "ctrl+e",
+        "when": "terminalFocus"
+    },
 ]

@@ -84,7 +84,7 @@ if type -q bat
         if test -d $argv
             cd $argv
         else
-            bat -pp --theme=base16 $argv;
+            bat --theme=OneHalfDark $argv;
         end
     end
 end
@@ -101,7 +101,7 @@ alias up topgrade
 alias w "browse_web"
 alias clock "tty-clock -sSc"
 alias b "browse_files"
-alias gc "git checkout (git branch --all -v | fzf --layout=reverse --height=20 --pointer='' | tr -d '[:space:]')"
+alias gc "git checkout (git branch --all -v | fzf --layout=reverse --height=20 | tr -d '[:space:]')"
 
 alias pac "paru"
 

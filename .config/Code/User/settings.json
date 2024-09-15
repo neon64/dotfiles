@@ -8,6 +8,7 @@
     },
     "workbench.startupEditor": "welcomePage",
     "files.trimTrailingWhitespace": true,
+    "editor.cursorSurroundingLines": 8,
     "php.suggest.basic": false,
     "breadcrumbs.enabled": true,
     "window.menuBarVisibility": "toggle",
@@ -20,8 +21,46 @@
     "vim.sneak": true,
     "vim.handleKeys": {
         "<C-w>": false,
+        "<C-p>": false,
         "<C-q>": false
     },
+    "vim.highlightedyank.enable": true,
+    "vim.highlightedyank.color": "#a9dc7660",
+    "vim.highlightedyank.duration": 250,
+    "vim.normalModeKeyBindings": [
+        {
+        "before": ["g", "p", "d"],
+        "commands": ["editor.action.peekDefinition"]
+        },
+        {
+        "before": ["g", "h"],
+        "commands": ["editor.action.showDefinitionPreviewHover"]
+        },
+        {
+        "before": ["g", "i"],
+        "commands": ["editor.action.goToImplementation"]
+        },
+        {
+        "before": ["g", "p", "i"],
+        "commands": ["editor.action.peekImplementation"]
+        },
+        {
+        "before": ["g", "q"],
+        "commands": ["editor.action.quickFix"]
+        },
+        {
+        "before": ["g", "r"],
+        "commands": ["editor.action.referenceSearch.trigger"]
+        },
+        {
+        "before": ["g", "t"],
+        "commands": ["editor.action.goToTypeDefinition"]
+        },
+        {
+        "before": ["g", "p", "t"],
+        "commands": ["editor.action.peekTypeDefinition"]
+        },
+    ],
     "latex-workshop.view.pdf.viewer": "tab",
     "latex-workshop.synctex.synctexjs.enabled": false,
     "editor.rulers": [
@@ -63,12 +102,8 @@
         }
     ],
     "editor.fontSize": 13,
-    "vscode-neovim.neovimExecutablePaths.linux": "/usr/bin/nvim",
     "markdown-preview-enhanced.automaticallyShowPreviewOfMarkdownBeingEdited": true,
     "markdown-preview-enhanced.mathRenderingOption": "None",
-    "ccls.codeLens.localVariables": true,
-    "ccls.codeLens.renderInline": true,
-    "ccls.codeLens.enabled": false,
     "workbench.editorAssociations": {
         "*.ipynb": "jupyter.notebook.ipynb",
         "*.docx": "default"
@@ -94,7 +129,10 @@
     "latex-workshop.synctex.afterBuild.enabled": true,
     "cSpell.userWords": [
         "alloc",
+        "curr",
+        "cvar",
         "endignore",
+        "insts",
         "LPVM",
         "optimisation",
         "optimizable",
