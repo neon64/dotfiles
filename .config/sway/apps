@@ -27,6 +27,7 @@ for_window [class="Spotify"] border pixel $borderwidth
 for_window [app_id="astroid"] border pixel $borderwidth
 for_window [app_id="io.elementary.files"] border pixel $borderwidth
 for_window [app_id="pavucontrol"] floating enable
+for_window [app_id="pwvucontrol"] floating enable
 for_window [title="Launch Application"] floating enable
 for_window [app_id="iwgtk"] floating enable
 for_window [app_id="wdisplays"] floating enable

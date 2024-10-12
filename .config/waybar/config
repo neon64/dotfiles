@@ -135,7 +135,7 @@
         },
         //"on-scroll-up": "amixer -q sset Master 5%+",
         //"on-scroll-down": "amixer -q sset Master 5%-",
-        "on-click": "pavucontrol"
+        "on-click": "pwvucontrol"
     },
     "mpd": {
         "format": "  {stateIcon}{consumeIcon}{repeatIcon}{singleIcon}    {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S})    ",
