@@ -52,7 +52,8 @@ client.urgent           $urgent-bg-color    $urgent-bg-color    $focused-text-co
 set $borderwidth 3
 default_border normal $borderwidth
 default_floating_border pixel $borderwidth
-hide_edge_borders smart
+hide_edge_borders none
+smart_gaps on
 gaps inner 20
 gaps outer 20
 titlebar_padding 6 8

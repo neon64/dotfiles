@@ -1,115 +1,137 @@
 
+# Generic floating windows
 for_window [title="^Question"] floating enable
 for_window [title="^Editing Profile"] floating enable
 for_window [title="^Login Keyring"] floating enable
 for_window [title="^Floating Terminal"] floating enable; border pixel $borderwidth; resize set 1024 640
 for_window [title="^Command Launcher"] floating enable; border pixel $borderwidth; resize set 640 320
-
-# for_window [app_id="firefox"] border none
-for_window [app_id="firefox"] border pixel $borderwidth
-for_window [class="code-oss"] border pixel $borderwidth
-for_window [class="Emacs"] border none
-for_window [app_id="emacs"] border none
-for_window [app_id="Alacritty"] border pixel $borderwidth
-for_window [app_id="dev.zed.Zed"] border none
-for_window [app_id="org.gnome.Nautilus"] border pixel $borderwidth
-
-for_window [app_id="org.gnome.Nautilus"] floating enable
-for_window [app_id="gnome-control-center"] floating enable
-for_window [app_id="mpv"] floating enable
-for_window [app_id="gnome-system-monitor"] floating enable; resize set 1024 600
-for_window [app_id="gnome-power-statistics"] floating enable
-for_window [app_id="blueman-manager"] floating enable; resize set 640 480
-for_window [app_id="keepassxc"] floating enable; resize set 1280 768
-for_window [class="VirtualBox Manager"] border normal $borderwidth
-for_window [class="VirtualBox Machine"] border normal $borderwidth
-for_window [app_id="evolution"] border normal $borderwidth
-for_window [class="Spotify"] border pixel $borderwidth
-for_window [app_id="astroid"] border pixel $borderwidth
-for_window [app_id="io.elementary.files"] border pixel $borderwidth
-for_window [app_id="pavucontrol"] floating enable
-for_window [app_id="pwvucontrol"] floating enable
 for_window [title="Launch Application"] floating enable
-for_window [app_id="iwgtk"] floating enable
-for_window [app_id="wdisplays"] floating enable
-for_window [app_id="org.gnome.NautilusPreviewer"] floating enable
+
+# Firefox
+for_window [app_id="firefox"] border none
+for_window [app_id="firefox"] title_format "   %title"
 for_window [title="Firefox — Sharing Indicator"] floating enable
-
-# some gnome apps look best in floating mode
-for_window [app_id="org.gnome.Calculator"] floating enable
-for_window [app_id="org.gnome.Weather"] floating enable
-for_window [app_id="org.gnome.clocks"] floating enable
-for_window [app_id="org.gnome.baobab"] floating enable
-for_window [app_id="org.gnome.Music"] floating enable
-for_window [app_id="io.bassi.Amberol"] floating enable
-for_window [app_id="gnome-tweaks"] floating enable
-for_window [app_id="evince"] border none
-
-for_window [class="anytype2"] border none
-# for_window [app_id="re.sonny.Tangram"] border none
-# for_window [class="Ferdi"] border none
-for_window [app_id="syncthing-gtk"] floating enable
-
-# for_window [title="Participants"] floating enable
-# for_window [title="Chat"] floating enable
-
-# default workspaces
-assign [class="Ferdi"] 2
-assign [class="qutebrowser"] 1
+for_window [title="^Messenger — Mozilla Firefox"] title_format "<tt></tt>  <tt></tt>%title"
+for_window [title="^Facebook — Mozilla Firefox"] title_format "<tt></tt>  <tt></tt>%title"
+for_window [title="YouTube"] title_format "<tt></tt>  <tt></tt>%title"
+for_window [title="^Google Search"] title_format "<tt></tt>  <tt></tt>%title"
+for_window [title="^Google Drive"] title_format "<tt></tt>  <tt></tt>%title"
+for_window [title="Gmail"] title_format "<tt></tt><span foreground='#FFFFFF'>  </span><tt></tt>%title"
+for_window [title="Trello"] title_format "<tt></tt><span foreground='#FFFFFF'>  </span><tt></tt>%title"
+for_window [title="Google Calendar"] title_format "<tt></tt><span foreground='#FFFFFF'> 📅  </span><tt></tt>%title"
+for_window [title="_2021_SM1"] title_format "<tt></tt><span foreground='#FFFFFF'> 📘  </span><tt></tt>%title"
 assign [class="Firefox"] 1
 assign [app_id="firefox"] 1
 assign [app_id="firefox-nightly"] 1
+
+# Qutebrowser
+assign [class="qutebrowser"] 1
+
+# Google Chrome
 assign [class="Google-chrome"] 1
-assign [class="Atom"] 3
-assign [class="Code"] 3
-assign [class="Cursor"] 3
-assign [class="code-oss"] 3
-assign [class="GitKraken"] 4
-assign [class="VirtualBox Machine"] 5
-assign [class="VirtualBox Manager"] 5
-assign [class="Spotify"] 7
-assign [app_id="evolution"] 8
-assign [app_id="astroid"] 8
-assign [class="Mailspring"] 8
-assign [app_id="geary"] 8
-assign [class="keepassxc"] 9
-assign [title="Zoom Meeting"] 10
-assign [title="Zoom - Licensed Account"] 10
-assign [app_id="org.keepassxc.KeePassXC"] 9
-# assign [class="jetbrains-idea"] 3
-# assign [class="jetbrains-clion"] 3
-assign [class="Vncviewer"] 10
-assign [app_id="re.sonny.Tangram"] 2
-assign [app_id="syncthing-gtk"] 0
+
+# Emacs
+for_window [class="Emacs"] border none
+for_window [app_id="emacs"] border none
 assign [class="Emacs"] 3
 
+# Alacritty
+for_window [app_id="Alacritty"] border pixel $borderwidth
 # for_window [title="." app_id="Alacritty"] title_format "%title (<b>%app_id</b><b>%class</b>)"
-# bindsym ctrl+t [app_id="firefox"] exec notify-send -t 5000 "bad"
-# bindsym --whole-window ctrl+button1 [app_id="firefox"]  exec notify-send -t 5000 "bad"
 # for_window [title=".", app_id="Alacritty"] title_format "%title (<b>%app_id</b><b>%class</b>)"
-# for_window [title="Mozilla Firefox"] title_format "%title"
-for_window [title="shotman"] move position 30 30
-for_window [title="shotman"] border none
-# for_window [class="notion-nativefier-46aee8"] border none
 
-# IntelliJ startup window
-for_window [title="win0"] floating enable
+# Zed
+for_window [app_id="dev.zed.Zed"] border none
 
-for_window [class="code-oss"] border none
-for_window [class="Code"] border none
-for_window [class="Cursor"] border none
+# VS Code
+for_window [app_id="code-oss"] border none
+for_window [app_id="code"] border none
+assign [app_id="code"] 3
+assign [app_id="code-oss"] 3
 
-# trying to make Firefox suitable in tabless mode
-# no_focus [app_id="firefox" title="^(?!New Tab - Mozilla Firefox).*$"]
-
-# for_window [app_id="Alacritty"] title_format "<tt></tt><span foreground='#00FF00' background='#000000'>  </span><tt> </tt>%title"
-# for_window [app_id="Alacritty"] title_format "%title"
+# Nautilus (Files)
+for_window [app_id="org.gnome.Nautilus"] border pixel $borderwidth
+for_window [app_id="org.gnome.Nautilus"] floating enable
 for_window [app_id="org.gnome.Nautilus"] title_format "%title - Files"
-for_window [class="VirtualBox Machine"] title_format "<tt></tt><span  background='#073624' foreground='#AAAAFF' >  </span><tt> </tt>%title"
-for_window [class="VirtualBox Manager"] title_format "<tt></tt><span  background='#073642' foreground='#AAAAFF' >  </span><tt> </tt>%title"
-for_window [class="libreoffice-writer"] title_format "<tt></tt><span  background='#073642' foreground='#adc5e7' >  </span><tt> </tt>%title"
-for_window [class="libreoffice-calc"] title_format "<tt></tt><span  background='#073642' foreground='#add58a' >  </span><tt> </tt>%title"
-for_window [class="libreoffice-impress"] title_format "<tt></tt><span  background='#073642' foreground='#d07e7e' >  </span><tt> </tt>%title"
+for_window [app_id="org.gnome.NautilusPreviewer"] floating enable
+
+# Elementary Files
+for_window [app_id="io.elementary.files"] border pixel $borderwidth
+
+# GNOME Control Center
+for_window [app_id="gnome-control-center"] floating enable
+
+# GNOME System Monitor
+for_window [app_id="gnome-system-monitor"] floating enable; resize set 1024 600
+
+# GNOME Power Statistics
+for_window [app_id="gnome-power-statistics"] floating enable
+
+# GNOME Calculator
+for_window [app_id="org.gnome.Calculator"] floating enable
+
+# GNOME Weather
+for_window [app_id="org.gnome.Weather"] floating enable
+
+# GNOME Clocks
+for_window [app_id="org.gnome.clocks"] floating enable
+
+# GNOME Baobab (Disk Usage Analyzer)
+for_window [app_id="org.gnome.baobab"] floating enable
+
+# GNOME Music
+for_window [app_id="org.gnome.Music"] floating enable
+
+# Amberol (Music Player)
+for_window [app_id="io.bassi.Amberol"] floating enable
+
+# GNOME Tweaks
+for_window [app_id="gnome-tweaks"] floating enable
+
+# mpv
+for_window [app_id="mpv"] floating enable
+
+# Blueman
+for_window [app_id="blueman-manager"] floating enable; resize set 640 480
+
+# KeePassXC
+for_window [app_id="keepassxc"] floating enable; resize set 1280 768
+assign [class="keepassxc"] 9
+assign [app_id="org.keepassxc.KeePassXC"] 9
+
+# VirtualBox
+for_window [class="VirtualBox Manager"] border normal $borderwidth
+for_window [class="VirtualBox Machine"] border normal $borderwidth
+for_window [class="VirtualBox Machine"] title_format "<tt></tt><span  background='#073624' foreground='#AAAAFF' >  </span><tt> </tt>%title"
+for_window [class="VirtualBox Manager"] title_format "<tt></tt><span  background='#073642' foreground='#AAAAFF' >  </span><tt> </tt>%title"
+assign [class="VirtualBox Machine"] 5
+assign [class="VirtualBox Manager"] 5
+
+# Evolution
+for_window [app_id="evolution"] border normal $borderwidth
+assign [app_id="evolution"] 8
+
+# Astroid
+for_window [app_id="astroid"] border pixel $borderwidth
+assign [app_id="astroid"] 8
+
+# Mailspring
+assign [class="Mailspring"] 8
+
+# Geary
+assign [app_id="geary"] 8
+
+# Pavucontrol
+for_window [app_id="pavucontrol"] floating enable
+
+# Pwvucontrol
+for_window [app_id="pwvucontrol"] floating enable
+
+# iwgtk
+for_window [app_id="iwgtk"] floating enable
+
+# wdisplays
+for_window [app_id="wdisplays"] floating enable
 
 # Zoom
 for_window [class="zoom"] idle_inhibit visible
@@ -118,19 +140,50 @@ for_window [class="zoom" title="Zoom Meeting"] floating disable
 for_window [class="zoom" title="Zoom - Free Account"] floating enable
 for_window [class="zoom" title="Settings"] floating enable
 for_window [class="zoom" title="Zoom - Licensed Account"] floating enable
+assign [title="Zoom Meeting"] 10
+assign [title="Zoom - Licensed Account"] 10
+
+# Evince
+for_window [app_id="evince"] border none
+for_window [app_id="evince"] title_format " 📖  %title"
+
+# Anytype
+for_window [class="anytype"] border none
+
+# Notion
+for_window [class="notion-nativefier-46aee8"] title_format "%title - Notion"
+
+# Syncthing GTK
+for_window [app_id="syncthing-gtk"] floating enable
+assign [app_id="syncthing-gtk"] 0
+
+# Shotman
+for_window [title="shotman"] move position 30 30
+for_window [title="shotman"] border none
+
+# IntelliJ startup window
+for_window [title="win0"] floating enable
+
+# LibreOffice
+for_window [class="libreoffice-writer"] title_format "<tt></tt><span  background='#073642' foreground='#adc5e7' >  </span><tt> </tt>%title"
+for_window [class="libreoffice-calc"] title_format "<tt></tt><span  background='#073642' foreground='#add58a' >  </span><tt> </tt>%title"
+for_window [class="libreoffice-impress"] title_format "<tt></tt><span  background='#073642' foreground='#d07e7e' >  </span><tt> </tt>%title"
+
+# Ferdi
+assign [class="Ferdi"] 2
+
+# Tangram
+assign [app_id="re.sonny.Tangram"] 2
+
+# Atom
+assign [class="Atom"] 3
+
+# GitKraken
+assign [class="GitKraken"] 4
+
+# VNC Viewer
+assign [class="Vncviewer"] 10
 
 # Title bar icons
 # https://gist.github.com/dmelliot/437924ff581f3f1edd59f44833be6cc6
 # <span foreground='#FF6611'>
-for_window [app_id="firefox"] title_format "   %title"
-for_window [app_id="evince"] title_format " 📖  %title"
-for_window [title="^Messenger — Mozilla Firefox"] title_format "<tt></tt>  <tt></tt>%title"
-for_window [title="^Facebook — Mozilla Firefox"] title_format "<tt></tt>  <tt></tt>%title"
-for_window [title="YouTube"] title_format "<tt></tt>  <tt></tt>%title"
-for_window [title="^Google Search"] title_format "<tt></tt>  <tt></tt>%title"
-for_window [title="^Google Drive"] title_format "<tt></tt>  <tt></tt>%title"
-for_window [title="Gmail"] title_format "<tt></tt><span foreground='#FFFFFF'>  </span><tt></tt>%title"
-for_window [title="Trello"] title_format "<tt></tt><span foreground='#FFFFFF'>  </span><tt></tt>%title"
-for_window [title="Google Calendar"] title_format "<tt></tt><span foreground='#FFFFFF'> 📅  </span><tt></tt>%title"
-for_window [title="_2021_SM1"] title_format "<tt></tt><span foreground='#FFFFFF'> 📘  </span><tt></tt>%title"
-for_window [class="notion-nativefier-46aee8"] title_format "%title - Notion"
