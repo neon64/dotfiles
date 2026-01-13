@@ -1,0 +1,12 @@
+[Unit]
+Description=Wayland Display Management Service
+
+[Service]
+ExecStart=swayidle -w timeout 600 '%h/.config/sway/lock.sh' timeout 700 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' before-sleep '%h/.config/sway/lock.sh'
+Restart=always
+RestartSec=5s
+
+[Install]
+WantedBy=sway-session.target
+
+

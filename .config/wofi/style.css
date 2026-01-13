@@ -1,0 +1,85 @@
+@import ".cache/wal/colors-wofi.css";
+
+window {
+    margin: 0px;
+    /* border: 1px solid #1d2021; */
+    border-radius: 0;
+    font-family: "Jost *";
+    color: #fbf1c7;
+    font-size: 14px;
+    background-color: @background;
+	color: @foreground;
+}
+
+#inner-box {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#outer-box {
+    margin: 0;
+    padding: 5px;
+    border: 3px solid shade(@foreground, 0.5);
+    /* background-color: #3c3836; */
+}
+
+#scroll {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+#img {
+    background: transparent;
+    margin: 10px;
+}
+
+#entry {
+    outline: none;
+    border-radius: 0;
+}
+
+#text {
+    background: transparent;
+    padding: 5px;
+    min-height: 40px;
+}
+
+#entry:nth-child(odd) {
+	background-color: @color0;
+}
+
+#entry:nth-child(even) {
+	background-color: @color0;
+}
+
+#entry:selected {
+	background-color: shade(@background, 1.5);
+}
+
+#input {
+	background-color: @color0;
+	color: @color4;
+	border-color: @color2;
+}
+
+#input:focus {
+	border-color: @color10;
+}
+
+#input {
+    margin-bottom: 10px;
+    border-width: 0px;
+    /* border-top: 1px solid #1d2021;
+    border-left: 1px solid #1d2021;
+    border-right: 1px solid #1d2021; */
+    border-radius: 0;
+    color: @foreground;
+    padding: 10px;
+}
+
+#input:focus {
+    background-color: mix(@color0, @color15, 0.1);
+    color: @foreground;
+}
