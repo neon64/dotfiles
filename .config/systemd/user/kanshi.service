@@ -1,0 +1,9 @@
+[Unit]
+Description=Wayland Display Management Service
+
+[Service]
+ExecStart=kanshi
+
+[Install]
+WantedBy=sway-session.target
+

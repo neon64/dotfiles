@@ -13,13 +13,7 @@ exec_always pgrep swaync || swaync
 # authentication popups
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 
-# kde connect daemon
-# exec /usr/lib/kdeconnectd
-
-# screen management
-# see this issue https://github.com/emersion/kanshi/issues/43
-# we restart kanshi on reload to ensure output configuration is reapplied
-exec_always "pkill kanshi; kanshi"
+exec_always "systemctl --user start sway-session.target"
 
 # exec env RUST_BACKTRACE=1 $HOME/.local/share/cargo/bin/swayrd > /tmp/swayrd.log 2>&1
 
@@ -39,9 +33,6 @@ include apps
 include /etc/sway/config.d/*
 
 exec_always pgrep waybar || waybar
-#bar {
-#    swaybar_command waybar
-#}
 
 focus_on_window_activation urgent
 focus_wrapping yes

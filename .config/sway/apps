@@ -11,6 +11,7 @@ for_window [class="code-oss"] border pixel $borderwidth
 for_window [class="Emacs"] border none
 for_window [app_id="emacs"] border none
 for_window [app_id="Alacritty"] border pixel $borderwidth
+for_window [app_id="dev.zed.Zed"] border none
 for_window [app_id="org.gnome.Nautilus"] border pixel $borderwidth
 
 for_window [app_id="org.gnome.Nautilus"] floating enable
@@ -61,6 +62,7 @@ assign [app_id="firefox-nightly"] 1
 assign [class="Google-chrome"] 1
 assign [class="Atom"] 3
 assign [class="Code"] 3
+assign [class="Cursor"] 3
 assign [class="code-oss"] 3
 assign [class="GitKraken"] 4
 assign [class="VirtualBox Machine"] 5
@@ -92,6 +94,10 @@ for_window [title="shotman"] border none
 
 # IntelliJ startup window
 for_window [title="win0"] floating enable
+
+for_window [class="code-oss"] border none
+for_window [class="Code"] border none
+for_window [class="Cursor"] border none
 
 # trying to make Firefox suitable in tabless mode
 # no_focus [app_id="firefox" title="^(?!New Tab - Mozilla Firefox).*$"]
