@@ -1,6 +1,6 @@
 {
     "require": {
-        "franzl/studio": "^0.15.0"
+        "franzl/studio": "^0.16.0"
     },
     "config": {
         "allow-plugins": {

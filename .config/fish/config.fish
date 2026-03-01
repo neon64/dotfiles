@@ -9,9 +9,9 @@ set -x XDG_CONFIG_HOME "$HOME/.config"
 set -x XDG_DATA_HOME "$HOME/.local/share"
 set -x XDG_CACHE_HOME "$HOME/.cache"
 set -x GHCUP_USE_XDG_DIRS 1
-set -x PAGER "less"
+set -x PAGER less
 
-if [ "$TERM_PROGRAM" = "vscode" ]
+if [ "$TERM_PROGRAM" = vscode ]
     set -x EDITOR "code -w"
 else
     set -x EDITOR (which nvim)
@@ -23,9 +23,9 @@ else
     # set env vars
     set -x WSLENV "WT_SESSION::WT_PROFILE_ID"
     set -x DISPLAY ":0"
-    set -x XDG_RUNTIME_DIR "/mnt/wslg/runtime-dir"
-    set -x WAYLAND_DISPLAY "wayland-0"
-    set -x PULSE_SERVER "/mnt/wslg/PulseServer"
+    set -x XDG_RUNTIME_DIR /mnt/wslg/runtime-dir
+    set -x WAYLAND_DISPLAY wayland-0
+    set -x PULSE_SERVER /mnt/wslg/PulseServer
 end
 
 set -x NPM_CONFIG_USERCONFIG $XDG_CONFIG_HOME/npm/npmrc
@@ -38,15 +38,16 @@ set -x LESSKEY "$XDG_CONFIG_HOME"/less/lesskey
 set -x LESSHISTFILE "$XDG_CACHE_HOME"/less/history
 set -x NOTMUCH_CONFIG "$XDG_CONFIG_HOME"/notmuch/notmuchrc
 set -x NMBGIT "$XDG_DATA_HOME"/notmuch/nmbug
+set -x XDG_SCREENSHOTS_DIR "$HOME/pics/screenshots"
 set -x BUNDLE_USER_CONFIG "$XDG_CONFIG_HOME"/bundle
 set -x BUNDLE_USER_CACHE "$XDG_CACHE_HOME"/bundle
 set -x BUNDLE_USER_PLUGIN "$XDG_DATA_HOME"/bundle
 set -x LIBVIRT_DEFAULT_URI "qemu:///system"
 
 if string match -rq '(m|M)icrosoft' (uname -r)
-    set -x BROWSER "wsl-open"
+    set -x BROWSER wsl-open
 else
-    set -x BROWSER "firefox"
+    set -x BROWSER firefox
 end
 
 set -x EMACSDIR "$XDG_CONFIG_HOME/emacs"
@@ -61,7 +62,7 @@ else if type -q fdfind
 end
 set -x FZF_CTRL_T_OPTS "--preview 'highlight --force --out-format=ansi {} | head -n 100'"
 set -x FZF_ALT_C_COMMAND "fasd -d -R"
-set -x FZF_ALT_C_OPTS "--no-sort"
+set -x FZF_ALT_C_OPTS --no-sort
 
 set -g man_standout -b yellow -o black
 
@@ -72,7 +73,7 @@ set -g man_standout -b yellow -o black
 # connects to an existing tmux session before creating a new one
 alias t "tmux a; or tmux"
 
-alias top "bpytop"
+alias top bpytop
 
 if type -q exa
     alias ls "exa --classify --git --header --color auto -s type"
@@ -84,7 +85,8 @@ if type -q bat
         if test -d $argv
             cd $argv
         else
-            bat --theme=OneHalfDark $argv;
+            bat --theme=OneHalfDark $argv
+
         end
     end
 end
@@ -94,16 +96,16 @@ if type -q prettyping
 end
 
 if type -q nvim
-    alias vim "nvim"
+    alias vim nvim
 end
 
 alias up topgrade
-alias w "browse_web"
+alias w browse_web
 alias clock "tty-clock -sSc"
-alias b "browse_files"
+alias b browse_files
 alias gc "git checkout (git branch --all -v | fzf --layout=reverse --height=20 | tr -d '[:space:]')"
 
-alias pac "paru"
+alias pac paru
 
 ### ========================================
 ###				   COLOURS

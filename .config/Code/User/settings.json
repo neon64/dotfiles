@@ -144,4 +144,5 @@
     "github.copilot.chat.agent.thinkingTool": true,
     "github.copilot.nextEditSuggestions.enabled": true,
     "mesonbuild.downloadLanguageServer": true,
+    "claudeCode.preferredLocation": "panel",
 }

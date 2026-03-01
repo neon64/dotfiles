@@ -68,9 +68,9 @@ bindsym $mod+Shift+c reload
 # Save screenshots to $SCREENSHOTS folder.
 # The default value is XDG_PICTURES_DIR, see
 # https://wiki.archlinux.org/index.php/XDG_user_directories
-bindsym Print exec shotman output
-bindsym Mod1+Print exec shotman window
-bindsym Shift+Print exec shotman area
+bindsym Print exec shotman --capture output
+bindsym Mod1+Print exec shotman --capture window
+bindsym Shift+Print exec shotman --capture region
 
 # exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+e exec ~/.config/nwg-launchers/nwgbar/run.sh
