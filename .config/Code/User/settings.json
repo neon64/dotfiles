@@ -145,4 +145,6 @@
     "github.copilot.nextEditSuggestions.enabled": true,
     "mesonbuild.downloadLanguageServer": true,
     "claudeCode.preferredLocation": "panel",
+    "python.analysis.typeCheckingMode": "standard",
+    "explorer.confirmDragAndDrop": false,
 }
