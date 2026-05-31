@@ -42,13 +42,13 @@ bindsym button3 kill
 # start your launcher
 bindsym $mod+d exec $window_switcher
 # bindsym $mod+g exec $web_search
-bindsym $mod+s exec swaymsg [app_id="org.gnome.Nautilus"] focus || nautilus
+bindsym $mod+n exec swaymsg [app_id="org.gnome.Nautilus"] focus || nautilus
 
-bindsym $mod+shift+s sticky toggle; exec notify-send -t 1000 "toggled sticky"
+bindsym $mod+s sticky toggle; exec notify-send -t 1000 "toggled sticky"
 # bindsym $mod+shift+u sticky disable; exec notify-send -t 1000 "removed sticky"
 
 # Toggle control center
-bindsym $mod+shift+n exec swaync-client -t -sw
+# bindsym $mod+shift+n exec swaync-client -t -sw
 
 # bindsym $mod+d exec alacritty --title "Command Launcher" --config-file ~/.config/alacritty/alacritty_big.yml -e ~/.config/bin/launch_util
 
@@ -68,12 +68,12 @@ bindsym $mod+Shift+c reload
 # Save screenshots to $SCREENSHOTS folder.
 # The default value is XDG_PICTURES_DIR, see
 # https://wiki.archlinux.org/index.php/XDG_user_directories
-bindsym Print exec shotman --capture output
-bindsym Mod1+Print exec shotman --capture window
-bindsym Shift+Print exec shotman --capture region
+# bindsym Print exec shotman --capture output
+# bindsym Mod1+Print exec shotman --capture window
+bindsym $mod+Shift+S exec shotman --capture region -C
 
 # exit sway (logs you out of your Wayland session)
-bindsym $mod+Shift+e exec ~/.config/nwg-launchers/nwgbar/run.sh
+bindsym $mod+Shift+e exec nwg-bar
 
 #
 # Moving around
@@ -113,8 +113,8 @@ bindsym $mod+Shift+$down move down
 bindsym $mod+Shift+$up move up
 bindsym $mod+Shift+$right move right
 
-bindsym $mod+n move workspace to output up
-bindsym $mod+m move workspace to output left
+bindsym $mod+shift+n move workspace to output up
+bindsym $mod+shift+m move workspace to output left
 
 #
 # Workspaces:
